@@ -31,8 +31,6 @@ namespace MathQuest.Battle
                 int index = i;
                 optionButtons[i].onClick.AddListener(() => Submit(index));
             }
-
-            gameObject.SetActive(false);
         }
 
         public void Show(MultipleChoiceAnswerResource answer, Action<int> submitted)

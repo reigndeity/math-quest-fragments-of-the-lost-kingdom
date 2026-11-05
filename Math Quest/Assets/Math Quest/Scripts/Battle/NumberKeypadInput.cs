@@ -65,8 +65,6 @@ namespace MathQuest.Battle
 
             SetLabel(submitButton, "SUBMIT");
             submitButton.onClick.AddListener(Submit);
-
-            gameObject.SetActive(false);
         }
 
         public void Show(Action<double> submitted)

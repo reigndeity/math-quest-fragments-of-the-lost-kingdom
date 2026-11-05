@@ -284,10 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162ef44cc0942964e87af2a4c352e3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Battle.BattleDemoController
-  question: {fileID: 11400000, guid: 00a4938ce828408698ed78191b671031, type: 2}
+  act: {fileID: 11400000, guid: e049d0a7653440a283246b458c5857aa, type: 2}
   dialogueBox: {fileID: 1289375540}
   questionPanel: {fileID: 808609616}
   questionText: {fileID: 808609700}
+  answerPanel: {fileID: 1650395387}
   multipleChoiceInput: {fileID: 1314234864}
   numberKeypadInput: {fileID: 276043291}
   expressionBuilderInput: {fileID: 2200000003}
@@ -2611,7 +2612,6 @@ RectTransform:
   - {fileID: 1902183027}
   - {fileID: 1563495441}
   - {fileID: 808609617}
-  - {fileID: 2200000002}
   - {fileID: 1289375537}
   - {fileID: 1650395388}
   m_Father: {fileID: 0}
@@ -4775,6 +4775,7 @@ RectTransform:
   m_Children:
   - {fileID: 1314234860}
   - {fileID: 276043288}
+  - {fileID: 2200000002}
   m_Father: {fileID: 944383181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6640,7 +6641,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200000001}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6648,7 +6649,7 @@ RectTransform:
   - {fileID: 2200000005}
   - {fileID: 2200000008}
   - {fileID: 2200000011}
-  m_Father: {fileID: 944383181}
+  m_Father: {fileID: 1650395388}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6676,7 +6677,6 @@ MonoBehaviour:
   ghostOffset: {x: 0, y: 90}
   emptySlotColor: {r: 0.78, g: 0.78, b: 0.78, a: 1}
   filledSlotColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedSlotColor: {r: 1, g: 0.9, b: 0.45, a: 1}
   lockedSlotColor: {r: 0.7, g: 0.85, b: 1, a: 1}
   hoverSlotColor: {r: 0.7, g: 1, b: 0.7, a: 1}
 --- !u!1 &2200000004
