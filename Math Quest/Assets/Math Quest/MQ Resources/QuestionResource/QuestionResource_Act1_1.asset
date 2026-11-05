@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   topic: Components of Algebraic Expressions
-  question: What is the coefficient of x in the expression 5x + 3?
+  question: "What is the coefficient of $x$ in the expression $5x+3$?"
   answer: {fileID: 11400000, guid: 0ec8e9ce500d913418c55314b2ef2965, type: 2}
   encourageDialogue:
   - Correct! You spotted it right away.

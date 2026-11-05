@@ -3,6 +3,8 @@
     "rootNamespace": "MathQuest",
     "references": [
         "UnityEngine.UI",
+        "TEXDrawCore",
+        "TEXDrawRuntime",
         "Unity.TextMeshPro",
         "Febucci.TextAnimator.Runtime"
     ],

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using MathQuest.Data;
-using TMPro;
+using TexDrawLib;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -20,7 +20,8 @@ namespace MathQuest.Battle
 
         [Header("Question UI")]
         [SerializeField] private GameObject questionPanel;
-        [SerializeField] private TMP_Text questionText;
+        [Tooltip("TEXDraw label that renders the question, including math such as fractions.")]
+        [SerializeField] private TEXDraw questionText;
 
         [Header("Answer inputs")]
         [FormerlySerializedAs("answerInput")]
