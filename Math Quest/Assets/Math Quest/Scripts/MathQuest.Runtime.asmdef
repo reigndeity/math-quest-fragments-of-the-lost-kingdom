@@ -1,7 +1,11 @@
 {
     "name": "MathQuest.Runtime",
     "rootNamespace": "MathQuest",
-    "references": [],
+    "references": [
+        "UnityEngine.UI",
+        "Unity.TextMeshPro",
+        "Febucci.TextAnimator.Runtime"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

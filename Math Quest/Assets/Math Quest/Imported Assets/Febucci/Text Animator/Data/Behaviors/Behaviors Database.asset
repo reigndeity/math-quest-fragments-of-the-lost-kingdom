@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103e863f5c0347be8a512f431aaf5ec1, type: 3}
   m_Name: Behaviors Database
   m_EditorClassIdentifier: Febucci.TextAnimator.Runtime::Febucci.UI.Effects.AnimationsDatabase
-  data: []
+  data:
+  - {fileID: 11400000, guid: 25776573e5e5abc49b6dd04ffa7971ab, type: 2}
+  - {fileID: 11400000, guid: 9f07d187f46f9c7438cec73275d1dc2d, type: 2}
+  - {fileID: 11400000, guid: 69db6fbe72ea8104cadc26d8ea3cd514, type: 2}
+  - {fileID: 11400000, guid: 22a249017bbea8847bb95ffc3c50e0b2, type: 2}
+  - {fileID: 11400000, guid: 0608973c15749f44d8cf55092d1d2659, type: 2}
+  - {fileID: 11400000, guid: ec9b56c635df8ea4ab529e864d17e8f0, type: 2}
+  - {fileID: 11400000, guid: 9297ed0bb574b614e99b2429595d27b6, type: 2}
+  - {fileID: 11400000, guid: 71b3c4f930f219443aceabe5feb36a3b, type: 2}
+  - {fileID: 11400000, guid: a0acfb696dd22e8429e3a852cefcb2e8, type: 2}
+  - {fileID: 11400000, guid: a2798e93a86a3824bb33307832fcf356, type: 2}
+  - {fileID: 11400000, guid: 5dc891e2b3bfda44a8a7339134dd88a1, type: 2}
+  - {fileID: 11400000, guid: c6d117729075c8445b6bedcacbef12ad, type: 2}
