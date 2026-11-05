@@ -5,7 +5,8 @@ namespace MathQuest.Data
     public enum AnswerMethod
     {
         MultipleChoice = 0,
-        NumberKeypad = 1
+        NumberKeypad = 1,
+        ExpressionBuilder = 2
     }
 
     /// <summary>

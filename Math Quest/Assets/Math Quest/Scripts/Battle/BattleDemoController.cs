@@ -27,6 +27,7 @@ namespace MathQuest.Battle
         [FormerlySerializedAs("answerInput")]
         [SerializeField] private MultipleChoiceInput multipleChoiceInput;
         [SerializeField] private NumberKeypadInput numberKeypadInput;
+        [SerializeField] private ExpressionBuilderInput expressionBuilderInput;
 
         [Header("Demo dialogue (stand-in for the level)")]
         [TextArea(1, 3)]
@@ -35,6 +36,7 @@ namespace MathQuest.Battle
         private void Start()
         {
             questionPanel.SetActive(false);
+            if (expressionBuilderInput != null) expressionBuilderInput.Hide();
             dialogueBox.Play(startDialogue, ShowQuestion);
         }
 
@@ -45,6 +47,7 @@ namespace MathQuest.Battle
 
             if (multipleChoiceInput != null) multipleChoiceInput.Hide();
             if (numberKeypadInput != null) numberKeypadInput.Hide();
+            if (expressionBuilderInput != null) expressionBuilderInput.Hide();
 
             switch (question.answer)
             {
@@ -53,6 +56,9 @@ namespace MathQuest.Battle
                     break;
                 case NumberAnswerResource number:
                     numberKeypadInput.Show(value => Resolve(number.IsCorrect(value)));
+                    break;
+                case ExpressionBuilderAnswerResource builder:
+                    expressionBuilderInput.Show(builder, placed => Resolve(builder.IsCorrect(placed)));
                     break;
                 default:
                     Debug.LogWarning(
@@ -86,6 +92,7 @@ namespace MathQuest.Battle
         {
             if (multipleChoiceInput != null) multipleChoiceInput.SetInteractable(interactable);
             if (numberKeypadInput != null) numberKeypadInput.SetInteractable(interactable);
+            if (expressionBuilderInput != null) expressionBuilderInput.SetInteractable(interactable);
         }
     }
 }
