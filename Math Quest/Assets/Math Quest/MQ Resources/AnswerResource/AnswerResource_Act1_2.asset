@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dc27f697929e2438ab161d1a7ee3d8, type: 3}
   m_Name: AnswerResource_Act1_2
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.NumberAnswerResource
-  correctValue: -15
+  correctValue: 47
   alternateValues: []

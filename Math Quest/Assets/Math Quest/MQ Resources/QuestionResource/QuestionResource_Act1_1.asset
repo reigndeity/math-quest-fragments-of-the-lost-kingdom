@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
-  topic: Components of Algebraic Expressions
-  question: "What is the coefficient of $x$ in the expression $5x+3$?"
-  answer: {fileID: 11400000, guid: 0ec8e9ce500d913418c55314b2ef2965, type: 2}
+  topic: Evaluating Algebraic Expressions
+  question: "Evaluate $\\frac{m^2-n^2}{m+n}+m^3$ when $m=-2$ and $n=5$."
+  answer: {fileID: 11400000, guid: b21712eaeddc4539930ac851bcf27e08, type: 2}
   encourageDialogue:
-  - Correct! You spotted it right away.
+  - Impressive! Every step was right.
   tauntDialogue:
-  - Hehehe... not quite!
+  - Hehehe... watch those negative signs!
   solutionDialogue:
-  - The coefficient is the number multiplied by the variable. / In 5x, the 5 multiplies
-    x, so the coefficient of x is 5. The 3 is a constant term.
+  - Substitute m = -2 and n = 5 into the expression.
+  - "The fraction: (m<sup>2</sup> - n<sup>2</sup>)/(m + n) = (4 - 25)/(-2 + 5) = -21/3 = -7."
+  - "The cube: m<sup>3</sup> = (-2)<sup>3</sup> = -8."
+  - "Add the two parts: -7 + (-8) = -15."

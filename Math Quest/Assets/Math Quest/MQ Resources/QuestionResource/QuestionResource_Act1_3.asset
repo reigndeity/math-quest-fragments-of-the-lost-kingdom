@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   topic: Translating Verbal Phrases into Algebraic Expressions
-  question: "Build the expression: the quotient of four less than the square of a number $x$, and the sum of three times $y$ and two, increased by the cube of twice the difference of $x$ and $y$."
+  question: "The quotient of four less than the square of a number $x$, and the sum of three times $y$ and two, increased by the cube of twice the difference of $x$ and $y$."
   answer: {fileID: 11400000, guid: 0b0cc9b1d4054071a28d2cd35e4d4d0a, type: 2}
   encourageDialogue:
   - Excellent! You built it perfectly.

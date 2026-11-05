@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d8f944e4af36545b643e33300c0c1a, type: 3}
   m_Name: AnswerResource_Act1_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.MultipleChoiceAnswerResource
-  optionA: 3
-  optionB: 5
-  optionC: 8
-  optionD: x
-  correctOption: 0
+  optionA: '-7'
+  optionB: '15'
+  optionC: '-15'
+  optionD: '1'
+  correctOption: 2
