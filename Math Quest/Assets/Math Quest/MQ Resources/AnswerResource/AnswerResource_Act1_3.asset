@@ -14,19 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.ExpressionBuilderAnswerResource
   tiles:
   - id: frac
-    math: "$\\frac{x^2-4}{3y+2}$"
+    math: $\frac{x^2-4}{3y+2}$
   - id: cube
-    math: "$[2(x-y)]^3$"
+    math: $[2(x-y)]^3$
   - id: plus
-    math: "$+$"
+    math: $+$
   - id: minus
-    math: "$-$"
-  - id: times
-    math: "$\\times$"
+    math: $-$
   - id: fracReversed
-    math: "$\\frac{4-x^2}{3y+2}$"
+    math: $\frac{4-x^2}{3y+2}$
   - id: cubePartial
-    math: "$2(x-y)^3$"
+    math: $2(x-y)^3$
   slots:
   - prefilledTileId: 
   - prefilledTileId: 

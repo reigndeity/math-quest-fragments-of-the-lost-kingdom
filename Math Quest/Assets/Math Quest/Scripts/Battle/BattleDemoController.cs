@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using MathQuest.Data;
 using TexDrawLib;
@@ -34,9 +36,20 @@ namespace MathQuest.Battle
         [SerializeField] private NumberKeypadInput numberKeypadInput;
         [SerializeField] private ExpressionBuilderInput expressionBuilderInput;
 
+        [Header("Health")]
+        [Tooltip("Enemy hearts. A correct answer removes one; at zero they refill so the demo can keep cycling.")]
+        [SerializeField] private HeartHealthBar enemyHealth;
+
+        [Header("Enemy animation")]
+        [Tooltip("Animator using the EnemyModel controller. Gets the 'hurt' trigger on a correct answer.")]
+        [SerializeField] private Animator enemyAnimator;
+
         [Header("Demo dialogue (stand-in for the level)")]
         [TextArea(1, 3)]
         [SerializeField] private List<string> startDialogue = new();
+
+        private static readonly int HurtTrigger = Animator.StringToHash("hurt");
+        private const string HurtState = "EnemyHurt";
 
         private int questionIndex;
 
@@ -92,7 +105,10 @@ namespace MathQuest.Battle
 
             if (correct)
             {
-                dialogueBox.Play(question.encourageDialogue, NextQuestion);
+                if (enemyHealth != null) enemyHealth.Damage();
+                // Hit first, then the enemy reacts in dialogue.
+                StartCoroutine(PlayEnemyHurt(() =>
+                    dialogueBox.Play(question.encourageDialogue, NextQuestion)));
                 return;
             }
 
@@ -101,9 +117,41 @@ namespace MathQuest.Battle
                 dialogueBox.Play(question.solutionDialogue, NextQuestion));
         }
 
+        // Fires the "hurt" trigger, waits for the hurt state to finish, then continues.
+        // A timeout keeps the demo moving if the animator is set up differently.
+        private IEnumerator PlayEnemyHurt(Action onDone)
+        {
+            if (enemyAnimator != null)
+            {
+                enemyAnimator.SetTrigger(HurtTrigger);
+                float timeout = 3f;
+
+                // The transition into the hurt state takes a moment to begin.
+                while (timeout > 0f && !enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName(HurtState))
+                {
+                    timeout -= Time.deltaTime;
+                    yield return null;
+                }
+
+                // Hurt plays once, then the controller returns to idle by itself.
+                while (timeout > 0f)
+                {
+                    AnimatorStateInfo state = enemyAnimator.GetCurrentAnimatorStateInfo(0);
+                    if (!state.IsName(HurtState) || state.normalizedTime >= 1f)
+                        break;
+
+                    timeout -= Time.deltaTime;
+                    yield return null;
+                }
+            }
+
+            onDone?.Invoke();
+        }
+
         // Demo only: right or wrong, move on to the next question and wrap around at the end.
         private void NextQuestion()
         {
+            if (enemyHealth != null && enemyHealth.IsDefeated) enemyHealth.Refill();
             questionIndex = (questionIndex + 1) % act.questions.Count;
             ShowQuestion();
         }
