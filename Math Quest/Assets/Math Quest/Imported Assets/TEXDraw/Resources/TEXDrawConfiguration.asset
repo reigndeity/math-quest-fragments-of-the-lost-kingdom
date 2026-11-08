@@ -21,7 +21,7 @@ MonoBehaviour:
     nativeSize: 50
   Paragraph:
     alignment: 0
-    justify: 1
+    justify: 0
     indent: 0
     rightToLeft: 0
     centeredMathBlock: 1
@@ -32,10 +32,10 @@ MonoBehaviour:
     leftPadding: 0
     rightPadding: 0
   Typeface:
-    defaultTypeface: cmr
+    defaultTypeface: mqpixel
     typewriterTypeface: cmtt
-    mathTypeface: cmmi
-    functionTypeface: cmr
+    mathTypeface: cmmib
+    functionTypeface: cmbx
     blankSpaceWidth: 6
     lineAscent: 16
     lineMedian: 5.25
