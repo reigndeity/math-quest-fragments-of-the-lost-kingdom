@@ -173,7 +173,7 @@ MonoBehaviour:
   submitButton: {fileID: 7839611490791244606}
   submitArea: {fileID: 348119773}
   startDelay: 0.3
-  readDelay: 0.8
+  readDelay: 0.3
   holderFadeDelay: 0.2
   holderFadeDuration: 0.3
   questionBoxDelay: 0.15
@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &278879712
 RectTransform:
   m_ObjectHideFlags: 0

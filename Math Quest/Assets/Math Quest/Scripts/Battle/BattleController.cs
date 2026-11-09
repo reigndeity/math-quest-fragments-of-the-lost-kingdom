@@ -170,6 +170,7 @@ namespace MathQuest.Battle
 
             // 1. Prepare everything while it is invisible, so nothing re-lays out later.
             SetGroup(0f, false);
+            questionAndAnswer.gameObject.SetActive(true); // may be inactive in the scene; its children need it on
             answerArea.gameObject.SetActive(true);
             if (submitArea != null)
                 submitArea.SetActive(true);
@@ -429,6 +430,10 @@ namespace MathQuest.Battle
             questionBox.Hide();
             answerArea.gameObject.SetActive(false);
             SetGroup(0f, false);
+
+            // Nothing in it is shown between questions, so the holder can rest switched off.
+            if (questionAndAnswer != null)
+                questionAndAnswer.gameObject.SetActive(false);
         }
     }
 }
