@@ -14,13 +14,13 @@ namespace MathQuest.Battle
     public sealed class MultipleChoiceInput : MonoBehaviour
     {
         [Tooltip("Exactly four buttons, in A to D order. Each needs a TextMeshPro label as a child.")]
-        [SerializeField] private Button[] optionButtons = new Button[MultipleChoiceAnswerResource.OptionCount];
+        [SerializeField] private Button[] optionButtons = new Button[MultipleChoiceAnswerResource.DefaultOptionCount];
 
         private Action<int> onSubmitted;
 
         private void Awake()
         {
-            if (optionButtons.Length != MultipleChoiceAnswerResource.OptionCount)
+            if (optionButtons.Length != MultipleChoiceAnswerResource.DefaultOptionCount)
             {
                 Debug.LogError("MultipleChoiceInput needs exactly four option buttons.", this);
                 return;

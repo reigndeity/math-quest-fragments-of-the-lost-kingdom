@@ -1,20 +1,21 @@
+using System;
+using System.Collections.Generic;
 using MathQuest.Data;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MathQuest.Battle
 {
     /// <summary>
-    /// Plays a level's start dialogue. One chat box exists at a time: it is spawned under
-    /// the holder of whoever is speaking and destroyed when the next line starts. Tapping
-    /// the tap area finishes the line that is typing, or moves on to the next one.
+    /// Runs dialogue in the battle. One chat box exists at a time: it is spawned under the
+    /// holder of whoever is speaking and destroyed when the next line starts. Tapping the
+    /// tap area finishes the line that is typing, or moves on to the next one.
+    /// It only shows dialogue; BattleController decides what happens before and after.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class BattleDialogueController : MonoBehaviour
     {
-        [SerializeField] private LevelResource level;
-
         [Header("Chat box")]
         [SerializeField] private DialogueChatBox chatBoxPrefab;
         [Tooltip("Where the player's bubble spawns (PlayerDialogueHolder).")]
@@ -22,92 +23,169 @@ namespace MathQuest.Battle
         [Tooltip("Where the enemy's bubble spawns (EnemyDialogueHolder).")]
         [SerializeField] private RectTransform enemyDialogueHolder;
 
+        [Header("Chat box (tune live in Play mode)")]
+        [FormerlySerializedAs("chatBoxFit")]
+        [SerializeField] private ChatBoxSettings chatBox = new();
+
         [Header("Input")]
-        [Tooltip("Button covering the screen. Tapping it advances the dialogue.")]
+        [Tooltip("Button covering the screen. Tapping it advances the dialogue. It is only made non-interactable when idle, never deactivated, so it can safely sit on a parent such as BattleArea.")]
         [SerializeField] private Button tapArea;
 
-        [Header("Events")]
-        [SerializeField] private UnityEvent onStartDialogueFinished;
+        private enum Mode { Idle, Lines, Hold }
 
+        private Mode mode;
         private DialogueChatBox current;
+        private IReadOnlyList<DialogueLine> lines;
         private int index;
-        private bool playing;
+        private Action onFinished;
+        private (float, float, float, float, float, float, float, ChatBoxGrow, bool, float, float, ChatBoxSide) fitKey;
 
         private void Awake()
         {
             if (tapArea != null)
             {
                 tapArea.onClick.AddListener(OnTap);
-                tapArea.gameObject.SetActive(false);
+                tapArea.interactable = false;
             }
         }
 
-        private void Start()
+        // Refits the bubble on screen as soon as a fit setting changes in the Inspector.
+        private void Update()
         {
-            PlayStartDialogue();
+            if (current == null || chatBox.Key == fitKey)
+                return;
+
+            fitKey = chatBox.Key;
+            current.Refit();
         }
 
-        public void PlayStartDialogue()
+        /// <summary>
+        /// Plays the lines in order, one bubble at a time, then calls <paramref name="finished"/>.
+        /// The last bubble is removed when the player taps past it.
+        /// </summary>
+        public void PlayLines(IReadOnlyList<DialogueLine> dialogue, Action finished)
         {
-            if (level == null || level.startDialogue.Count == 0)
+            if (dialogue == null || dialogue.Count == 0)
             {
-                Finish();
+                finished?.Invoke();
                 return;
             }
 
+            lines = dialogue;
             index = 0;
-            playing = true;
-            if (tapArea != null) tapArea.gameObject.SetActive(true);
+            onFinished = finished;
+            mode = Mode.Lines;
+            SetTappable(true);
             ShowLine();
+        }
+
+        /// <summary>
+        /// One speaker says one line and the bubble stays up. <paramref name="typed"/> fires
+        /// as soon as the line has finished typing (or a tap finished it). Remove the bubble
+        /// later with <see cref="ClearBubble"/>.
+        /// </summary>
+        public void SayAndHold(DialogueSpeaker speaker, string text, Action typed)
+        {
+            mode = Mode.Hold;
+            onFinished = typed;
+            SetTappable(true);
+
+            DialogueChatBox box = Spawn(speaker, text);
+            if (box == null)
+            {
+                Release();
+                return;
+            }
+
+            box.Typed += OnHeldTyped;
+            if (!box.IsTyping)
+                OnHeldTyped();
+        }
+
+        public void ClearBubble()
+        {
+            DestroyChatBox();
         }
 
         private void ShowLine()
         {
+            DialogueLine line = lines[index];
+            Spawn(line.speaker, line.text);
+        }
+
+        private DialogueChatBox Spawn(DialogueSpeaker speaker, string text)
+        {
             DestroyChatBox();
 
-            DialogueLine line = level.startDialogue[index];
-            bool isPlayer = line.speaker == DialogueSpeaker.Player;
+            bool isPlayer = speaker == DialogueSpeaker.Player;
             RectTransform holder = isPlayer ? playerDialogueHolder : enemyDialogueHolder;
 
             if (holder == null)
             {
-                Debug.LogWarning($"No dialogue holder is assigned for the {line.speaker}.", this);
-                return;
+                Debug.LogWarning($"No dialogue holder is assigned for the {speaker}.", this);
+                return null;
             }
 
             current = Instantiate(chatBoxPrefab, holder, false);
             // The prefab is laid out for the enemy; the player's faces the other way.
             current.SetMirrored(isPlayer);
-            current.Show(line.text);
+            fitKey = chatBox.Key;
+            current.Show(text, chatBox);
+            return current;
+        }
+
+        private void OnHeldTyped()
+        {
+            if (mode != Mode.Hold)
+                return;
+
+            Action callback = onFinished;
+            Release();
+            callback?.Invoke();
         }
 
         private void OnTap()
         {
-            if (!playing)
-                return;
-
-            if (current != null && current.IsTyping)
+            switch (mode)
             {
-                current.Skip();
-                return;
-            }
+                case Mode.Hold:
+                    if (current != null && current.IsTyping)
+                        current.Skip();
+                    break;
 
-            index++;
-            if (index < level.startDialogue.Count)
-            {
-                ShowLine();
-                return;
-            }
+                case Mode.Lines:
+                    if (current != null && current.IsTyping)
+                    {
+                        current.Skip();
+                        break;
+                    }
 
-            playing = false;
-            DestroyChatBox();
-            Finish();
+                    index++;
+                    if (index < lines.Count)
+                    {
+                        ShowLine();
+                        break;
+                    }
+
+                    DestroyChatBox();
+                    Action callback = onFinished;
+                    Release();
+                    callback?.Invoke();
+                    break;
+            }
         }
 
-        private void Finish()
+        private void Release()
         {
-            if (tapArea != null) tapArea.gameObject.SetActive(false);
-            onStartDialogueFinished?.Invoke();
+            mode = Mode.Idle;
+            onFinished = null;
+            SetTappable(false);
+        }
+
+        private void SetTappable(bool tappable)
+        {
+            if (tapArea != null)
+                tapArea.interactable = tappable;
         }
 
         private void DestroyChatBox()

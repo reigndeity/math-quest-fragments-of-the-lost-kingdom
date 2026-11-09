@@ -22,3 +22,5 @@ MonoBehaviour:
     text: Hmmm
   - speaker: 1
     text: '???'
+  questions:
+  - {fileID: 11400000, guid: 160605b9210a4317ad2e0e58f87188ed, type: 2}
