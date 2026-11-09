@@ -84,6 +84,21 @@ namespace MathQuest.Battle
         [Header("Timing: multiple choice (seconds)")]
         [SerializeField] private MultipleChoiceTiming multipleChoice = new();
 
+        // Timing of the number keypad: its intro plays as a whole, then the submit button follows.
+        [Serializable]
+        private sealed class KeypadTiming
+        {
+            [Tooltip("After QuestionBoxHolder is activated, wait this long before the keypad starts fading in.")]
+            [Min(0f)] public float keypadDelay = 0.3f;
+            [Tooltip("How long the keypad's intro takes. Set it to the length of the KeypadHolder animation. If the prefab has no Animator, the keypad fades in over this time instead.")]
+            [Min(0.01f)] public float keypadAnimationTime = 0.35f;
+            [Tooltip("After the keypad's intro has finished, wait this long before the SubmitButton is activated.")]
+            [Min(0f)] public float submitDelay = 0.15f;
+        }
+
+        [Header("Timing: number keypad (seconds)")]
+        [SerializeField] private KeypadTiming keypad = new();
+
         [Header("Timing: closing and after (seconds)")]
         [Tooltip("When Submit is pressed, how long QuestionAndAnswerHolder takes to fade back to 0.")]
         [SerializeField, Min(0.01f)] private float closeFadeDuration = 0.5f;
@@ -102,6 +117,8 @@ namespace MathQuest.Battle
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
+        [Tooltip("The KeypadHolder prefab, used for questions answered with a number.")]
+        [SerializeField] private NumberKeypadPanel keypadPrefab;
 
         private readonly struct Submission
         {
@@ -214,6 +231,13 @@ namespace MathQuest.Battle
                 yield return RevealMultipleChoice(panel);
                 submitDelay = multipleChoice.submitDelay;
             }
+            else if (answerUi != null && answerUi.TryGetComponent(out NumberKeypadPanel pad))
+            {
+                yield return new WaitForSeconds(keypad.keypadDelay);
+                pad.Reveal(keypad.keypadAnimationTime);
+                yield return new WaitForSeconds(keypad.keypadAnimationTime);
+                submitDelay = keypad.submitDelay;
+            }
 
             yield return new WaitForSeconds(submitDelay);
             submitButton.gameObject.SetActive(true); // plays the SubmitButton's animation
@@ -254,6 +278,29 @@ namespace MathQuest.Battle
                         answerFitter.Fit(PreferredHeight(panel));
                     break;
 
+                case NumberAnswerResource number:
+                    if (keypadPrefab == null)
+                    {
+                        Debug.LogError("Assign the Keypad Prefab (the KeypadHolder prefab) on BattleController.", this);
+                        break;
+                    }
+
+                    NumberKeypadPanel pad = Instantiate(keypadPrefab, answerArea, false);
+                    answerUi = pad.gameObject;
+                    activeQuestion = question;
+
+                    // Any key press can change what is typed; Submit unlocks once something is.
+                    pad.Show(() => submitButton.interactable = pad.HasValue);
+                    pad.Conceal();
+                    submitButton.interactable = false;
+                    readAnswer = () => pad.TryGetValue(out double typed)
+                        ? new Submission(pad.DisplayText, number.IsCorrect(typed))
+                        : (Submission?)null;
+
+                    if (answerFitter != null)
+                        answerFitter.Fit(PreferredHeight(pad));
+                    break;
+
                 default:
                     Debug.LogWarning(
                         $"No answer input exists yet for '{question.name}' ({question.answer}).", this);
@@ -288,6 +335,8 @@ namespace MathQuest.Battle
             submitButton.interactable = false;
             if (answerUi != null && answerUi.TryGetComponent(out MultipleChoicePanel panel))
                 panel.Lock();
+            else if (answerUi != null && answerUi.TryGetComponent(out NumberKeypadPanel pad))
+                pad.Lock();
 
             OnAnswered(activeQuestion, submission.Value.text, submission.Value.correct);
         }

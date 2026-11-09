@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Reflection;
 using Febucci.UI;
 using Febucci.UI.Core;
@@ -31,6 +32,9 @@ namespace MathQuest.Battle
 
         [Tooltip("On: equations type glyph by glyph like the rest of the line. Off: each equation appears whole as a block.")]
         public bool typeEquations = true;
+
+        [Tooltip("Math cannot wrap inside $...$, so a very long equation would just shrink until it fits. An equation longer than this many characters is cut into pieces at its = signs (the pieces can then wrap onto the next line). Shorter equations are left alone. 0 turns this off.")]
+        [Min(0)] public int breakEquationsLongerThan = 28;
 
         [Tooltip("Left or Center for every line. Plain lines can also be Justified, which stretches the spaces on every line but the last and can look uneven; math lines treat Justified as Left, since stretching the gaps around an equation looks wrong.")]
         public ChatBoxTextAlign plainTextAlign = ChatBoxTextAlign.Left;
@@ -67,6 +71,7 @@ namespace MathQuest.Battle
                 h.Add(pauseAfterPunctuation);
                 h.Add(typeEquations);
                 h.Add(plainTextAlign);
+                h.Add(breakEquationsLongerThan);
                 h.Add(maxFontSize);
                 h.Add(minFontSize);
                 h.Add(fontStep);
@@ -188,6 +193,10 @@ namespace MathQuest.Battle
         {
             StopMath();
             fit = fitSettings;
+
+            // Long equations are cut at their = signs so they can wrap; everything below uses this line.
+            if (fit != null && !string.IsNullOrEmpty(text))
+                text = BreakLongEquations(text, fit.breakEquationsLongerThan);
 
             bool hasMath = mathLabel != null && !string.IsNullOrEmpty(text) && text.Contains('$');
             label.gameObject.SetActive(!hasMath);
@@ -590,6 +599,68 @@ namespace MathQuest.Battle
                 mathLabel.SetLayoutDirty();
                 mathLabel.SetVerticesDirty();
             }
+        }
+
+        // ---- breaking long equations ---------------------------------------------------------
+
+        // Cuts every $...$ longer than maxLength into pieces at its top-level = signs:
+        //   $3(b-a)^2=3(5)^2=75$   becomes   $3(b-a)^2$ $=3(5)^2$ $=75$
+        // A space sits between the pieces, so the line can wrap there. Short equations such as
+        // $m=-2$ are left alone.
+        private static string BreakLongEquations(string text, int maxLength)
+        {
+            if (maxLength <= 0 || text.IndexOf('$') < 0)
+                return text;
+
+            var result = new StringBuilder(text.Length + 16);
+            int i = 0;
+
+            while (i < text.Length)
+            {
+                int open = text.IndexOf('$', i);
+                int close = open < 0 ? -1 : text.IndexOf('$', open + 1);
+                if (open < 0 || close < 0)
+                {
+                    result.Append(text, i, text.Length - i);
+                    break;
+                }
+
+                result.Append(text, i, open - i);
+                string body = text.Substring(open + 1, close - open - 1);
+                result.Append(body.Length > maxLength ? SplitAtEquals(body) : "$" + body + "$");
+                i = close + 1;
+            }
+
+            return result.ToString();
+        }
+
+        private static string SplitAtEquals(string body)
+        {
+            var result = new StringBuilder("$");
+            int depth = 0;
+            int start = 0;
+
+            for (int k = 0; k < body.Length; k++)
+            {
+                char c = body[k];
+                if (c == '{' || c == '(' || c == '[')
+                {
+                    depth++;
+                }
+                else if (c == '}' || c == ')' || c == ']')
+                {
+                    depth--;
+                }
+                else if (c == '=' && depth == 0 && k > start && "<>!".IndexOf(body[k - 1]) < 0)
+                {
+                    // Close this piece before the = sign; the next piece starts with it.
+                    result.Append(body, start, k - start).Append("$ $");
+                    start = k;
+                }
+            }
+
+            result.Append(body, start, body.Length - start).Append('$');
+            return result.ToString();
         }
 
         // ---- glyph-by-glyph equations -------------------------------------------------------
