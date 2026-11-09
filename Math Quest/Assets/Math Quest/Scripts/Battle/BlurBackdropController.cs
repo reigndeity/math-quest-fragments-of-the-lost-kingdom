@@ -26,12 +26,15 @@ namespace MathQuest.Battle
         [SerializeField, Range(1, 8)] private int downsample = 4;
         [Tooltip("Blur size at full strength, in pixels of the shrunken snapshot.")]
         [SerializeField, Min(0f)] private float blurRadius = 10f;
-        [SerializeField, Min(0.01f)] private float fadeDuration = 0.4f;
+        [Tooltip("How long the blur takes to fade in.")]
+        [SerializeField, Min(0.01f)] private float fadeInDuration = 0.5f;
+        [Tooltip("How long the blur takes to fade out when no duration is given, for example from the Test menu. During a battle, BattleController passes its own Blur Fade Out Duration instead.")]
+        [SerializeField, Min(0.01f)] private float fadeOutDuration = 0.8f;
         [Tooltip("Colour laid over the blur once it has fully faded in. The alpha is how strongly it covers: black at 50% darkens the blur by half. Overrides the RawImage's own Color.")]
         [SerializeField] private Color overlayColor = new Color(0f, 0f, 0f, 0.5f);
 
-        /// <summary>How long a fade takes, so callers can wait for FadeOut to finish.</summary>
-        public float FadeDuration => fadeDuration;
+        public float FadeInDuration => fadeInDuration;
+        public float FadeOutDuration => fadeOutDuration;
 
         private static readonly int AmountId = Shader.PropertyToID("_Amount");
         private static readonly int RadiusId = Shader.PropertyToID("_Radius");
@@ -156,27 +159,29 @@ namespace MathQuest.Battle
             blurred = null;
         }
 
-        public void FadeIn()
+        /// <summary>Fades the blur in. Without a duration, Fade In Duration is used.</summary>
+        public void FadeIn(float duration = -1f)
         {
             EnsureInitialized();
             if (material == null) return;
 
             image.enabled = true;
-            StartFade(1f, disableWhenDone: false);
+            StartFade(1f, false, duration >= 0f ? duration : fadeInDuration);
         }
 
-        public void FadeOut()
+        /// <summary>Fades the blur out. Without a duration, Fade Out Duration is used.</summary>
+        public void FadeOut(float duration = -1f)
         {
             EnsureInitialized();
             if (material == null) return;
 
-            StartFade(0f, disableWhenDone: true);
+            StartFade(0f, true, duration >= 0f ? duration : fadeOutDuration);
         }
 
-        private void StartFade(float target, bool disableWhenDone)
+        private void StartFade(float target, bool disableWhenDone, float duration)
         {
             StopFade();
-            fade = StartCoroutine(FadeRoutine(target, disableWhenDone));
+            fade = StartCoroutine(FadeRoutine(target, disableWhenDone, Mathf.Max(0.01f, duration)));
         }
 
         private void StopFade()
@@ -185,15 +190,15 @@ namespace MathQuest.Battle
             fade = null;
         }
 
-        private IEnumerator FadeRoutine(float target, bool disableWhenDone)
+        private IEnumerator FadeRoutine(float target, bool disableWhenDone, float duration)
         {
             float from = amount;
             float elapsed = 0f;
 
-            while (elapsed < fadeDuration)
+            while (elapsed < duration)
             {
                 elapsed += Time.unscaledDeltaTime;
-                SetAmount(Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / fadeDuration)));
+                SetAmount(Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration)));
                 yield return null;
             }
 

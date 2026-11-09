@@ -21,8 +21,8 @@ MonoBehaviour:
   tauntDialogue:
   - Hehehe... the signs tripped you up!
   solutionDialogue:
-  - "Substitute a = -2, b = 3, and c = 5 into the expression."
-  - "3(b - a)<sup>2</sup> = 3(3 - (-2))<sup>2</sup> = 3(5)<sup>2</sup> = 3(25) = 75."
-  - "-4c = -4(5) = -20."
-  - "a<sup>3</sup> = (-2)<sup>3</sup> = -8."
-  - "Add everything together: 75 - 20 - 8 = 47."
+  - 'Substitute $a=-2$, $b=3$, and $c=5$ into the expression.'
+  - '$3(b-a)^2=3(3-(-2))^2=3(5)^2=3(25)=75$.'
+  - '$-4c=-4(5)=-20$.'
+  - '$a^3=(-2)^3=-8$.'
+  - 'Add everything together: $75-20-8=47$.'

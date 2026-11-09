@@ -28,7 +28,7 @@ namespace MathQuest.Battle
         [SerializeField] private ChatBoxSettings chatBox = new();
 
         [Header("Input")]
-        [Tooltip("Button covering the screen. Tapping it advances the dialogue. It is only made non-interactable when idle, never deactivated, so it can safely sit on a parent such as BattleArea.")]
+        [Tooltip("Button covering the screen. Tapping it advances the dialogue. It is never deactivated, only made non-interactable while idle. Keep it above AnswerPanel in the hierarchy so the answer options are drawn, and clickable, on top of it.")]
         [SerializeField] private Button tapArea;
 
         private enum Mode { Idle, Lines, Hold }
@@ -38,24 +38,24 @@ namespace MathQuest.Battle
         private IReadOnlyList<DialogueLine> lines;
         private int index;
         private Action onFinished;
-        private (float, float, float, float, float, float, float, ChatBoxGrow, bool, float, float, ChatBoxSide) fitKey;
+        private int fitHash;
 
         private void Awake()
         {
             if (tapArea != null)
             {
                 tapArea.onClick.AddListener(OnTap);
-                tapArea.interactable = false;
+                SetTappable(false);
             }
         }
 
         // Refits the bubble on screen as soon as a fit setting changes in the Inspector.
         private void Update()
         {
-            if (current == null || chatBox.Key == fitKey)
+            if (current == null || chatBox.Hash == fitHash)
                 return;
 
-            fitKey = chatBox.Key;
+            fitHash = chatBox.Hash;
             current.Refit();
         }
 
@@ -129,7 +129,7 @@ namespace MathQuest.Battle
             current = Instantiate(chatBoxPrefab, holder, false);
             // The prefab is laid out for the enemy; the player's faces the other way.
             current.SetMirrored(isPlayer);
-            fitKey = chatBox.Key;
+            fitHash = chatBox.Hash;
             current.Show(text, chatBox);
             return current;
         }

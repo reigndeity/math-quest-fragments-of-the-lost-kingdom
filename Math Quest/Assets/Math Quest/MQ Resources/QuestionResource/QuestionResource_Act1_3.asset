@@ -21,8 +21,8 @@ MonoBehaviour:
   tauntDialogue:
   - Hehehe... that expression is not right!
   solutionDialogue:
-  - "Break the sentence into parts. 'Four less than the square of x' means x<sup>2</sup> - 4."
-  - "'The sum of three times y and two' is 3y + 2."
-  - "'The quotient of' these two parts makes a fraction: (x<sup>2</sup> - 4)/(3y + 2)."
-  - "'The cube of twice the difference of x and y' is [2(x - y)]<sup>3</sup>."
-  - "'Increased by' means add, so join the fraction and the cube with a plus sign."
+  - 'Break the sentence into parts. ''Four less than the square of $x$'' means $x^2-4$.'
+  - '''The sum of three times $y$ and two'' is $3y+2$.'
+  - '''The quotient of'' these two parts makes a fraction: $\frac{x^2-4}{3y+2}$.'
+  - '''The cube of twice the difference of $x$ and $y$'' is $[2(x-y)]^3$.'
+  - '''Increased by'' means add, so join the fraction and the cube with a plus sign.'

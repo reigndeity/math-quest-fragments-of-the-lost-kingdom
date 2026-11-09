@@ -44,17 +44,39 @@ namespace MathQuest.Battle
         private string shownQuestion;
         private (float max, float min, float step, float minBox, VerticalAlign align, float holderHeight) fittedWith;
 
-        /// <summary>Shows the box with the question, sized to fit. The panel must already be active.</summary>
-        public void Show(string question)
+        /// <summary>
+        /// Activates the holder and box and sizes them to the question. Follow with Conceal() to
+        /// keep it invisible until its turn, then Reveal() to play its own activation animation.
+        /// </summary>
+        public void Prepare(string question)
         {
+            gameObject.SetActive(true);
             box.gameObject.SetActive(true);
             Fit(question);
+        }
+
+        /// <summary>Prepare and show in one go (no waiting for Reveal).</summary>
+        public void Show(string question)
+        {
+            Prepare(question);
+        }
+
+        /// <summary>Deactivates the holder but keeps the size it was fitted to.</summary>
+        public void Conceal()
+        {
+            gameObject.SetActive(false);
+        }
+
+        /// <summary>Activates the holder again, which plays its animation.</summary>
+        public void Reveal()
+        {
+            gameObject.SetActive(true);
         }
 
         public void Hide()
         {
             shownQuestion = null;
-            box.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         private void Update()

@@ -13,6 +13,7 @@ namespace MathQuest.Battle
 {
     public enum ChatBoxGrow { Bottom, Middle, Top }
     public enum ChatBoxSide { Left, Middle, Right }
+    public enum ChatBoxTextAlign { Left, Center, Justified }
 
     /// <summary>
     /// How a speech bubble types and sizes itself to its line. Lives on the
@@ -30,6 +31,9 @@ namespace MathQuest.Battle
 
         [Tooltip("On: equations type glyph by glyph like the rest of the line. Off: each equation appears whole as a block.")]
         public bool typeEquations = true;
+
+        [Tooltip("Left or Center for every line. Plain lines can also be Justified, which stretches the spaces on every line but the last and can look uneven; math lines treat Justified as Left, since stretching the gaps around an equation looks wrong.")]
+        public ChatBoxTextAlign plainTextAlign = ChatBoxTextAlign.Left;
 
         [Header("Font size")]
         [Min(1f)] public float maxFontSize = 52f;
@@ -53,9 +57,29 @@ namespace MathQuest.Battle
         [Tooltip("Which side stays put while the width changes. Right keeps the tail in place on the enemy bubble (the player bubble is mirrored automatically).")]
         public ChatBoxSide growWidthFrom = ChatBoxSide.Right;
 
-        public (float, float, float, float, float, float, float, ChatBoxGrow, bool, float, float, ChatBoxSide) Key =>
-            (secondsPerLetter, pauseAfterPunctuation, maxFontSize, minFontSize, fontStep,
-             minBubbleHeight, maxBubbleHeight, growFrom, fitWidth, minBubbleWidth, maxBubbleWidth, growWidthFrom);
+        // Changes whenever any value changes, so a bubble on screen can be refitted live.
+        public int Hash
+        {
+            get
+            {
+                var h = new System.HashCode();
+                h.Add(secondsPerLetter);
+                h.Add(pauseAfterPunctuation);
+                h.Add(typeEquations);
+                h.Add(plainTextAlign);
+                h.Add(maxFontSize);
+                h.Add(minFontSize);
+                h.Add(fontStep);
+                h.Add(minBubbleHeight);
+                h.Add(maxBubbleHeight);
+                h.Add(growFrom);
+                h.Add(fitWidth);
+                h.Add(minBubbleWidth);
+                h.Add(maxBubbleWidth);
+                h.Add(growWidthFrom);
+                return h.ToHashCode();
+            }
+        }
     }
 
     /// <summary>
@@ -189,6 +213,7 @@ namespace MathQuest.Battle
             }
 
             ApplySpeed();
+            ApplyTextStyle();
             Refit(); // size the bubble to the whole line before typing starts
 
             IsTyping = true;
@@ -205,6 +230,7 @@ namespace MathQuest.Battle
                 return;
 
             ApplySpeed();
+            ApplyTextStyle();
 
             RectTransform root = (RectTransform)transform;
             ReadDesign(root);
@@ -326,6 +352,33 @@ namespace MathQuest.Battle
             root.pivot = new Vector2(pivotX, root.pivot.y);
             root.anchoredPosition = new Vector2(edge * mirror, root.anchoredPosition.y);
             root.sizeDelta = new Vector2(width, root.sizeDelta.y);
+        }
+
+        // Plain-text layout: never squeeze spaces to avoid wrapping, and use the chosen alignment.
+        private void ApplyTextStyle()
+        {
+            if (label != null)
+            {
+                label.wordWrappingRatios = 0f;
+
+                if (fit != null)
+                {
+                    label.horizontalAlignment =
+                        fit.plainTextAlign == ChatBoxTextAlign.Center ? HorizontalAlignmentOptions.Center
+                        : fit.plainTextAlign == ChatBoxTextAlign.Justified ? HorizontalAlignmentOptions.Justified
+                        : HorizontalAlignmentOptions.Left;
+                }
+            }
+
+            // TEXDraw lines (math): its horizontal alignment is a number, 0 left, 0.5 centre, 1 right.
+            // Justified is treated as Left here: stretching the gaps around an equation looks wrong.
+            if (mathLabel != null && fit != null)
+            {
+                float x = fit.plainTextAlign == ChatBoxTextAlign.Center ? 0.5f : 0f;
+                Vector2 alignment = mathLabel.alignment;
+                if (!Mathf.Approximately(alignment.x, x))
+                    mathLabel.alignment = new Vector2(x, alignment.y); // re-parses; the typing loop copes
+            }
         }
 
         private void ApplySpeed()

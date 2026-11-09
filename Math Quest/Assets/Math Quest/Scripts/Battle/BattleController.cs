@@ -1,14 +1,33 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using MathQuest.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MathQuest.Battle
 {
     /// <summary>
     /// Drives a battle from a LevelResource: start dialogue, then each question. The enemy
-    /// says the question; once it has typed, the screen blurs, the answer panel opens and
-    /// the answer input is spawned. Picking an answer closes the panel again.
-    /// Reacting to the answer (player line, praise, taunt, solution) comes next.
+    /// says the question; once it has typed, the screen blurs and the question and answers
+    /// fade and pop in, one step after the other. Submitting closes it again; the player then
+    /// says their answer and the enemy reacts (praise, or taunt and solution). Hearts and the
+    /// hurt animation come next.
+    ///
+    /// Opening, in order (all times are the Timing fields below):
+    ///   1. Everything is prepared invisibly: the question box is fitted, the options are
+    ///      spawned hidden and the answer area is sized for all of them, so nothing re-lays out.
+    ///   2. The blur fades in.
+    ///   3. After Holder Fade Delay, QuestionAndAnswerHolder fades from 0 to 1.
+    ///   4. After Question Box Delay, QuestionBoxHolder is activated and plays its animation.
+    ///   5. The answer input reveals itself. For multiple choice (see its own timing group): after
+    ///      Options Delay the options pop in one by one, Option Interval apart.
+    ///   6. When the input has finished revealing, Submit Delay later the SubmitButton is
+    ///      activated, which plays its own animation.
+    ///
+    /// The steps up to 4 are common to every question type. Step 5 and the Submit Delay belong to
+    /// the answer input, so each type (multiple choice now, keypad and builder later) has its own
+    /// timing group.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class BattleController : MonoBehaviour
@@ -17,28 +36,112 @@ namespace MathQuest.Battle
         [SerializeField] private BattleDialogueController dialogue;
         [SerializeField] private BlurBackdropController blur;
 
-        [Header("Answer panel")]
-        [Tooltip("The AnswerPanel object. Starts hidden and is shown while a question waits for an answer.")]
-        [SerializeField] private GameObject answerPanel;
+        [Header("Answer panel (AnswerPanel itself stays active; only its contents come and go)")]
+        [Tooltip("The CanvasGroup on QuestionAndAnswerHolder. Faded in and out as a whole.")]
+        [SerializeField] private CanvasGroup questionAndAnswer;
         [Tooltip("The QuestionBoxFitter on QuestionBoxHolder. Repeats the question and sizes the box to fit it.")]
         [SerializeField] private QuestionBoxFitter questionBox;
         [Tooltip("The AnswerArea inside the panel. Answer inputs are spawned here.")]
         [SerializeField] private RectTransform answerArea;
+        [Tooltip("The AnswerAreaFitter on AnswerAndSubmitHolder. Sizes the answer area to its options and moves the submit area to match. Optional.")]
+        [SerializeField] private AnswerAreaFitter answerFitter;
 
-        [Header("Timing")]
-        [Tooltip("Seconds to wait after the question has finished typing, so it can be read, before the panel opens.")]
+        [Header("Submit")]
+        [Tooltip("The one submit button used by every answer input. Only interactable while the player has an answer to submit.")]
+        [SerializeField] private Button submitButton;
+        [Tooltip("The SubmitArea that holds the button. Shown only while a question waits for an answer.")]
+        [SerializeField] private GameObject submitArea;
+
+        [Header("Timing: before the question (seconds)")]
+        [Tooltip("Pause before the start dialogue begins.")]
+        [SerializeField, Min(0f)] private float startDelay = 0.3f;
+        [Tooltip("After the enemy's question has finished typing, how long it can be read before the blur starts.")]
         [SerializeField, Min(0f)] private float readDelay = 0.8f;
+
+        [Header("Timing: opening the panel, same for every question type (seconds)")]
+        [Tooltip("After the blur starts, wait this long before QuestionAndAnswerHolder starts fading in.")]
+        [SerializeField, Min(0f)] private float holderFadeDelay = 0.2f;
+        [Tooltip("How long QuestionAndAnswerHolder takes to fade from 0 to 1.")]
+        [SerializeField, Min(0.01f)] private float holderFadeDuration = 0.3f;
+        [Tooltip("After the holder starts fading in, wait this long before QuestionBoxHolder is activated (its own animation plays then).")]
+        [SerializeField, Min(0f)] private float questionBoxDelay = 0.15f;
+        [Tooltip("How long QuestionBoxHolder's own animation takes. The answer area stays put during it instead of sliding along with the question box.")]
+        [SerializeField, Min(0f)] private float questionBoxAnimationTime = 0.4f;
+
+        // Timing of the multiple choice input. The keypad and the expression builder will get a
+        // group like this of their own, since their entrances differ.
+        [Serializable]
+        private sealed class MultipleChoiceTiming
+        {
+            [Tooltip("After QuestionBoxHolder is activated, wait this long before the first option pops in.")]
+            [Min(0f)] public float optionsDelay = 0.3f;
+            [Tooltip("Time between one option popping in and the next.")]
+            [Min(0f)] public float optionInterval = 0.1f;
+            [Tooltip("After the last option has popped in, wait this long before the SubmitButton is activated.")]
+            [Min(0f)] public float submitDelay = 0.15f;
+        }
+
+        [Header("Timing: multiple choice (seconds)")]
+        [SerializeField] private MultipleChoiceTiming multipleChoice = new();
+
+        [Header("Timing: closing and after (seconds)")]
+        [Tooltip("When Submit is pressed, how long QuestionAndAnswerHolder takes to fade back to 0.")]
+        [SerializeField, Min(0.01f)] private float closeFadeDuration = 0.5f;
+        [Tooltip("How long the blur takes to fade out when Submit is pressed. Set it equal to Close Fade Duration to make them match. (Blurring in uses Fade In Duration on the BlurBackdropController.)")]
+        [SerializeField, Min(0.01f)] private float blurFadeOutDuration = 0.8f;
+        [Tooltip("On: the player's answer line waits until BOTH the panel and the blur have finished fading, so nothing is still fading when the bubble appears. Off: it starts as soon as the panel has faded, while the blur may still be fading out behind it.")]
+        [SerializeField] private bool waitForBothFades = true;
+        [Tooltip("After the fade-out, extra pause before the player says their answer.")]
+        [SerializeField, Min(0f)] private float afterAnswerDelay = 0f;
+        [Tooltip("After the last reaction line, pause before the next question is asked.")]
+        [SerializeField, Min(0f)] private float nextQuestionDelay = 0.3f;
+
+        [Header("Player's answer line")]
+        [Tooltip("What the player says before the answer. The answer follows it, for example: My answer is: -15")]
+        [SerializeField] private string answerPrefix = "My answer is: ";
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
 
+        private readonly struct Submission
+        {
+            public readonly string text;
+            public readonly bool correct;
+
+            public Submission(string text, bool correct)
+            {
+                this.text = text;
+                this.correct = correct;
+            }
+        }
+
         private int questionIndex;
         private GameObject answerUi;
+        private QuestionResource activeQuestion;
+        private Func<Submission?> readAnswer; // the open input's current answer, or null if none yet
+        private Coroutine openRoutine;
+        private Coroutine fadeRoutine;
+
+        private void Awake()
+        {
+            if (submitButton == null)
+                Debug.LogError("BattleController needs the Submit Button assigned.", this);
+            else
+                submitButton.onClick.AddListener(OnSubmitPressed);
+
+            if (questionAndAnswer == null)
+                Debug.LogError("BattleController needs the Question And Answer CanvasGroup assigned.", this);
+        }
 
         private void Start()
         {
             HidePanelContents();
-            answerPanel.SetActive(false);
+            StartCoroutine(Begin());
+        }
+
+        private IEnumerator Begin()
+        {
+            yield return new WaitForSeconds(startDelay);
             dialogue.PlayLines(level.startDialogue, AskQuestion);
         }
 
@@ -54,7 +157,7 @@ namespace MathQuest.Battle
             dialogue.SayAndHold(
                 DialogueSpeaker.Enemy,
                 question.question,
-                () => StartCoroutine(OpenAnswerPanel(question)));
+                () => openRoutine = StartCoroutine(OpenAnswerPanel(question)));
         }
 
         private IEnumerator OpenAnswerPanel(QuestionResource question)
@@ -62,16 +165,70 @@ namespace MathQuest.Battle
             // The question has finished typing; give the player a moment to read it.
             yield return new WaitForSeconds(readDelay);
 
-            // The snapshot must be taken while the panel is still hidden.
+            // The snapshot must be taken while the panel's contents are still hidden.
             yield return blur.Capture();
 
-            // The panel must be active before the question is fitted, so the text can be measured.
+            // 1. Prepare everything while it is invisible, so nothing re-lays out later.
+            SetGroup(0f, false);
             answerArea.gameObject.SetActive(true);
-            answerPanel.SetActive(true);
-            questionBox.Show(question.question);
+            if (submitArea != null)
+                submitArea.SetActive(true);
+            submitButton.gameObject.SetActive(false); // appears after the input, with its own animation
 
-            SpawnAnswerInput(question);
+            questionBox.Prepare(question.question); // fitted now; its own animation waits for Reveal
+            SpawnAnswerInput(question);             // options spawned hidden, answer area sized for all of them
+            questionBox.Conceal();
+
+            // 2. The blur, then the holder, then the question box, then the options.
             blur.FadeIn();
+            yield return new WaitForSeconds(holderFadeDelay);
+
+            FadeGroup(1f, holderFadeDuration, true);
+            yield return new WaitForSeconds(questionBoxDelay);
+
+            if (answerFitter != null)
+                answerFitter.SetFollowPaused(true); // the question box slides in; the answers stay put
+            questionBox.Reveal();
+            StartCoroutine(ResumeFollowAfter(questionBoxAnimationTime));
+
+            yield return RevealInput();
+
+            openRoutine = null;
+        }
+
+        private IEnumerator ResumeFollowAfter(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            if (answerFitter != null)
+                answerFitter.SetFollowPaused(false);
+        }
+
+        // The answer input's entrance, then the submit button. Each question type has its own timing.
+        private IEnumerator RevealInput()
+        {
+            float submitDelay = 0f;
+
+            if (answerUi != null && answerUi.TryGetComponent(out MultipleChoicePanel panel))
+            {
+                yield return RevealMultipleChoice(panel);
+                submitDelay = multipleChoice.submitDelay;
+            }
+
+            yield return new WaitForSeconds(submitDelay);
+            submitButton.gameObject.SetActive(true); // plays the SubmitButton's animation
+        }
+
+        // Pops the options in one after another. They already exist, so the layout is final.
+        private IEnumerator RevealMultipleChoice(MultipleChoicePanel panel)
+        {
+            yield return new WaitForSeconds(multipleChoice.optionsDelay);
+
+            for (int i = 0; i < panel.OptionCount; i++)
+            {
+                panel.RevealOption(i);
+                if (i < panel.OptionCount - 1)
+                    yield return new WaitForSeconds(multipleChoice.optionInterval);
+            }
         }
 
         private void SpawnAnswerInput(QuestionResource question)
@@ -81,7 +238,19 @@ namespace MathQuest.Battle
                 case MultipleChoiceAnswerResource choice:
                     MultipleChoicePanel panel = Instantiate(multipleChoicePrefab, answerArea, false);
                     answerUi = panel.gameObject;
-                    panel.Show(choice, index => OnAnswered(index == choice.CorrectIndex));
+                    activeQuestion = question;
+
+                    // Tapping an option only selects it; Submit unlocks once something is selected.
+                    panel.Show(choice, () => submitButton.interactable = panel.HasSelection, concealed: true);
+                    submitButton.interactable = false;
+                    readAnswer = () => panel.HasSelection
+                        ? new Submission(
+                            choice.GetOption(panel.SelectedIndex),
+                            panel.SelectedIndex == choice.CorrectIndex)
+                        : (Submission?)null;
+
+                    if (answerFitter != null)
+                        answerFitter.Fit(PreferredHeight(panel));
                     break;
 
                 default:
@@ -91,24 +260,149 @@ namespace MathQuest.Battle
             }
         }
 
-        private void OnAnswered(bool correct)
+        // Height the spawned input's layout needs, for example the rows of a grid of options.
+        private static float PreferredHeight(Component input)
         {
-            Debug.Log(correct ? "Correct answer." : "Wrong answer.");
-            StartCoroutine(CloseAnswerPanel());
+            var rect = (RectTransform)input.transform;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rect);
+
+            LayoutGroup group = input.GetComponent<LayoutGroup>();
+            return group != null ? group.preferredHeight : rect.rect.height;
         }
 
-        private IEnumerator CloseAnswerPanel()
+        private void OnSubmitPressed()
         {
-            // The inputs and the enemy's bubble go at once; only the blur fades out.
-            dialogue.ClearBubble();
-            HidePanelContents();
-            blur.FadeOut();
-            yield return new WaitForSeconds(blur.FadeDuration);
-            answerPanel.SetActive(false);
+            Submission? submission = readAnswer?.Invoke();
+            if (submission == null)
+                return; // nothing selected yet
 
-            // Temporary, until the reaction dialogue exists: just ask the next question.
+            // Submitting mid-cascade stops the options still popping in.
+            if (openRoutine != null)
+            {
+                StopCoroutine(openRoutine);
+                openRoutine = null;
+            }
+
+            readAnswer = null;
+            submitButton.interactable = false;
+            if (answerUi != null && answerUi.TryGetComponent(out MultipleChoicePanel panel))
+                panel.Lock();
+
+            OnAnswered(activeQuestion, submission.Value.text, submission.Value.correct);
+        }
+
+        private void OnAnswered(QuestionResource question, string answerText, bool correct)
+        {
+            Debug.Log(correct ? "Correct answer." : "Wrong answer.");
+            StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct)));
+        }
+
+        // The player says their answer, then the enemy answers back: praise if it was right,
+        // otherwise the taunt (optional) and the solution.
+        private List<DialogueLine> BuildReaction(QuestionResource question, string answerText, bool correct)
+        {
+            var lines = new List<DialogueLine>
+            {
+                new DialogueLine { speaker = DialogueSpeaker.Player, text = answerPrefix + answerText }
+            };
+
+            if (correct)
+            {
+                AddEnemyLines(lines, question.encourageDialogue);
+            }
+            else
+            {
+                AddEnemyLines(lines, question.tauntDialogue);
+                AddEnemyLines(lines, question.solutionDialogue);
+            }
+
+            return lines;
+        }
+
+        private static void AddEnemyLines(List<DialogueLine> into, List<string> texts)
+        {
+            if (texts == null)
+                return;
+
+            foreach (string text in texts)
+            {
+                if (!string.IsNullOrWhiteSpace(text))
+                    into.Add(new DialogueLine { speaker = DialogueSpeaker.Enemy, text = text });
+            }
+        }
+
+        private IEnumerator CloseAnswerPanel(List<DialogueLine> reaction)
+        {
+            // The enemy's bubble goes at once; the panel fades out and the blur fades with it.
+            dialogue.ClearBubble();
+            FadeGroup(0f, closeFadeDuration, false);
+            blur.FadeOut(blurFadeOutDuration);
+
+            float fadeTime = waitForBothFades
+                ? Mathf.Max(closeFadeDuration, blurFadeOutDuration)
+                : closeFadeDuration;
+            yield return new WaitForSeconds(fadeTime + afterAnswerDelay);
+
+            HidePanelContents();
+
+            // The player's answer and the enemy's reply, one bubble at a time, then the next question.
+            dialogue.PlayLines(reaction, () => StartCoroutine(NextQuestion()));
+        }
+
+        // Temporary: right or wrong, move on and wrap around at the end.
+        private IEnumerator NextQuestion()
+        {
+            yield return new WaitForSeconds(nextQuestionDelay);
             questionIndex = (questionIndex + 1) % level.questions.Count;
             AskQuestion();
+        }
+
+        // ---- QuestionAndAnswerHolder fade --------------------------------------------------
+
+        private void SetGroup(float alpha, bool takesInput)
+        {
+            if (questionAndAnswer == null)
+                return;
+
+            if (fadeRoutine != null)
+            {
+                StopCoroutine(fadeRoutine);
+                fadeRoutine = null;
+            }
+
+            questionAndAnswer.alpha = alpha;
+            questionAndAnswer.interactable = takesInput;
+            questionAndAnswer.blocksRaycasts = takesInput;
+        }
+
+        private void FadeGroup(float target, float duration, bool takesInput)
+        {
+            if (questionAndAnswer == null)
+                return;
+
+            if (fadeRoutine != null)
+                StopCoroutine(fadeRoutine);
+
+            // Fading in takes input from the start; fading out stops taking it at once.
+            questionAndAnswer.interactable = takesInput;
+            questionAndAnswer.blocksRaycasts = takesInput;
+            fadeRoutine = StartCoroutine(FadeGroupRoutine(target, duration));
+        }
+
+        private IEnumerator FadeGroupRoutine(float target, float duration)
+        {
+            float from = questionAndAnswer.alpha;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                questionAndAnswer.alpha = Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                yield return null;
+            }
+
+            questionAndAnswer.alpha = target;
+            fadeRoutine = null;
         }
 
         private void HidePanelContents()
@@ -117,8 +411,24 @@ namespace MathQuest.Battle
                 Destroy(answerUi);
 
             answerUi = null;
+            readAnswer = null;
+            if (submitButton != null)
+            {
+                submitButton.interactable = false;
+                submitButton.gameObject.SetActive(false);
+            }
+
+            if (submitArea != null)
+                submitArea.SetActive(false);
+            if (answerFitter != null)
+            {
+                answerFitter.Clear();
+                answerFitter.SetFollowPaused(false);
+            }
+
             questionBox.Hide();
             answerArea.gameObject.SetActive(false);
+            SetGroup(0f, false);
         }
     }
 }
