@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Febucci.UI;
 using Febucci.UI.Core;
 using TexDrawLib;
@@ -26,6 +27,9 @@ namespace MathQuest.Battle
         [Min(0.001f)] public float secondsPerLetter = 0.035f;
         [Tooltip("Pause after . ! ? (half of this after , ; :). Plain lines only.")]
         [Min(0f)] public float pauseAfterPunctuation = 0.3f;
+
+        [Tooltip("On: equations type glyph by glyph like the rest of the line. Off: each equation appears whole as a block.")]
+        public bool typeEquations = true;
 
         [Header("Font size")]
         [Min(1f)] public float maxFontSize = 52f;
@@ -89,6 +93,22 @@ namespace MathQuest.Battle
         private int plainTotal;               // pixel-text letters in the whole line
         private readonly List<CharAtom> plainAtoms = new List<CharAtom>();
         private bool warnedNoLetters;
+        private bool warnedNoGlyphs;
+
+        // Glyph-by-glyph equations. The line is split into plain and equation segments in the
+        // source text, and the same segments are found in TEXDraw's layout; glyphs of a segment
+        // are then faded in as that segment's characters are typed.
+        private struct SourceSegment { public int start, end, units; public bool isEquation; }
+        private struct Fade { public CharAtom letter; public FractionAtom bar; }
+
+        private static readonly FieldInfo FractionColor =
+            typeof(FractionAtom).GetField("color", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        private bool? glyphMode;              // null until decided for the current line
+        private bool[] typeable;              // characters that cost typing time
+        private int[] unitBefore;             // typeable characters before index i, within its segment
+        private readonly List<SourceSegment> sourceSegments = new List<SourceSegment>();
+        private readonly List<List<Fade>> treeSegments = new List<List<Fade>>();
         private CanvasGroup mathGroup;        // hides the whole math label while TEXDraw settles
 
         private string currentText;
@@ -155,8 +175,12 @@ namespace MathQuest.Battle
             mathCut = 0;
             if (mathGroup != null)
                 mathGroup.alpha = 1f;
+            glyphMode = null;
             if (hasMath)
+            {
                 BuildPlainCounts(text);
+                BuildSegments(text);
+            }
 
             if (string.IsNullOrEmpty(text))
             {
@@ -409,6 +433,20 @@ namespace MathQuest.Battle
 
             mathCut = Mathf.Clamp(cut, 0, currentText.Length);
 
+            if (glyphMode == null)
+                DecideGlyphMode();
+
+            if (glyphMode == true)
+            {
+                if (mathLabel.text != currentText)
+                    mathLabel.text = currentText; // never changes while typing, so nothing re-parses
+
+                mathLabel.CalculateLayoutInputHorizontal();
+                CollectSegments();
+                ApplyGlyphs();
+                return;
+            }
+
             int q = mathCut >= currentText.Length ? -1 : currentText.IndexOf('$', mathCut);
             string composed = q < 0
                 ? currentText
@@ -501,6 +539,275 @@ namespace MathQuest.Battle
             }
         }
 
+        // ---- glyph-by-glyph equations -------------------------------------------------------
+
+        private void BuildSegments(string text)
+        {
+            // Which characters cost typing time. Inside an equation, commands (\frac), braces and
+            // the ^ and _ markers produce no glyph of their own.
+            typeable = new bool[text.Length];
+            bool inMath = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                if (c == '$')
+                {
+                    inMath = !inMath;
+                    continue;
+                }
+
+                if (!inMath)
+                {
+                    typeable[i] = !char.IsWhiteSpace(c);
+                    continue;
+                }
+
+                if (c == '\\')
+                {
+                    while (i + 1 < text.Length && char.IsLetter(text[i + 1]))
+                        i++;
+                    continue;
+                }
+
+                typeable[i] = !(char.IsWhiteSpace(c) || c == '{' || c == '}' || c == '^' || c == '_');
+            }
+
+            sourceSegments.Clear();
+            unitBefore = new int[text.Length + 1];
+
+            int start = 0;
+            bool equation = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text[i] != '$')
+                    continue;
+
+                if (!equation)
+                {
+                    AddSegment(start, i, false);
+                    start = i;
+                    equation = true;
+                }
+                else
+                {
+                    AddSegment(start, i + 1, true);
+                    start = i + 1;
+                    equation = false;
+                }
+            }
+
+            AddSegment(start, text.Length, equation);
+        }
+
+        private void AddSegment(int start, int end, bool isEquation)
+        {
+            int units = 0;
+            for (int i = start; i < end; i++)
+            {
+                unitBefore[i] = units;
+                if (typeable[i])
+                    units++;
+            }
+
+            sourceSegments.Add(new SourceSegment { start = start, end = end, units = units, isEquation = isEquation });
+        }
+
+        private void DecideGlyphMode()
+        {
+            glyphMode = false;
+            if (fit != null && !fit.typeEquations)
+                return;
+
+            // Look at TEXDraw's layout of the whole line and check it matches the source: plain,
+            // equation, plain, equation, ... If it does not, equations simply appear as blocks.
+            mathLabel.text = currentText;
+            mathLabel.CalculateLayoutInputHorizontal();
+            CollectSegments();
+
+            glyphMode = treeSegments.Count == sourceSegments.Count;
+            if (glyphMode == false && !warnedNoGlyphs)
+            {
+                warnedNoGlyphs = true;
+                Debug.LogWarning("DialogueChatBox could not match a math line to its equations " +
+                                 $"({treeSegments.Count} found, {sourceSegments.Count} expected), so equations " +
+                                 "will appear as whole blocks.", this);
+            }
+        }
+
+        private void CollectSegments()
+        {
+            treeSegments.Clear();
+            Atom root = mathLabel.orchestrator != null ? mathLabel.orchestrator.latestAtomCache : null;
+            ParagraphAtom paragraph = FindParagraph(root);
+            if (paragraph == null)
+                return;
+
+            var plain = new List<Fade>();
+            foreach (Atom child in paragraph.children)
+            {
+                if (child is WordAtom word)
+                {
+                    foreach (Atom letter in word.children)
+                    {
+                        if (letter is CharAtom ch)
+                            plain.Add(new Fade { letter = ch });
+                    }
+
+                    continue;
+                }
+
+                var equation = new List<Fade>();
+                CollectFades(child, equation);
+                if (equation.Count == 0)
+                    continue; // a space or other atom that draws nothing
+
+                treeSegments.Add(plain);
+                treeSegments.Add(equation);
+                plain = new List<Fade>();
+            }
+
+            treeSegments.Add(plain);
+        }
+
+        private static ParagraphAtom FindParagraph(Atom atom)
+        {
+            if (atom is ParagraphAtom paragraph)
+                return paragraph;
+
+            if (atom is LayoutAtom layout)
+            {
+                foreach (Atom child in layout.children)
+                {
+                    ParagraphAtom found = FindParagraph(child);
+                    if (found != null)
+                        return found;
+                }
+            }
+
+            return null;
+        }
+
+        // Everything an equation draws, in reading order: numerator, then the bar, then the
+        // denominator; a base before its scripts.
+        private static void CollectFades(Atom atom, List<Fade> into)
+        {
+            if (atom == null)
+                return;
+
+            if (atom is CharAtom ch)
+            {
+                into.Add(new Fade { letter = ch });
+            }
+            else if (atom is FractionAtom fraction)
+            {
+                CollectFades(fraction.numerator, into);
+                if (fraction.line)
+                    into.Add(new Fade { bar = fraction });
+                CollectFades(fraction.denominator, into);
+            }
+            else if (atom is ScriptsAtom scripts)
+            {
+                CollectFades(scripts.atom, into);
+                CollectFades(scripts.superscript, into);
+                CollectFades(scripts.subscript, into);
+            }
+            else if (atom is AutoDelimitedGroupAtom delimited)
+            {
+                CollectFades(delimited.left, into);
+                CollectFades(delimited.atom, into);
+                CollectFades(delimited.right, into);
+            }
+            else if (atom is AccentedAtom accented)
+            {
+                CollectFades(accented.accent, into);
+                CollectFades(accented.atom, into);
+            }
+            else if (atom is BoxedAtom boxed)
+            {
+                CollectFades(boxed.atom, into);
+            }
+            else if (atom is BoxedLinkAtom link)
+            {
+                CollectFades(link.atom, into);
+            }
+            else if (atom is BlockAtom block)
+            {
+                CollectFades(block.atom, into);
+            }
+            else if (atom is InlineAtom inline)
+            {
+                CollectFades(inline.atom, into);
+            }
+            else if (atom is LayoutAtom layout)
+            {
+                foreach (Atom child in layout.children)
+                    CollectFades(child, into);
+            }
+        }
+
+        private void ApplyGlyphs()
+        {
+            if (treeSegments.Count != sourceSegments.Count)
+                return; // the layout is mid-change; the next frame will match again
+
+            byte fullAlpha = (byte)Mathf.RoundToInt(mathLabel.color.a * 255f);
+            bool changed = false;
+
+            for (int s = 0; s < treeSegments.Count; s++)
+            {
+                SourceSegment segment = sourceSegments[s];
+                List<Fade> fades = treeSegments[s];
+
+                int typed = mathCut >= segment.end ? segment.units
+                          : mathCut <= segment.start ? 0
+                          : unitBefore[mathCut];
+
+                int visible;
+                if (mathCut >= segment.end)
+                    visible = fades.Count;
+                else if (segment.units <= 0)
+                    visible = 0;
+                else
+                    visible = Mathf.RoundToInt(typed * (float)fades.Count / segment.units);
+
+                for (int k = 0; k < fades.Count; k++)
+                    changed |= SetAlpha(fades[k], k < visible ? fullAlpha : (byte)0);
+            }
+
+            if (changed)
+            {
+                mathLabel.SetLayoutDirty();
+                mathLabel.SetVerticesDirty();
+            }
+        }
+
+        private static bool SetAlpha(Fade fade, byte alpha)
+        {
+            if (fade.letter != null)
+            {
+                Color32 color = fade.letter.color;
+                if (color.a == alpha)
+                    return false;
+
+                color.a = alpha;
+                fade.letter.color = color;
+                return true;
+            }
+
+            if (fade.bar != null && FractionColor != null)
+            {
+                var color = (Color32)FractionColor.GetValue(fade.bar);
+                if (color.a == alpha)
+                    return false;
+
+                color.a = alpha;
+                FractionColor.SetValue(fade.bar, color);
+                return true;
+            }
+
+            return false;
+        }
+
         private IEnumerator TypeMath(string text)
         {
             var blockWait = new WaitForSeconds(mathBlockPause);
@@ -517,6 +824,29 @@ namespace MathQuest.Battle
             }
 
             mathGroup.alpha = 1f;
+
+            if (glyphMode == true)
+            {
+                while (i < text.Length)
+                {
+                    while (i < text.Length && !typeable[i])
+                        i++;
+                    if (i >= text.Length)
+                        break;
+
+                    i++; // one glyph
+                    while (i < text.Length && !typeable[i])
+                        i++; // spaces, commands and the $ signs ride along with the glyph before them
+
+                    SetMathReveal(i);
+                    yield return new WaitForSeconds(fit != null ? fit.secondsPerLetter : mathCharDelay);
+                }
+
+                mathRoutine = null;
+                SetMathReveal(text.Length);
+                Finish();
+                yield break;
+            }
 
             while (i < text.Length)
             {
