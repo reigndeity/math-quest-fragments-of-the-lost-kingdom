@@ -29,7 +29,7 @@ namespace MathQuest.Data
         [Tooltip("Shuffle the order of the picked questions each time the level starts. Only matters with Strategy All.")]
         [SerializeField] private bool shuffle;
 
-        public override void Pick(List<QuestionResource> into)
+        public override void Pick(List<QuestionResource> into, int countOverride = -1)
         {
             List<QuestionResource> valid = new();
             foreach (QuestionResource question in questions)
@@ -59,6 +59,9 @@ namespace MathQuest.Data
                     (valid[i], valid[j]) = (valid[j], valid[i]);
                 }
             }
+
+            if (countOverride >= 0 && countOverride < valid.Count)
+                valid.RemoveRange(countOverride, valid.Count - countOverride); // keep the first N
 
             into.AddRange(valid);
         }

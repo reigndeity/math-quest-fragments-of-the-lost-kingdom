@@ -31,7 +31,7 @@ namespace MathQuest.Data
         [Tooltip("Off: a question can only appear once. On: the same question can be drawn again.")]
         [SerializeField] private bool allowRepeats;
 
-        public override void Pick(List<QuestionResource> into)
+        public override void Pick(List<QuestionResource> into, int countOverride = -1)
         {
             List<WeightedQuestion> candidates = new();
             foreach (WeightedQuestion entry in entries)
@@ -40,7 +40,8 @@ namespace MathQuest.Data
                     candidates.Add(entry);
             }
 
-            for (int n = 0; n < drawCount && candidates.Count > 0; n++)
+            int count = countOverride >= 0 ? countOverride : drawCount;
+            for (int n = 0; n < count && candidates.Count > 0; n++)
             {
                 float total = 0f;
                 foreach (WeightedQuestion entry in candidates)
