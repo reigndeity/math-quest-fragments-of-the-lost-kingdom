@@ -26,7 +26,7 @@ namespace MathQuest.Battle
     ///      activated, which plays its own animation.
     ///
     /// The steps up to 4 are common to every question type. Step 5 and the Submit Delay belong to
-    /// the answer input, so each type (multiple choice now, keypad and builder later) has its own
+    /// the answer input, so each type (multiple choice, keypad and expression builder) has its own
     /// timing group.
     /// </summary>
     [DisallowMultipleComponent]
@@ -68,7 +68,7 @@ namespace MathQuest.Battle
         [Tooltip("How long QuestionBoxHolder's own animation takes. The answer area stays put during it instead of sliding along with the question box.")]
         [SerializeField, Min(0f)] private float questionBoxAnimationTime = 0.4f;
 
-        // Timing of the multiple choice input. The keypad and the expression builder will get a
+        // Timing of the multiple choice input. The keypad and the expression builder each have a
         // group like this of their own, since their entrances differ.
         [Serializable]
         private sealed class MultipleChoiceTiming
@@ -99,6 +99,21 @@ namespace MathQuest.Battle
         [Header("Timing: number keypad (seconds)")]
         [SerializeField] private KeypadTiming keypad = new();
 
+        // Timing of the expression builder: its intro plays as a whole, then the submit button follows.
+        [Serializable]
+        private sealed class BuilderTiming
+        {
+            [Tooltip("After QuestionBoxHolder is activated, wait this long before the builder's intro plays.")]
+            [Min(0f)] public float builderDelay = 0.3f;
+            [Tooltip("How long the builder's intro takes. Set it to the length of the ExpressionBuilderHolder animation. If the prefab has no Animator, the builder fades in over this time instead.")]
+            [Min(0.01f)] public float builderAnimationTime = 0.35f;
+            [Tooltip("After the builder's intro has finished, wait this long before the SubmitButton is activated.")]
+            [Min(0f)] public float submitDelay = 0.15f;
+        }
+
+        [Header("Timing: expression builder (seconds)")]
+        [SerializeField] private BuilderTiming builder = new();
+
         [Header("Timing: closing and after (seconds)")]
         [Tooltip("When Submit is pressed, how long QuestionAndAnswerHolder takes to fade back to 0.")]
         [SerializeField, Min(0.01f)] private float closeFadeDuration = 0.5f;
@@ -119,6 +134,8 @@ namespace MathQuest.Battle
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
         [Tooltip("The KeypadHolder prefab, used for questions answered with a number.")]
         [SerializeField] private NumberKeypadPanel keypadPrefab;
+        [Tooltip("The ExpressionBuilderHolder prefab, used for questions answered by building an expression.")]
+        [SerializeField] private ExpressionBuilderPanel builderPrefab;
 
         private readonly struct Submission
         {
@@ -238,6 +255,13 @@ namespace MathQuest.Battle
                 yield return new WaitForSeconds(keypad.keypadAnimationTime);
                 submitDelay = keypad.submitDelay;
             }
+            else if (answerUi != null && answerUi.TryGetComponent(out ExpressionBuilderPanel expressionPanel))
+            {
+                yield return new WaitForSeconds(builder.builderDelay);
+                expressionPanel.Reveal(builder.builderAnimationTime);
+                yield return new WaitForSeconds(builder.builderAnimationTime);
+                submitDelay = builder.submitDelay;
+            }
 
             yield return new WaitForSeconds(submitDelay);
             submitButton.gameObject.SetActive(true); // plays the SubmitButton's animation
@@ -301,6 +325,29 @@ namespace MathQuest.Battle
                         answerFitter.Fit(PreferredHeight(pad));
                     break;
 
+                case ExpressionBuilderAnswerResource expression:
+                    if (builderPrefab == null)
+                    {
+                        Debug.LogError("Assign the Builder Prefab (the ExpressionBuilderHolder prefab) on BattleController.", this);
+                        break;
+                    }
+
+                    ExpressionBuilderPanel builderPanel = Instantiate(builderPrefab, answerArea, false);
+                    answerUi = builderPanel.gameObject;
+                    activeQuestion = question;
+
+                    // Submit unlocks once every slot has a tile.
+                    builderPanel.Show(expression, () => submitButton.interactable = builderPanel.AllFilled);
+                    builderPanel.Conceal();
+                    submitButton.interactable = false;
+                    readAnswer = () => builderPanel.AllFilled
+                        ? new Submission(builderPanel.AnswerText, expression.IsCorrect(builderPanel.PlacedTileIds))
+                        : (Submission?)null;
+
+                    if (answerFitter != null)
+                        answerFitter.Fit(PreferredHeight(builderPanel));
+                    break;
+
                 default:
                     Debug.LogWarning(
                         $"No answer input exists yet for '{question.name}' ({question.answer}).", this);
@@ -337,6 +384,8 @@ namespace MathQuest.Battle
                 panel.Lock();
             else if (answerUi != null && answerUi.TryGetComponent(out NumberKeypadPanel pad))
                 pad.Lock();
+            else if (answerUi != null && answerUi.TryGetComponent(out ExpressionBuilderPanel expressionPanel))
+                expressionPanel.Lock();
 
             OnAnswered(activeQuestion, submission.Value.text, submission.Value.correct);
         }

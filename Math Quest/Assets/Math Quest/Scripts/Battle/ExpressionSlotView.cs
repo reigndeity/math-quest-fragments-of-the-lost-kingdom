@@ -7,8 +7,8 @@ namespace MathQuest.Battle
 {
     /// <summary>
     /// A slot in the expression being built. Lives on the slot prefab. Tapping is handled
-    /// by the button; dragging the tile out of the slot is forwarded to the owning
-    /// <see cref="ExpressionBuilderInput"/>.
+    /// by the button; dragging the tile out of the slot is forwarded to the owner
+    /// (an <see cref="IExpressionDragHost"/>).
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class ExpressionSlotView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -17,7 +17,7 @@ namespace MathQuest.Battle
         [SerializeField] private Image background;
         [SerializeField] private TEXDraw label;
 
-        private ExpressionBuilderInput owner;
+        private IExpressionDragHost owner;
         private int slotIndex;
         private bool dragging;
 
@@ -30,7 +30,7 @@ namespace MathQuest.Battle
         }
 
         /// <summary>Connects this view to its input so drags can be reported.</summary>
-        public void Bind(ExpressionBuilderInput builder, int index)
+        public void Bind(IExpressionDragHost builder, int index)
         {
             owner = builder;
             slotIndex = index;

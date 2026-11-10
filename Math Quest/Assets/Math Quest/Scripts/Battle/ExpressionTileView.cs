@@ -7,7 +7,7 @@ namespace MathQuest.Battle
 {
     /// <summary>
     /// A tile in the pool. Lives on the tile prefab. Tapping is handled by the button;
-    /// dragging is forwarded to the owning <see cref="ExpressionBuilderInput"/>.
+    /// dragging is forwarded to the owner (an <see cref="IExpressionDragHost"/>).
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class ExpressionTileView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -15,9 +15,10 @@ namespace MathQuest.Battle
         [SerializeField] private Button button;
         [SerializeField] private TEXDraw label;
 
-        private ExpressionBuilderInput owner;
+        private IExpressionDragHost owner;
         private string tileId;
         private bool dragging;
+        private CanvasGroup availability;
 
         public Button Button => button;
 
@@ -27,10 +28,27 @@ namespace MathQuest.Battle
         }
 
         /// <summary>Connects this view to its input so drags can be reported. Not called on drag ghosts.</summary>
-        public void Bind(ExpressionBuilderInput builder, string id)
+        public void Bind(IExpressionDragHost builder, string id)
         {
             owner = builder;
             tileId = id;
+        }
+
+        /// <summary>
+        /// Shows or hides the tile while keeping its place in the pool, so the pool does not
+        /// reflow when a tile is placed in a slot.
+        /// </summary>
+        public void SetAvailable(bool available)
+        {
+            if (availability == null)
+            {
+                availability = GetComponent<CanvasGroup>();
+                if (availability == null)
+                    availability = gameObject.AddComponent<CanvasGroup>();
+            }
+
+            availability.alpha = available ? 1f : 0f;
+            availability.blocksRaycasts = available;
         }
 
         public void OnBeginDrag(PointerEventData eventData)

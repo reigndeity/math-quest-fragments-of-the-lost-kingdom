@@ -14,7 +14,7 @@ namespace MathQuest.Battle
     /// placed tile ids and does not decide whether they are correct.
     /// </summary>
     [DisallowMultipleComponent]
-    public sealed class ExpressionBuilderInput : MonoBehaviour
+    public sealed class ExpressionBuilderInput : MonoBehaviour, IExpressionDragHost
     {
         [SerializeField] private RectTransform slotContainer;
         [SerializeField] private RectTransform tileContainer;

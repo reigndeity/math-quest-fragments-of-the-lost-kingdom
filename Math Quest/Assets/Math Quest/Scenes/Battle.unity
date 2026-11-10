@@ -186,6 +186,10 @@ MonoBehaviour:
     keypadDelay: 0
     keypadAnimationTime: 0.35
     submitDelay: 0.15
+  builder:
+    builderDelay: 0.3
+    builderAnimationTime: 0.35
+    submitDelay: 0.15
   closeFadeDuration: 0.5
   blurFadeOutDuration: 0.8
   waitForBothFades: 1
@@ -194,6 +198,7 @@ MonoBehaviour:
   answerPrefix: 'My answer is: '
   multipleChoicePrefab: {fileID: 7200000000000000001, guid: c0e7852ee08d143448e6ae7bde0c5163, type: 3}
   keypadPrefab: {fileID: 5100000000000000005, guid: f1b50b3bb0514d7eaa76f0f64a28ba9b, type: 3}
+  builderPrefab: {fileID: 5200000000000000005, guid: 19eaa27a5372428d9a5ef71dc8f837ef, type: 3}
 --- !u!1 &278879711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,6 +1750,7 @@ MonoBehaviour:
     secondsPerLetter: 0.05
     pauseAfterPunctuation: 0.3
     typeEquations: 1
+    breakEquationsLongerThan: 28
     plainTextAlign: 0
     maxFontSize: 45
     minFontSize: 28
