@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnswerResource_Act1_Difficult_23
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.MultipleChoiceAnswerResource
   options:
-  - "4/9"
-  - "-9/4"
-  - "-4/9"
+  - "$\\frac{4}{9}$"
+  - "$-\\frac{9}{4}$"
+  - "$-\\frac{4}{9}$"
   - "-4"
   correctIndex: 2

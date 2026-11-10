@@ -15,6 +15,6 @@ MonoBehaviour:
   options:
   - "4w+5"
   - "w+20"
-  - "(w+5)/4"
+  - "$\\frac{w+5}{4}$"
   - "4(w+5)"
   correctIndex: 3

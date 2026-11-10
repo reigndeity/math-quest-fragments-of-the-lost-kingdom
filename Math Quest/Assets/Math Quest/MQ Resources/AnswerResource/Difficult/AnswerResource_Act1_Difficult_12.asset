@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnswerResource_Act1_Difficult_12
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.MultipleChoiceAnswerResource
   options:
-  - "7/10"
-  - "-10/7"
+  - "$\\frac{7}{10}$"
+  - "$-\\frac{10}{7}$"
   - "-7"
-  - "-7/10"
+  - "$-\\frac{7}{10}$"
   correctIndex: 3

@@ -16,5 +16,5 @@ MonoBehaviour:
   - "m+8"
   - "m-8"
   - "8m"
-  - "m/8"
+  - "$\\frac{m}{8}$"
   correctIndex: 0

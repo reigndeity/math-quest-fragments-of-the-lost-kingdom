@@ -1,4 +1,5 @@
 using System;
+using TexDrawLib;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,10 @@ namespace MathQuest.Battle
     {
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text label;
+        [Tooltip("Used for options written with $...$ (fractions, exponents). Leave empty and one is created next to the label, with the label's position and color.")]
+        [SerializeField] private TEXDraw mathLabel;
+        [Tooltip("Size of the math text when the math label is created automatically. It shrinks if the option is too wide.")]
+        [SerializeField, Min(1f)] private float mathSize = 50f;
         [Tooltip("Shown while this option is the selected one. If left empty, the child called Selected is used.")]
         [SerializeField] private GameObject selectedMarker;
 
@@ -42,9 +47,50 @@ namespace MathQuest.Battle
 
         public void Bind(string text, Action clicked)
         {
-            label.text = text;
+            bool isMath = !string.IsNullOrEmpty(text) && text.Contains("$");
+            if (isMath)
+                EnsureMathLabel();
+
+            if (isMath && mathLabel != null)
+            {
+                mathLabel.text = text;
+                mathLabel.gameObject.SetActive(true);
+                label.gameObject.SetActive(false);
+            }
+            else
+            {
+                label.text = text;
+                label.gameObject.SetActive(true);
+                if (mathLabel != null)
+                    mathLabel.gameObject.SetActive(false);
+            }
+
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => clicked?.Invoke());
+        }
+
+        private void EnsureMathLabel()
+        {
+            if (mathLabel != null)
+                return;
+
+            RectTransform source = label.rectTransform;
+            GameObject created = new("MathLabel", typeof(RectTransform));
+            RectTransform rect = (RectTransform)created.transform;
+            rect.SetParent(source.parent, false);
+            rect.SetSiblingIndex(source.GetSiblingIndex() + 1);
+            rect.anchorMin = source.anchorMin;
+            rect.anchorMax = source.anchorMax;
+            rect.pivot = source.pivot;
+            rect.anchoredPosition = source.anchoredPosition;
+            rect.sizeDelta = source.sizeDelta;
+
+            mathLabel = created.AddComponent<TEXDraw>();
+            mathLabel.alignment = new Vector2(0.5f, 0.5f);
+            mathLabel.size = mathSize;
+            mathLabel.overflow = TexDrawLib.Core.Overflow.DownScale;
+            mathLabel.color = label.color;
+            mathLabel.raycastTarget = false; // clicks must reach the button
         }
 
         /// <summary>

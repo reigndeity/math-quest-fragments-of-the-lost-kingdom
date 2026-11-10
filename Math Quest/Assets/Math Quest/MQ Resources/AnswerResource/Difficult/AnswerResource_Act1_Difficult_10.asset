@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnswerResource_Act1_Difficult_10
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.MultipleChoiceAnswerResource
   options:
-  - "5/8"
-  - "-5/8"
+  - "$\\frac{5}{8}$"
+  - "$-\\frac{5}{8}$"
   - "-5"
-  - "-8/5"
+  - "$-\\frac{8}{5}$"
   correctIndex: 1

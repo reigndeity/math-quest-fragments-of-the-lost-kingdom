@@ -16,5 +16,5 @@ MonoBehaviour:
   - "n-9"
   - "9n"
   - "n+9"
-  - "n/9"
+  - "$\\frac{n}{9}$"
   correctIndex: 2
