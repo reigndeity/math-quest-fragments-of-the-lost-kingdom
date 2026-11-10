@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_7
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Components of Algebraic Expressions"
+  question: "In the expression $4x^2-7x+2$, identify the coefficient of the middle term."
+  answer: {fileID: 11400000, guid: 1bf2c0897ec350dfb3f68658ba37eb0b, type: 2}
+  encourageDialogue:
+  - "Well done! You got it right."
+  tauntDialogue:
+  - "Nope! Not even close."
+  solutionDialogue:
+  - "The middle term is $-7x$."
+  - "Its coefficient is $-7$. Keep the sign."

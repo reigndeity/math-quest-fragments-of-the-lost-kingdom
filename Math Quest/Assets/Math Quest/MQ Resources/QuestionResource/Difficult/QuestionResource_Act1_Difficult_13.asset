@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_13
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Components of Algebraic Expressions"
+  question: "How many terms are there in the expression below? $-2(x+4)^3-\\frac{y}{5}+6x-1$"
+  answer: {fileID: 11400000, guid: 1751212dd040549badece30cda4b0d96, type: 2}
+  encourageDialogue:
+  - "Impressive! That is correct."
+  tauntDialogue:
+  - "Hehehe... that is not right!"
+  solutionDialogue:
+  - "Terms are the parts separated by + and - signs."
+  - "$-2(x+4)^3$, $-\\frac{y}{5}$, $6x$ and $-1$ make 4 terms."

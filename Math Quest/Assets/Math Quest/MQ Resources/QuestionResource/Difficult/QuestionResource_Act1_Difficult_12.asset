@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_12
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Components of Algebraic Expressions"
+  question: "What is the numerical coefficient of the term $-\\frac{7a^2b}{10}$ in $-\\frac{7a^2b}{10}+3a-5$?"
+  answer: {fileID: 11400000, guid: e04e204180cc50528a91a848cbe7be74, type: 2}
+  encourageDialogue:
+  - "Correct! You are stronger than you look."
+  tauntDialogue:
+  - "Ha! Is that your best?"
+  solutionDialogue:
+  - "Remove the variables $a^2b$ and keep the sign."
+  - "The coefficient is $-\\frac{7}{10}$."

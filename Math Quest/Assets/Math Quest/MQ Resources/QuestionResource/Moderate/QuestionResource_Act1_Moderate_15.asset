@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_15
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "Half of a number $m$, plus the cube of a different number $k$."
+  answer: {fileID: 11400000, guid: 4763ede95aa35b5c8cb078a87d925981, type: 2}
+  encourageDialogue:
+  - "Well done! You got it right."
+  tauntDialogue:
+  - "Nope! Not even close."
+  solutionDialogue:
+  - "Half of $m$ is $\\frac{m}{2}$."
+  - "The cube of $k$ is $k^3$."
+  - "Plus joins them: $\\frac{m}{2}+k^3$."

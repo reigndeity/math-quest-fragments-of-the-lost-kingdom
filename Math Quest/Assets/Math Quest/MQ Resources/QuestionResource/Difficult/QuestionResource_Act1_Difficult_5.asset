@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_5
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "The square of three less than twice a number $x$, decreased by the quotient of four times $y$ and the quantity five more than $x$, all increased by half the difference of $x$ and $y$."
+  answer: {fileID: 11400000, guid: 0978b4f4ff895499a20a3f3941de6a97, type: 2}
+  encourageDialogue:
+  - "Impressive! That is correct."
+  tauntDialogue:
+  - "Hehehe... that is not right!"
+  solutionDialogue:
+  - "Three less than twice $x$ is $2x-3$, and its square is $(2x-3)^2$."
+  - "Four times $y$ over the quantity five more than $x$ is $\\frac{4y}{x+5}$, which is subtracted."
+  - "Half the difference of $x$ and $y$ is $\\frac{x-y}{2}$, which is added."
+  - "Put it together: $(2x-3)^2-\\frac{4y}{x+5}+\\frac{x-y}{2}$."

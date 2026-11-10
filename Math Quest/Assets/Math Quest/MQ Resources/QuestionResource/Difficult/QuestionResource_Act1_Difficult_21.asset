@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_21
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Evaluating Algebraic Expressions"
+  question: "Evaluate $2pq^3+\\frac{p-7}{2}$ when $p=3$ and $q=-2$."
+  answer: {fileID: 11400000, guid: fdedb1fb4f6d504697a9a0285cea9197, type: 2}
+  encourageDialogue:
+  - "Impressive! That is correct."
+  tauntDialogue:
+  - "Hehehe... that is not right!"
+  solutionDialogue:
+  - "Replace the letters: $2(3)(-2)^3+\\frac{3-7}{2}$."
+  - "$6(-8)+\\frac{-4}{2}$."
+  - "$-48-2=-50$."

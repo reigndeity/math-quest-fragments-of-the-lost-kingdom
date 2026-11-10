@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_19
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Evaluating Algebraic Expressions"
+  question: "Evaluate $\\frac{5m}{m+2}+(n-6)$ when $m=3$ and $n=-4$."
+  answer: {fileID: 11400000, guid: 88c6d46d71445812a33c12f3d2356746, type: 2}
+  encourageDialogue:
+  - "Well done! You got it right."
+  tauntDialogue:
+  - "Nope! Not even close."
+  solutionDialogue:
+  - "Replace the letters: $\\frac{5(3)}{3+2}+(-4-6)$."
+  - "$\\frac{15}{5}-10$."
+  - "$3-10=-7$."

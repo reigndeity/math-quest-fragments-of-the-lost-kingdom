@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_10
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Components of Algebraic Expressions"
+  question: "Identify the coefficient of the term with the highest degree in the expression $6m-4m^3+2n$."
+  answer: {fileID: 11400000, guid: be2133f6659b55af98969d20f9680d90, type: 2}
+  encourageDialogue:
+  - "Hmph... correct. Lucky guess?"
+  tauntDialogue:
+  - "Wrong! Better luck next time."
+  solutionDialogue:
+  - "The degrees are 1, 3 and 1."
+  - "The highest is $-4m^3$, so the coefficient is $-4$."

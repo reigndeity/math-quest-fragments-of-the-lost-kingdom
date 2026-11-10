@@ -22,7 +22,7 @@ MonoBehaviour:
     text: Hmmm
   - speaker: 1
     text: '???'
-  questions:
-  - {fileID: 11400000, guid: 160605b9210a4317ad2e0e58f87188ed, type: 2}
-  - {fileID: 11400000, guid: 180772628f70462ca66150775f77f675, type: 2}
-  - {fileID: 11400000, guid: 00a4938ce828408698ed78191b671031, type: 2}
+  questionPools:
+  - {fileID: 11400000, guid: 7edead29895153cca69bc79aaabdf07c, type: 2}
+  - {fileID: 11400000, guid: fc2d15a233ef5cdabdcf255d78e0df96, type: 2}
+  - {fileID: 11400000, guid: 1fabb1f89dbc57d8a2e6c646929596e7, type: 2}

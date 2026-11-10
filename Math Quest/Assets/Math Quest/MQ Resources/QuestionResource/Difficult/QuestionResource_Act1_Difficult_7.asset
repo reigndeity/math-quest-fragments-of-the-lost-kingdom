@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_7
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Classifying Algebraic Expressions"
+  question: "Given the algebraic expression $-4x^3+9x-5$, classify it based on its number of terms (Monomial, Binomial, or Trinomial)."
+  answer: {fileID: 11400000, guid: 7ea4a6f825375b37a3c5b4e9995639df, type: 2}
+  encourageDialogue:
+  - "Well done! You got it right."
+  tauntDialogue:
+  - "Nope! Not even close."
+  solutionDialogue:
+  - "The terms are $-4x^3$, $9x$ and $-5$."
+  - "Three terms make a trinomial."

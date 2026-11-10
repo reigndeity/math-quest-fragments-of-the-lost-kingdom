@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48fad98311d407881a9a16b9a75ac2c, type: 3}
+  m_Name: AnswerResource_Act1_Difficult_5
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.ExpressionBuilderAnswerResource
+  tiles:
+  - id: sq
+    math: "$(2x-3)^2$"
+  - id: minus
+    math: "$-$"
+  - id: quot
+    math: "$\\frac{4y}{x+5}$"
+  - id: plus
+    math: "$+$"
+  - id: half
+    math: "$\\frac{x-y}{2}$"
+  - id: sqRev
+    math: "$(3-2x)^2$"
+  - id: quotBad
+    math: "$\\frac{4y}{x}+5$"
+  slots:
+  - prefilledTileId: 
+  - prefilledTileId: 
+  - prefilledTileId: 
+  - prefilledTileId: 
+  - prefilledTileId: 
+  acceptedArrangements:
+  - tileIds:
+    - sq
+    - minus
+    - quot
+    - plus
+    - half

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_1
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "The quotient of four less than the square of a number $x$, and the sum of three times $y$ and two, increased by the cube of twice the difference of $x$ and $y$."
+  answer: {fileID: 11400000, guid: f16a39e6048256e38cb04359bf7f874e, type: 2}
+  encourageDialogue:
+  - "Impressive! That is correct."
+  tauntDialogue:
+  - "Hehehe... that is not right!"
+  solutionDialogue:
+  - "Break the sentence into parts. Four less than the square of $x$ means $x^2-4$."
+  - "The sum of three times $y$ and two is $3y+2$."
+  - "The quotient of these two parts makes a fraction: $\\frac{x^2-4}{3y+2}$."
+  - "The cube of twice the difference of $x$ and $y$ is $[2(x-y)]^3$."
+  - "Increased by means add, so join the fraction and the cube with a plus sign."

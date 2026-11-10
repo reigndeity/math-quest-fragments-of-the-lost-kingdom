@@ -18,7 +18,20 @@ namespace MathQuest.Data
         [Tooltip("Plays before the battle. Each line says who speaks, so either side can go first.")]
         public List<DialogueLine> startDialogue = new();
 
-        [Tooltip("The questions of this level, asked in order. The enemy says each one, then the answer panel opens.")]
-        public List<QuestionResource> questions = new();
+        [Tooltip("Question pools, used in order. Each pool decides which of its questions are asked. Mix fixed and weighted pools, for example 3 easy then 2 moderate.")]
+        public List<QuestionPoolResource> questionPools = new();
+
+        /// <summary>Asks every pool for its picks, in order. Call once when the level starts.</summary>
+        public List<QuestionResource> BuildQuestionList()
+        {
+            List<QuestionResource> result = new();
+            foreach (QuestionPoolResource pool in questionPools)
+            {
+                if (pool != null)
+                    pool.Pick(result);
+            }
+
+            return result;
+        }
     }
 }

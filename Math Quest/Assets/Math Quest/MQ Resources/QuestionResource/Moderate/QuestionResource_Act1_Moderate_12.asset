@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_12
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "Three times the sum of a number $x$ and 5, divided by the difference between $x$ and 2."
+  answer: {fileID: 11400000, guid: 20987ad8b6a051d89449f36ae380a9a6, type: 2}
+  encourageDialogue:
+  - "Correct! You are stronger than you look."
+  tauntDialogue:
+  - "Ha! Is that your best?"
+  solutionDialogue:
+  - "The top is 3 times the sum: $3(x+5)$."
+  - "The bottom is the difference: $x-2$."
+  - "Divide them: $\\frac{3(x+5)}{x-2}$."

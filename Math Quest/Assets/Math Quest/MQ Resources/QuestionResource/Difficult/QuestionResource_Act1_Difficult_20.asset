@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_20
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Evaluating Algebraic Expressions"
+  question: "Evaluate $3(a+4)-\\frac{b}{5}$ when $a=-6$ and $b=15$."
+  answer: {fileID: 11400000, guid: e105124a0d9f58c8a8c75ffffa4a08e9, type: 2}
+  encourageDialogue:
+  - "Correct! You are stronger than you look."
+  tauntDialogue:
+  - "Ha! Is that your best?"
+  solutionDialogue:
+  - "Replace the letters: $3(-6+4)-\\frac{15}{5}$."
+  - "$3(-2)-3$."
+  - "$-6-3=-9$."

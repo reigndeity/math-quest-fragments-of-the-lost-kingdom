@@ -150,6 +150,7 @@ namespace MathQuest.Battle
         }
 
         private int questionIndex;
+        private List<QuestionResource> questions = new(); // built from the level's pools when the battle starts
         private GameObject answerUi;
         private QuestionResource activeQuestion;
         private Func<Submission?> readAnswer; // the open input's current answer, or null if none yet
@@ -176,18 +177,20 @@ namespace MathQuest.Battle
         private IEnumerator Begin()
         {
             yield return new WaitForSeconds(startDelay);
+            questions = level.BuildQuestionList();
+            questionIndex = 0;
             dialogue.PlayLines(level.startDialogue, AskQuestion);
         }
 
         private void AskQuestion()
         {
-            if (level.questions.Count == 0 || level.questions[questionIndex] == null)
+            if (questions.Count == 0 || questions[questionIndex] == null)
             {
                 Debug.LogWarning("The level has no question to ask.", this);
                 return;
             }
 
-            QuestionResource question = level.questions[questionIndex];
+            QuestionResource question = questions[questionIndex];
             dialogue.SayAndHold(
                 DialogueSpeaker.Enemy,
                 question.question,
@@ -452,7 +455,7 @@ namespace MathQuest.Battle
         private IEnumerator NextQuestion()
         {
             yield return new WaitForSeconds(nextQuestionDelay);
-            questionIndex = (questionIndex + 1) % level.questions.Count;
+            questionIndex = (questionIndex + 1) % questions.Count;
             AskQuestion();
         }
 

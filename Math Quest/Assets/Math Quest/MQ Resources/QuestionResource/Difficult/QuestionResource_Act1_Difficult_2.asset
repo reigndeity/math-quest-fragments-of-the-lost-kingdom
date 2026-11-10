@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_2
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  topic: "Evaluating Algebraic Expressions"
+  question: "Evaluate $3(b-a)^2-4c+a^3$ when $a=-2$, $b=3$ and $c=5$."
+  answer: {fileID: 11400000, guid: 5817aa5ec3a9524389c3c8e1902f833f, type: 2}
+  encourageDialogue:
+  - "Hmph... correct. Lucky guess?"
+  tauntDialogue:
+  - "Wrong! Better luck next time."
+  solutionDialogue:
+  - "Replace the letters: $3(3-(-2))^2-4(5)+(-2)^3$."
+  - "$3(5)^2-20-8$."
+  - "$75-20-8=47$."
