@@ -16,6 +16,9 @@ namespace MathQuest.Battle
         // The character spawned last, so it can be replaced.
         [NonSerialized] public GameObject spawned;
 
+        // Hearts left. Set when the character is shown.
+        [NonSerialized] public int health;
+
         [Tooltip("The NameText in the CharacterStatsHolder.")]
         public TMP_Text nameText;
 
@@ -69,6 +72,53 @@ namespace MathQuest.Battle
                 Apply(level.enemy);
             else
                 Debug.LogWarning("The level has no Enemy character assigned.", this);
+        }
+
+        /// <summary>Hearts left for this side.</summary>
+        public int Health(CharacterRole role) => SlotFor(role).health;
+
+        public bool IsDefeated(CharacterRole role) => SlotFor(role).health <= 0;
+
+        /// <summary>
+        /// Takes hearts from one side: the last full heart loses its fill, and the hurt
+        /// animation plays if the character prefab has an Animator with a "hurt" trigger.
+        /// </summary>
+        public void Damage(CharacterRole role, int amount = 1)
+        {
+            CharacterSlot slot = SlotFor(role);
+            slot.health = Mathf.Max(0, slot.health - amount);
+            ShowFilledHearts(slot);
+            PlayHurt(slot);
+        }
+
+        private CharacterSlot SlotFor(CharacterRole role) => role == CharacterRole.Player ? playerSlot : enemySlot;
+
+        private static void ShowFilledHearts(CharacterSlot slot)
+        {
+            if (slot.heartHolder == null)
+                return;
+
+            HeartView[] hearts = slot.heartHolder.GetComponentsInChildren<HeartView>(false);
+            for (int i = 0; i < hearts.Length; i++)
+                hearts[i].SetFilled(i < slot.health);
+        }
+
+        private static void PlayHurt(CharacterSlot slot)
+        {
+            if (slot.spawned == null || !slot.spawned.TryGetComponent(out Animator animator))
+                animator = slot.spawned != null ? slot.spawned.GetComponentInChildren<Animator>() : null;
+
+            if (animator == null || animator.runtimeAnimatorController == null)
+                return;
+
+            foreach (AnimatorControllerParameter parameter in animator.parameters)
+            {
+                if (parameter.name == "hurt" && parameter.type == AnimatorControllerParameterType.Trigger)
+                {
+                    animator.SetTrigger("hurt");
+                    return;
+                }
+            }
         }
 
         /// <summary>Shows one character on the side its role says.</summary>
@@ -146,8 +196,8 @@ namespace MathQuest.Battle
             }
 
             // Every heart starts full.
-            foreach (HeartView heart in slot.heartHolder.GetComponentsInChildren<HeartView>(false))
-                heart.SetFilled(true);
+            slot.health = count;
+            ShowFilledHearts(slot);
 
             if (slot.heartHolder.TryGetComponent(out HeartRowLimiter limiter))
                 limiter.Refresh();

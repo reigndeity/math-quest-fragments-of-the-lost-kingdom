@@ -128,6 +128,12 @@ namespace MathQuest.Battle
         [Tooltip("After the last reaction line, pause before the next question is asked.")]
         [SerializeField, Min(0f)] private float nextQuestionDelay = 0.3f;
 
+        [Header("Health")]
+        [Tooltip("Hearts lost per hit. A right answer hurts the enemy; a wrong answer hurts the player.")]
+        [SerializeField, Min(1)] private int damagePerHit = 1;
+        [Tooltip("After the player's answer line, how long the hit takes (hurt animation, heart lost) before the enemy replies.")]
+        [SerializeField, Min(0f)] private float hitDuration = 0.6f;
+
         [Header("Player's answer line")]
         [Tooltip("What the player says before the answer. The answer follows it, for example: My answer is: -15")]
         [SerializeField] private string answerPrefix = "My answer is: ";
@@ -401,7 +407,7 @@ namespace MathQuest.Battle
         private void OnAnswered(QuestionResource question, string answerText, bool correct)
         {
             Debug.Log(correct ? "Correct answer." : "Wrong answer.");
-            StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct)));
+            StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct), correct));
         }
 
         // The player says their answer, then the enemy answers back: praise if it was right,
@@ -438,7 +444,7 @@ namespace MathQuest.Battle
             }
         }
 
-        private IEnumerator CloseAnswerPanel(List<DialogueLine> reaction)
+        private IEnumerator CloseAnswerPanel(List<DialogueLine> reaction, bool correct)
         {
             // The enemy's bubble goes at once; the panel fades out and the blur fades with it.
             dialogue.ClearBubble();
@@ -452,8 +458,51 @@ namespace MathQuest.Battle
 
             HidePanelContents();
 
-            // The player's answer and the enemy's reply, one bubble at a time, then the next question.
-            dialogue.PlayLines(reaction, () => StartCoroutine(NextQuestion()));
+            // The player says their answer first, then the hit lands, then the enemy replies.
+            List<DialogueLine> answerLine = reaction.GetRange(0, 1);
+            List<DialogueLine> reply = reaction.GetRange(1, reaction.Count - 1);
+            dialogue.PlayLines(answerLine, () => StartCoroutine(HitThenReply(reply, correct)));
+        }
+
+        // A right answer hurts the enemy, a wrong one hurts the player.
+        private IEnumerator HitThenReply(List<DialogueLine> reply, bool correct)
+        {
+            dialogue.ClearBubble();
+
+            CharacterRole loser = correct ? CharacterRole.Enemy : CharacterRole.Player;
+            if (characters != null)
+            {
+                characters.Damage(loser, damagePerHit);
+                yield return new WaitForSeconds(hitDuration);
+            }
+
+            if (reply.Count > 0)
+                dialogue.PlayLines(reply, AfterReply);
+            else
+                AfterReply();
+        }
+
+        private void AfterReply()
+        {
+            if (characters != null && characters.IsDefeated(CharacterRole.Enemy))
+            {
+                EndBattle(playerWon: true);
+                return;
+            }
+
+            if (characters != null && characters.IsDefeated(CharacterRole.Player))
+            {
+                EndBattle(playerWon: false);
+                return;
+            }
+
+            StartCoroutine(NextQuestion());
+        }
+
+        // Placeholder: the victory / defeat dialogue comes later. For now the battle just stops.
+        private void EndBattle(bool playerWon)
+        {
+            Debug.Log(playerWon ? "Battle over: the enemy has no hearts left." : "Battle over: the player has no hearts left.");
         }
 
         // Temporary: right or wrong, move on and wrap around at the end.
