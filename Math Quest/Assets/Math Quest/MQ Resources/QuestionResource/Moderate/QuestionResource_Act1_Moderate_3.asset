@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_3
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Seven less than twice a number $n$."
   answer: {fileID: 11400000, guid: 152051b157225a5ab0c7df8d4ec5730d, type: 2}

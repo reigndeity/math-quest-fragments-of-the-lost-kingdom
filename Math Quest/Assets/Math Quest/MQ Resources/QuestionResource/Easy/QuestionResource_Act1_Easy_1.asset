@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "What is the variable in the expression: $5x+8$?"
   answer: {fileID: 11400000, guid: b796c17faa605791895f27c4e075d437, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_22
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $\\frac{x^2}{3}-2(x-5)$ when $x=-3$."
   answer: {fileID: 11400000, guid: 15290ba711a15df885377b50509e3097, type: 2}

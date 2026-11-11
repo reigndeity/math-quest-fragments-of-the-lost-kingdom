@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_19
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $\\frac{5m}{m+2}+(n-6)$ when $m=3$ and $n=-4$."
   answer: {fileID: 11400000, guid: 88c6d46d71445812a33c12f3d2356746, type: 2}

@@ -49,6 +49,7 @@ namespace MathQuest.Data
         public override AnswerMethod Method => AnswerMethod.ExpressionBuilder;
         public IReadOnlyList<ExpressionTile> Tiles => tiles;
         public IReadOnlyList<ExpressionSlot> Slots => slots;
+        public IReadOnlyList<ExpressionArrangement> AcceptedArrangements => acceptedArrangements;
 
         public bool TryGetTile(string tileId, out ExpressionTile tile)
         {

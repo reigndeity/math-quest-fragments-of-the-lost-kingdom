@@ -35,6 +35,8 @@ namespace MathQuest.Battle
         [SerializeField] private LevelResource level;
         [Tooltip("Shows the player and the level's enemy (names, hearts, pictures). Optional while setting up.")]
         [SerializeField] private CharacterAssetConfig characters;
+        [Tooltip("Spawns the skill effects. Optional: without it the hit still lands, just without an effect.")]
+        [SerializeField] private VfxManager vfx;
         [SerializeField] private BattleDialogueController dialogue;
         [SerializeField] private BlurBackdropController blur;
 
@@ -131,12 +133,18 @@ namespace MathQuest.Battle
         [Header("Health")]
         [Tooltip("Hearts lost per hit. A right answer hurts the enemy; a wrong answer hurts the player.")]
         [SerializeField, Min(1)] private int damagePerHit = 1;
-        [Tooltip("After the player's answer line, how long the hit takes (hurt animation, heart lost) before the enemy replies.")]
+        [Tooltip("After the hit lands (heart lost, hurt animation), how long to wait before the enemy replies.")]
         [SerializeField, Min(0f)] private float hitDuration = 0.6f;
+        [Tooltip("If an attack animation never fires its PlaySkill animation event, the effect is played anyway after this many seconds.")]
+        [SerializeField, Min(0.1f)] private float attackEventTimeout = 2f;
 
         [Header("Player's answer line")]
         [Tooltip("What the player says before the answer. The answer follows it, for example: My answer is: -15")]
         [SerializeField] private string answerPrefix = "My answer is: ";
+
+        [Header("Debug")]
+        [Tooltip("Dev only. Shows the correct answer of the current question in the top-left corner of the Game view (and in the Console), so you do not have to remember them. Does nothing in a release build.")]
+        [SerializeField] private bool showAnswerHint;
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
@@ -296,6 +304,10 @@ namespace MathQuest.Battle
 
         private void SpawnAnswerInput(QuestionResource question)
         {
+            hintText = DescribeAnswer(question.answer);
+            if (showAnswerHint)
+                Debug.Log($"[Answer hint] {question.name}: {hintText}", this);
+
             switch (question.answer)
             {
                 case MultipleChoiceAnswerResource choice:
@@ -379,6 +391,55 @@ namespace MathQuest.Battle
             return group != null ? group.preferredHeight : rect.rect.height;
         }
 
+        // ---- Debug: answer hint -------------------------------------------------------------
+
+        private string hintText;
+
+        private static string DescribeAnswer(AnswerResource answer)
+        {
+            switch (answer)
+            {
+                case MultipleChoiceAnswerResource choice:
+                    return choice.GetOption(choice.CorrectIndex);
+                case NumberAnswerResource number:
+                    return number.CorrectValue.ToString("0.####");
+                case ExpressionBuilderAnswerResource expression:
+                    if (expression.AcceptedArrangements.Count == 0)
+                        return "(no accepted arrangement)";
+
+                    var parts = new List<string>();
+                    foreach (string tileId in expression.AcceptedArrangements[0].tileIds)
+                        parts.Add(expression.TryGetTile(tileId, out ExpressionTile tile) ? tile.math : tileId);
+
+                    return string.Join("   ", parts);
+                default:
+                    return "?";
+            }
+        }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        private void OnGUI()
+        {
+            if (!showAnswerHint || string.IsNullOrEmpty(hintText))
+                return;
+
+            var style = new GUIStyle(GUI.skin.label)
+            {
+                fontSize = Mathf.Max(14, Screen.height / 45),
+                fontStyle = FontStyle.Bold,
+                wordWrap = true
+            };
+
+            Rect rect = new(12f, 12f, Screen.width - 24f, Screen.height * 0.3f);
+            string text = "Answer: " + hintText;
+
+            style.normal.textColor = Color.black; // simple outline so it reads on any background
+            GUI.Label(new Rect(rect.x + 1.5f, rect.y + 1.5f, rect.width, rect.height), text, style);
+            style.normal.textColor = Color.yellow;
+            GUI.Label(rect, text, style);
+        }
+#endif
+
         private void OnSubmitPressed()
         {
             Submission? submission = readAnswer?.Invoke();
@@ -406,8 +467,9 @@ namespace MathQuest.Battle
 
         private void OnAnswered(QuestionResource question, string answerText, bool correct)
         {
+            hintText = null;
             Debug.Log(correct ? "Correct answer." : "Wrong answer.");
-            StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct), correct));
+            StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct), correct, question));
         }
 
         // The player says their answer, then the enemy answers back: praise if it was right,
@@ -444,7 +506,7 @@ namespace MathQuest.Battle
             }
         }
 
-        private IEnumerator CloseAnswerPanel(List<DialogueLine> reaction, bool correct)
+        private IEnumerator CloseAnswerPanel(List<DialogueLine> reaction, bool correct, QuestionResource question)
         {
             // The enemy's bubble goes at once; the panel fades out and the blur fades with it.
             dialogue.ClearBubble();
@@ -461,17 +523,47 @@ namespace MathQuest.Battle
             // The player says their answer first, then the hit lands, then the enemy replies.
             List<DialogueLine> answerLine = reaction.GetRange(0, 1);
             List<DialogueLine> reply = reaction.GetRange(1, reaction.Count - 1);
-            dialogue.PlayLines(answerLine, () => StartCoroutine(HitThenReply(reply, correct)));
+            dialogue.PlayLines(answerLine, () => StartCoroutine(HitThenReply(reply, correct, question)));
         }
 
         // A right answer hurts the enemy, a wrong one hurts the player.
-        private IEnumerator HitThenReply(List<DialogueLine> reply, bool correct)
+        private IEnumerator HitThenReply(List<DialogueLine> reply, bool correct, QuestionResource question)
         {
             dialogue.ClearBubble();
 
+            CharacterRole attacker = correct ? CharacterRole.Player : CharacterRole.Enemy;
             CharacterRole loser = correct ? CharacterRole.Enemy : CharacterRole.Player;
             if (characters != null)
             {
+                // The attacker's attack animation starts (if it has one for this difficulty). Its
+                // PlaySkill animation event says when the effect appears.
+                CharacterAnimationEvents events = characters.GetAnimationEvents(attacker);
+                if (events != null && characters.TryPlayAttack(attacker, question.difficulty))
+                {
+                    bool requested = false;
+                    Action onSkill = () => requested = true;
+                    events.SkillRequested += onSkill;
+
+                    float waited = 0f;
+                    while (!requested && waited < attackEventTimeout)
+                    {
+                        waited += Time.deltaTime;
+                        yield return null;
+                    }
+
+                    events.SkillRequested -= onSkill;
+                    if (!requested)
+                        Debug.LogWarning($"The {CharacterAssetConfig.AttackTrigger(question.difficulty)} animation never fired its PlaySkill animation event.", this);
+                }
+
+                // The attacker's skill for this question's difficulty plays, then the hit lands.
+                if (vfx != null)
+                {
+                    float impact = vfx.Play(characters.GetSkill(attacker, question.difficulty), attacker, loser);
+                    if (impact > 0f)
+                        yield return new WaitForSeconds(impact);
+                }
+
                 characters.Damage(loser, damagePerHit);
                 yield return new WaitForSeconds(hitDuration);
             }

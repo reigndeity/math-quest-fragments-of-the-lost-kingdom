@@ -1,7 +1,17 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MathQuest.Data
 {
+    /// <summary>The skill this character uses against questions of one difficulty.</summary>
+    [Serializable]
+    public sealed class DifficultySkill
+    {
+        public QuestionDifficulty difficulty;
+        public SkillResource skill;
+    }
+
     /// <summary>
     /// One fighter: who they are, how many hearts they start with, and how they look in battle.
     /// The player is a special case: its name will later come from what the player types, and
@@ -23,5 +33,20 @@ namespace MathQuest.Data
 
         [Tooltip("The character prefab (for example Player_Boy). It is spawned into the PlayerModel or EnemyModel holder when the battle starts. If empty, whatever is already in the holder is kept.")]
         public GameObject characterPrefab;
+
+        [Tooltip("The skill used for each question difficulty: the player uses it when answering right, the enemy when the player answers wrong. A difficulty with no entry plays no effect.")]
+        public List<DifficultySkill> skills = new();
+
+        /// <summary>The skill for a difficulty, or null if none is set.</summary>
+        public SkillResource GetSkill(QuestionDifficulty difficulty)
+        {
+            foreach (DifficultySkill entry in skills)
+            {
+                if (entry != null && entry.difficulty == difficulty)
+                    return entry.skill;
+            }
+
+            return null;
+        }
     }
 }

@@ -16,3 +16,10 @@ MonoBehaviour:
   displayName: PLAYER NAME
   maxHearts: 3
   characterPrefab: {fileID: 1995083367057083502, guid: fd8e69c823f560b47af573eeb70ef497, type: 3}
+  skills:
+  - difficulty: 0
+    skill: {fileID: 11400000, guid: 0682e299909e5d5597eec9305258bbb9, type: 2}
+  - difficulty: 1
+    skill: {fileID: 11400000, guid: d0fbd09de17753328f0688b39a2111fa, type: 2}
+  - difficulty: 2
+    skill: {fileID: 11400000, guid: 8352ce1197525ece944dbfa822915eb7, type: 2}

@@ -16,3 +16,10 @@ MonoBehaviour:
   displayName: ENEMY NAME
   maxHearts: 3
   characterPrefab: {fileID: 3509842088010357834, guid: ca95ad02b555d614b9ccf6d05c9c0d60, type: 3}
+  skills:
+  - difficulty: 0
+    skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}
+  - difficulty: 1
+    skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}
+  - difficulty: 2
+    skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}

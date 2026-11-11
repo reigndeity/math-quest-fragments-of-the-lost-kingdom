@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_19
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Nine more than the quotient of a number $d$ and 3."
   answer: {fileID: 11400000, guid: 31ef01882f7c538281b09d5be345f8f1, type: 2}

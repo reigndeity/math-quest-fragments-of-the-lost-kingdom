@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_9
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "What is the constant in $9+4y$?"
   answer: {fileID: 11400000, guid: 06c816cb027c5c388d1d5493274afea0, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_21
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The sum of five times a number $y$ and the square of $y$."
   answer: {fileID: 11400000, guid: 1bec4c8c25e45bc79fdbbe6e2f9bc2df, type: 2}

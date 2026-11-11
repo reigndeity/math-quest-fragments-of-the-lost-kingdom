@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_18
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $(2x-3)^2-4y$ when $x=5$ and $y=-2$."
   answer: {fileID: 11400000, guid: d579ba50b0145e79b18099431d3905f1, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_22
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Write an expression for: \"Three times the difference of a number $c$ and 8.\""
   answer: {fileID: 11400000, guid: 153911544e8851429e867a61cd2af0a4, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_20
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The difference between the square of $x$ and twice $y$."
   answer: {fileID: 11400000, guid: e593568abd5c5fb6bcfab4a09ba7fca7, type: 2}

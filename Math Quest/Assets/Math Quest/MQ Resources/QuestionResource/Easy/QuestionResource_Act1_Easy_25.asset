@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_25
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "State the coefficients of $x$ and $y$ in $7x-2y+13$."
   answer: {fileID: 11400000, guid: 76b0447008ca50a6aae698b1363f1f4b, type: 2}

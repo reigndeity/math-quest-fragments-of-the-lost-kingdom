@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_12
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "Identify the coefficients of $x$ and $y$ in the algebraic expression: $3x-5y+6$"
   answer: {fileID: 11400000, guid: 72779addbc7552a09f3339b1495e595a, type: 2}

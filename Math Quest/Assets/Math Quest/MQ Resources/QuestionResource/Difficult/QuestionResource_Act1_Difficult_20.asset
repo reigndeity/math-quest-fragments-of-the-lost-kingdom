@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_20
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3(a+4)-\\frac{b}{5}$ when $a=-6$ and $b=15$."
   answer: {fileID: 11400000, guid: e105124a0d9f58c8a8c75ffffa4a08e9, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_15
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The quotient of five times $m$ and the sum of $m$ and two, increased by six subtracted from $n$."
   answer: {fileID: 11400000, guid: 6a6287f0735c54a199c3df93ead5f091, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_19
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3a+2b-5$ when $a=4$ and $b=3$."
   answer: {fileID: 11400000, guid: 6b22063dd8665c9aa4f9696ce0212510, type: 2}

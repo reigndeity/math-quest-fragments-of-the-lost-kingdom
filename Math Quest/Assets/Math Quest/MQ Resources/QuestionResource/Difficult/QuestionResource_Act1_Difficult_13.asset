@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_13
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "How many terms are there in the expression below? $-2(x+4)^3-\\frac{y}{5}+6x-1$"
   answer: {fileID: 11400000, guid: 1751212dd040549badece30cda4b0d96, type: 2}

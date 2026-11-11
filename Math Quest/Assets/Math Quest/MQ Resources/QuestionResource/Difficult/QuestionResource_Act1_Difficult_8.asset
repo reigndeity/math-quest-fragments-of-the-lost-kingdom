@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_8
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "How many terms are in the expression $-\\frac{5x^3y}{8}+\\frac{x}{6}-y^5+14$?"
   answer: {fileID: 11400000, guid: 38af8dc71085516d935673817a11b6cb, type: 2}

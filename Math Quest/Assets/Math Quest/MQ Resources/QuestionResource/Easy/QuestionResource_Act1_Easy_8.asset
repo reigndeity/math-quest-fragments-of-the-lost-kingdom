@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_8
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3a$ when $a=2$."
   answer: {fileID: 11400000, guid: 6afb62eb9d2d53e3aa0783dbe86f8021, type: 2}

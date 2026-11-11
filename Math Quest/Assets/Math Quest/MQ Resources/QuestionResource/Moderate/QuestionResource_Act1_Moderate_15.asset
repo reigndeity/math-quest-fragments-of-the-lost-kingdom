@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_15
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Half of a number $m$, plus the cube of a different number $k$."
   answer: {fileID: 11400000, guid: 4763ede95aa35b5c8cb078a87d925981, type: 2}

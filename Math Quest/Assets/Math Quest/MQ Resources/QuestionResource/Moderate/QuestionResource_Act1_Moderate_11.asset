@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_11
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The quotient of a number $n$ and 4, subtracted from twice the square of $n$."
   answer: {fileID: 11400000, guid: 4bd660aacaa358efa3aaa4298a6b089f, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_4
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $a+4$ when $a=3$."
   answer: {fileID: 11400000, guid: 142197a8fbe254339d0c12f035fe8321, type: 2}

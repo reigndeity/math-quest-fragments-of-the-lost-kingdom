@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_12
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "What is the numerical coefficient of the term $-\\frac{7a^2b}{10}$ in $-\\frac{7a^2b}{10}+3a-5$?"
   answer: {fileID: 11400000, guid: e04e204180cc50528a91a848cbe7be74, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_23
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Translate: \"Six more than a number $x$\" into algebraic form."
   answer: {fileID: 11400000, guid: 010549c9390e58c2aa4635272130c378, type: 2}

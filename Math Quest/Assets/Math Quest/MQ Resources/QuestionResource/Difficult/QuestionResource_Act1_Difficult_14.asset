@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_14
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The square of three less than twice a number $x$, decreased by four times $y$."
   answer: {fileID: 11400000, guid: cbba634d3267577188582530bb76454d, type: 2}

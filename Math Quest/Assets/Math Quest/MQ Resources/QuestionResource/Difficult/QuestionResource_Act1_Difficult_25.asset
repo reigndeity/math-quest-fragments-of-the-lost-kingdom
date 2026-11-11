@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_25
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "What is the constant term in the expression below? $-3x^2+8x-14$"
   answer: {fileID: 11400000, guid: 66c61db9cc9f543c87edd411fd214275, type: 2}

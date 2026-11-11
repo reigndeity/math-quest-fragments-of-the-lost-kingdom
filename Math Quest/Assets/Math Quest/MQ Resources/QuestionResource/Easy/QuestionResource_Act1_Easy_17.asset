@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_17
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Translate the verbal phrase into an algebraic expression: \"The sum of $m$ and 8\""
   answer: {fileID: 11400000, guid: acd20a163db1518fa8e7355f26d0f572, type: 2}

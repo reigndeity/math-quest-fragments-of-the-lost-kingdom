@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_17
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $2(p+3q)$ when $p=5$ and $q=-1$."
   answer: {fileID: 11400000, guid: 29de6645623d5ebb82eb44022fb92397, type: 2}

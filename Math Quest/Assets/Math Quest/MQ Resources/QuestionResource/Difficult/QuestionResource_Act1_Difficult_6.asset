@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_6
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The product of three and the cube of $a$, increased by five subtracted from twice the difference of $a$ and $b$."
   answer: {fileID: 11400000, guid: 9324eef4e4e45291848c522853e448c7, type: 2}

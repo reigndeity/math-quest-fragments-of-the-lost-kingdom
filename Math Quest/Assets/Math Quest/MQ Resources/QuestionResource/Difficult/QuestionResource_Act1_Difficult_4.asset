@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_4
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $\\frac{3p^2q-r^2}{2p+q}$ when $p=-1$, $q=4$ and $r=-6$."
   answer: {fileID: 11400000, guid: a1d5706a6a4c5e84b86ebcd54f732df5, type: 2}

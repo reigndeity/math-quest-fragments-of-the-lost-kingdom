@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_2
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3(b-a)^2-4c+a^3$ when $a=-2$, $b=3$ and $c=5$."
   answer: {fileID: 11400000, guid: 5817aa5ec3a9524389c3c8e1902f833f, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_2
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The total cost of $a$ apples at 15 pesos each and $b$ bananas at 8 pesos each, decreased by a 20-peso discount coupon."
   answer: {fileID: 11400000, guid: 79def1727f1751a79284f8dc5388d5f6, type: 2}

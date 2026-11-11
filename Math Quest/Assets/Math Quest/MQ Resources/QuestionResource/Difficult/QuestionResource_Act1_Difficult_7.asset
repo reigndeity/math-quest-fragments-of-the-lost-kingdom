@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_7
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Classifying Algebraic Expressions"
   question: "Given the algebraic expression $-4x^3+9x-5$, classify it based on its number of terms (Monomial, Binomial, or Trinomial)."
   answer: {fileID: 11400000, guid: 7ea4a6f825375b37a3c5b4e9995639df, type: 2}

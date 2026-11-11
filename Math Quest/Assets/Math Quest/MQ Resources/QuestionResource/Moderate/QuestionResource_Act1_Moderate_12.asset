@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_12
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Three times the sum of a number $x$ and 5, divided by the difference between $x$ and 2."
   answer: {fileID: 11400000, guid: 20987ad8b6a051d89449f36ae380a9a6, type: 2}

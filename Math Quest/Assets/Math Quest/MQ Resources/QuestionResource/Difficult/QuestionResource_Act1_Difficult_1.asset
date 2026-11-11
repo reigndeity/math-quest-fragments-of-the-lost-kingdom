@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The quotient of four less than the square of a number $x$, and the sum of three times $y$ and two, increased by the cube of twice the difference of $x$ and $y$."
   answer: {fileID: 11400000, guid: f16a39e6048256e38cb04359bf7f874e, type: 2}

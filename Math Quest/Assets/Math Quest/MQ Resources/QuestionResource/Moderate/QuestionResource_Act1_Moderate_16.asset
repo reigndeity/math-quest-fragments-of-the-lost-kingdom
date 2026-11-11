@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_16
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Translate the phrase: \"The sum of a number $w$ and 5, multiplied by 4.\""
   answer: {fileID: 11400000, guid: a19af80e029d521c9554c6feaad03716, type: 2}

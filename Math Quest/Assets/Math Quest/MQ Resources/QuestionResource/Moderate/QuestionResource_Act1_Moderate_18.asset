@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_18
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $5m-3n^2$ when $m=6$ and $n=2$."
   answer: {fileID: 11400000, guid: 17bdec93ea2552479f3b532b87f52d8a, type: 2}

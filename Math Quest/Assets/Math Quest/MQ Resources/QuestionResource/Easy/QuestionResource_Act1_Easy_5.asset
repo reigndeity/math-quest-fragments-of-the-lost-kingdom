@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_5
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $4k-5$ when $k=2$."
   answer: {fileID: 11400000, guid: f3687fb5de2d557d943587291d848eae, type: 2}

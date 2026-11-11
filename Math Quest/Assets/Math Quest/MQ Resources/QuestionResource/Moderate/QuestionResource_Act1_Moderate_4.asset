@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_4
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Eight subtracted from the product of 3 and a number $b$."
   answer: {fileID: 11400000, guid: 3436ccda9b3c58d19dd8a03050868f9e, type: 2}

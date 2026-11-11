@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_24
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $x^3+4y$ when $x=2$ and $y=5$."
   answer: {fileID: 11400000, guid: c233484358d5572692a9a9abfc416e4d, type: 2}

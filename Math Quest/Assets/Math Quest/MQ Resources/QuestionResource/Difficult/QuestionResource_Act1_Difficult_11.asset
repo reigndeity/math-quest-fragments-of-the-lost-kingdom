@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_11
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "What is the numerical coefficient of the term $-\\frac{3y}{4}$ in $x^2-\\frac{3y}{4}+10$?"
   answer: {fileID: 11400000, guid: d4d913db96675afcbb06cc45014ec46c, type: 2}

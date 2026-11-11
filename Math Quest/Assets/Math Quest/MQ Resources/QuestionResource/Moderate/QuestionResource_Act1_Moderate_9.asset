@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_9
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Components of Algebraic Expressions"
   question: "In the expression $9-3y^2+y$, what is the constant term?"
   answer: {fileID: 11400000, guid: d9fbb72285ca51a289944e184d92be7a, type: 2}

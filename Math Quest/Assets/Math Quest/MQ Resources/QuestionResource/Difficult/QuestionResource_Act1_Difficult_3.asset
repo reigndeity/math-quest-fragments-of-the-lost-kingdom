@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_3
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $\\frac{m^2-n^2}{m+n}+m^3$ when $m=-2$ and $n=5$."
   answer: {fileID: 11400000, guid: eba8abcb56e550cb8820f52902867bef, type: 2}

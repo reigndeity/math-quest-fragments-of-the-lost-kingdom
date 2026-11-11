@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_21
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "If $x=2$ and $y=5$, what is $4x+2y-6$?"
   answer: {fileID: 11400000, guid: 66a1323c710b530991d068afa2348e93, type: 2}

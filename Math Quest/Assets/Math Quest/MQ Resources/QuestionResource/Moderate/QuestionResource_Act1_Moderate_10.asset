@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_10
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Components of Algebraic Expressions"
   question: "Identify the coefficient of the term with the highest degree in the expression $6m-4m^3+2n$."
   answer: {fileID: 11400000, guid: be2133f6659b55af98969d20f9680d90, type: 2}

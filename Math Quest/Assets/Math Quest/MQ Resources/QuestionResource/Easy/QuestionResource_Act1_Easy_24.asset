@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_24
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $5s$ when $s=4$."
   answer: {fileID: 11400000, guid: 17248ac220d6597ab179df3be6c08ff0, type: 2}

@@ -19,6 +19,9 @@ namespace MathQuest.Battle
         // Hearts left. Set when the character is shown.
         [NonSerialized] public int health;
 
+        // Who is shown here right now.
+        [NonSerialized] public CharacterResource character;
+
         [Tooltip("The NameText in the CharacterStatsHolder.")]
         public TMP_Text nameText;
 
@@ -91,6 +94,20 @@ namespace MathQuest.Battle
             PlayHurt(slot);
         }
 
+        /// <summary>The skill the character on this side uses for a question difficulty, or null.</summary>
+        public SkillResource GetSkill(CharacterRole role, QuestionDifficulty difficulty)
+        {
+            CharacterResource shown = SlotFor(role).character;
+            return shown != null ? shown.GetSkill(difficulty) : null;
+        }
+
+        /// <summary>The anchor points (Root, Center, Top) of the character shown on this side, or null.</summary>
+        public VfxAnchors GetAnchors(CharacterRole role)
+        {
+            GameObject spawned = SlotFor(role).spawned;
+            return spawned != null ? spawned.GetComponentInChildren<VfxAnchors>() : null;
+        }
+
         private CharacterSlot SlotFor(CharacterRole role) => role == CharacterRole.Player ? playerSlot : enemySlot;
 
         private static void ShowFilledHearts(CharacterSlot slot)
@@ -105,20 +122,73 @@ namespace MathQuest.Battle
 
         private static void PlayHurt(CharacterSlot slot)
         {
-            if (slot.spawned == null || !slot.spawned.TryGetComponent(out Animator animator))
-                animator = slot.spawned != null ? slot.spawned.GetComponentInChildren<Animator>() : null;
+            TrySetTrigger(slot, "hurt");
+        }
 
-            if (animator == null || animator.runtimeAnimatorController == null)
-                return;
+        /// <summary>
+        /// Sets a trigger on the first Animator that has it: the one on the holder (PlayerModel or
+        /// EnemyModel), or one inside the spawned character prefab. False if none has it.
+        /// </summary>
+        private static bool TrySetTrigger(CharacterSlot slot, string trigger)
+        {
+            var animators = new System.Collections.Generic.List<Animator>();
+            if (slot.modelHolder != null && slot.modelHolder.TryGetComponent(out Animator onHolder))
+                animators.Add(onHolder);
+            if (slot.spawned != null)
+                animators.AddRange(slot.spawned.GetComponentsInChildren<Animator>());
 
-            foreach (AnimatorControllerParameter parameter in animator.parameters)
+            foreach (Animator animator in animators)
             {
-                if (parameter.name == "hurt" && parameter.type == AnimatorControllerParameterType.Trigger)
+                if (animator.runtimeAnimatorController == null)
+                    continue;
+
+                foreach (AnimatorControllerParameter parameter in animator.parameters)
                 {
-                    animator.SetTrigger("hurt");
-                    return;
+                    if (parameter.name == trigger && parameter.type == AnimatorControllerParameterType.Trigger)
+                    {
+                        animator.SetTrigger(trigger);
+                        return true;
+                    }
                 }
             }
+
+            return false;
+        }
+
+        /// <summary>The Animator trigger that starts the attack for a difficulty: easyAtk, moderateAtk or difficultAtk.</summary>
+        public static string AttackTrigger(QuestionDifficulty difficulty)
+        {
+            return difficulty switch
+            {
+                QuestionDifficulty.Moderate => "moderateAtk",
+                QuestionDifficulty.Difficult => "difficultAtk",
+                _ => "easyAtk"
+            };
+        }
+
+        /// <summary>
+        /// Starts this side's attack animation for the difficulty. False if there is no such
+        /// animation (no Animator, or no matching trigger), so the caller can skip waiting for it.
+        /// </summary>
+        public bool TryPlayAttack(CharacterRole role, QuestionDifficulty difficulty)
+        {
+            return TrySetTrigger(SlotFor(role), AttackTrigger(difficulty));
+        }
+
+        /// <summary>
+        /// The receiver of this side's animation events (on PlayerModel or EnemyModel, next to the
+        /// Animator). Added automatically if the holder has an Animator but no receiver yet.
+        /// </summary>
+        public CharacterAnimationEvents GetAnimationEvents(CharacterRole role)
+        {
+            RectTransform holder = SlotFor(role).modelHolder;
+            if (holder == null)
+                return null;
+
+            if (!holder.TryGetComponent(out CharacterAnimationEvents events) && holder.TryGetComponent(out Animator _))
+                events = holder.gameObject.AddComponent<CharacterAnimationEvents>();
+
+            return events;
         }
 
         /// <summary>Shows one character on the side its role says.</summary>
@@ -127,6 +197,7 @@ namespace MathQuest.Battle
             bool isPlayer = character.role == CharacterRole.Player;
             CharacterSlot slot = isPlayer ? playerSlot : enemySlot;
 
+            slot.character = character;
             SpawnModel(slot, character.characterPrefab);
 
             if (slot.nameText != null)

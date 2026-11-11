@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_20
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "Identify the coefficients of $x$ and $y$ in the algebraic expression: $2x-8y+11$"
   answer: {fileID: 11400000, guid: 688af3b3ae6c558e83ae3033830dbfd6, type: 2}

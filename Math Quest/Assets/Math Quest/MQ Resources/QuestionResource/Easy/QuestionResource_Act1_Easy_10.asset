@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_10
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3m-2$ when $m=4$."
   answer: {fileID: 11400000, guid: 44aa451ce22e58928be108ca5afa9a32, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_14
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $\\frac{24}{c}+d^2$ when $c=6$ and $d=3$."
   answer: {fileID: 11400000, guid: 07516eea6d885ee39daf5283146789a1, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_17
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "The product of twice $p$ and the cube of $q$, increased by half the difference of $p$ and seven."
   answer: {fileID: 11400000, guid: bdc32b933fbf56e48033354c21f52fc9, type: 2}

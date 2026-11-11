@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_3
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Write as an algebraic expression: \"the sum of a number $n$ and 9\""
   answer: {fileID: 11400000, guid: 64a9f2cccba752f491555e203db8839c, type: 2}

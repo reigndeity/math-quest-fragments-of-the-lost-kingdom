@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_5
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Five more than the product of negative two and the square of $x$."
   answer: {fileID: 11400000, guid: a55455dda90e5e7ca119bfaf77cbac09, type: 2}

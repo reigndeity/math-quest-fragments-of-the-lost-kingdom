@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_21
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $2pq^3+\\frac{p-7}{2}$ when $p=3$ and $q=-2$."
   answer: {fileID: 11400000, guid: fdedb1fb4f6d504697a9a0285cea9197, type: 2}

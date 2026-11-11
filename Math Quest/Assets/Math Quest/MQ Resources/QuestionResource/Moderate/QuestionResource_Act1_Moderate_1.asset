@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $x^2-y^2+2xy$ when $x=3$ and $y=4$."
   answer: {fileID: 11400000, guid: 3cdc08f93b4553989685719d793b42f4, type: 2}

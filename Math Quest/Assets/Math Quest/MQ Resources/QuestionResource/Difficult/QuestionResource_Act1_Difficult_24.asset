@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_24
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "How many terms are in the unexpanded algebraic expression below? $-2(3a-b)^2+\\frac{a+4}{5}-11$"
   answer: {fileID: 11400000, guid: 1b475f6c05b15534afc7611939dae625, type: 2}

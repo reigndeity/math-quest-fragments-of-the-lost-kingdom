@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_7
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Components of Algebraic Expressions"
   question: "In the expression $4x^2-7x+2$, identify the coefficient of the middle term."
   answer: {fileID: 11400000, guid: 1bf2c0897ec350dfb3f68658ba37eb0b, type: 2}

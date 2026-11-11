@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Moderate_23
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 1
   topic: "Evaluating Algebraic Expressions"
   question: "Evaluate $3x+2y$ when $x=4$ and $y=-2$."
   answer: {fileID: 11400000, guid: e53afe97f2f35abeb1eb083db4fc3a01, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_16
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Three times the quantity four more than a number $a$, decreased by the quotient of $b$ and five."
   answer: {fileID: 11400000, guid: eb8c891b168b563fb70c795a3de75a5a, type: 2}

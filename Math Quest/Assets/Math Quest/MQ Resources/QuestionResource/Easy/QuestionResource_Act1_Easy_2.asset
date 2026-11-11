@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_2
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Components of Algebraic Expressions"
   question: "Identify the constant term in: $3y-7$."
   answer: {fileID: 11400000, guid: e270cd1bdcab564abfff00cdb419a8ff, type: 2}

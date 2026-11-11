@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Difficult_9
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 2
   topic: "Components of Algebraic Expressions"
   question: "What are the constant terms in the expression below? $-\\frac{4x^2}{3}+7x-15$"
   answer: {fileID: 11400000, guid: ddb4111b99bf5ca6a510a980a53a7d98, type: 2}

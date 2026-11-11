@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_13
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Translate the verbal phrase into an algebraic expression: \"Eight more than a number $x$\""
   answer: {fileID: 11400000, guid: 4128d6a1fae054ccacd4a04d1d65a1d5, type: 2}

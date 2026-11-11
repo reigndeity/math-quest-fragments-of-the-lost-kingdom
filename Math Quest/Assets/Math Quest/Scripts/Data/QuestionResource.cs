@@ -15,6 +15,9 @@ namespace MathQuest.Data
         [Header("Identity")]
         public ActId act = ActId.Act1;
 
+        [Tooltip("Decides which skill the characters use when this question is answered.")]
+        public QuestionDifficulty difficulty = QuestionDifficulty.Easy;
+
         [Tooltip("One of the Act's topics, for example Components of Algebraic Expressions.")]
         public string topic;
 

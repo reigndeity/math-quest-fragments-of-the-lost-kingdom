@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: QuestionResource_Act1_Easy_16
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
+  difficulty: 0
   topic: "Translating Verbal Phrases into Algebraic Expressions"
   question: "Translate the verbal phrase into an algebraic expression: \"Five less than a number $n$\""
   answer: {fileID: 11400000, guid: 9d9370c26aae516ea10ac2edfdbac90c, type: 2}
