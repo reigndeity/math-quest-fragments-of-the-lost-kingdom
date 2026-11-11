@@ -16,7 +16,8 @@ MonoBehaviour:
   impactDelay: 0.3
   replyDelay: 0.6
   steps:
-  - trigger: 0
+  - kind: 0
+    trigger: 0
     delay: 0
     prefab: {fileID: 7818479349147026228, guid: 23cd4e3ad80619b4b912b5445d8c9048, type: 3}
     position: 1
@@ -34,7 +35,35 @@ MonoBehaviour:
     travelDuration: 0.3
     lifetime: 1
     sortingOrder: 99
-  - trigger: 1
+    shakeDuration: 0.3
+    shakeStrength: 20
+    shakeFrequency: 30
+    shakeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - kind: 0
+    trigger: 1
     delay: 0
     prefab: {fileID: 101398, guid: 38b92f1bcacea924e94fa17a2fc1769f, type: 3}
     position: 1
@@ -52,3 +81,76 @@ MonoBehaviour:
     travelDuration: 0
     lifetime: 1
     sortingOrder: 99
+    shakeDuration: 0.3
+    shakeStrength: 20
+    shakeFrequency: 30
+    shakeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - kind: 1
+    trigger: 1
+    delay: 0
+    prefab: {fileID: 0}
+    position: 0
+    anchor: 1
+    offset: {x: 0, y: 0, z: 0}
+    rotationMode: 0
+    rotation: {x: -45, y: 75, z: -90}
+    scaleMode: 0
+    scale: 0
+    customScale: {x: 0, y: 0, z: 0}
+    parentToAnchor: 0
+    travel: 0
+    travelTo: 0
+    travelAnchor: 0
+    travelDuration: 0
+    lifetime: 1
+    sortingOrder: 99
+    shakeDuration: 0.3
+    shakeStrength: 20
+    shakeFrequency: 30
+    shakeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

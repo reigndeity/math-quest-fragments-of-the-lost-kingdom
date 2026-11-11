@@ -52,8 +52,24 @@ namespace MathQuest.Battle
         [Tooltip("Knows where each character is, so anchors can be found on whoever is currently shown.")]
         [SerializeField] private CharacterAssetConfig characters;
 
+        [Tooltip("What a Camera Shake step moves: the BattleArea. The characters are UI, so moving the real camera would not shake them.")]
+        [SerializeField] private RectTransform shakeTarget;
+
         private Dictionary<string, VfxResource> library;
         private bool warnedAboutOverlay;
+
+        // Shakes that are running right now. Several can overlap: their movements add up.
+        private sealed class ActiveShake
+        {
+            public VfxStep Step;
+            public float Elapsed;
+            public float NextJump;
+            public Vector2 Offset;
+        }
+
+        private readonly List<ActiveShake> shakes = new();
+        private Vector2 shakeRestPosition;
+        private bool shaking;
 
         /// <summary>
         /// Starts a skill: plays its Start steps and returns a run that knows when the hit
@@ -110,7 +126,10 @@ namespace MathQuest.Battle
         {
             foreach (VfxStep step in run.Steps)
             {
-                if (step == null || step.trigger != trigger || step.prefab == null)
+                if (step == null || step.trigger != trigger)
+                    continue;
+
+                if (step.kind == VfxStepKind.Spawn && step.prefab == null)
                     continue;
 
                 if (step.delay > 0f)
@@ -126,8 +145,83 @@ namespace MathQuest.Battle
             Spawn(step, run);
         }
 
+        private void Update()
+        {
+            if (shakeTarget == null)
+                return;
+
+            if (shakes.Count == 0)
+            {
+                if (shaking)
+                {
+                    shakeTarget.anchoredPosition = shakeRestPosition; // back to where it was
+                    shaking = false;
+                }
+
+                return;
+            }
+
+            Vector2 total = Vector2.zero;
+            for (int i = shakes.Count - 1; i >= 0; i--)
+            {
+                ActiveShake shake = shakes[i];
+                shake.Elapsed += Time.deltaTime;
+
+                if (shake.Elapsed >= shake.Step.shakeDuration)
+                {
+                    shakes.RemoveAt(i);
+                    continue;
+                }
+
+                // Jump to a new random spot a set number of times a second.
+                if (shake.Elapsed >= shake.NextJump)
+                {
+                    shake.NextJump = shake.Elapsed + 1f / Mathf.Max(1f, shake.Step.shakeFrequency);
+                    float t = shake.Elapsed / shake.Step.shakeDuration;
+                    float strength = shake.Step.shakeStrength * shake.Step.shakeCurve.Evaluate(t);
+                    shake.Offset = Random.insideUnitCircle * strength;
+                }
+
+                total += shake.Offset;
+            }
+
+            shakeTarget.anchoredPosition = shakeRestPosition + total;
+        }
+
+        private void StartShake(VfxStep step)
+        {
+            if (shakeTarget == null)
+            {
+                Debug.LogWarning("A Camera Shake step needs the Shake Target (BattleArea) assigned on the VfxManager.", this);
+                return;
+            }
+
+            if (!shaking)
+            {
+                shakeRestPosition = shakeTarget.anchoredPosition; // remembered so it can be put back
+                shaking = true;
+            }
+
+            shakes.Add(new ActiveShake { Step = step });
+        }
+
+        private void OnDisable()
+        {
+            if (shaking && shakeTarget != null)
+                shakeTarget.anchoredPosition = shakeRestPosition;
+
+            shakes.Clear();
+            shaking = false;
+        }
+
         private void Spawn(VfxStep step, VfxRun run)
         {
+            if (step.kind == VfxStepKind.CameraShake)
+            {
+                StartShake(step);
+                return;
+            }
+
             Transform point = FindAnchor(step.position, step.anchor, run);
             if (point == null)
             {

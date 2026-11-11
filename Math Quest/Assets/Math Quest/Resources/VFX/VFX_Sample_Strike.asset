@@ -69,3 +69,49 @@ MonoBehaviour:
     travelDuration: 0.4
     lifetime: 2
     sortingOrder: 100
+  - kind: 1
+    trigger: 1
+    delay: 0
+    prefab: {fileID: 0}
+    position: 1
+    anchor: 1
+    offset: {x: 0, y: 0, z: 0}
+    rotationMode: 0
+    rotation: {x: 0, y: 0, z: 0}
+    scaleMode: 0
+    scale: 1
+    customScale: {x: 1, y: 1, z: 1}
+    parentToAnchor: 0
+    travel: 0
+    travelTo: 1
+    travelAnchor: 1
+    travelDuration: 0.4
+    lifetime: 2
+    sortingOrder: 100
+    shakeDuration: 0.3
+    shakeStrength: 20
+    shakeFrequency: 30
+    shakeCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: -1
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4

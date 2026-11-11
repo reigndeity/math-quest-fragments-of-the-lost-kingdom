@@ -18,6 +18,7 @@ namespace MathQuest.Editor
 
         // A button press is remembered here and carried out after the list has been drawn and saved.
         private int pendingAdd = -1;
+        private bool pendingAddShake;
         private int pendingRemove = -1;
 
         public override void OnInspectorGUI()
@@ -40,8 +41,9 @@ namespace MathQuest.Editor
             bool changed = false;
             if (pendingAdd >= 0)
             {
-                AddStep(steps, (VfxTrigger)pendingAdd);
+                AddStep(steps, (VfxTrigger)pendingAdd, pendingAddShake);
                 pendingAdd = -1;
+                pendingAddShake = false;
                 changed = true;
             }
             else if (pendingRemove >= 0)
@@ -69,6 +71,12 @@ namespace MathQuest.Editor
             if (GUI.Button(new Rect(bar.xMax - 64f, bar.y + 1f, 62f, 20f), "+ Step"))
                 pendingAdd = (int)trigger;
 
+            if (GUI.Button(new Rect(bar.xMax - 136f, bar.y + 1f, 70f, 20f), "+ Shake"))
+            {
+                pendingAdd = (int)trigger;
+                pendingAddShake = true;
+            }
+
             int shown = 0;
             for (int i = 0; i < steps.arraySize; i++)
             {
@@ -86,12 +94,13 @@ namespace MathQuest.Editor
 
         }
 
-        private static void AddStep(SerializedProperty steps, VfxTrigger trigger)
+        private static void AddStep(SerializedProperty steps, VfxTrigger trigger, bool shake)
         {
             int index = steps.arraySize;
             steps.InsertArrayElementAtIndex(index);
             SerializedProperty step = steps.GetArrayElementAtIndex(index);
 
+            step.FindPropertyRelative("kind").enumValueIndex = (int)(shake ? VfxStepKind.CameraShake : VfxStepKind.Spawn);
             step.FindPropertyRelative("trigger").enumValueIndex = (int)trigger;
             step.FindPropertyRelative("delay").floatValue = 0f;
             step.FindPropertyRelative("prefab").objectReferenceValue = null;
@@ -100,6 +109,15 @@ namespace MathQuest.Editor
                 (int)(trigger == VfxTrigger.Start ? VfxPosition.Caster : VfxPosition.Target);
             step.FindPropertyRelative("anchor").enumValueIndex = (int)VfxAnchorPoint.Center;
             step.FindPropertyRelative("travel").boolValue = false;
+            if (shake)
+            {
+                // Sensible starting values: a short, hard hit that fades out.
+                step.FindPropertyRelative("shakeDuration").floatValue = 0.3f;
+                step.FindPropertyRelative("shakeStrength").floatValue = 20f;
+                step.FindPropertyRelative("shakeFrequency").floatValue = 30f;
+                step.FindPropertyRelative("shakeCurve").animationCurveValue = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+            }
+
             step.isExpanded = true;
         }
 
@@ -111,14 +129,22 @@ namespace MathQuest.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
             // Title row: foldout with the prefab's name, and the remove button.
+            bool isShake = step.FindPropertyRelative("kind").enumValueIndex == (int)VfxStepKind.CameraShake;
             Object prefab = step.FindPropertyRelative("prefab").objectReferenceValue;
             EditorGUILayout.BeginHorizontal();
-            step.isExpanded = EditorGUILayout.Foldout(step.isExpanded, prefab != null ? prefab.name : "(no prefab)", true, EditorStyles.foldoutHeader);
+            string title = isShake
+                ? $"Camera Shake   {step.FindPropertyRelative("shakeDuration").floatValue:0.##}s, strength {step.FindPropertyRelative("shakeStrength").floatValue:0.##}"
+                : prefab != null ? prefab.name : "(no prefab)";
+            step.isExpanded = EditorGUILayout.Foldout(step.isExpanded, title, true, EditorStyles.foldoutHeader);
             if (GUILayout.Button("X", GUILayout.Width(22f)))
                 remove = true;
             EditorGUILayout.EndHorizontal();
 
-            if (step.isExpanded)
+            if (step.isExpanded && isShake)
+            {
+                DrawShake(step);
+            }
+            else if (step.isExpanded)
             {
                 // The things you change most.
                 EditorGUILayout.PropertyField(step.FindPropertyRelative("prefab"), GUIContent.none);
@@ -153,6 +179,29 @@ namespace MathQuest.Editor
 
             EditorGUILayout.EndVertical();
             return remove;
+        }
+
+        private static void DrawShake(SerializedProperty step)
+        {
+            EditorGUILayout.BeginHorizontal();
+            Labeled("Delay", step.FindPropertyRelative("delay"), 40f, 70f);
+            GUILayout.FlexibleSpace();
+            Labeled("Duration", step.FindPropertyRelative("shakeDuration"), 56f, 70f);
+            GUILayout.Label("s", GUILayout.Width(10f));
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeStrength"), new GUIContent("Strength"));
+            EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeFrequency"), new GUIContent("Jumps per second"));
+            EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeCurve"), new GUIContent("Strength over time"));
+
+            SerializedProperty more = step.FindPropertyRelative("sortingOrder");
+            more.isExpanded = EditorGUILayout.Foldout(more.isExpanded, "More", true);
+            if (more.isExpanded)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(step.FindPropertyRelative("trigger"), new GUIContent("Happens at"));
+                EditorGUI.indentLevel--;
+            }
         }
 
         private static void DrawMore(SerializedProperty step)

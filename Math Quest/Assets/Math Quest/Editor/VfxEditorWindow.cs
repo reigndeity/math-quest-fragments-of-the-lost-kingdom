@@ -286,7 +286,9 @@ namespace MathQuest.Editor
                 };
 
                 float begin = baseTime + step.delay;
-                float end = begin + (step.travel ? step.travelDuration : step.lifetime);
+                float end = begin + (step.kind == VfxStepKind.CameraShake
+                    ? step.shakeDuration
+                    : step.travel ? step.travelDuration : step.lifetime);
                 begins.Add(begin);
                 ends.Add(end);
                 total = Mathf.Max(total, end);
@@ -328,11 +330,16 @@ namespace MathQuest.Editor
                     _ => new Color(0.45f, 0.75f, 1f)
                 };
 
-                string name = step.prefab != null ? step.prefab.name : "(no prefab)";
+                string name = step.kind == VfxStepKind.CameraShake
+                    ? "Camera Shake"
+                    : step.prefab != null ? step.prefab.name : "(no prefab)";
                 GUI.Label(new Rect(area.x + 6f, y, labelWidth - 8f, rowHeight), name, EditorStyles.miniLabel);
 
                 var bar = new Rect(X(begins[i]), y + 2f, Mathf.Max(3f, X(ends[i]) - X(begins[i])), rowHeight - 4f);
-                EditorGUI.DrawRect(bar, new Color(color.r, color.g, color.b, step.travel ? 0.9f : 0.45f));
+                if (step.kind == VfxStepKind.CameraShake)
+                    EditorGUI.DrawRect(bar, new Color(0.8f, 0.6f, 1f, 0.7f)); // shakes are purple
+                else
+                    EditorGUI.DrawRect(bar, new Color(color.r, color.g, color.b, step.travel ? 0.9f : 0.45f));
             }
 
             GUI.Label(new Rect(area.x + 6f, area.y + 2f, labelWidth, 14f), "Timeline", EditorStyles.miniBoldLabel);

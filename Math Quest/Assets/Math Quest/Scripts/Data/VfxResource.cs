@@ -15,6 +15,15 @@ namespace MathQuest.Data
         End = 2
     }
 
+    /// <summary>What a step does.</summary>
+    public enum VfxStepKind
+    {
+        /// <summary>Spawns an effect prefab at a character.</summary>
+        Spawn = 0,
+        /// <summary>Shakes the battle scene.</summary>
+        CameraShake = 1
+    }
+
     /// <summary>Which character a step works with.</summary>
     public enum VfxPosition
     {
@@ -43,10 +52,13 @@ namespace MathQuest.Data
     {
     }
 
-    /// <summary>One thing a VFX does: spawn an effect at a character, optionally flying to another.</summary>
+    /// <summary>One thing a VFX does: spawn an effect at a character, or shake the screen.</summary>
     [Serializable]
     public sealed class VfxStep
     {
+        [Tooltip("Spawn an effect, or shake the battle scene.")]
+        public VfxStepKind kind = VfxStepKind.Spawn;
+
         [Tooltip("When this step happens during the skill.")]
         public VfxTrigger trigger = VfxTrigger.Start;
 
@@ -89,6 +101,20 @@ namespace MathQuest.Data
 
         [Tooltip("Drawing order. It must be higher than the Canvas's Sorting Order so the effect shows in front of the characters.")]
         public int sortingOrder = 100;
+
+        // ---- camera shake (only used when Kind is Camera Shake) ----
+
+        [Tooltip("How long the shake lasts, in seconds.")]
+        [Min(0.05f)] public float shakeDuration = 0.3f;
+
+        [Tooltip("How far the scene moves at the strongest point, in canvas units (pixels at the reference size). Around 10 is a rumble, 40 is a hard hit.")]
+        [Min(0f)] public float shakeStrength = 20f;
+
+        [Tooltip("How many times a second the shake jumps to a new spot.")]
+        [Min(1f)] public float shakeFrequency = 30f;
+
+        [Tooltip("Strength over the shake's length: left is the start, right is the end, height is how strong (1 = full Strength). A falling line is a hit; a rising line is a build-up rumble.")]
+        public AnimationCurve shakeCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
     }
 
     /// <summary>
