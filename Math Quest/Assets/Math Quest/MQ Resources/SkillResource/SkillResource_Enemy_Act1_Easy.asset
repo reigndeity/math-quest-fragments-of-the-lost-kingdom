@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a347d4e212409da376bf08863c7bcf, type: 3}
   m_Name: SkillResource_Enemy_Act1_Easy
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.SkillResource
+  vfxId: Sample_Strike
   vfxPrefab: {fileID: 143092, guid: 3cec58934a80dd440953a42a1d17492d, type: 3}
   placement: 0
   anchor: 1

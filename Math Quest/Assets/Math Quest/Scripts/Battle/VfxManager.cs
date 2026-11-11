@@ -1,49 +1,207 @@
+using System.Collections;
+using System.Collections.Generic;
 using MathQuest.Data;
 using UnityEngine;
 
 namespace MathQuest.Battle
 {
     /// <summary>
-    /// Spawns the effect of a skill at an anchor point of a character, and removes it again
-    /// after its lifetime. The battle only asks "play this skill, caster to target"; where
-    /// the effect goes and for how long is decided by the SkillResource.
+    /// One skill being played. The battle starts it, then asks it for the Impact and End steps
+    /// at the right moments.
+    /// </summary>
+    public sealed class VfxRun
+    {
+        private readonly VfxManager manager;
+        internal readonly List<VfxStep> Steps;
+        internal readonly CharacterRole Caster;
+        internal readonly CharacterRole Target;
+
+        /// <summary>Seconds from the start until the hit should land (a heart is lost).</summary>
+        public float ImpactDelay { get; }
+
+        /// <summary>Seconds after the hit before the reply. Negative: not set, use the battle's own Hit Duration.</summary>
+        public float ReplyDelay { get; }
+
+        internal VfxRun(VfxManager manager, List<VfxStep> steps, CharacterRole caster, CharacterRole target,
+            float impactDelay, float replyDelay = -1f)
+        {
+            ReplyDelay = replyDelay;
+            this.manager = manager;
+            Steps = steps;
+            Caster = caster;
+            Target = target;
+            ImpactDelay = impactDelay;
+        }
+
+        /// <summary>Plays the steps that happen when the hit lands.</summary>
+        public void Impact() => manager.Fire(this, VfxTrigger.Impact);
+
+        /// <summary>Plays the steps that happen when the skill is over.</summary>
+        public void End() => manager.Fire(this, VfxTrigger.End);
+    }
+
+    /// <summary>
+    /// Plays skills. A skill points at a VFX by id (a VfxResource in a Resources/VFX folder), and
+    /// the VFX lists what to spawn where and when. The battle only says "begin this skill from
+    /// caster to target", then "impact" and "end".
     /// </summary>
     public sealed class VfxManager : MonoBehaviour
     {
+        private const string ResourcesFolder = "VFX";
+
         [Tooltip("Knows where each character is, so anchors can be found on whoever is currently shown.")]
         [SerializeField] private CharacterAssetConfig characters;
 
+        private Dictionary<string, VfxResource> library;
         private bool warnedAboutOverlay;
 
         /// <summary>
-        /// Plays the skill's effect. Returns how many seconds until the hit should land, so the
-        /// caller can wait that long before taking a heart. Returns 0 when there is no effect.
+        /// Starts a skill: plays its Start steps and returns a run that knows when the hit
+        /// should land. Never returns null; a skill with no effect gives a run that does nothing.
         /// </summary>
-        public float Play(SkillResource skill, CharacterRole caster, CharacterRole target)
+        public VfxRun Begin(SkillResource skill, CharacterRole caster, CharacterRole target)
         {
-            if (skill == null || skill.vfxPrefab == null || characters == null)
-                return 0f;
+            VfxRun run = CreateRun(skill, caster, target);
+            Fire(run, VfxTrigger.Start);
+            return run;
+        }
 
-            CharacterRole side = skill.placement == SkillPlacement.OnTarget ? target : caster;
-            VfxAnchors anchors = characters.GetAnchors(side);
-            if (anchors == null)
+        private VfxRun CreateRun(SkillResource skill, CharacterRole caster, CharacterRole target)
+        {
+            if (skill == null)
+                return new VfxRun(this, new List<VfxStep>(), caster, target, 0f);
+
+            // A skill with a VFX id uses that VFX.
+            if (!string.IsNullOrWhiteSpace(skill.vfxId))
             {
-                Debug.LogWarning($"{side} has no VfxAnchors (the AnchorVFX prefab) to spawn {skill.name} on.", this);
-                return 0f;
+                if (TryGetVfx(skill.vfxId, out VfxResource vfx))
+                    return new VfxRun(this, vfx.steps, caster, target, vfx.impactDelay, vfx.replyDelay);
+
+                Debug.LogWarning(
+                    $"{skill.name}: no VFX with the id '{skill.vfxId}'. VFX assets must be in a Resources/VFX folder.", this);
+                return new VfxRun(this, new List<VfxStep>(), caster, target, 0f);
             }
 
-            Transform point = anchors.Get(skill.anchor);
-            Vector3 position = WorldPosition(point);
+            // Otherwise the simple single-prefab effect on the skill itself.
+            var steps = new List<VfxStep>();
+            if (skill.vfxPrefab != null)
+            {
+                steps.Add(new VfxStep
+                {
+                    trigger = VfxTrigger.Start,
+                    prefab = skill.vfxPrefab,
+                    position = skill.placement == SkillPlacement.OnTarget ? VfxPosition.Target : VfxPosition.Caster,
+                    anchor = skill.anchor,
+                    offset = skill.positionOffset,
+                    rotationMode = skill.overrideRotation ? VfxRotationMode.Custom : VfxRotationMode.Prefab,
+                    rotation = skill.rotation,
+                    scaleMode = skill.overrideScale ? VfxScaleMode.Custom : VfxScaleMode.Multiply,
+                    scale = skill.scale,
+                    customScale = skill.customScale,
+                    lifetime = skill.lifetime,
+                    sortingOrder = skill.sortingOrder
+                });
+            }
 
-            // Effects live in the world, not under the Canvas, so the Canvas's scale does not shrink them.
-            GameObject instance = Instantiate(skill.vfxPrefab, position, Quaternion.identity);
-            instance.transform.localScale = skill.vfxPrefab.transform.localScale * skill.scale;
+            return new VfxRun(this, steps, caster, target, steps.Count > 0 ? skill.impactDelay : 0f);
+        }
+
+        internal void Fire(VfxRun run, VfxTrigger trigger)
+        {
+            foreach (VfxStep step in run.Steps)
+            {
+                if (step == null || step.trigger != trigger || step.prefab == null)
+                    continue;
+
+                if (step.delay > 0f)
+                    StartCoroutine(SpawnAfter(step, run));
+                else
+                    Spawn(step, run);
+            }
+        }
+
+        private IEnumerator SpawnAfter(VfxStep step, VfxRun run)
+        {
+            yield return new WaitForSeconds(step.delay);
+            Spawn(step, run);
+        }
+
+        private void Spawn(VfxStep step, VfxRun run)
+        {
+            Transform point = FindAnchor(step.position, step.anchor, run);
+            if (point == null)
+            {
+                Debug.LogWarning($"No anchor to spawn {step.prefab.name} on.", this);
+                return;
+            }
+
+            Vector3 position = WorldPosition(point) + step.offset;
+            Quaternion rotation = step.rotationMode == VfxRotationMode.Custom
+                ? Quaternion.Euler(step.rotation)
+                : step.prefab.transform.rotation;
+
+            GameObject instance = Instantiate(step.prefab, position, rotation);
+
+            Vector3 size = step.scaleMode switch
+            {
+                VfxScaleMode.Custom => step.customScale,
+                VfxScaleMode.Multiply => step.prefab.transform.localScale * step.scale,
+                _ => step.prefab.transform.localScale
+            };
+
+            if (step.parentToAnchor)
+            {
+                // The Canvas is tiny in the world, so keep the effect's world size when it becomes a child.
+                instance.transform.SetParent(point, true);
+                Vector3 parentScale = point.lossyScale;
+                instance.transform.localScale = new Vector3(
+                    size.x / SafeScale(parentScale.x), size.y / SafeScale(parentScale.y), size.z / SafeScale(parentScale.z));
+            }
+            else
+            {
+                instance.transform.localScale = size;
+            }
 
             foreach (Renderer renderer in instance.GetComponentsInChildren<Renderer>(true))
-                renderer.sortingOrder = skill.sortingOrder;
+                renderer.sortingOrder = step.sortingOrder;
 
-            Destroy(instance, skill.lifetime);
-            return skill.impactDelay;
+            if (step.travel)
+            {
+                Transform destination = FindAnchor(step.travelTo, step.travelAnchor, run);
+                if (destination != null)
+                    instance.AddComponent<VfxMover>().Begin(() => WorldPosition(destination), step.travelDuration);
+            }
+
+            Destroy(instance, step.lifetime);
+        }
+
+        private static float SafeScale(float value) => Mathf.Abs(value) < 1e-5f ? 1f : value;
+
+        private Transform FindAnchor(VfxPosition position, VfxAnchorPoint anchor, VfxRun run)
+        {
+            if (characters == null)
+                return null;
+
+            CharacterRole side = position == VfxPosition.Target ? run.Target : run.Caster;
+            VfxAnchors anchors = characters.GetAnchors(side);
+            return anchors != null ? anchors.Get(anchor) : null;
+        }
+
+        private bool TryGetVfx(string id, out VfxResource vfx)
+        {
+            if (library == null)
+            {
+                library = new Dictionary<string, VfxResource>();
+                foreach (VfxResource resource in Resources.LoadAll<VfxResource>(ResourcesFolder))
+                {
+                    if (library.ContainsKey(resource.Id))
+                        Debug.LogWarning($"Two VFX share the id '{resource.Id}'. Ids must be unique.", resource);
+                    else
+                        library[resource.Id] = resource;
+                }
+            }
+
+            return library.TryGetValue(id, out vfx);
         }
 
         private Vector3 WorldPosition(Transform point)

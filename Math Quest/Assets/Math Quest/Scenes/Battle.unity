@@ -306,6 +306,7 @@ MonoBehaviour:
   attackEventTimeout: 2
   answerPrefix: 'My answer is: '
   showAnswerHint: 1
+  answerHintPrefab: {fileID: 7700000000000000004, guid: b3284107b21d59888613ec6afde7d32d, type: 3}
   multipleChoicePrefab: {fileID: 7200000000000000001, guid: c0e7852ee08d143448e6ae7bde0c5163, type: 3}
   keypadPrefab: {fileID: 5100000000000000005, guid: f1b50b3bb0514d7eaa76f0f64a28ba9b, type: 3}
   builderPrefab: {fileID: 5200000000000000005, guid: 19eaa27a5372428d9a5ef71dc8f837ef, type: 3}
@@ -661,7 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -780,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

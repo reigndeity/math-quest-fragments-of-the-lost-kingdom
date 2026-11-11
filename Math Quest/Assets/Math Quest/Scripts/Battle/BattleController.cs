@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MathQuest.Data;
+using TexDrawLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -133,7 +134,7 @@ namespace MathQuest.Battle
         [Header("Health")]
         [Tooltip("Hearts lost per hit. A right answer hurts the enemy; a wrong answer hurts the player.")]
         [SerializeField, Min(1)] private int damagePerHit = 1;
-        [Tooltip("After the hit lands (heart lost, hurt animation), how long to wait before the enemy replies.")]
+        [Tooltip("After the hit lands (heart lost, hurt animation), how long to wait before the enemy replies. Only used when the skill has no VFX; a VFX has its own Reply Delay.")]
         [SerializeField, Min(0f)] private float hitDuration = 0.6f;
         [Tooltip("If an attack animation never fires its PlaySkill animation event, the effect is played anyway after this many seconds.")]
         [SerializeField, Min(0.1f)] private float attackEventTimeout = 2f;
@@ -145,6 +146,8 @@ namespace MathQuest.Battle
         [Header("Debug")]
         [Tooltip("Dev only. Shows the correct answer of the current question in the top-left corner of the Game view (and in the Console), so you do not have to remember them. Does nothing in a release build.")]
         [SerializeField] private bool showAnswerHint;
+        [Tooltip("The AnswerHint prefab. Its color, size, position and font are set on the prefab. Empty: a plain one is created in code.")]
+        [SerializeField] private TEXDraw answerHintPrefab;
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
@@ -305,8 +308,9 @@ namespace MathQuest.Battle
         private void SpawnAnswerInput(QuestionResource question)
         {
             hintText = DescribeAnswer(question.answer);
+            RefreshHintLabel();
             if (showAnswerHint)
-                Debug.Log($"[Answer hint] {question.name}: {hintText}", this);
+                Debug.Log($"[Answer hint] {question.name}: {PlainMath(hintText)}", this); // the Console cannot draw math
 
             switch (question.answer)
             {
@@ -395,6 +399,31 @@ namespace MathQuest.Battle
 
         private string hintText;
 
+        // Turns TEXDraw math into something readable on one line: $\frac{x+5}{2}$ becomes (x+5)/2.
+        private static string PlainMath(string math)
+        {
+            if (string.IsNullOrEmpty(math))
+                return math;
+
+            string text = math.Replace("$", string.Empty);
+            var fraction = new System.Text.RegularExpressions.Regex(@"\\frac\{([^{}]*)\}\{([^{}]*)\}");
+            string previous;
+            do
+            {
+                previous = text;
+                text = fraction.Replace(text, match => Wrap(match.Groups[1].Value) + "/" + Wrap(match.Groups[2].Value));
+            }
+            while (text != previous);
+
+            return text.Replace("\\cdot", "*").Replace("\\times", "*").Replace("\\", string.Empty);
+        }
+
+        // Parentheses only when the part is more than a plain number or letter.
+        private static string Wrap(string part)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(part, @"^[\w.]+$") ? part : "(" + part + ")";
+        }
+
         private static string DescribeAnswer(AnswerResource answer)
         {
             switch (answer)
@@ -407,38 +436,76 @@ namespace MathQuest.Battle
                     if (expression.AcceptedArrangements.Count == 0)
                         return "(no accepted arrangement)";
 
-                    var parts = new List<string>();
-                    foreach (string tileId in expression.AcceptedArrangements[0].tileIds)
-                        parts.Add(expression.TryGetTile(tileId, out ExpressionTile tile) ? tile.math : tileId);
+                    // One line per accepted arrangement, the tiles in slot order.
+                    var lines = new List<string>();
+                    foreach (ExpressionArrangement arrangement in expression.AcceptedArrangements)
+                    {
+                        var parts = new List<string>();
+                        foreach (string tileId in arrangement.tileIds)
+                            parts.Add(expression.TryGetTile(tileId, out ExpressionTile tile) ? tile.math : tileId);
 
-                    return string.Join("   ", parts);
+                        lines.Add(string.Join(" ", parts));
+                    }
+
+                    return string.Join("\nor\n", lines);
                 default:
                     return "?";
             }
         }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-        private void OnGUI()
+        // The hint is drawn with TEXDraw, like the question, so fractions and exponents look right.
+        private TEXDraw hintLabel;
+
+        private void RefreshHintLabel()
         {
-            if (!showAnswerHint || string.IsNullOrEmpty(hintText))
-                return;
+            bool visible = showAnswerHint && !string.IsNullOrEmpty(hintText);
 
-            var style = new GUIStyle(GUI.skin.label)
+            if (hintLabel == null)
             {
-                fontSize = Mathf.Max(14, Screen.height / 45),
-                fontStyle = FontStyle.Bold,
-                wordWrap = true
-            };
+                if (!visible)
+                    return;
 
-            Rect rect = new(12f, 12f, Screen.width - 24f, Screen.height * 0.3f);
-            string text = "Answer: " + hintText;
+                hintLabel = CreateHintLabel();
+                if (hintLabel == null)
+                    return;
+            }
 
-            style.normal.textColor = Color.black; // simple outline so it reads on any background
-            GUI.Label(new Rect(rect.x + 1.5f, rect.y + 1.5f, rect.width, rect.height), text, style);
-            style.normal.textColor = Color.yellow;
-            GUI.Label(rect, text, style);
+            hintLabel.gameObject.SetActive(visible);
+            if (visible)
+            {
+                // Two backslashes are TEXDraw's line break.
+                hintLabel.text = "Answer:\\\\ " + hintText.Replace("\n", "\\\\ ");
+                hintLabel.transform.SetAsLastSibling(); // on top of the panel
+            }
         }
-#endif
+
+        private TEXDraw CreateHintLabel()
+        {
+            Canvas canvas = questionAndAnswer != null ? questionAndAnswer.GetComponentInParent<Canvas>() : null;
+            if (canvas == null)
+                return null;
+
+            if (answerHintPrefab != null)
+                return Instantiate(answerHintPrefab, canvas.rootCanvas.transform, false);
+
+            var go = new GameObject("AnswerHint (debug)", typeof(RectTransform));
+            var rect = (RectTransform)go.transform;
+            rect.SetParent(canvas.rootCanvas.transform, false);
+
+            // Top left, clear of the camera notch.
+            rect.anchorMin = rect.anchorMax = new Vector2(0f, 1f);
+            rect.pivot = new Vector2(0f, 1f);
+            rect.anchoredPosition = new Vector2(150f, -30f);
+            rect.sizeDelta = new Vector2(900f, 700f);
+
+            TEXDraw label = go.AddComponent<TEXDraw>();
+            label.size = 60f;
+            label.color = Color.yellow;
+            label.alignment = new Vector2(0f, 1f);
+            label.overflow = TexDrawLib.Core.Overflow.DownScale;
+            label.raycastTarget = false;
+            return label;
+        }
 
         private void OnSubmitPressed()
         {
@@ -468,6 +535,7 @@ namespace MathQuest.Battle
         private void OnAnswered(QuestionResource question, string answerText, bool correct)
         {
             hintText = null;
+            RefreshHintLabel();
             Debug.Log(correct ? "Correct answer." : "Wrong answer.");
             StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct), correct, question));
         }
@@ -556,16 +624,20 @@ namespace MathQuest.Battle
                         Debug.LogWarning($"The {CharacterAssetConfig.AttackTrigger(question.difficulty)} animation never fired its PlaySkill animation event.", this);
                 }
 
-                // The attacker's skill for this question's difficulty plays, then the hit lands.
-                if (vfx != null)
-                {
-                    float impact = vfx.Play(characters.GetSkill(attacker, question.difficulty), attacker, loser);
-                    if (impact > 0f)
-                        yield return new WaitForSeconds(impact);
-                }
+                // The attacker's skill for this question's difficulty: Start steps play, the hit
+                // lands after the VFX's Impact Delay (Impact steps play with it), then End steps.
+                VfxRun run = vfx != null
+                    ? vfx.Begin(characters.GetSkill(attacker, question.difficulty), attacker, loser)
+                    : null;
+
+                if (run != null && run.ImpactDelay > 0f)
+                    yield return new WaitForSeconds(run.ImpactDelay);
 
                 characters.Damage(loser, damagePerHit);
-                yield return new WaitForSeconds(hitDuration);
+                run?.Impact();
+                // A VFX decides how long the hit lingers; without one the battle's Hit Duration is used.
+                yield return new WaitForSeconds(run != null && run.ReplyDelay >= 0f ? run.ReplyDelay : hitDuration);
+                run?.End();
             }
 
             if (reply.Count > 0)

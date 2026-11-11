@@ -28,6 +28,9 @@ namespace MathQuest.Data
         menuName = "Math Quest/Resources/Skill Resource")]
     public sealed class SkillResource : ScriptableObject
     {
+        [Tooltip("The VFX this skill plays: pick one from the list. A VFX can spawn effects on the caster, on the target, let one fly across, and play something on impact. Empty: the simple effect below is used instead.")]
+        [VfxId] public string vfxId;
+
         [Tooltip("The effect that is spawned (for example a Pixel Arsenal prefab). Empty means no effect: the hit still lands.")]
         public GameObject vfxPrefab;
 
@@ -43,8 +46,23 @@ namespace MathQuest.Data
         [Tooltip("Seconds after which the spawned effect is removed.")]
         [Min(0.1f)] public float lifetime = 2f;
 
-        [Tooltip("Multiplies the effect's size.")]
+        [Tooltip("On: the effect is spawned with the Rotation below instead of the rotation it has in its prefab.")]
+        public bool overrideRotation;
+
+        [Tooltip("Rotation in degrees. Only used when Override Rotation is on.")]
+        public Vector3 rotation;
+
+        [Tooltip("Off: the prefab's own size times Scale Multiplier. On: the Custom Scale below is used instead.")]
+        public bool overrideScale;
+
+        [Tooltip("Multiplies the prefab's own size. Only used when Override Scale is off.")]
         [Min(0.01f)] public float scale = 1f;
+
+        [Tooltip("The size the effect is spawned with. Only used when Override Scale is on.")]
+        public Vector3 customScale = Vector3.one;
+
+        [Tooltip("Moves the effect away from its anchor, in world units (the Canvas is small in the world, so use small numbers).")]
+        public Vector3 positionOffset;
 
         [Tooltip("Drawing order of the effect. It must be higher than the Canvas's Sorting Order so it appears in front of the characters.")]
         public int sortingOrder = 100;
