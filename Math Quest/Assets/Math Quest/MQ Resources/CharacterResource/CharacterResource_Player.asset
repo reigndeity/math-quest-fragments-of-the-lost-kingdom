@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a3eef32a7b4ccb95ee3633f7d7f0a9, type: 3}
+  m_Name: CharacterResource_Player
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.CharacterResource
+  role: 0
+  displayName: PLAYER NAME
+  maxHearts: 3
+  characterPrefab: {fileID: 1995083367057083502, guid: fd8e69c823f560b47af573eeb70ef497, type: 3}

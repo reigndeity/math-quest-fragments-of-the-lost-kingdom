@@ -29,11 +29,20 @@ namespace MathQuest.Data
     {
         public ActId act = ActId.Act1;
 
+        [Tooltip("Who the player fights in this level. Must be a Character Resource with the Enemy role.")]
+        public CharacterResource enemy;
+
         [Tooltip("Plays before the battle. Each line says who speaks, so either side can go first.")]
         public List<DialogueLine> startDialogue = new();
 
         [Tooltip("Question pools, used in order. Each pool decides which of its questions are asked; tick Override Count to change how many for this level only. Mix fixed and weighted pools, for example 3 easy then 2 moderate.")]
         public List<LevelQuestionPool> questionPools = new();
+
+        private void OnValidate()
+        {
+            if (enemy != null && enemy.role != CharacterRole.Enemy)
+                Debug.LogWarning($"{name}: '{enemy.name}' is not an Enemy character.", this);
+        }
 
         /// <summary>Asks every pool for its picks, in order. Call once when the level starts.</summary>
         public List<QuestionResource> BuildQuestionList()

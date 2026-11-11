@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LevelResource_Act1_1
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.LevelResource
   act: 1
+  enemy: {fileID: 11400000, guid: 5606433027a85429b4975dc9d938bf15, type: 2}
   startDialogue:
   - speaker: 0
     text: No way!

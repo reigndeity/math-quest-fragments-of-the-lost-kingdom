@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a3eef32a7b4ccb95ee3633f7d7f0a9, type: 3}
+  m_Name: CharacterResource_Enemy_Act1
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.CharacterResource
+  role: 1
+  displayName: ENEMY NAME
+  maxHearts: 3
+  characterPrefab: {fileID: 3509842088010357834, guid: ca95ad02b555d614b9ccf6d05c9c0d60, type: 3}

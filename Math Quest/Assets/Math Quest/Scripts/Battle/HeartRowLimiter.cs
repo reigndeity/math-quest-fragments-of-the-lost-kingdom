@@ -18,11 +18,12 @@ namespace MathQuest.Battle
 
         private GridLayoutGroup grid;
 
-        private void OnEnable() => Apply();
-        private void OnValidate() => Apply();
-        private void OnTransformChildrenChanged() => Apply();
+        private void OnEnable() => Refresh();
+        private void OnValidate() => Refresh();
+        private void OnTransformChildrenChanged() => Refresh();
 
-        private void Apply()
+        /// <summary>Recounts the hearts and sets how many fit in a row.</summary>
+        public void Refresh()
         {
             if (grid == null)
                 grid = GetComponent<GridLayoutGroup>();

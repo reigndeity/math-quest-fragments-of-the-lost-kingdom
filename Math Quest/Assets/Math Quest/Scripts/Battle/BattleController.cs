@@ -33,6 +33,8 @@ namespace MathQuest.Battle
     public sealed class BattleController : MonoBehaviour
     {
         [SerializeField] private LevelResource level;
+        [Tooltip("Shows the player and the level's enemy (names, hearts, pictures). Optional while setting up.")]
+        [SerializeField] private CharacterAssetConfig characters;
         [SerializeField] private BattleDialogueController dialogue;
         [SerializeField] private BlurBackdropController blur;
 
@@ -176,6 +178,9 @@ namespace MathQuest.Battle
 
         private IEnumerator Begin()
         {
+            if (characters != null)
+                characters.Apply(level);
+
             yield return new WaitForSeconds(startDelay);
             questions = level.BuildQuestionList();
             questionIndex = 0;
