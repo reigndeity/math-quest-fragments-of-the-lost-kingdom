@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a347d4e212409da376bf08863c7bcf, type: 3}
   m_Name: SkillResource_Player_Difficult
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.SkillResource
+  vfxId: Player_Difficult_Attack
   vfxPrefab: {fileID: 179884, guid: 5e40863c46ca0c14597dca5b3aba43ac, type: 3}
   placement: 0
   anchor: 2
