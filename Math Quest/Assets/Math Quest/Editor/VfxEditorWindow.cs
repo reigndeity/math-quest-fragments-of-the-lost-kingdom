@@ -18,6 +18,7 @@ namespace MathQuest.Editor
         private const float ListWidth = 230f;
         private const float DetailMaxWidth = 620f; // with Narrow on, the editor stops growing here
         private const string NarrowKey = "MathQuest.VfxEditor.Narrow2";
+        private const string LayersKey = "MathQuest.VfxEditor.Layers";
 
         private readonly List<VfxResource> all = new();
         private readonly List<SkillResource> skills = new();
@@ -29,6 +30,7 @@ namespace MathQuest.Editor
 
         // On: the editor stays 620 wide, however wide the window is. Off (default): it fills the window.
         private bool narrow;
+        private bool showLayers;
 
         private float MaxWidth => narrow ? DetailMaxWidth : 100000f;
 
@@ -54,6 +56,7 @@ namespace MathQuest.Editor
         private void OnEnable()
         {
             narrow = EditorPrefs.GetBool(NarrowKey, false);
+            showLayers = EditorPrefs.GetBool(LayersKey, false);
             Refresh();
             FollowSelection();
         }
@@ -203,6 +206,13 @@ namespace MathQuest.Editor
             EditorGUILayout.BeginHorizontal(EditorStyles.toolbar, GUILayout.MaxWidth(MaxWidth));
             GUILayout.Label(AssetDatabase.GetAssetPath(selected), EditorStyles.miniLabel);
             GUILayout.FlexibleSpace();
+            bool newLayers = GUILayout.Toggle(showLayers, "Layers", EditorStyles.toolbarButton, GUILayout.Width(52f));
+            if (newLayers != showLayers)
+            {
+                showLayers = newLayers;
+                EditorPrefs.SetBool(LayersKey, showLayers);
+            }
+
             bool newNarrow = GUILayout.Toggle(narrow, "Narrow", EditorStyles.toolbarButton, GUILayout.Width(56f));
             if (newNarrow != narrow)
             {
@@ -234,6 +244,12 @@ namespace MathQuest.Editor
                     "This VFX is not in a Resources/VFX folder, so the game will not find it. Move it there.", MessageType.Warning);
             }
 
+            if (showLayers)
+            {
+                DrawLayers(selected);
+                GUILayout.Space(6f);
+            }
+
             DrawTimeline(selected);
             GUILayout.Space(6f);
 
@@ -260,6 +276,64 @@ namespace MathQuest.Editor
             AssetDatabase.MoveAssetToTrash(path);
             Refresh();
             GUIUtility.ExitGUI(); // a dialog was shown mid-layout
+        }
+
+        // ---- layers -------------------------------------------------------------------------
+
+        private struct LayerRow
+        {
+            public int Order;
+            public string Label;
+            public bool IsVfx;
+        }
+
+        // What draws in front of what, front first: the Canvases of the open scene, the answer hint (made when
+        // the game runs), and the sorting order of this VFX's own steps, so a number can be picked on purpose.
+        private static void DrawLayers(VfxResource vfx)
+        {
+            var rows = new List<LayerRow>();
+
+            int sceneCanvases = 0;
+            foreach (Canvas canvas in UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                if (EditorUtility.IsPersistent(canvas) || !canvas.gameObject.scene.IsValid())
+                    continue;
+
+                if (!canvas.isRootCanvas && !canvas.overrideSorting)
+                    continue; // follows its parent, so it is not a layer of its own
+
+                sceneCanvases++;
+                string note = canvas.isRootCanvas ? "  (everything that has no Canvas of its own)" : string.Empty;
+                rows.Add(new LayerRow { Order = canvas.sortingOrder, Label = canvas.gameObject.name + note });
+            }
+
+            rows.Add(new LayerRow { Order = 300, Label = "AnswerHint (debug)  made when the game runs" });
+
+            foreach (VfxStep step in vfx.steps)
+            {
+                if (step == null || step.kind != VfxStepKind.Spawn || step.prefab == null)
+                    continue;
+
+                rows.Add(new LayerRow { Order = step.sortingOrder, Label = "VFX: " + step.prefab.name, IsVfx = true });
+            }
+
+            rows.Sort((a, b) => b.Order.CompareTo(a.Order)); // front on top
+
+            EditorGUILayout.LabelField("Layers   front (top) to back", EditorStyles.boldLabel);
+            if (sceneCanvases == 0)
+                EditorGUILayout.HelpBox("No Canvas found. Open the Battle scene to list its layers.", MessageType.Info);
+
+            foreach (LayerRow row in rows)
+            {
+                Rect rect = EditorGUILayout.GetControlRect(false, 18f);
+                EditorGUI.DrawRect(rect, row.IsVfx ? new Color(1f, 0.85f, 0.2f, 0.25f) : new Color(1f, 1f, 1f, 0.06f));
+                GUI.Label(new Rect(rect.x + 6f, rect.y, 46f, rect.height), row.Order.ToString(), EditorStyles.boldLabel);
+                GUI.Label(new Rect(rect.x + 54f, rect.y, rect.width - 56f, rect.height), row.Label);
+            }
+
+            EditorGUILayout.LabelField(
+                "Higher numbers draw in front. Pick a VFX number between two layers. The same number as a layer can flicker.",
+                EditorStyles.miniLabel);
         }
 
         // ---- timeline -----------------------------------------------------------------------

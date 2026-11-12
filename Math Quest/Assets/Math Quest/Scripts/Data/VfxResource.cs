@@ -96,6 +96,12 @@ namespace MathQuest.Data
         [Tooltip("Seconds the flight takes. Set the VFX's Impact Delay to match so the hit lands on arrival.")]
         [Min(0.01f)] public float travelDuration = 0.4f;
 
+        [Tooltip("On: the effect turns to point the way it is flying, like a rocket. Off: it keeps its rotation.")]
+        public bool faceTravelDirection;
+
+        [Tooltip("On: when the effect arrives it stops. Trails (children with Trail in the name) are left behind to fade out, and the rest is removed.")]
+        public bool finishOnArrival;
+
         [Tooltip("Seconds after which the effect is removed.")]
         [Min(0.1f)] public float lifetime = 2f;
 

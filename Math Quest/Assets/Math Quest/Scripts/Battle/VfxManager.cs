@@ -263,7 +263,8 @@ namespace MathQuest.Battle
             {
                 Transform destination = FindAnchor(step.travelTo, step.travelAnchor, run);
                 if (destination != null)
-                    instance.AddComponent<VfxMover>().Begin(() => WorldPosition(destination), step.travelDuration);
+                    instance.AddComponent<VfxMover>().Begin(
+                        () => WorldPosition(destination), step.travelDuration, step.faceTravelDirection, step.finishOnArrival);
             }
 
             Destroy(instance, step.lifetime);

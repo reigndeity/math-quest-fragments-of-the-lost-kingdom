@@ -453,6 +453,9 @@ namespace MathQuest.Battle
             }
         }
 
+        // Above the answer panel (Sort Order 200).
+        private const int HintSortingOrder = 300;
+
         // The hint is drawn with TEXDraw, like the question, so fractions and exponents look right.
         private TEXDraw hintLabel;
 
@@ -468,6 +471,14 @@ namespace MathQuest.Battle
                 hintLabel = CreateHintLabel();
                 if (hintLabel == null)
                     return;
+
+                // The answer panel has its own Canvas above the characters, so the hint needs one that is higher still.
+                Canvas hintCanvas = hintLabel.gameObject.GetComponent<Canvas>();
+                if (hintCanvas == null)
+                    hintCanvas = hintLabel.gameObject.AddComponent<Canvas>();
+
+                hintCanvas.overrideSorting = true;
+                hintCanvas.sortingOrder = HintSortingOrder;
             }
 
             hintLabel.gameObject.SetActive(visible);

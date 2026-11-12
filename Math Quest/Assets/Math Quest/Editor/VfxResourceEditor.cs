@@ -174,6 +174,15 @@ namespace MathQuest.Editor
 
                 EditorGUILayout.EndHorizontal();
 
+                if (travel.boolValue)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Space(74f);
+                    EditorGUILayout.PropertyField(step.FindPropertyRelative("faceTravelDirection"), new GUIContent("Face direction"));
+                    EditorGUILayout.PropertyField(step.FindPropertyRelative("finishOnArrival"), new GUIContent("Finish on arrival"));
+                    EditorGUILayout.EndHorizontal();
+                }
+
                 DrawMore(step);
             }
 

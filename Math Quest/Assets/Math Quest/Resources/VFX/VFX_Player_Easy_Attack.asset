@@ -19,22 +19,24 @@ MonoBehaviour:
   - kind: 0
     trigger: 0
     delay: 0
-    prefab: {fileID: 7818479349147026228, guid: 23cd4e3ad80619b4b912b5445d8c9048, type: 3}
+    prefab: {fileID: 129780, guid: 15f4c8fe95882b8458fde34e3f0cfc55, type: 3}
     position: 1
     anchor: 1
     offset: {x: 0, y: 0, z: 0}
     rotationMode: 1
     rotation: {x: -45, y: 75, z: -90}
-    scaleMode: 0
+    scaleMode: 2
     scale: 0
-    customScale: {x: 0, y: 0, z: 0}
+    customScale: {x: 0.4717822, y: 0.4717822, z: 0.4717822}
     parentToAnchor: 0
     travel: 0
     travelTo: 0
     travelAnchor: 0
     travelDuration: 0.3
+    faceTravelDirection: 0
+    finishOnArrival: 0
     lifetime: 1
-    sortingOrder: 99
+    sortingOrder: 100
     shakeDuration: 0.3
     shakeStrength: 20
     shakeFrequency: 30
@@ -79,8 +81,10 @@ MonoBehaviour:
     travelTo: 0
     travelAnchor: 0
     travelDuration: 0
+    faceTravelDirection: 0
+    finishOnArrival: 0
     lifetime: 1
-    sortingOrder: 99
+    sortingOrder: 100
     shakeDuration: 0.3
     shakeStrength: 20
     shakeFrequency: 30
@@ -125,6 +129,8 @@ MonoBehaviour:
     travelTo: 0
     travelAnchor: 0
     travelDuration: 0
+    faceTravelDirection: 0
+    finishOnArrival: 0
     lifetime: 1
     sortingOrder: 99
     shakeDuration: 0.3
