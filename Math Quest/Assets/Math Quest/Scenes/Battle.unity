@@ -307,7 +307,7 @@ MonoBehaviour:
   answerPrefix: 'My answer is: '
   showAnswerHint: 1
   answerHintPrefab: {fileID: 7700000000000000004, guid: b3284107b21d59888613ec6afde7d32d, type: 3}
-  debugEnemySkill: {fileID: 11400000, guid: 12bbb16ccb8f5767b84890a223ea9ee6, type: 2}
+  debugEnemySkill: {fileID: 0}
   debugPlayerSkill: {fileID: 0}
   multipleChoicePrefab: {fileID: 7200000000000000001, guid: c0e7852ee08d143448e6ae7bde0c5163, type: 3}
   keypadPrefab: {fileID: 5100000000000000005, guid: f1b50b3bb0514d7eaa76f0f64a28ba9b, type: 3}
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348119773}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018418569}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
