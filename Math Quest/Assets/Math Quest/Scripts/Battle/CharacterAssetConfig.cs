@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using MathQuest.Data;
 using TMPro;
 using UnityEngine;
@@ -27,6 +28,9 @@ namespace MathQuest.Battle
 
         [Tooltip("The HeartHolder. Hearts are added or removed here to match the character's max hearts.")]
         public RectTransform heartHolder;
+
+        [Tooltip("The CanvasGroup on the CharacterStatsHolder (name and hearts). Faded in when the battle starts and out when it ends.")]
+        public CanvasGroup statsGroup;
     }
 
     /// <summary>
@@ -75,6 +79,63 @@ namespace MathQuest.Battle
                 Apply(level.enemy);
             else
                 Debug.LogWarning("The level has no Enemy character assigned.", this);
+        }
+
+        private static readonly int DissolveId = Shader.PropertyToID("_Dissolve");
+
+        /// <summary>Shows or hides a side's name and hearts at once (0 hidden, 1 shown).</summary>
+        public void SetStatsAlpha(CharacterRole role, float alpha)
+        {
+            CanvasGroup group = SlotFor(role).statsGroup;
+            if (group != null)
+                group.alpha = alpha;
+        }
+
+        /// <summary>Fades a side's name and hearts to the given alpha over the given seconds.</summary>
+        public IEnumerator FadeStats(CharacterRole role, float to, float seconds)
+        {
+            CanvasGroup group = SlotFor(role).statsGroup;
+            if (group == null)
+                yield break;
+
+            float from = group.alpha;
+            float elapsed = 0f;
+            while (elapsed < seconds)
+            {
+                elapsed += Time.deltaTime;
+                group.alpha = Mathf.Lerp(from, to, Mathf.Clamp01(elapsed / Mathf.Max(0.01f, seconds)));
+                yield return null;
+            }
+
+            group.alpha = to;
+        }
+
+        /// <summary>
+        /// Dissolves the character on this side with its Defeat Dissolve material, from whole to gone over
+        /// the given seconds. Does nothing if the character has no Defeat Dissolve. Each call gets its own
+        /// copy of the material, so the shared material asset is never changed.
+        /// </summary>
+        public IEnumerator Dissolve(CharacterRole role, float seconds)
+        {
+            CharacterSlot slot = SlotFor(role);
+            Material source = slot.character != null ? slot.character.defeatDissolve : null;
+            if (source == null || slot.spawned == null)
+                yield break;
+
+            var material = new Material(source);
+            material.SetFloat(DissolveId, 0f);
+            foreach (Image image in slot.spawned.GetComponentsInChildren<Image>())
+                image.material = material;
+
+            float elapsed = 0f;
+            while (elapsed < seconds)
+            {
+                elapsed += Time.deltaTime;
+                material.SetFloat(DissolveId, Mathf.Clamp01(elapsed / Mathf.Max(0.01f, seconds)));
+                yield return null;
+            }
+
+            material.SetFloat(DissolveId, 1f);
         }
 
         /// <summary>Hearts left for this side.</summary>

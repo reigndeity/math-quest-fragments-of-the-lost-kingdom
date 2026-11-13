@@ -35,6 +35,12 @@ namespace MathQuest.Data
         [Tooltip("Plays before the battle. Each line says who speaks, so either side can go first.")]
         public List<DialogueLine> startDialogue = new();
 
+        [Tooltip("Plays when the player defeats the enemy. It replaces the enemy's praise on the winning hit.")]
+        public List<DialogueLine> victoryDialogue = new();
+
+        [Tooltip("Plays when the enemy defeats the player. It replaces the taunt and solution on the losing hit.")]
+        public List<DialogueLine> defeatDialogue = new();
+
         [Tooltip("Question pools, used in order. Each pool decides which of its questions are asked; tick Override Count to change how many for this level only. Mix fixed and weighted pools, for example 3 easy then 2 moderate.")]
         public List<LevelQuestionPool> questionPools = new();
 

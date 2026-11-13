@@ -139,6 +139,20 @@ namespace MathQuest.Battle
         [Tooltip("If an attack animation never fires its PlaySkill animation event, the effect is played anyway after this many seconds.")]
         [SerializeField, Min(0.1f)] private float attackEventTimeout = 2f;
 
+        [Header("Names and hearts")]
+        [Tooltip("How long both CharacterStatsHolders take to fade in when the battle starts, before the first dialogue.")]
+        [SerializeField, Min(0f)] private float statsFadeInDuration = 0.4f;
+        [Tooltip("How long the CharacterStatsHolder takes to fade out on the last heart, before the victory or defeat dialogue.")]
+        [SerializeField, Min(0f)] private float statsFadeOutDuration = 0.3f;
+        [Tooltip("On: only the defeated side's name and hearts fade out. Off: both fade out.")]
+        [SerializeField] private bool fadeOnlyDefeatedStats;
+
+        [Header("Ending")]
+        [Tooltip("How long the defeated enemy takes to dissolve, using its Defeat Dissolve material.")]
+        [SerializeField, Min(0.05f)] private float defeatDissolveDuration = 1.2f;
+        [Tooltip("On: the enemy says its Victory Dialogue lines first, then dissolves. Off: it dissolves first, then the dialogue plays.")]
+        [SerializeField] private bool dissolveAfterVictoryDialogue = true;
+
         [Header("Player's answer line")]
         [Tooltip("What the player says before the answer. The answer follows it, for example: My answer is: -15")]
         [SerializeField] private string answerPrefix = "My answer is: ";
@@ -188,6 +202,14 @@ namespace MathQuest.Battle
         private void Start()
         {
             HidePanelContents();
+
+            // Names and hearts start hidden; they fade in once everything is ready.
+            if (characters != null)
+            {
+                characters.SetStatsAlpha(CharacterRole.Player, 0f);
+                characters.SetStatsAlpha(CharacterRole.Enemy, 0f);
+            }
+
             StartCoroutine(Begin());
         }
 
@@ -197,6 +219,14 @@ namespace MathQuest.Battle
                 characters.Apply(level);
 
             yield return new WaitForSeconds(startDelay);
+
+            // Both sides' names and hearts appear together, then the battle's dialogue starts.
+            if (characters != null)
+            {
+                StartCoroutine(characters.FadeStats(CharacterRole.Player, 1f, statsFadeInDuration));
+                yield return characters.FadeStats(CharacterRole.Enemy, 1f, statsFadeInDuration);
+            }
+
             questions = level.BuildQuestionList();
             questionIndex = 0;
             dialogue.PlayLines(level.startDialogue, AskQuestion);
@@ -661,6 +691,13 @@ namespace MathQuest.Battle
                 yield return new WaitForSeconds(run != null && run.ReplyDelay >= 0f ? run.ReplyDelay : hitDuration);
                 run?.End();
                 events?.ResetSortingOrder(); // in case the animation moved the character in front of others
+
+                // The last heart: no praise or taunt, the level's ending plays instead.
+                if (characters.IsDefeated(loser))
+                {
+                    StartCoroutine(PlayEnding(playerWon: loser == CharacterRole.Enemy));
+                    yield break;
+                }
             }
 
             if (reply.Count > 0)
@@ -686,7 +723,37 @@ namespace MathQuest.Battle
             StartCoroutine(NextQuestion());
         }
 
-        // Placeholder: the victory / defeat dialogue comes later. For now the battle just stops.
+        // Victory: the enemy's last words, then it dissolves (or the other way round).
+        // Defeat: the level's defeat dialogue. Then the battle is over.
+        private IEnumerator PlayEnding(bool playerWon)
+        {
+            List<DialogueLine> lines = playerWon ? level.victoryDialogue : level.defeatDialogue;
+
+            // The names and hearts go first: only the loser's, or both.
+            CharacterRole loser = playerWon ? CharacterRole.Enemy : CharacterRole.Player;
+            CharacterRole winner = playerWon ? CharacterRole.Player : CharacterRole.Enemy;
+            if (!fadeOnlyDefeatedStats)
+                StartCoroutine(characters.FadeStats(winner, 0f, statsFadeOutDuration));
+            yield return characters.FadeStats(loser, 0f, statsFadeOutDuration);
+
+            if (playerWon && !dissolveAfterVictoryDialogue)
+                yield return characters.Dissolve(CharacterRole.Enemy, defeatDissolveDuration);
+
+            bool finished = false;
+            dialogue.PlayLines(lines, () => finished = true);
+            while (!finished)
+                yield return null;
+
+            if (playerWon && dissolveAfterVictoryDialogue)
+            {
+                dialogue.ClearBubble();
+                yield return characters.Dissolve(CharacterRole.Enemy, defeatDissolveDuration);
+            }
+
+            EndBattle(playerWon);
+        }
+
+        // Placeholder: what happens after the ending (results screen, back to the map) comes later.
         private void EndBattle(bool playerWon)
         {
             Debug.Log(playerWon ? "Battle over: the enemy has no hearts left." : "Battle over: the player has no hearts left.");

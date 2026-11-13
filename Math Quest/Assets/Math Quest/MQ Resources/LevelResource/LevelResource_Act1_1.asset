@@ -23,6 +23,16 @@ MonoBehaviour:
     text: Hmmm
   - speaker: 1
     text: ???
+  victoryDialogue:
+  - speaker: 1
+    text: No... how did you solve that?!
+  - speaker: 0
+    text: Math wins again!
+  defeatDialogue:
+  - speaker: 1
+    text: Hehehe... come back when you have studied!
+  - speaker: 0
+    text: I'll be back...
   questionPools:
   - pool: {fileID: 11400000, guid: 7edead29895153cca69bc79aaabdf07c, type: 2}
     overrideCount: 1
