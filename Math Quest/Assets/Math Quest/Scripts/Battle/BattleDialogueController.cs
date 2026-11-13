@@ -7,6 +7,31 @@ using UnityEngine.UI;
 
 namespace MathQuest.Battle
 {
+    /// <summary>The typing sound: a short beep as letters appear, a different voice for each side.</summary>
+    [Serializable]
+    public sealed class DialogueSoundSettings
+    {
+        [Tooltip("The beeps. One is picked at random each time, so the voice does not sound like a machine gun.")]
+        public AudioClip[] beeps;
+
+        [Range(0f, 1f)] public float volume = 0.5f;
+
+        [Tooltip("A beep plays on every Nth letter. 1 is every letter, 2 is every other letter. Higher is calmer.")]
+        [Min(1)] public int everyNthLetter = 2;
+
+        [Tooltip("Each beep's pitch is random between these two, so repeated beeps vary a little.")]
+        [Min(0.1f)] public float pitchMin = 0.95f;
+        [Min(0.1f)] public float pitchMax = 1.05f;
+
+        [Tooltip("Multiplies the pitch for the player's bubbles. Above 1 is higher.")]
+        [Min(0.1f)] public float playerPitch = 1.2f;
+        [Tooltip("Multiplies the pitch for the enemy's bubbles. Below 1 is deeper.")]
+        [Min(0.1f)] public float enemyPitch = 0.85f;
+
+        [Tooltip("On: spaces beep too. Off: only letters do.")]
+        public bool beepOnSpaces;
+    }
+
     /// <summary>
     /// Runs dialogue in the battle. One chat box exists at a time: it is spawned under the
     /// holder of whoever is speaking and destroyed when the next line starts. Tapping the
@@ -27,6 +52,9 @@ namespace MathQuest.Battle
         [FormerlySerializedAs("chatBoxFit")]
         [SerializeField] private ChatBoxSettings chatBox = new();
 
+        [Header("Typing sound (tune live in Play mode)")]
+        [SerializeField] private DialogueSoundSettings sound = new();
+
         [Header("Input")]
         [Tooltip("Button covering the screen. Tapping it advances the dialogue. It is never deactivated, only made non-interactable while idle. Keep it above AnswerPanel in the hierarchy so the answer options are drawn, and clickable, on top of it.")]
         [SerializeField] private Button tapArea;
@@ -35,6 +63,9 @@ namespace MathQuest.Battle
 
         private Mode mode;
         private DialogueChatBox current;
+        private AudioSource beepSource;
+        private int letterCount;
+        private float voicePitch = 1f;
         private IReadOnlyList<DialogueLine> lines;
         private int index;
         private Action onFinished;
@@ -130,8 +161,41 @@ namespace MathQuest.Battle
             // The prefab is laid out for the enemy; the player's faces the other way.
             current.SetMirrored(isPlayer);
             fitHash = chatBox.Hash;
+
+            // The voice: set up before the first letter appears.
+            letterCount = 0;
+            voicePitch = isPlayer ? sound.playerPitch : sound.enemyPitch;
+            current.LetterTyped += OnLetterTyped;
+
             current.Show(text, chatBox);
             return current;
+        }
+
+        private void OnLetterTyped(char letter)
+        {
+            if (sound.beeps == null || sound.beeps.Length == 0)
+                return;
+
+            if (!sound.beepOnSpaces && char.IsWhiteSpace(letter))
+                return;
+
+            letterCount++;
+            if (letterCount % Mathf.Max(1, sound.everyNthLetter) != 0)
+                return;
+
+            AudioClip clip = sound.beeps[UnityEngine.Random.Range(0, sound.beeps.Length)];
+            if (clip == null)
+                return;
+
+            if (beepSource == null)
+            {
+                beepSource = gameObject.AddComponent<AudioSource>();
+                beepSource.playOnAwake = false;
+                beepSource.spatialBlend = 0f; // plain 2D sound
+            }
+
+            beepSource.pitch = UnityEngine.Random.Range(sound.pitchMin, sound.pitchMax) * voicePitch;
+            beepSource.PlayOneShot(clip, sound.volume);
         }
 
         private void OnHeldTyped()

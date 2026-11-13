@@ -2563,7 +2563,7 @@ MonoBehaviour:
   playerDialogueHolder: {fileID: 405541060}
   enemyDialogueHolder: {fileID: 1600690335}
   chatBox:
-    secondsPerLetter: 0.05
+    secondsPerLetter: 0.04
     pauseAfterPunctuation: 0.3
     typeEquations: 1
     breakEquationsLongerThan: 28
@@ -2578,6 +2578,19 @@ MonoBehaviour:
     minBubbleWidth: 160
     maxBubbleWidth: 600
     growWidthFrom: 2
+  sound:
+    beeps:
+    - {fileID: 8300000, guid: 093b768ea757e5c4aa49dafac80d778f, type: 3}
+    - {fileID: 8300000, guid: 70d811189f3dbed469cb691b5baddbfc, type: 3}
+    - {fileID: 8300000, guid: 30ddcdd00c60b0044b4dd0001a850463, type: 3}
+    - {fileID: 8300000, guid: 06e450bcfc7dc114c88b953f6b3043c6, type: 3}
+    volume: 1
+    everyNthLetter: 2
+    pitchMin: 0.95
+    pitchMax: 1.05
+    playerPitch: 1.2
+    enemyPitch: 0.85
+    beepOnSpaces: 0
   tapArea: {fileID: 1432870164}
 --- !u!1 &1850139096
 GameObject:

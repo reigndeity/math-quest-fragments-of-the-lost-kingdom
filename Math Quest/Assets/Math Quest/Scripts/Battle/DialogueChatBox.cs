@@ -155,9 +155,16 @@ namespace MathQuest.Battle
         /// <summary>Fires once when the current line finishes typing, or is skipped.</summary>
         public event Action Typed;
 
+        /// <summary>Fires for every letter (or equation piece) that appears while typing. Used for the typing sound.</summary>
+        public event Action<char> LetterTyped;
+
+        // Set while a skip is jumping to the end, so the letters that appear all at once make no sound.
+        private bool muteLetters;
+
         private void Awake()
         {
             typewriter.onTextShowed.AddListener(OnPlainTyped);
+            typewriter.onCharacterVisible.AddListener(OnPlainLetter);
             if (mathLabel != null)
             {
                 mathGroup = mathLabel.GetComponent<CanvasGroup>();
@@ -289,6 +296,12 @@ namespace MathQuest.Battle
                 SetMathReveal(mathCut);
         }
 
+        private void OnPlainLetter(char letter)
+        {
+            if (!muteLetters)
+                LetterTyped?.Invoke(letter);
+        }
+
         /// <summary>Finishes the current line immediately.</summary>
         public void Skip()
         {
@@ -305,7 +318,9 @@ namespace MathQuest.Battle
                 return;
             }
 
+            muteLetters = true;
             typewriter.SkipTypewriter(); // fires onTextShowed, which finishes the line
+            muteLetters = false;
         }
 
         // Height the whole line needs at this font size, at the given text width.
@@ -963,6 +978,7 @@ namespace MathQuest.Battle
                         i++; // spaces, commands and the $ signs ride along with the glyph before them
 
                     SetMathReveal(i);
+                    LetterTyped?.Invoke('a');
                     yield return new WaitForSeconds(fit != null ? fit.secondsPerLetter : mathCharDelay);
                 }
 
@@ -980,10 +996,12 @@ namespace MathQuest.Battle
                     int close = text.IndexOf('$', i + 1);
                     i = close < 0 ? text.Length : close + 1;
                     SetMathReveal(i);
+                    LetterTyped?.Invoke('a');
                     yield return blockWait;
                     continue;
                 }
 
+                char shown = text[i];
                 i++;
 
                 // Spaces appear together with the letter before them.
@@ -991,6 +1009,7 @@ namespace MathQuest.Battle
                     i++;
 
                 SetMathReveal(i);
+                LetterTyped?.Invoke(shown);
                 yield return new WaitForSeconds(fit != null ? fit.secondsPerLetter : mathCharDelay);
             }
 
