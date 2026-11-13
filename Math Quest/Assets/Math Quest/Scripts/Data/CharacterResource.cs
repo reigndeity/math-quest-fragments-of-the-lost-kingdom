@@ -34,19 +34,20 @@ namespace MathQuest.Data
         [Tooltip("The character prefab (for example Player_Boy). It is spawned into the PlayerModel or EnemyModel holder when the battle starts. If empty, whatever is already in the holder is kept.")]
         public GameObject characterPrefab;
 
-        [Tooltip("The skill used for each question difficulty: the player uses it when answering right, the enemy when the player answers wrong. A difficulty with no entry plays no effect.")]
+        [Tooltip("The skills for each question difficulty: the player uses one when answering right, the enemy when the player answers wrong. Give a difficulty several entries and one is picked at random each time. A difficulty with no entry plays no effect.")]
         public List<DifficultySkill> skills = new();
 
-        /// <summary>The skill for a difficulty, or null if none is set.</summary>
+        /// <summary>A skill for a difficulty (a random one if there are several), or null if none is set.</summary>
         public SkillResource GetSkill(QuestionDifficulty difficulty)
         {
+            var matches = new List<SkillResource>();
             foreach (DifficultySkill entry in skills)
             {
-                if (entry != null && entry.difficulty == difficulty)
-                    return entry.skill;
+                if (entry != null && entry.difficulty == difficulty && entry.skill != null)
+                    matches.Add(entry.skill);
             }
 
-            return null;
+            return matches.Count == 0 ? null : matches[UnityEngine.Random.Range(0, matches.Count)];
         }
     }
 }

@@ -31,6 +31,11 @@ namespace MathQuest.Data
         [Tooltip("The VFX this skill plays: pick one from the list. A VFX can spawn effects on the caster, on the target, let one fly across, and play something on impact. Empty: the simple effect below is used instead.")]
         [VfxId] public string vfxId;
 
+        [Tooltip("The Animator trigger that starts this skill's attack animation, for example Attack_JumpAndLand. "
+                 + "Empty: the trigger for the question's difficulty is used (easyAtk, moderateAtk or difficultAtk). "
+                 + "Naming it here lets a character own several different attacks.")]
+        public string attackTrigger;
+
         [Tooltip("The effect that is spawned (for example a Pixel Arsenal prefab). Empty means no effect: the hit still lands.")]
         public GameObject vfxPrefab;
 

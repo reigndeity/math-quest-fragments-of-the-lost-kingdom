@@ -19,6 +19,8 @@ MonoBehaviour:
   skills:
   - difficulty: 0
     skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}
+  - difficulty: 0
+    skill: {fileID: 11400000, guid: 12bbb16ccb8f5767b84890a223ea9ee6, type: 2}
   - difficulty: 1
     skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}
   - difficulty: 2

@@ -148,6 +148,10 @@ namespace MathQuest.Battle
         [SerializeField] private bool showAnswerHint;
         [Tooltip("The AnswerHint prefab. Its color, size, position and font are set on the prefab. Empty: a plain one is created in code.")]
         [SerializeField] private TEXDraw answerHintPrefab;
+        [Tooltip("Dev only. If set, the enemy always uses this skill when the player answers wrong, instead of picking one at random. Leave empty for normal play.")]
+        [SerializeField] private SkillResource debugEnemySkill;
+        [Tooltip("Dev only. If set, the player always uses this skill when answering right, whatever the question's difficulty. Leave empty for normal play.")]
+        [SerializeField] private SkillResource debugPlayerSkill;
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
@@ -616,8 +620,21 @@ namespace MathQuest.Battle
             {
                 // The attacker's attack animation starts (if it has one for this difficulty). Its
                 // PlaySkill animation event says when the effect appears.
+                // One skill is picked for this attack (a character can have several per difficulty); it names
+                // its own animation trigger, or the difficulty's trigger is used.
+                SkillResource skill = characters.GetSkill(attacker, question.difficulty);
+
+                // Dev: a skill picked in the Debug section replaces the random pick.
+                SkillResource forced = attacker == CharacterRole.Enemy ? debugEnemySkill : debugPlayerSkill;
+                if (forced != null)
+                    skill = forced;
+
+                string trigger = skill != null && !string.IsNullOrEmpty(skill.attackTrigger)
+                    ? skill.attackTrigger
+                    : CharacterAssetConfig.AttackTrigger(question.difficulty);
+
                 CharacterAnimationEvents events = characters.GetAnimationEvents(attacker);
-                if (events != null && characters.TryPlayAttack(attacker, question.difficulty))
+                if (events != null && characters.TryPlayAttackTrigger(attacker, trigger))
                 {
                     bool requested = false;
                     Action onSkill = () => requested = true;
@@ -632,13 +649,13 @@ namespace MathQuest.Battle
 
                     events.SkillRequested -= onSkill;
                     if (!requested)
-                        Debug.LogWarning($"The {CharacterAssetConfig.AttackTrigger(question.difficulty)} animation never fired its PlaySkill animation event.", this);
+                        Debug.LogWarning($"The {trigger} animation never fired its PlaySkill animation event.", this);
                 }
 
                 // The attacker's skill for this question's difficulty: Start steps play, the hit
                 // lands after the VFX's Impact Delay (Impact steps play with it), then End steps.
                 VfxRun run = vfx != null
-                    ? vfx.Begin(characters.GetSkill(attacker, question.difficulty), attacker, loser)
+                    ? vfx.Begin(skill, attacker, loser)
                     : null;
 
                 if (run != null && run.ImpactDelay > 0f)
@@ -649,6 +666,7 @@ namespace MathQuest.Battle
                 // A VFX decides how long the hit lingers; without one the battle's Hit Duration is used.
                 yield return new WaitForSeconds(run != null && run.ReplyDelay >= 0f ? run.ReplyDelay : hitDuration);
                 run?.End();
+                events?.ResetSortingOrder(); // in case the animation moved the character in front of others
             }
 
             if (reply.Count > 0)

@@ -175,6 +175,12 @@ namespace MathQuest.Battle
             return TrySetTrigger(SlotFor(role), AttackTrigger(difficulty));
         }
 
+        /// <summary>Starts an attack animation by its Animator trigger name. False if no Animator has that trigger.</summary>
+        public bool TryPlayAttackTrigger(CharacterRole role, string trigger)
+        {
+            return !string.IsNullOrEmpty(trigger) && TrySetTrigger(SlotFor(role), trigger);
+        }
+
         /// <summary>
         /// The receiver of this side's animation events (on PlayerModel or EnemyModel, next to the
         /// Animator). Added automatically if the holder has an Animator but no receiver yet.

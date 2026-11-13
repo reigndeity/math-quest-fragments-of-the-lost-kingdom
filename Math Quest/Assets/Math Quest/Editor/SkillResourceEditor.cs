@@ -20,6 +20,7 @@ namespace MathQuest.Editor
 
             SerializedProperty vfxId = serializedObject.FindProperty("vfxId");
             EditorGUILayout.PropertyField(vfxId);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("attackTrigger"));
 
             if (!string.IsNullOrEmpty(vfxId.stringValue))
             {
