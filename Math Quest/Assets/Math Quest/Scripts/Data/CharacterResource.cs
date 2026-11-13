@@ -34,6 +34,9 @@ namespace MathQuest.Data
         [Tooltip("The character prefab (for example Player_Boy). It is spawned into the PlayerModel or EnemyModel holder when the battle starts. If empty, whatever is already in the holder is kept.")]
         public GameObject characterPrefab;
 
+        [Tooltip("The dissolve used when this character is defeated: one of the PixelDissolve materials (Fire, Nature, Shadow, Frost...). It decides the colour of the burning edge. Empty: no dissolve.")]
+        public Material defeatDissolve;
+
         [Tooltip("The skills for each question difficulty: the player uses one when answering right, the enemy when the player answers wrong. Give a difficulty several entries and one is picked at random each time. A difficulty with no entry plays no effect.")]
         public List<DifficultySkill> skills = new();
 
