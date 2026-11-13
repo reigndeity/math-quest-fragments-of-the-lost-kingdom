@@ -5,165 +5,81 @@ using UnityEngine.UI;
 namespace MathQuest.Battle
 {
     /// <summary>
-    /// Blurred backdrop behind the answer panel. The whole battle is UI on an overlay
-    /// canvas, so a shader cannot sample what is behind it. Instead this takes a
-    /// snapshot of the screen just before the panel appears, shrinks it, shows it on a
-    /// full-screen RawImage with the Blur shader, and fades the effect between 0 and 1.
+    /// The live blur behind the answer panel, made with Unified Universal Blur (a package).
     ///
-    /// The overlay colour (for example black at 50% alpha) is set here, not on the RawImage.
+    /// How it fits together:
+    /// - The Universal Blur Feature on Renderer2D blurs the whole camera image every frame (the battle
+    ///   Canvas: background, ambience, characters), so nothing behind the panel pauses.
+    /// - AnswerPanel is on its own Screen Space - Overlay Canvas. The camera never draws it, so the blur
+    ///   cannot see (and re-blur) itself.
+    /// - BlurBackDrop is a full-screen Image with the UniversalBlurUI material. It shows that blur; its
+    ///   Color tints it (grey darkens it). This component fades it in and out.
     ///
-    /// Use: yield return Capture(); then show the panel, then FadeIn().
-    /// Put this on an object that is always active (not on the panel itself).
+    /// How blurry it is lives on the Universal Blur Feature (Iterations, Downsample, Scale, Offset).
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class BlurBackdropController : MonoBehaviour
     {
-        [Tooltip("Full-screen RawImage, the first child of AnswerPanel so it sits behind everything else. Its Color is an overlay on the blur, for example black at 50% alpha to darken it.")]
-        [SerializeField] private RawImage image;
-        [Tooltip("The MathQuest/UI/Blur shader (the Blur file in Shaders).")]
-        [SerializeField] private Shader shader;
-        [Tooltip("How much the snapshot is shrunk before blurring. Higher is smoother and cheaper.")]
-        [SerializeField, Range(1, 8)] private int downsample = 4;
-        [Tooltip("Blur size at full strength, in pixels of the shrunken snapshot.")]
-        [SerializeField, Min(0f)] private float blurRadius = 10f;
+        [Tooltip("The full-screen Image with the UniversalBlurUI material (BlurBackDrop), the first child of AnswerPanel so it sits behind the question and answers. Its Color tints the blur.")]
+        [SerializeField] private Graphic image;
         [Tooltip("How long the blur takes to fade in.")]
         [SerializeField, Min(0.01f)] private float fadeInDuration = 0.5f;
-        [Tooltip("How long the blur takes to fade out when no duration is given, for example from the Test menu. During a battle, BattleController passes its own Blur Fade Out Duration instead.")]
+        [Tooltip("How long the blur takes to fade out when no duration is given. During a battle, BattleController passes its own Blur Fade Out Duration instead.")]
         [SerializeField, Min(0.01f)] private float fadeOutDuration = 0.8f;
-        [Tooltip("Colour laid over the blur once it has fully faded in. The alpha is how strongly it covers: black at 50% darkens the blur by half. Overrides the RawImage's own Color.")]
-        [SerializeField] private Color overlayColor = new Color(0f, 0f, 0f, 0.5f);
 
         public float FadeInDuration => fadeInDuration;
         public float FadeOutDuration => fadeOutDuration;
 
-        private static readonly int AmountId = Shader.PropertyToID("_Amount");
-        private static readonly int RadiusId = Shader.PropertyToID("_Radius");
-
-        private Material material;
-        private RenderTexture blurred;
-        private Texture2D snapshot;
-        private int builtDownsample;
+        private CanvasGroup group;
         private Coroutine fade;
-        private float amount;
 
         private void Awake()
         {
             EnsureInitialized();
         }
 
-        // Safe to call more than once. Also covers the case where a method runs before
-        // Awake did, for example from the component's context menu.
         private void EnsureInitialized()
         {
-            if (material != null)
+            if (group != null)
                 return;
 
-            if (image == null || shader == null)
+            if (image == null)
             {
-                Debug.LogError("BlurBackdropController needs both the Image and the Shader assigned.", this);
+                Debug.LogError("BlurBackdropController needs the Image (BlurBackDrop) assigned.", this);
                 return;
             }
 
-            material = new Material(shader);
-            image.material = material;
-            material.SetFloat(RadiusId, blurRadius);
-            image.color = overlayColor;
-            SetAmount(0f);
+            // Fading the group blends between the sharp live battle (0) and the full blur (1).
+            group = image.GetComponent<CanvasGroup>();
+            if (group == null)
+                group = image.gameObject.AddComponent<CanvasGroup>();
+
+            group.alpha = 0f;
+            group.interactable = false;
             image.enabled = false;
         }
 
-        // Lets Blur Radius and Downsample be tweaked live in the Inspector while the blur shows.
-        private void Update()
-        {
-            if (material == null)
-                return;
-
-            material.SetFloat(RadiusId, blurRadius);
-            image.color = overlayColor;
-
-            if (snapshot != null && downsample != builtDownsample)
-                RebuildBlurred();
-        }
-
-        private void OnDestroy()
-        {
-            if (material != null) Destroy(material);
-            if (snapshot != null) Destroy(snapshot);
-            ReleaseBlurred();
-        }
-
-        /// <summary>Takes the snapshot. Call this while the answer panel is still hidden.</summary>
+        /// <summary>
+        /// Gets the blur ready before it fades in. The blur is live, so nothing is captured any more:
+        /// this switches the backdrop on (still invisible) and waits a frame. Kept so the battle's call
+        /// order stays the same.
+        /// </summary>
         public IEnumerator Capture()
         {
             EnsureInitialized();
-            if (material == null) yield break;
+            if (group == null) yield break;
 
             StopFade();
-            image.enabled = false;
-            SetAmount(0f);
-
-            // Let a frame render without the backdrop, so a retake never captures the old blur,
-            // then wait until that frame is complete.
+            group.alpha = 0f;
+            image.enabled = true;
             yield return null;
-            yield return new WaitForEndOfFrame();
-
-            if (snapshot != null) Destroy(snapshot);
-            snapshot = EnsureSrgb(ScreenCapture.CaptureScreenshotAsTexture());
-            snapshot.filterMode = FilterMode.Bilinear;
-
-            RebuildBlurred();
-        }
-
-        // Shrinking first makes the blur smooth with few samples.
-        private void RebuildBlurred()
-        {
-            ReleaseBlurred();
-            blurred = new RenderTexture(
-                Mathf.Max(1, snapshot.width / downsample),
-                Mathf.Max(1, snapshot.height / downsample),
-                0,
-                RenderTextureFormat.ARGB32,
-                RenderTextureReadWrite.sRGB)
-            {
-                filterMode = FilterMode.Bilinear,
-                wrapMode = TextureWrapMode.Clamp
-            };
-            Graphics.Blit(snapshot, blurred);
-            builtDownsample = downsample;
-
-            image.texture = blurred;
-        }
-
-        // A screenshot already holds display-ready colours. In a Linear colour space Unity can
-        // treat the captured texture as raw data, which brightens everything a second time
-        // (a washed-out, whitish blur). Re-uploading it as an sRGB texture avoids that.
-        private static Texture2D EnsureSrgb(Texture2D source)
-        {
-            if (QualitySettings.activeColorSpace != ColorSpace.Linear || source.isDataSRGB)
-                return source;
-
-            var copy = new Texture2D(source.width, source.height, source.format, false, false);
-            copy.LoadRawTextureData(source.GetRawTextureData<byte>());
-            copy.Apply(false);
-            Destroy(source);
-            return copy;
-        }
-
-        private void ReleaseBlurred()
-        {
-            if (blurred == null)
-                return;
-
-            blurred.Release();
-            Destroy(blurred);
-            blurred = null;
         }
 
         /// <summary>Fades the blur in. Without a duration, Fade In Duration is used.</summary>
         public void FadeIn(float duration = -1f)
         {
             EnsureInitialized();
-            if (material == null) return;
+            if (group == null) return;
 
             image.enabled = true;
             StartFade(1f, false, duration >= 0f ? duration : fadeInDuration);
@@ -173,15 +89,15 @@ namespace MathQuest.Battle
         public void FadeOut(float duration = -1f)
         {
             EnsureInitialized();
-            if (material == null) return;
+            if (group == null) return;
 
             StartFade(0f, true, duration >= 0f ? duration : fadeOutDuration);
         }
 
-        private void StartFade(float target, bool disableWhenDone, float duration)
+        private void StartFade(float target, bool hideWhenDone, float duration)
         {
             StopFade();
-            fade = StartCoroutine(FadeRoutine(target, disableWhenDone, Mathf.Max(0.01f, duration)));
+            fade = StartCoroutine(FadeRoutine(target, hideWhenDone, Mathf.Max(0.01f, duration)));
         }
 
         private void StopFade()
@@ -190,35 +106,29 @@ namespace MathQuest.Battle
             fade = null;
         }
 
-        private IEnumerator FadeRoutine(float target, bool disableWhenDone, float duration)
+        private IEnumerator FadeRoutine(float target, bool hideWhenDone, float duration)
         {
-            float from = amount;
+            float from = group.alpha;
             float elapsed = 0f;
 
             while (elapsed < duration)
             {
                 elapsed += Time.unscaledDeltaTime;
-                SetAmount(Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration)));
+                group.alpha = Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration));
                 yield return null;
             }
 
-            SetAmount(target);
-            if (disableWhenDone) image.enabled = false;
+            group.alpha = target;
+            if (hideWhenDone) image.enabled = false;
             fade = null;
         }
 
-        private void SetAmount(float value)
-        {
-            amount = value;
-            material.SetFloat(AmountId, value);
-        }
-
-        [ContextMenu("Test: capture and fade in")]
+        [ContextMenu("Test: fade in")]
         private void TestFadeIn()
         {
             if (!Application.isPlaying)
             {
-                Debug.LogWarning("Press Play first. The snapshot can only be taken while the game runs.", this);
+                Debug.LogWarning("Press Play first.", this);
                 return;
             }
 
