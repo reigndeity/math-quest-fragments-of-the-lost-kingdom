@@ -144,14 +144,8 @@ namespace MathQuest.Battle
         [SerializeField] private string answerPrefix = "My answer is: ";
 
         [Header("Debug")]
-        [Tooltip("Dev only. Shows the correct answer of the current question in the top-left corner of the Game view (and in the Console), so you do not have to remember them. Does nothing in a release build.")]
-        [SerializeField] private bool showAnswerHint;
-        [Tooltip("The AnswerHint prefab. Its color, size, position and font are set on the prefab. Empty: a plain one is created in code.")]
-        [SerializeField] private TEXDraw answerHintPrefab;
-        [Tooltip("Dev only. If set, the enemy always uses this skill when the player answers wrong, instead of picking one at random. Leave empty for normal play.")]
-        [SerializeField] private SkillResource debugEnemySkill;
-        [Tooltip("Dev only. If set, the player always uses this skill when answering right, whatever the question's difficulty. Leave empty for normal play.")]
-        [SerializeField] private SkillResource debugPlayerSkill;
+        [Tooltip("Optional. The DebugController object: while it is active, the answer hint and forced skills work. Deactivate it to turn all of that off.")]
+        [SerializeField] private BattleDebugController debug;
 
         [Header("Answer inputs")]
         [SerializeField] private MultipleChoicePanel multipleChoicePrefab;
@@ -313,8 +307,8 @@ namespace MathQuest.Battle
         {
             hintText = DescribeAnswer(question.answer);
             RefreshHintLabel();
-            if (showAnswerHint)
-                Debug.Log($"[Answer hint] {question.name}: {PlainMath(hintText)}", this); // the Console cannot draw math
+            if (debug != null && debug.ShowAnswerHint)
+                UnityEngine.Debug.Log($"[Answer hint] {question.name}: {PlainMath(hintText)}", this); // the Console cannot draw math
 
             switch (question.answer)
             {
@@ -465,7 +459,7 @@ namespace MathQuest.Battle
 
         private void RefreshHintLabel()
         {
-            bool visible = showAnswerHint && !string.IsNullOrEmpty(hintText);
+            bool visible = debug != null && debug.ShowAnswerHint && !string.IsNullOrEmpty(hintText);
 
             if (hintLabel == null)
             {
@@ -500,8 +494,8 @@ namespace MathQuest.Battle
             if (canvas == null)
                 return null;
 
-            if (answerHintPrefab != null)
-                return Instantiate(answerHintPrefab, canvas.rootCanvas.transform, false);
+            if (debug != null && debug.AnswerHintPrefab != null)
+                return Instantiate(debug.AnswerHintPrefab, canvas.rootCanvas.transform, false);
 
             var go = new GameObject("AnswerHint (debug)", typeof(RectTransform));
             var rect = (RectTransform)go.transform;
@@ -624,8 +618,8 @@ namespace MathQuest.Battle
                 // its own animation trigger, or the difficulty's trigger is used.
                 SkillResource skill = characters.GetSkill(attacker, question.difficulty);
 
-                // Dev: a skill picked in the Debug section replaces the random pick.
-                SkillResource forced = attacker == CharacterRole.Enemy ? debugEnemySkill : debugPlayerSkill;
+                // Dev: a skill picked on the DebugController replaces the random pick.
+                SkillResource forced = debug != null ? debug.ForcedSkill(attacker) : null;
                 if (forced != null)
                     skill = forced;
 

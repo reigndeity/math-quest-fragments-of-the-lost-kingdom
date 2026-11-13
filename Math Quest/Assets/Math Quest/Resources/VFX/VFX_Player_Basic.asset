@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae22bba911df461f8e8e1cfa071933d3, type: 3}
-  m_Name: VFX_Player_Difficult_Attack
+  m_Name: VFX_Player_Basic
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.VfxResource
-  id: Player_Difficult_Attack
-  impactDelay: 0.5
-  replyDelay: 1.5
+  id: Player_Basic
+  impactDelay: 0.3
+  replyDelay: 0.6
   steps:
   - kind: 0
     trigger: 0
     delay: 0
-    prefab: {fileID: 106364, guid: 1abc15be90b5da746a6855807c7d293e, type: 3}
-    position: 0
+    prefab: {fileID: 129780, guid: 15f4c8fe95882b8458fde34e3f0cfc55, type: 3}
+    position: 1
     anchor: 1
     offset: {x: 0, y: 0, z: 0}
-    rotationMode: 0
-    rotation: {x: 0, y: 0, z: 0}
-    scaleMode: 0
-    scale: 1
-    customScale: {x: 1, y: 1, z: 1}
+    rotationMode: 1
+    rotation: {x: -45, y: 75, z: -90}
+    scaleMode: 2
+    scale: 0
+    customScale: {x: 0.4717822, y: 0.4717822, z: 0.4717822}
     parentToAnchor: 0
     travel: 0
-    travelTo: 1
-    travelAnchor: 1
-    travelDuration: 0.5
+    travelTo: 0
+    travelAnchor: 0
+    travelDuration: 0.3
     faceTravelDirection: 0
     finishOnArrival: 0
-    lifetime: 1.5
-    sortingOrder: 99
+    lifetime: 1
+    sortingOrder: 100
     shakeDuration: 0.3
     shakeStrength: 20
     shakeFrequency: 30
@@ -46,68 +46,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -1
+        inSlope: 0
         outSlope: -1
-        tangentMode: 136
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
         outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  - kind: 0
-    trigger: 0
-    delay: 0
-    prefab: {fileID: 154648, guid: ac5df17466c26a242a75461c2ec4f647, type: 3}
-    position: 0
-    anchor: 1
-    offset: {x: 0, y: 0, z: 0}
-    rotationMode: 0
-    rotation: {x: 0, y: 0, z: 0}
-    scaleMode: 0
-    scale: 1
-    customScale: {x: 1, y: 1, z: 1}
-    parentToAnchor: 0
-    travel: 1
-    travelTo: 1
-    travelAnchor: 1
-    travelDuration: 0.5
-    faceTravelDirection: 1
-    finishOnArrival: 1
-    lifetime: 3
-    sortingOrder: 101
-    shakeDuration: 0.3
-    shakeStrength: 20
-    shakeFrequency: 30
-    shakeCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -1
-        outSlope: -1
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
         inSlope: -1
-        outSlope: -1
-        tangentMode: 136
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -115,24 +67,24 @@ MonoBehaviour:
   - kind: 0
     trigger: 1
     delay: 0
-    prefab: {fileID: 184980, guid: d22e7dfbf1ca24449914bfdd6999c6b8, type: 3}
+    prefab: {fileID: 101398, guid: 38b92f1bcacea924e94fa17a2fc1769f, type: 3}
     position: 1
     anchor: 1
     offset: {x: 0, y: 0, z: 0}
     rotationMode: 0
-    rotation: {x: 0, y: 0, z: 0}
-    scaleMode: 2
-    scale: 1
-    customScale: {x: 0.75, y: 0.75, z: 0.75}
+    rotation: {x: -45, y: 75, z: -90}
+    scaleMode: 0
+    scale: 0
+    customScale: {x: 0, y: 0, z: 0}
     parentToAnchor: 0
     travel: 0
-    travelTo: 1
-    travelAnchor: 1
-    travelDuration: 0.5
+    travelTo: 0
+    travelAnchor: 0
+    travelDuration: 0
     faceTravelDirection: 0
     finishOnArrival: 0
-    lifetime: 3
-    sortingOrder: 101
+    lifetime: 1
+    sortingOrder: 100
     shakeDuration: 0.3
     shakeStrength: 20
     shakeFrequency: 30
@@ -142,20 +94,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -1
+        inSlope: 0
         outSlope: -1
-        tangentMode: 136
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 0
         inSlope: -1
-        outSlope: -1
-        tangentMode: 136
+        outSlope: 0
+        tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -164,23 +116,23 @@ MonoBehaviour:
     trigger: 1
     delay: 0
     prefab: {fileID: 0}
-    position: 1
+    position: 0
     anchor: 1
     offset: {x: 0, y: 0, z: 0}
     rotationMode: 0
-    rotation: {x: 0, y: 0, z: 0}
+    rotation: {x: -45, y: 75, z: -90}
     scaleMode: 0
-    scale: 1
-    customScale: {x: 1, y: 1, z: 1}
+    scale: 0
+    customScale: {x: 0, y: 0, z: 0}
     parentToAnchor: 0
     travel: 0
-    travelTo: 1
-    travelAnchor: 1
-    travelDuration: 0.5
+    travelTo: 0
+    travelAnchor: 0
+    travelDuration: 0
     faceTravelDirection: 0
     finishOnArrival: 0
-    lifetime: 3
-    sortingOrder: 101
+    lifetime: 1
+    sortingOrder: 99
     shakeDuration: 0.3
     shakeStrength: 20
     shakeFrequency: 30

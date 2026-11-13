@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae22bba911df461f8e8e1cfa071933d3, type: 3}
-  m_Name: VFX_Player_Moderate_Attack
+  m_Name: VFX_Player_Missile
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.VfxResource
-  id: Player_Moderate_Attack
+  id: Player_Missile
   impactDelay: 0.5
   replyDelay: 2
   steps:

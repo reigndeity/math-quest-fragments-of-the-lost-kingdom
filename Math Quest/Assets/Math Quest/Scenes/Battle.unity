@@ -305,10 +305,7 @@ MonoBehaviour:
   hitDuration: 0.6
   attackEventTimeout: 2
   answerPrefix: 'My answer is: '
-  showAnswerHint: 1
-  answerHintPrefab: {fileID: 7700000000000000004, guid: b3284107b21d59888613ec6afde7d32d, type: 3}
-  debugEnemySkill: {fileID: 0}
-  debugPlayerSkill: {fileID: 0}
+  debug: {fileID: 198591282}
   multipleChoicePrefab: {fileID: 7200000000000000001, guid: c0e7852ee08d143448e6ae7bde0c5163, type: 3}
   keypadPrefab: {fileID: 5100000000000000005, guid: f1b50b3bb0514d7eaa76f0f64a28ba9b, type: 3}
   builderPrefab: {fileID: 5200000000000000005, guid: 19eaa27a5372428d9a5ef71dc8f837ef, type: 3}
@@ -373,6 +370,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5262769ad1a845e599927751ecbce069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Battle.CharacterAnimationEvents
+--- !u!1 &198591280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 198591281}
+  - component: {fileID: 198591282}
+  m_Layer: 0
+  m_Name: DebugController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &198591281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198591280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &198591282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198591280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b0e6b313eb45d691cbbdeed1b9f963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Battle.BattleDebugController
+  showAnswerHint: 1
+  answerHintPrefab: {fileID: 7700000000000000004, guid: b3284107b21d59888613ec6afde7d32d, type: 3}
+  enemySkill: {fileID: 0}
+  playerSkill: {fileID: 0}
 --- !u!1 &278879711
 GameObject:
   m_ObjectHideFlags: 0
@@ -3322,3 +3367,4 @@ SceneRoots:
   - {fileID: 1762499344}
   - {fileID: 1125829677}
   - {fileID: 198591248}
+  - {fileID: 198591281}

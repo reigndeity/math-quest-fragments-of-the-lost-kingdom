@@ -21,5 +21,13 @@ MonoBehaviour:
     skill: {fileID: 11400000, guid: 0682e299909e5d5597eec9305258bbb9, type: 2}
   - difficulty: 1
     skill: {fileID: 11400000, guid: d0fbd09de17753328f0688b39a2111fa, type: 2}
+  - difficulty: 1
+    skill: {fileID: 11400000, guid: 8352ce1197525ece944dbfa822915eb7, type: 2}
+  - difficulty: 1
+    skill: {fileID: 11400000, guid: c662c1249ff05b0599e8221dca5b9d7f, type: 2}
+  - difficulty: 2
+    skill: {fileID: 11400000, guid: d0fbd09de17753328f0688b39a2111fa, type: 2}
   - difficulty: 2
     skill: {fileID: 11400000, guid: 8352ce1197525ece944dbfa822915eb7, type: 2}
+  - difficulty: 2
+    skill: {fileID: 11400000, guid: c662c1249ff05b0599e8221dca5b9d7f, type: 2}
