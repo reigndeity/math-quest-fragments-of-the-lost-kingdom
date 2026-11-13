@@ -34,6 +34,12 @@ namespace MathQuest.Battle
     public sealed class BattleController : MonoBehaviour
     {
         [SerializeField] private LevelResource level;
+        [Tooltip("The act the level belongs to. Its background is shown behind the battle.")]
+        [SerializeField] private ActResource act;
+        [Tooltip("The Image under Canvas > Environment > Background. It gets the act's background.")]
+        [SerializeField] private Image background;
+        [Tooltip("Environment > AmbienceHolder. The act's ambience prefab is spawned inside it.")]
+        [SerializeField] private RectTransform ambienceHolder;
         [Tooltip("Shows the player and the level's enemy (names, hearts, pictures). Optional while setting up.")]
         [SerializeField] private CharacterAssetConfig characters;
         [Tooltip("Spawns the skill effects. Optional: without it the hit still lands, just without an effect.")]
@@ -202,6 +208,7 @@ namespace MathQuest.Battle
         private void Start()
         {
             HidePanelContents();
+            ShowActBackground();
 
             // Names and hearts start hidden; they fade in once everything is ready.
             if (characters != null)
@@ -211,6 +218,42 @@ namespace MathQuest.Battle
             }
 
             StartCoroutine(Begin());
+        }
+
+        private void ShowActBackground()
+        {
+            if (act == null)
+                return;
+
+            if (level != null && !act.levels.Contains(level))
+                Debug.LogWarning($"{level.name} is not in {act.name}'s level list.", this);
+
+            if (background != null && act.background != null)
+                background.sprite = act.background;
+
+            SpawnAmbience();
+        }
+
+        private void SpawnAmbience()
+        {
+            if (ambienceHolder == null || act.ambiencePrefab == null)
+                return;
+
+            GameObject ambience = Instantiate(act.ambiencePrefab, ambienceHolder, false);
+            ambience.name = act.ambiencePrefab.name;
+
+            if (ambience.transform is RectTransform)
+                return; // a UI prefab: it lays itself out inside the holder
+
+            // A particle effect: the Canvas is tiny in the world, so keep the prefab's own size,
+            // and draw it between the background and the characters.
+            Vector3 parentScale = ambienceHolder.lossyScale;
+            Vector3 size = act.ambiencePrefab.transform.localScale;
+            ambience.transform.localScale = new Vector3(
+                size.x / Mathf.Max(1e-5f, parentScale.x), size.y / Mathf.Max(1e-5f, parentScale.y), size.z / Mathf.Max(1e-5f, parentScale.z));
+
+            foreach (Renderer renderer in ambience.GetComponentsInChildren<Renderer>(true))
+                renderer.sortingOrder = act.ambienceSortingOrder;
         }
 
         private IEnumerator Begin()
