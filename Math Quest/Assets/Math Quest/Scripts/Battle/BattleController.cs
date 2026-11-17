@@ -225,7 +225,7 @@ namespace MathQuest.Battle
             if (act == null)
                 return;
 
-            if (level != null && !act.levels.Contains(level))
+            if (level != null && !act.Contains(level))
                 Debug.LogWarning($"{level.name} is not in {act.name}'s level list.", this);
 
             if (background != null && act.background != null)

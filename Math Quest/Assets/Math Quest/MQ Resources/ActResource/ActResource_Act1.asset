@@ -15,7 +15,27 @@ MonoBehaviour:
   act: 1
   displayName: Act I
   levels:
-  - {fileID: 11400000, guid: cb5716dfddd64895a4b8f2c17eedf822, type: 2}
+  - level: {fileID: 11400000, guid: cb5716dfddd64895a4b8f2c17eedf822, type: 2}
+    mapPosition: {x: -200, y: 160}
+  - level: {fileID: 0}
+    mapPosition: {x: 280, y: 560}
+  - level: {fileID: 0}
+    mapPosition: {x: -300, y: 880}
+  - level: {fileID: 0}
+    mapPosition: {x: 240, y: 1240}
+  - level: {fileID: 0}
+    mapPosition: {x: -220, y: 1660}
+  - level: {fileID: 0}
+    mapPosition: {x: 240, y: 2040}
+  - level: {fileID: 0}
+    mapPosition: {x: -200, y: 2380}
+  - level: {fileID: 0}
+    mapPosition: {x: 220, y: 3020}
+  - level: {fileID: 0}
+    mapPosition: {x: -300, y: 3180}
+  - level: {fileID: 0}
+    mapPosition: {x: -100, y: 3680}
+  mapTopPadding: 400
   background: {fileID: 21300000, guid: 0c9360bd43055000954dc509fe316aa0, type: 3}
   ambiencePrefab: {fileID: 151008, guid: 6fd3dd626230b244f80a741b439898b8, type: 3}
   ambienceSortingOrder: 105
