@@ -36,6 +36,8 @@ namespace MathQuest.UI
         [Tooltip("When the map is shown, scroll to the bottom (level 1).")]
         [SerializeField] private bool startAtBottom = true;
         [SerializeField] private float scrollSensitivity = 30f;
+        [Tooltip("How far, in UI units, levels fade out at the top and bottom edges of the scroll area instead of being cut off. 0 is a hard edge.")]
+        [SerializeField, Min(0)] private int edgeFade = 120;
 
         private readonly List<GameObject> spawned = new();
         private RectTransform rectTransform;
@@ -171,9 +173,19 @@ namespace MathQuest.UI
             scroll.horizontal = false;
             scroll.vertical = true;
 
-            if (!TryGetComponent(out RectMask2D _))
-                gameObject.AddComponent<RectMask2D>();
+            if (!TryGetComponent(out RectMask2D mask))
+                mask = gameObject.AddComponent<RectMask2D>();
+            mask.softness = new Vector2Int(0, edgeFade); // fade the top and bottom, keep the sides sharp
         }
+
+#if UNITY_EDITOR
+        // Change Edge Fade in the Inspector and see it at once.
+        private void OnValidate()
+        {
+            if (TryGetComponent(out RectMask2D mask))
+                mask.softness = new Vector2Int(0, edgeFade);
+        }
+#endif
 
         // Full width of the area, anchored to its bottom, as tall as the act's levels need (never shorter than the area).
         private void SizeContent(RectTransform map)
