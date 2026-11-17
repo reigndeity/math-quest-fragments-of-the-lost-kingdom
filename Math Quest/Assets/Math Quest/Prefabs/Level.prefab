@@ -804,6 +804,8 @@ GameObject:
   - component: {fileID: 4641888957899853514}
   - component: {fileID: 4640163476079616418}
   - component: {fileID: 5867554386201158361}
+  - component: {fileID: 311793768862079228}
+  - component: {fileID: 6174029385511047213}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -873,6 +875,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &311793768862079228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929985472637979818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5867554386201158361}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &230050390656956107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -967,7 +1013,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
       propertyPath: m_Name
-      value: LevelStarHolder
+      value: LevelStarHolder (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1073,7 +1123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
       propertyPath: m_Name
-      value: LevelStarHolder (1)
+      value: LevelStarHolder (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1179,7 +1233,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
       propertyPath: m_Name
-      value: LevelStarHolder (2)
+      value: LevelStarHolder (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727997945631429568, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1191,3 +1249,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1570460948184622431, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
   m_PrefabInstance: {fileID: 6387585291199782219}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6174029385511047213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929985472637979818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e9a41d2b84f6e9a0d5c1b8e2f4a63, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.LevelNode
+  button: {fileID: 311793768862079228}
+  numberText: {fileID: 2042250080642432205}
+  lockedObject: {fileID: 8703041997543138253}
+  selectedObject: {fileID: 45816737419889939}
+  statsHolder: {fileID: 2949287800329485923}
+  starHolder: {fileID: 1049285932833781777}
+  stars:
+  - {fileID: 5579439954545866772}
+  - {fileID: 3398557854319988154}
+  - {fileID: 1655680299774170004}
+  starFillName: StarFill
+  timeText: {fileID: 9056249756503895899}
+  timeFormat: 'Time Taken: {0}'

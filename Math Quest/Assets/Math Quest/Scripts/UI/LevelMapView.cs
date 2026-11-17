@@ -39,7 +39,16 @@ namespace MathQuest.UI
         [Tooltip("How far, in UI units, levels fade out at the top and bottom edges of the scroll area instead of being cut off. 0 is a hard edge.")]
         [SerializeField, Min(0)] private int edgeFade = 120;
 
+        [Header("Test progress (until saving exists)")]
+        [Tooltip("How many levels count as finished, from level 1. The next one is the current level; the rest stay locked.")]
+        [SerializeField, Min(0)] private int testCompletedLevels = 1;
+        [Tooltip("Best answering time in seconds for each finished level (element 0 is level 1). Missing ones use 0 (3 stars).")]
+        [SerializeField] private List<float> testBestTimes = new() { 45f };
+        [Tooltip("On: spots with no level made yet act like real levels, so every state can be seen now. Off: they stay locked (the real rule).")]
+        [SerializeField] private bool testIncludeEmptySlots = true;
+
         private readonly List<GameObject> spawned = new();
+        private readonly List<LevelNode> nodes = new();
         private RectTransform rectTransform;
         private RectTransform content;
 
@@ -49,6 +58,16 @@ namespace MathQuest.UI
         public RectTransform Area => rectTransform != null ? rectTransform : rectTransform = (RectTransform)transform;
 
         public IReadOnlyList<GameObject> SpawnedLevels => spawned;
+        public IReadOnlyList<LevelNode> Nodes => nodes;
+
+        /// <summary>The selected level, or null. Always an unlocked or completed one.</summary>
+        public LevelNode Selected { get; private set; }
+
+        /// <summary>The selection changed. The Proceed button will listen to this.</summary>
+        public event System.Action<LevelNode> SelectionChanged;
+
+        /// <summary>A locked level was tapped. Nothing listens yet: a hook for a later shake or sound.</summary>
+        public event System.Action<LevelNode> LockedLevelTapped;
 
         private void Start()
         {
@@ -91,12 +110,84 @@ namespace MathQuest.UI
                 rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0f); // bottom middle of the map
                 rect.anchoredPosition = new Vector2(slot.mapPosition.x * widthScale, slot.mapPosition.y);
 
-                SetNumber(level.transform, i + 1);
+                if (level.TryGetComponent(out LevelNode node))
+                {
+                    node.Setup(i, slot.level);
+                    node.Clicked += Select;
+                    node.LockedClicked += tapped => LockedLevelTapped?.Invoke(tapped);
+                    nodes.Add(node);
+                }
+                else
+                {
+                    SetNumber(level.transform, i + 1);
+                }
+
                 spawned.Add(level);
             }
 
+            ApplyProgress();
+            Select(CurrentLevel());
+
             if (startAtBottom)
                 ScrollToBottom();
+        }
+
+        /// <summary>Selects this level (and unselects the last one). Locked levels and null are ignored.</summary>
+        public void Select(LevelNode node)
+        {
+            if (node == null || !node.CanSelect || node == Selected)
+                return;
+
+            if (Selected != null)
+                Selected.SetSelected(false);
+
+            Selected = node;
+            Selected.SetSelected(true);
+            SelectionChanged?.Invoke(Selected);
+        }
+
+        // Levels unlock strictly in order: every level before the current one is finished, the current one is
+        // unlocked, everything after is locked. A spot with no level made yet is always locked.
+        // For now the progress comes from the Test Progress fields; later it will come from the save.
+        private void ApplyProgress()
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                LevelNode node = nodes[i];
+                if (node.Level == null && !testIncludeEmptySlots)
+                {
+                    node.SetProgress(LevelNodeState.Locked);
+                }
+                else if (node.Index < testCompletedLevels)
+                {
+                    float best = node.Index < testBestTimes.Count ? testBestTimes[node.Index] : 0f;
+                    int stars = node.Level != null ? node.Level.StarsForTime(best) : best <= 60f ? 3 : best <= 120f ? 2 : 1;
+                    node.SetProgress(LevelNodeState.Completed, stars, best);
+                }
+                else if (node.Index == testCompletedLevels)
+                {
+                    node.SetProgress(LevelNodeState.Unlocked);
+                }
+                else
+                {
+                    node.SetProgress(LevelNodeState.Locked);
+                }
+            }
+        }
+
+        // The level to preselect: the newest unlocked one, or the last finished one if every level is done.
+        private LevelNode CurrentLevel()
+        {
+            LevelNode lastCompleted = null;
+            foreach (LevelNode node in nodes)
+            {
+                if (node.State == LevelNodeState.Unlocked)
+                    return node;
+                if (node.State == LevelNodeState.Completed)
+                    lastCompleted = node;
+            }
+
+            return lastCompleted;
         }
 
         /// <summary>Removes the levels this view spawned.</summary>
@@ -105,6 +196,8 @@ namespace MathQuest.UI
             foreach (GameObject level in spawned)
                 DestroyObject(level);
             spawned.Clear();
+            nodes.Clear();
+            Selected = null;
 
             // A preview left over from before a script reload (no longer in the list above).
             if (!Application.isPlaying)

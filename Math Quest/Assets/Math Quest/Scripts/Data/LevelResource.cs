@@ -44,10 +44,28 @@ namespace MathQuest.Data
         [Tooltip("Question pools, used in order. Each pool decides which of its questions are asked; tick Override Count to change how many for this level only. Mix fixed and weighted pools, for example 3 easy then 2 moderate.")]
         public List<LevelQuestionPool> questionPools = new();
 
+        [Header("Stars")]
+        [Tooltip("Finish within this many seconds of answering time for 3 stars.")]
+        [Min(0f)] public float threeStarTime = 60f;
+
+        [Tooltip("Finish within this many seconds of answering time for 2 stars. Slower than this still earns 1 star.")]
+        [Min(0f)] public float twoStarTime = 120f;
+
         private void OnValidate()
         {
             if (enemy != null && enemy.role != CharacterRole.Enemy)
                 Debug.LogWarning($"{name}: '{enemy.name}' is not an Enemy character.", this);
+
+            if (twoStarTime < threeStarTime)
+                twoStarTime = threeStarTime;
+        }
+
+        /// <summary>Stars for finishing this level in the given answering time: 3, 2, or 1 (finishing always earns 1).</summary>
+        public int StarsForTime(float seconds)
+        {
+            if (seconds <= threeStarTime)
+                return 3;
+            return seconds <= twoStarTime ? 2 : 1;
         }
 
         /// <summary>Asks every pool for its picks, in order. Call once when the level starts.</summary>
