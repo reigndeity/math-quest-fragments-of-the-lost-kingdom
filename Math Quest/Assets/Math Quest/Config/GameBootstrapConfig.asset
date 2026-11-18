@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Bootstrap.GameBootstrapConfig
   scenes:
   - scene: {fileID: 102900000, guid: 916b539cc43343346a63238f5b548c57, type: 3}
-    scenePath: Assets/Math Quest/Scenes/MainMenu.unity
+    scenePath: Assets/Math Quest/Scenes/Menu.unity
     makeActiveScene: 1

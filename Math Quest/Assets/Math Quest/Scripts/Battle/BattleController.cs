@@ -196,6 +196,13 @@ namespace MathQuest.Battle
 
         private void Awake()
         {
+            // Started from the level map: play the level that was picked there instead of the Inspector's one.
+            if (LevelSession.HasSelection)
+            {
+                level = LevelSession.Level;
+                act = LevelSession.Act;
+            }
+
             if (submitButton == null)
                 Debug.LogError("BattleController needs the Submit Button assigned.", this);
             else

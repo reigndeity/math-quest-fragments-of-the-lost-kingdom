@@ -252,8 +252,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 15.000001}
+  m_SizeDelta: {x: 0, y: -29.999998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2088176049101766153
 CanvasRenderer:
@@ -292,8 +292,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 311793768862079228}
   - component: {fileID: 6174029385511047213}
   m_Layer: 5
-  m_Name: Level
+  m_Name: Level (Old Design)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4193695358716195800, guid: 5953cbfacd765074d853406f439b443e, type: 3}
+  m_Sprite: {fileID: -5321099399631716182, guid: 240424aa5fbbdde4b93321603ca3e741, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -919,6 +919,31 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6174029385511047213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929985472637979818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3e9a41d2b84f6e9a0d5c1b8e2f4a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.LevelNode
+  button: {fileID: 311793768862079228}
+  numberText: {fileID: 2042250080642432205}
+  lockedObject: {fileID: 8703041997543138253}
+  selectedObject: {fileID: 45816737419889939}
+  statsHolder: {fileID: 2949287800329485923}
+  starHolder: {fileID: 1049285932833781777}
+  stars:
+  - {fileID: 5579439954545866772}
+  - {fileID: 3398557854319988154}
+  - {fileID: 1655680299774170004}
+  starFillName: StarFill
+  timeText: {fileID: 9056249756503895899}
+  timeFormat: 'Time Taken: {0}'
 --- !u!1001 &230050390656956107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1249,28 +1274,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1570460948184622431, guid: a4335643c6af82b4eb9ffda49d259598, type: 3}
   m_PrefabInstance: {fileID: 6387585291199782219}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6174029385511047213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8929985472637979818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c3e9a41d2b84f6e9a0d5c1b8e2f4a63, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.LevelNode
-  button: {fileID: 311793768862079228}
-  numberText: {fileID: 2042250080642432205}
-  lockedObject: {fileID: 8703041997543138253}
-  selectedObject: {fileID: 45816737419889939}
-  statsHolder: {fileID: 2949287800329485923}
-  starHolder: {fileID: 1049285932833781777}
-  stars:
-  - {fileID: 5579439954545866772}
-  - {fileID: 3398557854319988154}
-  - {fileID: 1655680299774170004}
-  starFillName: StarFill
-  timeText: {fileID: 9056249756503895899}
-  timeFormat: 'Time Taken: {0}'

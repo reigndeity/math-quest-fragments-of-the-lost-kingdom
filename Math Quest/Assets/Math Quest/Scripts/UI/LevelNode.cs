@@ -38,6 +38,8 @@ namespace MathQuest.UI
         [Header("Shown by state")]
         [SerializeField] private GameObject lockedObject;
         [SerializeField] private GameObject selectedObject;
+        [Tooltip("Optional. The \"you are here\" marker: shown only on the current (unlocked, not yet finished) level.")]
+        [SerializeField] private GameObject pointerObject;
         [SerializeField] private GameObject statsHolder;
         [SerializeField] private GameObject starHolder;
 
@@ -115,6 +117,7 @@ namespace MathQuest.UI
             SetActive(lockedObject, locked);
             SetActive(starHolder, !locked);
             SetActive(selectedObject, IsSelected);
+            SetActive(pointerObject, State == LevelNodeState.Unlocked);
             SetActive(statsHolder, IsSelected && completed);
 
             if (button != null)

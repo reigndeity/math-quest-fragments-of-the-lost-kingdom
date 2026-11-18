@@ -66,6 +66,9 @@ namespace MathQuest.UI
         /// <summary>The selection changed. The Proceed button will listen to this.</summary>
         public event System.Action<LevelNode> SelectionChanged;
 
+        /// <summary>An unlocked or finished level was tapped (even if it was already selected). Opens its info panel.</summary>
+        public event System.Action<LevelNode> LevelClicked;
+
         /// <summary>A locked level was tapped. Nothing listens yet: a hook for a later shake or sound.</summary>
         public event System.Action<LevelNode> LockedLevelTapped;
 
@@ -113,7 +116,11 @@ namespace MathQuest.UI
                 if (level.TryGetComponent(out LevelNode node))
                 {
                     node.Setup(i, slot.level);
-                    node.Clicked += Select;
+                    node.Clicked += tapped =>
+                    {
+                        Select(tapped);
+                        LevelClicked?.Invoke(tapped);
+                    };
                     node.LockedClicked += tapped => LockedLevelTapped?.Invoke(tapped);
                     nodes.Add(node);
                 }
