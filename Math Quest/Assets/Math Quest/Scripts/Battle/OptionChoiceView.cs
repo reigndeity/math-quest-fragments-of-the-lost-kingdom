@@ -16,6 +16,8 @@ namespace MathQuest.Battle
         [SerializeField] private TEXDraw mathLabel;
         [Tooltip("Size of the math text when the math label is created automatically. It shrinks if the option is too wide.")]
         [SerializeField, Min(1f)] private float mathSize = 50f;
+        [Tooltip("Material for the automatically created math label. The default TEXDraw material is black; use TEXDraw-Colored to let the label's color show (white).")]
+        [SerializeField] private Material mathMaterial;
         [Tooltip("Shown while this option is the selected one. If left empty, the child called Selected is used.")]
         [SerializeField] private GameObject selectedMarker;
 
@@ -90,6 +92,8 @@ namespace MathQuest.Battle
             mathLabel.size = mathSize;
             mathLabel.overflow = TexDrawLib.Core.Overflow.DownScale;
             mathLabel.color = label.color;
+            if (mathMaterial != null)
+                mathLabel.material = mathMaterial;
             mathLabel.raycastTarget = false; // clicks must reach the button
         }
 
