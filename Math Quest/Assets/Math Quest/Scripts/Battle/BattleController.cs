@@ -194,6 +194,16 @@ namespace MathQuest.Battle
         private Coroutine openRoutine;
         private Coroutine fadeRoutine;
 
+        // Answering time: only the seconds the question panel is open count (not dialogue, hits or pauses).
+        private float answerStartedAt = -1f;
+        private float answeringTime;
+
+        /// <summary>The level being played (the one picked on the map, or the Inspector's).</summary>
+        public LevelResource Level => level;
+
+        /// <summary>The battle is over: true if the player won, and the total answering time in seconds.</summary>
+        public event Action<bool, float> BattleEnded;
+
         private void Awake()
         {
             // Started from the level map: play the level that was picked there instead of the Inspector's one.
@@ -322,6 +332,7 @@ namespace MathQuest.Battle
             yield return new WaitForSeconds(holderFadeDelay);
 
             FadeGroup(1f, holderFadeDuration, true);
+            answerStartedAt = Time.time; // the player can start answering now
             yield return new WaitForSeconds(questionBoxDelay);
 
             if (answerFitter != null)
@@ -602,6 +613,12 @@ namespace MathQuest.Battle
             if (submission == null)
                 return; // nothing selected yet
 
+            if (answerStartedAt >= 0f)
+            {
+                answeringTime += Time.time - answerStartedAt; // Time.time stands still while paused
+                answerStartedAt = -1f;
+            }
+
             // Submitting mid-cascade stops the options still popping in.
             if (openRoutine != null)
             {
@@ -803,10 +820,11 @@ namespace MathQuest.Battle
             EndBattle(playerWon);
         }
 
-        // Placeholder: what happens after the ending (results screen, back to the map) comes later.
+        // Both endings land here: the enemy has dissolved (win) or the player's last words are done (loss).
         private void EndBattle(bool playerWon)
         {
             Debug.Log(playerWon ? "Battle over: the enemy has no hearts left." : "Battle over: the player has no hearts left.");
+            BattleEnded?.Invoke(playerWon, answeringTime);
         }
 
         // Temporary: right or wrong, move on and wrap around at the end.

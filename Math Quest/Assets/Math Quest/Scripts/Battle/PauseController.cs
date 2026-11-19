@@ -1,6 +1,8 @@
 using MathQuest.Bootstrap;
 using MathQuest.Data;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace MathQuest.Battle
@@ -14,9 +16,17 @@ namespace MathQuest.Battle
     [RequireComponent(typeof(Button))]
     public sealed class PauseController : MonoBehaviour
     {
-        [Header("Pause canvas")]
-        [SerializeField] private GameObject pauseCanvas;
+        [Header("Pause panel")]
+        [Tooltip("The PausePanel inside UiCanvas. UiCanvas stays on because the match end panel lives in it too.")]
+        [FormerlySerializedAs("pauseCanvas")]
+        [SerializeField] private GameObject pausePanel;
         [SerializeField] private Button resumeButton;
+
+        [Header("Level requirements (optional)")]
+        [Tooltip("Gives the level, whose star times are shown below.")]
+        [SerializeField] private BattleController battle;
+        [SerializeField] private TMP_Text twoStarTimeText;
+        [SerializeField] private TMP_Text threeStarTimeText;
 
         [Header("Settings")]
         [SerializeField] private Button settingsButton;
@@ -63,9 +73,36 @@ namespace MathQuest.Battle
             IsPaused = true;
             Time.timeScale = 0f;
 
+            RefreshRequirements();
+
             if (settingsHolder != null) settingsHolder.SetActive(false);
             if (confirmationHolder != null) confirmationHolder.SetActive(false);
-            if (pauseCanvas != null) pauseCanvas.SetActive(true);
+            if (pausePanel != null) pausePanel.SetActive(true);
+        }
+
+        /// <summary>Called when the match ends: the pause button stops working (and an open pause closes).</summary>
+        public void DisablePausing()
+        {
+            Resume();
+
+            // Awake has not run yet if the button's canvas was still off.
+            if (pauseButton == null) pauseButton = GetComponent<Button>();
+            pauseButton.interactable = false;
+        }
+
+        private void RefreshRequirements()
+        {
+            LevelResource level = battle != null ? battle.Level : null;
+            if (level == null) return;
+
+            if (twoStarTimeText != null) twoStarTimeText.text = FormatMinutes(level.twoStarTime);
+            if (threeStarTimeText != null) threeStarTimeText.text = FormatMinutes(level.threeStarTime);
+        }
+
+        private static string FormatMinutes(float seconds)
+        {
+            int total = Mathf.Max(0, Mathf.RoundToInt(seconds));
+            return $"{total / 60:00}:{total % 60:00}";
         }
 
         public void Resume()
@@ -77,7 +114,7 @@ namespace MathQuest.Battle
 
             if (settingsHolder != null) settingsHolder.SetActive(false);
             if (confirmationHolder != null) confirmationHolder.SetActive(false);
-            if (pauseCanvas != null) pauseCanvas.SetActive(false);
+            if (pausePanel != null) pausePanel.SetActive(false);
         }
 
         private void OpenSettings()
