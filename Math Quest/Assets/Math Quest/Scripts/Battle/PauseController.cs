@@ -1,3 +1,4 @@
+using System.Collections;
 using MathQuest.Bootstrap;
 using MathQuest.Data;
 using TMPro;
@@ -22,9 +23,23 @@ namespace MathQuest.Battle
         [SerializeField] private GameObject pausePanel;
         [SerializeField] private Button resumeButton;
 
+        [Header("Open and close animation (optional)")]
+        [Tooltip("The Animator on PauseHolder. It plays its Active state when the panel opens (the Paused bool is on) and its Inactive state when Paused turns off. It should use Unscaled Time, because the game is frozen while paused.")]
+        [SerializeField] private Animator pauseAnimator;
+        [SerializeField] private string pausedParameter = "Paused";
+        [Tooltip("The state that plays while closing. The panel is switched off once it has finished.")]
+        [SerializeField] private string inactiveStateName = "State_Inactive";
+
+        [Header("Background blur (optional)")]
+        [Tooltip("The BlurBackdropController. The background blurs while the game is paused.")]
+        [SerializeField] private BlurBackdropController blur;
+
         [Header("Level requirements (optional)")]
-        [Tooltip("Gives the level, whose star times are shown below.")]
+        [Tooltip("Gives the level, whose star times are shown below. Also hides the question while paused.")]
         [SerializeField] private BattleController battle;
+        [Tooltip("The question and answers fade out while paused, so the question cannot be studied while the clock is stopped.")]
+        [SerializeField] private bool hideQuestionWhilePaused = true;
+        [SerializeField, Min(0.01f)] private float questionHideDuration = 0.25f;
         [SerializeField] private TMP_Text twoStarTimeText;
         [SerializeField] private TMP_Text threeStarTimeText;
 
@@ -40,6 +55,8 @@ namespace MathQuest.Battle
         [SerializeField] private string menuSceneName = "Menu";
 
         private Button pauseButton;
+        private bool blurredByPause; // only fade out a blur this pause started
+        private Coroutine closeRoutine;
 
         public bool IsPaused { get; private set; }
 
@@ -75,9 +92,30 @@ namespace MathQuest.Battle
 
             RefreshRequirements();
 
+            // If a question is open the background is already blurred; leave that blur alone.
+            blurredByPause = blur != null && !blur.IsBlurred;
+            if (blurredByPause) blur.FadeIn();
+
+            if (hideQuestionWhilePaused && battle != null)
+                battle.SetQuestionHiddenByPause(true, questionHideDuration);
+
+            // Paused again while the panel was still closing: stop that and start the opening over.
+            if (closeRoutine != null)
+            {
+                StopCoroutine(closeRoutine);
+                closeRoutine = null;
+            }
+
             if (settingsHolder != null) settingsHolder.SetActive(false);
             if (confirmationHolder != null) confirmationHolder.SetActive(false);
-            if (pausePanel != null) pausePanel.SetActive(true);
+
+            if (pausePanel != null)
+            {
+                if (pausePanel.activeSelf) pausePanel.SetActive(false); // switching it on again restarts its Animator
+                pausePanel.SetActive(true);
+            }
+
+            if (pauseAnimator != null) pauseAnimator.SetBool(pausedParameter, true);
         }
 
         /// <summary>Called when the match ends: the pause button stops working (and an open pause closes).</summary>
@@ -112,9 +150,49 @@ namespace MathQuest.Battle
             IsPaused = false;
             Time.timeScale = 1f;
 
+            if (blurredByPause && blur != null) blur.FadeOut();
+            blurredByPause = false;
+
+            if (hideQuestionWhilePaused && battle != null)
+                battle.SetQuestionHiddenByPause(false, questionHideDuration);
+
+            // The panel plays its closing animation (the game is already running again), then switches off.
+            if (pauseAnimator != null && pausePanel != null && pausePanel.activeInHierarchy)
+            {
+                pauseAnimator.SetBool(pausedParameter, false);
+                closeRoutine = StartCoroutine(HidePanelAfterClose());
+            }
+            else
+            {
+                HidePanelNow();
+            }
+        }
+
+        private void HidePanelNow()
+        {
             if (settingsHolder != null) settingsHolder.SetActive(false);
             if (confirmationHolder != null) confirmationHolder.SetActive(false);
             if (pausePanel != null) pausePanel.SetActive(false);
+        }
+
+        private IEnumerator HidePanelAfterClose()
+        {
+            yield return null; // the Animator moves to its Inactive state on the next update
+
+            // Wait for the closing state to finish, but never longer than a couple of seconds.
+            float waited = 0f;
+            while (waited < 2f)
+            {
+                AnimatorStateInfo info = pauseAnimator.GetCurrentAnimatorStateInfo(0);
+                if (info.IsName(inactiveStateName) && info.normalizedTime >= 1f)
+                    break;
+
+                waited += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            closeRoutine = null;
+            HidePanelNow();
         }
 
         private void OpenSettings()

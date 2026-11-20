@@ -21,6 +21,8 @@ namespace MathQuest.Battle
 
         [SerializeField] private BattleController battle;
         [SerializeField] private PauseController pause;
+        [Tooltip("The BlurBackdropController. The background blurs while the match end panel is open.")]
+        [SerializeField] private BlurBackdropController blur;
 
         [Header("Panel")]
         [Tooltip("The MatchEndPanel. It is turned on when the battle ends.")]
@@ -86,6 +88,7 @@ namespace MathQuest.Battle
                     starFills[i].SetActive(i < stars);
             }
 
+            if (blur != null && !blur.IsBlurred) blur.FadeIn();
             if (matchEndPanel != null) matchEndPanel.SetActive(true);
         }
 

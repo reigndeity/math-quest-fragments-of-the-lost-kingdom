@@ -32,6 +32,10 @@ namespace MathQuest.Battle
 
         private CanvasGroup group;
         private Coroutine fade;
+        private float targetAlpha;
+
+        /// <summary>True while the blur is showing or fading in (so pausing does not blur twice or fade out another panel's blur).</summary>
+        public bool IsBlurred => targetAlpha > 0.5f;
 
         private void Awake()
         {
@@ -70,6 +74,7 @@ namespace MathQuest.Battle
             if (group == null) yield break;
 
             StopFade();
+            targetAlpha = 0f;
             group.alpha = 0f;
             image.enabled = true;
             yield return null;
@@ -97,6 +102,7 @@ namespace MathQuest.Battle
         private void StartFade(float target, bool hideWhenDone, float duration)
         {
             StopFade();
+            targetAlpha = target;
             fade = StartCoroutine(FadeRoutine(target, hideWhenDone, Mathf.Max(0.01f, duration)));
         }
 

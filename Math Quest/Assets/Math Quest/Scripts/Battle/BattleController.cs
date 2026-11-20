@@ -198,6 +198,11 @@ namespace MathQuest.Battle
         private float answerStartedAt = -1f;
         private float answeringTime;
 
+        // QuestionAndAnswerHolder's alpha = the battle's fade x the pause fade.
+        private float baseAlpha = 1f;
+        private float pauseVisibility = 1f;
+        private Coroutine pauseVisibilityRoutine;
+
         /// <summary>The level being played (the one picked on the map, or the Inspector's).</summary>
         public LevelResource Level => level;
 
@@ -220,6 +225,8 @@ namespace MathQuest.Battle
 
             if (questionAndAnswer == null)
                 Debug.LogError("BattleController needs the Question And Answer CanvasGroup assigned.", this);
+            else
+                baseAlpha = questionAndAnswer.alpha;
         }
 
         private void Start()
@@ -848,9 +855,51 @@ namespace MathQuest.Battle
                 fadeRoutine = null;
             }
 
-            questionAndAnswer.alpha = alpha;
+            SetBaseAlpha(alpha);
             questionAndAnswer.interactable = takesInput;
             questionAndAnswer.blocksRaycasts = takesInput;
+        }
+
+        // The holder's alpha is the battle's fade (baseAlpha) times the pause fade (pauseVisibility), so
+        // hiding the question while paused never fights with a fade that is still running.
+        private void SetBaseAlpha(float alpha)
+        {
+            baseAlpha = alpha;
+            if (questionAndAnswer != null)
+                questionAndAnswer.alpha = baseAlpha * pauseVisibility;
+        }
+
+        /// <summary>
+        /// Fades the question and answers out while the game is paused (so the question cannot be studied
+        /// for free while the clock is stopped), and back in on resume. Runs on unscaled time.
+        /// </summary>
+        public void SetQuestionHiddenByPause(bool hidden, float duration)
+        {
+            if (questionAndAnswer == null)
+                return;
+
+            if (pauseVisibilityRoutine != null)
+                StopCoroutine(pauseVisibilityRoutine);
+
+            pauseVisibilityRoutine = StartCoroutine(PauseVisibilityRoutine(hidden ? 0f : 1f, Mathf.Max(0.01f, duration)));
+        }
+
+        private IEnumerator PauseVisibilityRoutine(float target, float duration)
+        {
+            float from = pauseVisibility;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                pauseVisibility = Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                questionAndAnswer.alpha = baseAlpha * pauseVisibility;
+                yield return null;
+            }
+
+            pauseVisibility = target;
+            questionAndAnswer.alpha = baseAlpha * pauseVisibility;
+            pauseVisibilityRoutine = null;
         }
 
         private void FadeGroup(float target, float duration, bool takesInput)
@@ -869,17 +918,17 @@ namespace MathQuest.Battle
 
         private IEnumerator FadeGroupRoutine(float target, float duration)
         {
-            float from = questionAndAnswer.alpha;
+            float from = baseAlpha;
             float elapsed = 0f;
 
             while (elapsed < duration)
             {
                 elapsed += Time.unscaledDeltaTime;
-                questionAndAnswer.alpha = Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration));
+                SetBaseAlpha(Mathf.Lerp(from, target, Mathf.SmoothStep(0f, 1f, elapsed / duration)));
                 yield return null;
             }
 
-            questionAndAnswer.alpha = target;
+            SetBaseAlpha(target);
             fadeRoutine = null;
         }
 

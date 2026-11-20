@@ -2344,6 +2344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Battle.MatchEndController
   battle: {fileID: 198591249}
   pause: {fileID: 1327008536}
+  blur: {fileID: 1125829678}
   matchEndPanel: {fileID: 1178717648}
   title: {fileID: 598457679}
   victoryText: Victory
@@ -3564,6 +3565,7 @@ GameObject:
   - component: {fileID: 698327168}
   - component: {fileID: 698327170}
   - component: {fileID: 698327169}
+  - component: {fileID: 698327171}
   m_Layer: 5
   m_Name: MatchEndHolder
   m_TagString: Untagged
@@ -3581,7 +3583,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1851660036}
   - {fileID: 1281964836}
@@ -3633,6 +3635,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698327167}
   m_CullTransparentMesh: 1
+--- !u!95 &698327171
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698327167}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4c799cc4b863834479ee1ef6c541268e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &743680618
 GameObject:
   m_ObjectHideFlags: 0
@@ -5623,7 +5647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6158,7 +6182,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Battle.PauseController
   pausePanel: {fileID: 1606318102}
   resumeButton: {fileID: 1218881692}
+  pauseAnimator: {fileID: 8035186681433732286}
+  pausedParameter: Paused
+  inactiveStateName: State_Inactive
+  blur: {fileID: 1125829678}
   battle: {fileID: 198591249}
+  hideQuestionWhilePaused: 1
+  questionHideDuration: 0.25
   twoStarTimeText: {fileID: 1473819354}
   threeStarTimeText: {fileID: 641115185}
   settingsButton: {fileID: 287776237}
@@ -7085,7 +7115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9446,6 +9476,7 @@ GameObject:
   - component: {fileID: 8035186681433732285}
   - component: {fileID: 7199230775637792960}
   - component: {fileID: 3494239044242971228}
+  - component: {fileID: 8035186681433732286}
   m_Layer: 5
   m_Name: PauseHolder
   m_TagString: Untagged
@@ -9692,6 +9723,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -0.0000064104242}
   m_SizeDelta: {x: 640, y: 584}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &8035186681433732286
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5739882908890280260}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c3ed45a57aa610a42bfce62d21779aa0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8286377811476873582
 GameObject:
   m_ObjectHideFlags: 0
