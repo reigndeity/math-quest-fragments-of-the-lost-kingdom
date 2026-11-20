@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Difficult_32
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  difficulty: 2
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "Translate: \"The quotient of five less than twice a number $n$ and the sum of $n$ and three.\""
+  answer: {fileID: 11400000, guid: 184f0c16bc2f47eeaf2c4f22b80a98fb, type: 2}
+  encourageDialogue:
+  - "Correct! You are stronger than you look."
+  tauntDialogue:
+  - "Ha! Is that your best?"
+  solutionDialogue:
+  - "Turn each part of the phrase into math, then join the pieces."
+  - "The expression is $\\frac{2n-5}{n+3}$."

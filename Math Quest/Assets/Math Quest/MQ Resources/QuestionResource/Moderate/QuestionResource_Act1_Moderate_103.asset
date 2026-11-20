@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_103
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  difficulty: 1
+  topic: "Components of Algebraic Expressions"
+  question: "In the expression $18-7y^3+2y$, what is the constant term?"
+  answer: {fileID: 11400000, guid: e5657ed91489479b964723d0e2392538, type: 2}
+  encourageDialogue:
+  - "Well done! You got it right."
+  tauntDialogue:
+  - "Nope! Not even close."
+  solutionDialogue:
+  - "A constant term has no variable."
+  - "Here it is $18$."

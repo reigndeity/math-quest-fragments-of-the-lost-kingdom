@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Moderate_41
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  difficulty: 1
+  topic: "Translating Verbal Phrases into Algebraic Expressions"
+  question: "The difference between the square of $a$ and three times $b$."
+  answer: {fileID: 11400000, guid: f4fa2b2c65544685a5e539abc314b00e, type: 2}
+  encourageDialogue:
+  - "Impressive! That is correct."
+  tauntDialogue:
+  - "Hehehe... that is not right!"
+  solutionDialogue:
+  - "Turn each part of the phrase into math, then join the pieces."
+  - "The expression is $a^2-3b$."

@@ -22,7 +22,5 @@ MonoBehaviour:
   tauntDialogue:
   - "Hehehe... that is not right!"
   solutionDialogue:
-  - "Three less than twice $x$ is $2x-3$, and its square is $(2x-3)^2$."
-  - "Four times $y$ over the quantity five more than $x$ is $\\frac{4y}{x+5}$, which is subtracted."
-  - "Half the difference of $x$ and $y$ is $\\frac{x-y}{2}$, which is added."
-  - "Put it together: $(2x-3)^2-\\frac{4y}{x+5}+\\frac{x-y}{2}$."
+  - "Turn each part of the phrase into math, then join the pieces."
+  - "The expression is $(2x-3)^2-\\frac{4y}{x+5}+\\frac{x-y}{2}$."

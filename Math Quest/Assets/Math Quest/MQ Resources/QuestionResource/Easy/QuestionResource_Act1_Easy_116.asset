@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a67493121d927458369348e77f5f07, type: 3}
+  m_Name: QuestionResource_Act1_Easy_116
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
+  act: 1
+  difficulty: 0
+  topic: "Evaluating Algebraic Expressions"
+  question: "Evaluate $9x+2y-7$ when $x=1$ and $y=4$."
+  answer: {fileID: 11400000, guid: 013089029505452b964a37fd6b060d2b, type: 2}
+  encourageDialogue:
+  - "Correct! You are stronger than you look."
+  tauntDialogue:
+  - "Ha! Is that your best?"
+  solutionDialogue:
+  - "Replace each letter with its value: $9(1)+2(4)-7$."
+  - "Work it out step by step. The result is $10$."

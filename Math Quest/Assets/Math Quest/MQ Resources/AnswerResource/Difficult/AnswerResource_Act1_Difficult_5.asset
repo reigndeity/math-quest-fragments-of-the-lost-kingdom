@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: AnswerResource_Act1_Difficult_5
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.ExpressionBuilderAnswerResource
   tiles:
-  - id: sq
+  - id: t1
     math: "$(2x-3)^2$"
-  - id: minus
-    math: "$-$"
-  - id: quot
+  - id: t2
     math: "$\\frac{4y}{x+5}$"
+  - id: t3
+    math: "$\\frac{x-y}{2}$"
   - id: plus
     math: "$+$"
-  - id: half
-    math: "$\\frac{x-y}{2}$"
-  - id: sqRev
-    math: "$(3-2x)^2$"
-  - id: quotBad
+  - id: minus
+    math: "$-$"
+  - id: d1
+    math: "$(2x)^2-3$"
+  - id: d2
     math: "$\\frac{4y}{x}+5$"
   slots:
   - prefilledTileId: 
@@ -35,8 +35,26 @@ MonoBehaviour:
   - prefilledTileId: 
   acceptedArrangements:
   - tileIds:
-    - sq
+    - t1
     - minus
-    - quot
+    - t2
     - plus
-    - half
+    - t3
+  - tileIds:
+    - t1
+    - plus
+    - t3
+    - minus
+    - t2
+  - tileIds:
+    - t3
+    - plus
+    - t1
+    - minus
+    - t2
+  - tileIds:
+    - t3
+    - minus
+    - t2
+    - plus
+    - t1

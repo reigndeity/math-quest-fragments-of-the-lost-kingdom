@@ -22,6 +22,5 @@ MonoBehaviour:
   tauntDialogue:
   - "Wrong! Better luck next time."
   solutionDialogue:
-  - "Three less than twice $x$ is $2x-3$, and its square is $(2x-3)^2$."
-  - "Decreased by four times $y$ means subtract $4y$."
-  - "So: $(2x-3)^2-4y$."
+  - "Turn each part of the phrase into math, then join the pieces."
+  - "The expression is $(2x-3)^2-4y$."

@@ -13,22 +13,24 @@ MonoBehaviour:
   m_Name: AnswerResource_Act1_Difficult_14
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.ExpressionBuilderAnswerResource
   tiles:
-  - id: sq
+  - id: t1
     math: "$(2x-3)^2$"
-  - id: minus
-    math: "$-$"
-  - id: four
+  - id: t2
     math: "$4y$"
   - id: plus
     math: "$+$"
-  - id: sqRev
-    math: "$(3-2x)^2$"
+  - id: minus
+    math: "$-$"
+  - id: d1
+    math: "$(2x)^2-3$"
+  - id: d2
+    math: "$y+4$"
   slots:
   - prefilledTileId: 
   - prefilledTileId: 
   - prefilledTileId: 
   acceptedArrangements:
   - tileIds:
-    - sq
+    - t1
     - minus
-    - four
+    - t2
