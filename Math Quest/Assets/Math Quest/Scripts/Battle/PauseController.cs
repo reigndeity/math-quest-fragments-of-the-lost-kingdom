@@ -53,6 +53,8 @@ namespace MathQuest.Battle
         [SerializeField] private Button confirmButton;
         [Tooltip("Must be in Build Settings.")]
         [SerializeField] private string menuSceneName = "Menu";
+        [Tooltip("On: leaving for the menu plays the loading transition (the circle).")]
+        [SerializeField] private bool useTransition = true;
 
         private Button pauseButton;
         private bool blurredByPause; // only fade out a blur this pause started
@@ -211,7 +213,7 @@ namespace MathQuest.Battle
             Time.timeScale = 1f;
 
             LevelSession.Clear();
-            SceneLoader.Replace(menuSceneName, gameObject.scene);
+            SceneLoader.Replace(menuSceneName, gameObject.scene, useTransition);
         }
     }
 }

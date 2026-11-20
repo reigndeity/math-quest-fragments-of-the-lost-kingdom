@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MathQuest.Bootstrap;
 using MathQuest.Data;
 using TexDrawLib;
 using UnityEngine;
@@ -284,6 +285,11 @@ namespace MathQuest.Battle
         {
             if (characters != null)
                 characters.Apply(level);
+
+            // Arriving from the menu (or restarting) plays the loading transition. The intro only starts counting once
+            // the screen is clear again, so none of it is missed whatever the transition's timings are.
+            while (ScreenTransition.IsRunning)
+                yield return null;
 
             yield return new WaitForSeconds(startDelay);
 

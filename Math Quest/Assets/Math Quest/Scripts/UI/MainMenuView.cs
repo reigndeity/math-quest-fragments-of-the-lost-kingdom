@@ -1,3 +1,4 @@
+using MathQuest.Bootstrap;
 using MathQuest.Data;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace MathQuest.UI
         [SerializeField] private TMP_Text startLabel;
         [SerializeField] private string newGameText = "New Game";
         [SerializeField] private string continueText = "Continue";
+
+        [Tooltip("On: pressing the button plays the loading transition (the circle) while the next panel opens.")]
+        [SerializeField] private bool useTransition = true;
 
         [Header("Where the button goes")]
         [Tooltip("Opened by New Game.")]
@@ -55,6 +59,14 @@ namespace MathQuest.UI
             if (next == null)
                 return;
 
+            if (useTransition)
+                ScreenTransition.Run(() => Switch(next));
+            else
+                Switch(next);
+        }
+
+        private void Switch(GameObject next)
+        {
             gameObject.SetActive(false);
             next.SetActive(true);
         }

@@ -29,6 +29,8 @@ namespace MathQuest.UI
         [SerializeField] private LevelMapView map;
         [Tooltip("Must be in Build Settings.")]
         [SerializeField] private string battleSceneName = "Battle";
+        [Tooltip("On: the loading transition (the circle) plays while the Battle scene loads.")]
+        [SerializeField] private bool useTransition = true;
 
         /// <summary>The level the panel is showing.</summary>
         public LevelNode Current { get; private set; }
@@ -74,7 +76,7 @@ namespace MathQuest.UI
                 return;
 
             LevelSession.Set(map.Act, Current.Level);
-            SceneLoader.Replace(battleSceneName, gameObject.scene);
+            SceneLoader.Replace(battleSceneName, gameObject.scene, useTransition);
         }
     }
 }

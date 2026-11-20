@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 873272570}
   action: 0
+  useTransition: 0
 --- !u!114 &37076964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 658974094}
   action: 1
+  useTransition: 0
 --- !u!1 &45577696
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 1875579467}
   action: 0
+  useTransition: 1
 --- !u!114 &45577702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 658974094}
   action: 1
+  useTransition: 1
 --- !u!1 &61807879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,6 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 1033382416678232000}
   action: 0
+  useTransition: 0
 --- !u!1 &157686009
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,6 +1596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 1124666523}
   action: 0
+  useTransition: 0
 --- !u!114 &256021505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2539,7 +2545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
+  m_AnchoredPosition: {x: 0, y: -600}
   m_SizeDelta: {x: 850, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &514609207
@@ -3482,7 +3488,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 600}
   m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &747632266
@@ -3996,6 +4002,7 @@ MonoBehaviour:
   playButton: {fileID: 343611725}
   map: {fileID: 613460073}
   battleSceneName: Battle
+  useTransition: 1
 --- !u!1 &873272570
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,6 +4059,7 @@ MonoBehaviour:
   startLabel: {fileID: 1904574003}
   newGameText: New Game
   continueText: Continue
+  useTransition: 1
   characterSelectionPanel: {fileID: 767435264}
   actSelectionPanel: {fileID: 658974094}
 --- !u!1 &884814454
@@ -4473,6 +4481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 873272570}
   action: 0
+  useTransition: 0
 --- !u!114 &938495376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4487,6 +4496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 767435264}
   action: 1
+  useTransition: 0
 --- !u!114 &938495377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5479,6 +5489,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 2224918863666913192}
+    - target: {fileID: 5527597928754811747, guid: 5896b4fd9cb49184f991493c24ede4f8, type: 3}
+      propertyPath: useTransition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5648596894735486166, guid: 5896b4fd9cb49184f991493c24ede4f8, type: 3}
       propertyPath: target
       value: 
@@ -5518,6 +5532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 873272570}
   action: 0
+  useTransition: 1
 --- !u!114 &1368015243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5532,6 +5547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 1875579467}
   action: 1
+  useTransition: 1
 --- !u!1001 &1397893899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7266,6 +7282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 2224918863666913192}
   action: 0
+  useTransition: 0
 --- !u!114 &1709567156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7911,6 +7928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 871962941}
   action: 1
+  useTransition: 0
 --- !u!114 &1852558924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8719,6 +8737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 754893970}
   action: 0
+  useTransition: 0
 --- !u!114 &2004093165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8733,6 +8752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 767435264}
   action: 1
+  useTransition: 0
 --- !u!1 &2020734031
 GameObject:
   m_ObjectHideFlags: 0
@@ -9763,6 +9783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 754893970}
   action: 1
+  useTransition: 0
 --- !u!222 &1794989633113895135
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9907,6 +9928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 754893970}
   action: 1
+  useTransition: 1
 --- !u!1 &1910689547088940218
 GameObject:
   m_ObjectHideFlags: 0
@@ -11314,8 +11336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4bd97f2d2eb6343ae1ce625919c13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
-  target: {fileID: 658974094}
+  target: {fileID: 1875579467}
   action: 0
+  useTransition: 1
 --- !u!222 &6778845131357829963
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11400,6 +11423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 1033382416678232000}
   action: 1
+  useTransition: 0
 --- !u!222 &7174418087005123683
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11498,6 +11522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 767435264}
   action: 0
+  useTransition: 0
 --- !u!114 &7672296490331913550
 MonoBehaviour:
   m_ObjectHideFlags: 0

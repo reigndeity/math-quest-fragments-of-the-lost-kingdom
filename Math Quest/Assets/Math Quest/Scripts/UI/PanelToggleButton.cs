@@ -1,3 +1,4 @@
+using MathQuest.Bootstrap;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,9 @@ namespace MathQuest.UI
         [SerializeField] private GameObject target;
         [SerializeField] private PanelAction action = PanelAction.Show;
 
+        [Tooltip("On: the loading transition (the circle) plays while the panel changes. If a button has several of these, tick it on all of them so they share one transition.")]
+        [SerializeField] private bool useTransition;
+
         private Button button;
 
         private void Awake()
@@ -29,6 +33,16 @@ namespace MathQuest.UI
         }
 
         private void OnClick()
+        {
+            if (target == null) return;
+
+            if (useTransition)
+                ScreenTransition.Run(Apply);
+            else
+                Apply();
+        }
+
+        private void Apply()
         {
             if (target == null) return;
 

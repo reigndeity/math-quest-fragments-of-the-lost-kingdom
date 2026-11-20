@@ -40,6 +40,8 @@ namespace MathQuest.Battle
         [SerializeField] private Button returnToLevelSelectionButton;
         [Tooltip("Must be in Build Settings.")]
         [SerializeField] private string menuSceneName = "Menu";
+        [Tooltip("On: restarting and returning to the level selection play the loading transition (the circle).")]
+        [SerializeField] private bool useTransition = true;
 
         private void Awake()
         {
@@ -90,14 +92,14 @@ namespace MathQuest.Battle
         private void Restart()
         {
             // The level stays as it is: LevelSession (or the Inspector's level) is read again by the new battle.
-            SceneLoader.Reload(gameObject.scene);
+            SceneLoader.Reload(gameObject.scene, useTransition);
         }
 
         private void ReturnToLevelSelection()
         {
             LevelSession.Clear();
             MenuNavigation.OpenLevelSelection = true;
-            SceneLoader.Replace(menuSceneName, gameObject.scene);
+            SceneLoader.Replace(menuSceneName, gameObject.scene, useTransition);
         }
 
         private static string Format(float seconds)
