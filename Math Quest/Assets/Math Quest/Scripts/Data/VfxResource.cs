@@ -121,6 +121,12 @@ namespace MathQuest.Data
 
         [Tooltip("Strength over the shake's length: left is the start, right is the end, height is how strong (1 = full Strength). A falling line is a hit; a rising line is a build-up rumble.")]
         public AnimationCurve shakeCurve = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+
+        [Tooltip("On: the phone also vibrates for the length of the shake, following the same Strength over time curve. Android only; the player can turn vibration off.")]
+        public bool vibrate = true;
+
+        [Tooltip("How strong the vibration is at the shake's strongest point: 0 is none, 1 is the most the phone can do.")]
+        [Range(0f, 1f)] public float vibrationStrength = 0.8f;
     }
 
     /// <summary>

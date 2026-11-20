@@ -116,6 +116,8 @@ namespace MathQuest.Editor
                 step.FindPropertyRelative("shakeStrength").floatValue = 20f;
                 step.FindPropertyRelative("shakeFrequency").floatValue = 30f;
                 step.FindPropertyRelative("shakeCurve").animationCurveValue = AnimationCurve.Linear(0f, 1f, 1f, 0f);
+                step.FindPropertyRelative("vibrate").boolValue = true;
+                step.FindPropertyRelative("vibrationStrength").floatValue = 0.8f;
             }
 
             step.isExpanded = true;
@@ -202,6 +204,15 @@ namespace MathQuest.Editor
             EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeStrength"), new GUIContent("Strength"));
             EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeFrequency"), new GUIContent("Jumps per second"));
             EditorGUILayout.PropertyField(step.FindPropertyRelative("shakeCurve"), new GUIContent("Strength over time"));
+
+            SerializedProperty vibrate = step.FindPropertyRelative("vibrate");
+            EditorGUILayout.PropertyField(vibrate, new GUIContent("Vibrate", vibrate.tooltip));
+            if (vibrate.boolValue)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(step.FindPropertyRelative("vibrationStrength"), new GUIContent("Vibration strength"));
+                EditorGUI.indentLevel--;
+            }
 
             SerializedProperty more = step.FindPropertyRelative("sortingOrder");
             more.isExpanded = EditorGUILayout.Foldout(more.isExpanded, "More", true);

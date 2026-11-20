@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MathQuest.Bootstrap;
 using MathQuest.Data;
 using UnityEngine;
 
@@ -203,6 +204,10 @@ namespace MathQuest.Battle
             }
 
             shakes.Add(new ActiveShake { Step = step });
+
+            // The phone buzzes along with the screen: same length, same strength curve.
+            if (step.vibrate)
+                Haptics.PlayCurve(step.shakeDuration, step.shakeCurve, step.vibrationStrength);
         }
 
         private void OnDisable()
@@ -212,6 +217,7 @@ namespace MathQuest.Battle
 
             shakes.Clear();
             shaking = false;
+            Haptics.Cancel(); // leaving the battle must not leave the phone buzzing
         }
 
         private void Spawn(VfxStep step, VfxRun run)

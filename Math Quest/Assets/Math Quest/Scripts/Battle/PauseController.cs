@@ -91,6 +91,7 @@ namespace MathQuest.Battle
 
             IsPaused = true;
             Time.timeScale = 0f;
+            Haptics.Cancel(); // the shake stops with the pause, so the buzz does too
 
             RefreshRequirements();
 
