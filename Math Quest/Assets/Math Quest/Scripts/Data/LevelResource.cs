@@ -68,14 +68,26 @@ namespace MathQuest.Data
             return seconds <= twoStarTime ? 2 : 1;
         }
 
-        /// <summary>Asks every pool for its picks, in order. Call once when the level starts.</summary>
-        public List<QuestionResource> BuildQuestionList()
+        /// <summary>
+        /// Asks every pool for its picks, in order. Call once when the level starts.
+        /// <paramref name="avoid"/> is the texts of the questions asked last time, so a restart gets new ones
+        /// whenever the pools have enough. Questions already picked for this level are avoided too, so the same
+        /// question never appears twice in one run.
+        /// </summary>
+        public List<QuestionResource> BuildQuestionList(IEnumerable<string> avoid = null)
         {
+            HashSet<string> avoidSet = avoid != null ? new HashSet<string>(avoid) : new HashSet<string>();
             List<QuestionResource> result = new();
             foreach (LevelQuestionPool entry in questionPools)
             {
-                if (entry != null && entry.pool != null)
-                    entry.pool.Pick(result, entry.overrideCount ? entry.questionCount : -1);
+                if (entry == null || entry.pool == null)
+                    continue;
+
+                int before = result.Count;
+                entry.pool.Pick(result, entry.overrideCount ? entry.questionCount : -1, avoidSet);
+
+                for (int i = before; i < result.Count; i++)
+                    avoidSet.Add(result[i].question);
             }
 
             return result;

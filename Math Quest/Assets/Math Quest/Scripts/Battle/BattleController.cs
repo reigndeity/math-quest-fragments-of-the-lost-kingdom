@@ -294,7 +294,9 @@ namespace MathQuest.Battle
                 yield return characters.FadeStats(CharacterRole.Enemy, 1f, statsFadeInDuration);
             }
 
-            questions = level.BuildQuestionList();
+            // A restart (or a replay) avoids the questions asked last time, as long as the pools have enough others.
+            questions = level.BuildQuestionList(LevelSession.GetLastQuestions(level));
+            LevelSession.RememberQuestions(level, questions);
             questionIndex = 0;
             dialogue.PlayLines(level.startDialogue, AskQuestion);
         }

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5854b2db2b74792b356d0ecf5c6f5e2, type: 3}
+  m_Name: LevelResource_Act1_10
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.LevelResource
+  act: 1
+  enemy: {fileID: 11400000, guid: 5606433027a85429b4975dc9d938bf15, type: 2}
+  startDialogue:
+  - speaker: 1
+    text: "I am the last guard of this realm. Prove that you master it all!"
+  - speaker: 0
+    text: "I've come too far to stop now."
+  victoryDialogue:
+  - speaker: 1
+    text: "No... how did you solve all of that?!"
+  - speaker: 0
+    text: "Math wins again!"
+  defeatDialogue:
+  - speaker: 1
+    text: "Hehehe... come back when you have studied!"
+  - speaker: 0
+    text: "I'll be back..."
+  questionPools:
+  - pool: {fileID: 11400000, guid: b75aa8a4f9ba43e0bbd3b575a1ad7dc4, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: 23423d8db6da4288ba23e49b86fc10a7, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: 4201a46fec744d81bbef22cd0dc0dde4, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: ebb86559736442f38a67395b39c13ece, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: 4201a46fec744d81bbef22cd0dc0dde4, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  threeStarTime: 180
+  twoStarTime: 360

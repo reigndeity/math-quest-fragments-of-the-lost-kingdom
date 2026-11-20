@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad75036079c4419ca40c47b9f98cb46c, type: 3}
+  m_Name: QuestionPool_Act1_Evaluating_Difficult
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionWeightedPoolResource
+  entries:
+  - question: {fileID: 11400000, guid: 6cb40a725d8655279cb987243b8191f0, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 5728d34b8aff5a518aa30c97ff200dc6, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 1e9dd62fcf3a537eb9c79d7491c8a6e2, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 92dfff139e005283a2d07b2f2fa01c44, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: d5286c94cd345c8d8af5d5ec40a99426, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 9637fe6e9fa2525cb1c7cf88d51e42b1, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 3dba26f7e43b50e483f215c1f066fabb, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 64b0387e377554c4b0c9becc12c74bc5, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 2b9d363f3c59469999fb624a23e5f921, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 7828fb261a7a4b5386e26e710948bed8, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 6a0c09de48ca49478466115984ae2e4d, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 13ace645dc20462db5545efc8e9b8e2d, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 4f4abeaf7e82482b898c1e91886ba7e9, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 074ce8b0c55940edb041157ca1c614d1, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 865e50ca75c04b7da860fbd13ab0298f, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 51a8bf5a342f4ead912aa4b7bdd42482, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: bfba2443a8cb4507b0b9bae5cb437191, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 920df452a788434c829bb26b5f92d15e, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 3ff22c1f2ac943508b0e06a2d3510032, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 62a5fb18ff974c0196083837e2e04d18, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: bf8835076cac4032a69442c23cb347cc, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 78edeea179c74a2c9c0d053d6373c423, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 0e37988265df4e90babe6dbd1bec2165, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 6a4805151a994c6cb7b8ba679b9d9c9c, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 07ef84f2744942ea96ca1faff856ae62, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 3bccdfe93de44e2f97ef28e499561e31, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 3af9a5339f964d749aeedbd178c3943b, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 4ef4240420ac43aba2459465d8775b75, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: 6443ae72af32412bb08471c2d0857f1c, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: e689f6eef29e4826a7ba5fb8e518f3eb, type: 2}
+    weight: 1
+  - question: {fileID: 11400000, guid: ee3649f63da047758d054cdb48065da4, type: 2}
+    weight: 1
+  drawCount: 3
+  allowRepeats: 0

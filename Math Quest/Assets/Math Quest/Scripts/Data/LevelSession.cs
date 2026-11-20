@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace MathQuest.Data
 {
     /// <summary>
@@ -21,6 +23,31 @@ namespace MathQuest.Data
         {
             Act = null;
             Level = null;
+        }
+
+        // The questions each level asked last time (their texts), so a restart or a replay gets new ones.
+        // Kept for as long as the game runs; it does not need to survive closing the game.
+        private static readonly Dictionary<LevelResource, List<string>> LastQuestions = new();
+
+        /// <summary>Texts of the questions this level asked last time, or null if it has not been played yet.</summary>
+        public static IEnumerable<string> GetLastQuestions(LevelResource level)
+        {
+            return level != null && LastQuestions.TryGetValue(level, out List<string> texts) ? texts : null;
+        }
+
+        public static void RememberQuestions(LevelResource level, IEnumerable<QuestionResource> questions)
+        {
+            if (level == null || questions == null)
+                return;
+
+            List<string> texts = new();
+            foreach (QuestionResource question in questions)
+            {
+                if (question != null)
+                    texts.Add(question.question);
+            }
+
+            LastQuestions[level] = texts;
         }
     }
 }

@@ -13,7 +13,10 @@ namespace MathQuest.Data
         /// Appends this pool's picks, in the order they will be asked. A negative
         /// <paramref name="countOverride"/> uses the pool's own count; otherwise the level's
         /// number is used instead.
+        /// <paramref name="avoid"/> holds question texts to skip when the pool has other questions to use
+        /// (the ones asked last time, and the ones already picked for this level). Only when the pool runs out of
+        /// fresh questions does it fall back to the avoided ones.
         /// </summary>
-        public abstract void Pick(List<QuestionResource> into, int countOverride = -1);
+        public abstract void Pick(List<QuestionResource> into, int countOverride = -1, ICollection<string> avoid = null);
     }
 }

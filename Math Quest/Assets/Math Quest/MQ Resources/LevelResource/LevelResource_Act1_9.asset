@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5854b2db2b74792b356d0ecf5c6f5e2, type: 3}
+  m_Name: LevelResource_Act1_9
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.LevelResource
+  act: 1
+  enemy: {fileID: 11400000, guid: 5606433027a85429b4975dc9d938bf15, type: 2}
+  startDialogue:
+  - speaker: 1
+    text: "Time to put everything together: parts, phrases and numbers."
+  - speaker: 0
+    text: "I've learned a lot on this road."
+  victoryDialogue:
+  - speaker: 1
+    text: "You have learned well... but the final guard is stronger."
+  - speaker: 0
+    text: "Then I'll face him next."
+  defeatDialogue:
+  - speaker: 1
+    text: "You forgot something along the way. Review and return!"
+  - speaker: 0
+    text: "I'll be back..."
+  questionPools:
+  - pool: {fileID: 11400000, guid: ecac35fe843a4a66af1be5bf85b99f6b, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: 5ad3d7cce3af4c92a06de15b68ce51e9, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: b75aa8a4f9ba43e0bbd3b575a1ad7dc4, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: 4201a46fec744d81bbef22cd0dc0dde4, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  - pool: {fileID: 11400000, guid: ebb86559736442f38a67395b39c13ece, type: 2}
+    overrideCount: 1
+    questionCount: 1
+  threeStarTime: 150
+  twoStarTime: 300

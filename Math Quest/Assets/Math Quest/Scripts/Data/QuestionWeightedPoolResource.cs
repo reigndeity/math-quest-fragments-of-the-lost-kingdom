@@ -31,17 +31,33 @@ namespace MathQuest.Data
         [Tooltip("Off: a question can only appear once. On: the same question can be drawn again.")]
         [SerializeField] private bool allowRepeats;
 
-        public override void Pick(List<QuestionResource> into, int countOverride = -1)
+        public override void Pick(List<QuestionResource> into, int countOverride = -1, ICollection<string> avoid = null)
         {
-            List<WeightedQuestion> candidates = new();
+            // Fresh questions first; the ones to avoid are only used if the pool runs out of fresh ones.
+            List<WeightedQuestion> fresh = new();
+            List<WeightedQuestion> stale = new();
             foreach (WeightedQuestion entry in entries)
             {
-                if (entry != null && entry.question != null && entry.weight > 0f)
-                    candidates.Add(entry);
+                if (entry == null || entry.question == null || entry.weight <= 0f)
+                    continue;
+
+                if (avoid != null && avoid.Contains(entry.question.question))
+                    stale.Add(entry);
+                else
+                    fresh.Add(entry);
             }
 
-            int count = countOverride >= 0 ? countOverride : drawCount;
-            for (int n = 0; n < count && candidates.Count > 0; n++)
+            int remaining = countOverride >= 0 ? countOverride : drawCount;
+            remaining -= Draw(fresh, into, remaining);
+            if (remaining > 0 && !allowRepeats)
+                Draw(stale, into, remaining);
+        }
+
+        // Draws up to 'count' questions from the candidates, favouring higher weights. Returns how many it drew.
+        private int Draw(List<WeightedQuestion> candidates, List<QuestionResource> into, int count)
+        {
+            int drawn = 0;
+            while (drawn < count && candidates.Count > 0)
             {
                 float total = 0f;
                 foreach (WeightedQuestion entry in candidates)
@@ -59,10 +75,18 @@ namespace MathQuest.Data
                     }
                 }
 
-                into.Add(candidates[chosen].question);
+                QuestionResource question = candidates[chosen].question;
+                into.Add(question);
+                drawn++;
+
                 if (!allowRepeats)
-                    candidates.RemoveAt(chosen);
+                {
+                    // Also drop questions with the same text, so a duplicate in the bank is not asked twice.
+                    candidates.RemoveAll(entry => entry.question == question || entry.question.question == question.question);
+                }
             }
+
+            return drawn;
         }
     }
 }

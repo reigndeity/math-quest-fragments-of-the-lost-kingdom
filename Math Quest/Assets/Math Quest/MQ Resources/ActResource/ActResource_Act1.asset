@@ -17,23 +17,23 @@ MonoBehaviour:
   levels:
   - level: {fileID: 11400000, guid: cb5716dfddd64895a4b8f2c17eedf822, type: 2}
     mapPosition: {x: -220, y: 520}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: 9a9e6c8199f045108ced953c23e44e9c, type: 2}
     mapPosition: {x: 220, y: 800}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: 3a9dcdda9a584b889c31bd679efeb2e4, type: 2}
     mapPosition: {x: -80, y: 1140}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: 34168fc2d0d747279965497b0a1eae7e, type: 2}
     mapPosition: {x: 240, y: 1660}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: 18b1fc268af144d3bc89749539e9c912, type: 2}
     mapPosition: {x: -140, y: 1780}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: de5f506f990b4042ace5418812a0d84d, type: 2}
     mapPosition: {x: -180, y: 2320}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: efc13072e0ce41fe92b880ea3f39c7ef, type: 2}
     mapPosition: {x: 320, y: 2480}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: bfcb2207620a4ef9856a7eae94266202, type: 2}
     mapPosition: {x: 140, y: 3080}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: b341e99bd5624a788a9b040257d32c9d, type: 2}
     mapPosition: {x: -240, y: 3420}
-  - level: {fileID: 0}
+  - level: {fileID: 11400000, guid: fa65a4e6c4d44319934844a9f2ec279e, type: 2}
     mapPosition: {x: -0, y: 3820}
   mapTopPadding: 400
   background: {fileID: 0}
