@@ -35,6 +35,9 @@ namespace MathQuest.Data
             return level != null && LastQuestions.TryGetValue(level, out List<string> texts) ? texts : null;
         }
 
+        /// <summary>Forgets every level's last questions (used when the game data is reset).</summary>
+        public static void ForgetQuestions() => LastQuestions.Clear();
+
         public static void RememberQuestions(LevelResource level, IEnumerable<QuestionResource> questions)
         {
             if (level == null || questions == null)

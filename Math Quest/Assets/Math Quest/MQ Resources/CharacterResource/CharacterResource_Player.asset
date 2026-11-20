@@ -16,6 +16,8 @@ MonoBehaviour:
   displayName: PLAYER NAME
   maxHearts: 3
   characterPrefab: {fileID: 1995083367057083502, guid: fd8e69c823f560b47af573eeb70ef497, type: 3}
+  girlPrefab: {fileID: 1995083367057083502, guid: 4135e066a6b24e34fa2616d9bf60db50, type: 3}
+  defeatDissolve: {fileID: 0}
   skills:
   - difficulty: 0
     skill: {fileID: 11400000, guid: 0682e299909e5d5597eec9305258bbb9, type: 2}

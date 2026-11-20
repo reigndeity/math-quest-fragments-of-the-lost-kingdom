@@ -34,11 +34,23 @@ namespace MathQuest.Data
         [Tooltip("The character prefab (for example Player_Boy). It is spawned into the PlayerModel or EnemyModel holder when the battle starts. If empty, whatever is already in the holder is kept.")]
         public GameObject characterPrefab;
 
+        [Tooltip("Player only: the prefab used when the player picked the girl (Player_Girl). Character Prefab is then the boy's. Empty: the girl uses Character Prefab too.")]
+        public GameObject girlPrefab;
+
         [Tooltip("The dissolve used when this character is defeated: one of the PixelDissolve materials (Fire, Nature, Shadow, Frost...). It decides the colour of the burning edge. Empty: no dissolve.")]
         public Material defeatDissolve;
 
         [Tooltip("The skills for each question difficulty: the player uses one when answering right, the enemy when the player answers wrong. Give a difficulty several entries and one is picked at random each time. A difficulty with no entry plays no effect.")]
         public List<DifficultySkill> skills = new();
+
+        /// <summary>The prefab to show: the girl's when the player picked her (and one is set), otherwise Character Prefab.</summary>
+        public GameObject GetPrefab(PlayerCharacter chosen)
+        {
+            if (role == CharacterRole.Player && chosen == PlayerCharacter.Girl && girlPrefab != null)
+                return girlPrefab;
+
+            return characterPrefab;
+        }
 
         /// <summary>A skill for a difficulty (a random one if there are several), or null if none is set.</summary>
         public SkillResource GetSkill(QuestionDifficulty difficulty)

@@ -265,13 +265,26 @@ namespace MathQuest.Battle
             CharacterSlot slot = isPlayer ? playerSlot : enemySlot;
 
             slot.character = character;
-            SpawnModel(slot, character.characterPrefab);
+
+            // The player is the boy or the girl the player chose, under the name they typed. Both come from
+            // the save (loaded now if it has not been yet); the Display Name is only the fallback.
+            if (isPlayer)
+                _ = SaveSystem.Data;
+
+            SpawnModel(slot, isPlayer ? character.GetPrefab(PlayerProfile.Character) : character.characterPrefab);
 
             if (slot.nameText != null)
             {
-                slot.nameText.text = isPlayer && !string.IsNullOrEmpty(playerNameOverride)
-                    ? playerNameOverride
-                    : character.displayName;
+                string shownName = character.displayName;
+                if (isPlayer)
+                {
+                    if (!string.IsNullOrEmpty(playerNameOverride))
+                        shownName = playerNameOverride;
+                    else if (!string.IsNullOrWhiteSpace(PlayerProfile.PlayerName))
+                        shownName = PlayerProfile.PlayerName;
+                }
+
+                slot.nameText.text = shownName;
             }
 
             ShowHearts(slot, character.maxHearts);

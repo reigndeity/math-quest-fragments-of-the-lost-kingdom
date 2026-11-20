@@ -38,7 +38,10 @@ namespace MathQuest.UI
         private void Confirm()
         {
             if (EnteredName.Length == 0) return;
+
+            // A character and a name are both chosen now, so this is where the game is first saved.
             PlayerProfile.PlayerName = EnteredName;
+            SaveSystem.StartNewGame(PlayerProfile.Character, EnteredName);
         }
 
         private void Refresh()
