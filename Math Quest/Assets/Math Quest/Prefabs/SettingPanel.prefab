@@ -643,6 +643,7 @@ GameObject:
   - component: {fileID: 2112618478391115845}
   - component: {fileID: 8270119583065740504}
   - component: {fileID: 1141921285904235789}
+  - component: {fileID: 1344549213997319928}
   m_Layer: 5
   m_Name: SettingHolder
   m_TagString: Untagged
@@ -713,6 +714,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.14
+--- !u!114 &1344549213997319928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7084657694596838573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 907af1d528c112844af15882df56f59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.VolumeSettingsView
+  soundSlider: {fileID: 56232161659720073}
+  musicSlider: {fileID: 3014972832376965452}
 --- !u!1 &7198115983374004567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 8590534417005797933}
   action: 0
+  useTransition: 0
 --- !u!1 &7251581115372291231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 7198115983374004567}
   action: 1
+  useTransition: 0
 --- !u!1001 &4872511687990365628
 PrefabInstance:
   m_ObjectHideFlags: 0

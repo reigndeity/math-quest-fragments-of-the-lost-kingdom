@@ -256,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 873272570}
   action: 0
-  useTransition: 0
+  useTransition: 1
 --- !u!114 &37076964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 658974094}
   action: 1
-  useTransition: 0
+  useTransition: 1
 --- !u!1 &45577696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,6 +4147,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1817771405}
     m_Modifications:
+    - target: {fileID: 1093066939590729439, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
+      propertyPath: useTransition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1540484778246436400, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -4266,6 +4270,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6488666588781534599, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
       insertIndex: -1
       addedObject: {fileID: 906085350}
+    - targetCorrespondingSourceObject: {fileID: 6488666588781534599, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 906085352}
+    - targetCorrespondingSourceObject: {fileID: 6488666588781534599, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 906085351}
   m_SourcePrefab: {fileID: 100100000, guid: 4465ff92a4d8c0643b6b8825f56c4996, type: 3}
 --- !u!224 &906085348 stripped
 RectTransform:
@@ -4289,6 +4299,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc224dbb06b85cd4f99eeb742253c74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.ResetSaveButton
+--- !u!114 &906085351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906085349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4bd97f2d2eb6343ae1ce625919c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
+  target: {fileID: 873272570}
+  action: 0
+  useTransition: 1
+--- !u!114 &906085352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 906085349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db4bd97f2d2eb6343ae1ce625919c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
+  target: {fileID: 1124666523}
+  action: 1
+  useTransition: 1
 --- !u!1 &922794505
 GameObject:
   m_ObjectHideFlags: 0
@@ -4481,7 +4521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 873272570}
   action: 0
-  useTransition: 0
+  useTransition: 1
 --- !u!114 &938495376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4496,7 +4536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
   target: {fileID: 767435264}
   action: 1
-  useTransition: 0
+  useTransition: 1
 --- !u!114 &938495377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11336,7 +11376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4bd97f2d2eb6343ae1ce625919c13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.UI.PanelToggleButton
-  target: {fileID: 1875579467}
+  target: {fileID: 658974094}
   action: 0
   useTransition: 1
 --- !u!222 &6778845131357829963
