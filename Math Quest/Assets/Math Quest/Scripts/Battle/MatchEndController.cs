@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MathQuest.Bootstrap;
 using MathQuest.Data;
 using MathQuest.UI;
@@ -16,9 +15,6 @@ namespace MathQuest.Battle
     [DisallowMultipleComponent]
     public sealed class MatchEndController : MonoBehaviour
     {
-        // Until saving exists, the best time only lasts while the game is running.
-        private static readonly Dictionary<LevelResource, float> SessionBestTimes = new();
-
         [SerializeField] private BattleController battle;
         [SerializeField] private PauseController pause;
         [Tooltip("The BlurBackdropController. The background blurs while the match end panel is open.")]
@@ -69,14 +65,13 @@ namespace MathQuest.Battle
 
             int stars = playerWon && level != null ? level.StarsForTime(answeringTime) : 0;
 
-            float best = 0f;
-            bool hasBest = level != null && SessionBestTimes.TryGetValue(level, out best);
-            if (playerWon && level != null && (!hasBest || answeringTime < best))
-            {
-                best = answeringTime;
-                hasBest = true;
-                SessionBestTimes[level] = best;
-            }
+            // A win is saved (a better result replaces the old one), and it opens the next level on the map.
+            if (playerWon && level != null)
+                SaveSystem.RecordWin(level, stars, answeringTime);
+
+            LevelRecord record = SaveSystem.GetLevel(level);
+            bool hasBest = record != null && record.bestTime > 0f;
+            float best = hasBest ? record.bestTime : 0f;
 
             if (title != null) title.text = playerWon ? victoryText : defeatText;
             if (currentTimeValue != null) currentTimeValue.text = Format(answeringTime);

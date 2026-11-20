@@ -1,5 +1,6 @@
 using MathQuest.Bootstrap;
 using MathQuest.Data;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace MathQuest.UI
     /// <summary>
     /// On the AboutCurrentLevelPanel. One panel is reused for every level: <see cref="Show"/> fills it for the
     /// tapped level and opens it, and the Play button starts that level in the Battle scene.
-    /// For now it only shows the stars; best time and mistakes wait for saving.
+    /// It shows the stars and best time saved for the level.
     /// </summary>
     public sealed class LevelInfoPanel : MonoBehaviour
     {
@@ -16,6 +17,11 @@ namespace MathQuest.UI
         [SerializeField] private RectTransform[] stars = System.Array.Empty<RectTransform>();
         [Tooltip("The child of each star holder turned on when that star is earned.")]
         [SerializeField] private string starFillName = "StarFill";
+
+        [Header("Best time")]
+        [Tooltip("The BestTimeValue text. Shows the fastest winning time from the save, or --:-- if the level has not been won.")]
+        [SerializeField] private TMP_Text bestTimeValue;
+        [SerializeField] private string noTimeText = "--:--";
 
         [Header("Play")]
         [SerializeField] private Button playButton;
@@ -48,6 +54,12 @@ namespace MathQuest.UI
 
                 Transform fill = stars[i].Find(starFillName);
                 if (fill != null) fill.gameObject.SetActive(i < earned);
+            }
+
+            if (bestTimeValue != null)
+            {
+                bool won = node != null && node.State == LevelNodeState.Completed && node.BestTime > 0f;
+                bestTimeValue.text = won ? TimeFormat.Minutes(node.BestTime) : noTimeText;
             }
 
             gameObject.SetActive(true);

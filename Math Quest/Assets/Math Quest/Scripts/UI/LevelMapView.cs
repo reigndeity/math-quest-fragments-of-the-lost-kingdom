@@ -17,7 +17,7 @@ namespace MathQuest.UI
     /// Top Padding, so the scroll stops there. Optionally sets an Image (like CurrentActLevelBackground)
     /// to the act's background, so the same scene works for every act.
     ///
-    /// UI only for now: nothing unlocks or opens levels.
+    /// Which levels are open, and their stars and best times, come from the save (SaveSystem).
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(RectTransform))]
@@ -38,14 +38,6 @@ namespace MathQuest.UI
         [SerializeField] private float scrollSensitivity = 30f;
         [Tooltip("How far, in UI units, levels fade out at the top and bottom edges of the scroll area instead of being cut off. 0 is a hard edge.")]
         [SerializeField, Min(0)] private int edgeFade = 120;
-
-        [Header("Test progress (until saving exists)")]
-        [Tooltip("How many levels count as finished, from level 1. The next one is the current level; the rest stay locked.")]
-        [SerializeField, Min(0)] private int testCompletedLevels = 1;
-        [Tooltip("Best answering time in seconds for each finished level (element 0 is level 1). Missing ones use 0 (3 stars).")]
-        [SerializeField] private List<float> testBestTimes = new() { 45f };
-        [Tooltip("On: spots with no level made yet act like real levels, so every state can be seen now. Off: they stay locked (the real rule).")]
-        [SerializeField] private bool testIncludeEmptySlots = true;
 
         private readonly List<GameObject> spawned = new();
         private readonly List<LevelNode> nodes = new();
@@ -153,33 +145,63 @@ namespace MathQuest.UI
             SelectionChanged?.Invoke(Selected);
         }
 
-        // Levels unlock strictly in order: every level before the current one is finished, the current one is
-        // unlocked, everything after is locked. A spot with no level made yet is always locked.
-        // For now the progress comes from the Test Progress fields; later it will come from the save.
+        // Levels unlock strictly in order, from the save: a finished level shows its best stars and time, the first
+        // level that is not finished (after a finished one) is unlocked, everything after is locked. A spot with no
+        // level made yet is always locked.
         private void ApplyProgress()
         {
+            bool previousFinished = true; // the first level is always open
             for (int i = 0; i < nodes.Count; i++)
             {
                 LevelNode node = nodes[i];
-                if (node.Level == null && !testIncludeEmptySlots)
+                if (node.Level == null)
                 {
                     node.SetProgress(LevelNodeState.Locked);
+                    previousFinished = false;
+                    continue;
                 }
-                else if (node.Index < testCompletedLevels)
+
+                LevelRecord record = SaveSystem.GetLevel(node.Level);
+                if (record != null)
                 {
-                    float best = node.Index < testBestTimes.Count ? testBestTimes[node.Index] : 0f;
-                    int stars = node.Level != null ? node.Level.StarsForTime(best) : best <= 60f ? 3 : best <= 120f ? 2 : 1;
-                    node.SetProgress(LevelNodeState.Completed, stars, best);
+                    node.SetProgress(LevelNodeState.Completed, record.stars, record.bestTime);
+                    previousFinished = true;
                 }
-                else if (node.Index == testCompletedLevels)
+                else if (previousFinished)
                 {
                     node.SetProgress(LevelNodeState.Unlocked);
+                    previousFinished = false;
                 }
                 else
                 {
                     node.SetProgress(LevelNodeState.Locked);
                 }
             }
+        }
+
+        /// <summary>Reads the save again (after a win or a reset) and updates every level.</summary>
+        public void RefreshProgress()
+        {
+            if (nodes.Count == 0)
+                return;
+
+            ApplyProgress();
+
+            if (Selected != null && !Selected.CanSelect)
+                Selected = null;
+
+            Select(CurrentLevel());
+        }
+
+        private void OnEnable()
+        {
+            SaveSystem.Changed += RefreshProgress;
+            RefreshProgress(); // coming back to the map after a battle
+        }
+
+        private void OnDisable()
+        {
+            SaveSystem.Changed -= RefreshProgress;
         }
 
         // The level to preselect: the newest unlocked one, or the last finished one if every level is done.

@@ -18,6 +18,33 @@ namespace MathQuest.Data
 
         public string playerName = string.Empty;
         public PlayerCharacter character = PlayerCharacter.Boy;
+
+        /// <summary>One entry for every level the player has won at least once.</summary>
+        public System.Collections.Generic.List<LevelRecord> levels = new();
+    }
+
+    /// <summary>What the player achieved on one level. A level has a record once it has been won.</summary>
+    [Serializable]
+    public sealed class LevelRecord
+    {
+        /// <summary>The LevelResource's asset name, for example LevelResource_Act1_3.</summary>
+        public string levelId;
+
+        /// <summary>The most stars earned (1 to 3).</summary>
+        public int stars;
+
+        /// <summary>The fastest answering time of a win, in seconds.</summary>
+        public float bestTime;
+    }
+
+    /// <summary>Formats seconds the way the game shows times: 02:05.</summary>
+    public static class TimeFormat
+    {
+        public static string Minutes(float seconds)
+        {
+            int total = Mathf.Max(0, Mathf.RoundToInt(seconds));
+            return $"{total / 60:00}:{total % 60:00}";
+        }
     }
 
     /// <summary>
@@ -93,6 +120,46 @@ namespace MathQuest.Data
 
             PlayerProfile.Character = data.character;
             PlayerProfile.PlayerName = data.playerName;
+
+            Save();
+            Changed?.Invoke();
+        }
+
+        /// <summary>The record of a level, or null if it has not been won yet.</summary>
+        public static LevelRecord GetLevel(LevelResource level)
+        {
+            if (level == null)
+                return null;
+
+            foreach (LevelRecord record in Data.levels)
+            {
+                if (record.levelId == level.name)
+                    return record;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Saves a win. A better result replaces the old one, and a worse one never does: stars only go up and the
+        /// best time only goes down. Winning a level is what opens the next one.
+        /// </summary>
+        public static void RecordWin(LevelResource level, int stars, float answeringTime)
+        {
+            if (level == null)
+                return;
+
+            LevelRecord record = GetLevel(level);
+            if (record == null)
+            {
+                Data.levels.Add(new LevelRecord { levelId = level.name, stars = stars, bestTime = answeringTime });
+            }
+            else
+            {
+                record.stars = Mathf.Max(record.stars, stars);
+                if (record.bestTime <= 0f || answeringTime < record.bestTime)
+                    record.bestTime = answeringTime;
+            }
 
             Save();
             Changed?.Invoke();

@@ -2732,7 +2732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &522582486
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3009,9 +3009,6 @@ MonoBehaviour:
   startAtBottom: 1
   scrollSensitivity: 30
   edgeFade: 120
-  testCompletedLevels: 0
-  testBestTimes: []
-  testIncludeEmptySlots: 0
 --- !u!114 &613460074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3287,6 +3284,17 @@ MonoBehaviour:
   - {fileID: 806815628}
   activeColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveColor: {r: 0, g: 0, b: 0, a: 1}
+  acts:
+  - {fileID: 11400000, guid: e049d0a7653440a283246b458c5857aa, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentStars: {fileID: 1596094867}
+  maxStars: {fileID: 395395506}
+  progressFill: {fileID: 308718416}
+  starsPerLevel: 3
+  defaultLevelCount: 10
   unlockedActCount: 1
 --- !u!1 &688106532
 GameObject:
@@ -3893,7 +3901,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &871962942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3983,6 +3991,8 @@ MonoBehaviour:
   - {fileID: 3436954315143782105}
   - {fileID: 1613046866597478647}
   starFillName: StarFill
+  bestTimeValue: {fileID: 1277166887}
+  noTimeText: --:--
   playButton: {fileID: 343611725}
   map: {fileID: 613460073}
   battleSceneName: Battle
@@ -6740,7 +6750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 225, y: 0}
+  m_AnchoredPosition: {x: 225, y: -30}
   m_SizeDelta: {x: 450, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1619831346
