@@ -6,7 +6,7 @@ namespace MathQuest.Bootstrap
     /// <summary>
     /// Phone vibration. On Android it talks to the system vibrator directly, so it can follow a strength curve
     /// (a hit that fades out) instead of the fixed one-second buzz that Handheld.Vibrate gives. In the editor and
-    /// on other platforms it does nothing, except raise <see cref="Requested"/>, so it can be tested.
+    /// on other platforms it does nothing.
     ///
     ///   Haptics.PlayCurve(0.3f, curve, 0.8f);   // vibrate for 0.3s, following the curve, at 80% strength
     ///   Haptics.Cancel();                        // stop at once
@@ -18,9 +18,6 @@ namespace MathQuest.Bootstrap
 
         // How long each step of a vibration lasts. A curve is played as a staircase of steps this long.
         private const float StepSeconds = 0.04f;
-
-        /// <summary>Raised whenever a vibration is asked for (duration in seconds, strength 0 to 1). Used by tests.</summary>
-        public static event Action<float, float> Requested;
 
         /// <summary>The player's on/off switch. On unless they turned it off.</summary>
         public static bool Enabled
@@ -42,7 +39,6 @@ namespace MathQuest.Bootstrap
                 return;
 
             BuildWaveform(duration, curve, strength, out long[] timings, out int[] amplitudes);
-            Requested?.Invoke(duration, strength);
             PlayWaveform(timings, amplitudes);
         }
 
@@ -52,7 +48,6 @@ namespace MathQuest.Bootstrap
             if (!Enabled || duration <= 0f || strength <= 0f)
                 return;
 
-            Requested?.Invoke(duration, strength);
             PlayWaveform(new[] { (long)Mathf.RoundToInt(duration * 1000f) }, new[] { ToAmplitude(strength) });
         }
 
@@ -73,14 +68,29 @@ namespace MathQuest.Bootstrap
             }
         }
 
-        private static int ToAmplitude(float strength) => Mathf.Clamp(Mathf.RoundToInt(strength * 255f), 0, 255);
+        // Most phone motors give nothing you can feel below about a third of their range, so a fading hit would
+        // vanish half way. Anything that should vibrate is lifted into the range that can be felt (80 to 255).
+        private const int FeelableFloor = 80;
+
+        private static int ToAmplitude(float strength)
+        {
+            strength = Mathf.Clamp01(strength);
+            return strength <= 0.02f ? 0 : Mathf.RoundToInt(Mathf.Lerp(FeelableFloor, 255f, strength));
+        }
 
 #if UNITY_ANDROID && !UNITY_EDITOR
         private static bool initialized;
+        private static bool initFailed;
         private static AndroidJavaObject vibrator;
         private static AndroidJavaClass effectClass;
+        private static AndroidJavaObject alarmAttributes;
         private static int sdk;
         private static bool hasAmplitudeControl;
+
+        // The game's vibrations are sent as the "alarm" type. On many phones (Tecno, itel and others) the haptic
+        // setting is off out of the box and silently drops every other type, so a camera shake would never be felt.
+        // The player's own switch is Haptics.Enabled.
+        private const int UsageAlarm = 4;
 
         private static bool Init()
         {
@@ -107,52 +117,108 @@ namespace MathQuest.Bootstrap
                     }
                 }
 
-                if (vibrator != null && sdk >= 26)
+                bool hasVibrator = vibrator != null && vibrator.Call<bool>("hasVibrator");
+
+                if (hasVibrator && sdk >= 26)
                 {
                     effectClass = new AndroidJavaClass("android.os.VibrationEffect");
                     hasAmplitudeControl = vibrator.Call<bool>("hasAmplitudeControl");
                 }
+
+                if (hasVibrator)
+                    alarmAttributes = MakeAttributes(UsageAlarm);
+
+                if (!hasVibrator)
+                    vibrator = null; // a phone or tablet with no motor: nothing to do
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"Vibration is not available: {e.Message}");
+                Debug.LogWarning($"[Haptics] Could not reach the vibrator: {e.Message}");
                 vibrator = null;
+                initFailed = true;
             }
 
             return vibrator != null;
         }
 
+        private static AndroidJavaObject MakeAttributes(int usage)
+        {
+            using (var builder = new AndroidJavaObject("android.media.AudioAttributes$Builder"))
+            {
+                using (builder.Call<AndroidJavaObject>("setUsage", usage)) { }
+                return builder.Call<AndroidJavaObject>("build");
+            }
+        }
+
+        private static long TotalMilliseconds(long[] timings)
+        {
+            long total = 0;
+            foreach (long t in timings)
+                total += t;
+            return total;
+        }
+
         private static void PlayWaveform(long[] timings, int[] amplitudes)
         {
             if (!Init())
+            {
+                // Only when reaching the vibrator went wrong (not when the phone simply has none).
+                if (initFailed)
+                    Handheld.Vibrate();
                 return;
+            }
 
             try
             {
-                long total = 0;
-                foreach (long t in timings)
-                    total += t;
-
-                if (sdk >= 26 && hasAmplitudeControl)
-                {
-                    using (var effect = effectClass.CallStatic<AndroidJavaObject>("createWaveform", timings, amplitudes, -1))
-                        vibrator.Call("vibrate", effect);
-                }
-                else if (sdk >= 26)
-                {
-                    // No strength control on this phone: one buzz for the whole length.
-                    using (var effect = effectClass.CallStatic<AndroidJavaObject>("createOneShot", total, -1))
-                        vibrator.Call("vibrate", effect);
-                }
-                else
-                {
-                    vibrator.Call("vibrate", total);
-                }
+                Send(timings, amplitudes, alarmAttributes);
             }
             catch (Exception e)
             {
-                Debug.LogWarning($"Could not vibrate: {e.Message}");
+                // Something about the alarm type failed on this phone: try without it, then the plain system buzz.
+                Debug.LogWarning($"[Haptics] Could not vibrate as an alarm, trying the default type: {e.Message}");
+                try
+                {
+                    Send(timings, amplitudes, null);
+                }
+                catch (Exception second)
+                {
+                    Debug.LogWarning($"[Haptics] Could not vibrate, using the plain buzz instead: {second.Message}");
+                    Handheld.Vibrate();
+                }
             }
+        }
+
+        private static void Send(long[] timings, int[] amplitudes, AndroidJavaObject attributes)
+        {
+            long total = TotalMilliseconds(timings);
+
+            if (sdk >= 26 && hasAmplitudeControl)
+            {
+                using (var effect = effectClass.CallStatic<AndroidJavaObject>("createWaveform", timings, amplitudes, -1))
+                    Vibrate(effect, attributes);
+            }
+            else if (sdk >= 26)
+            {
+                // No strength control on this phone: one buzz for the whole length.
+                using (var effect = effectClass.CallStatic<AndroidJavaObject>("createOneShot", total, -1))
+                    Vibrate(effect, attributes);
+            }
+            else if (attributes != null)
+            {
+                vibrator.Call("vibrate", total, attributes);
+            }
+            else
+            {
+                vibrator.Call("vibrate", total);
+            }
+        }
+
+        private static void Vibrate(AndroidJavaObject effect, AndroidJavaObject attributes)
+        {
+            if (attributes != null)
+                vibrator.Call("vibrate", effect, attributes);
+            else
+                vibrator.Call("vibrate", effect);
         }
 
         /// <summary>Stops any vibration that is still running.</summary>

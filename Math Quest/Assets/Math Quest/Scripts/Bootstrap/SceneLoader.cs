@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace MathQuest.Bootstrap
@@ -13,6 +14,24 @@ namespace MathQuest.Bootstrap
     {
         private static bool isLoading;
 
+        // The scene being left and the scene being loaded each have an Event System. Two at once make Unity print
+        // warnings, so the one in the scene that is about to go is switched off before the new scene loads.
+        private static void SetEventSystems(Scene scene, bool enabled)
+        {
+            if (!scene.IsValid() || !scene.isLoaded)
+                return;
+
+            foreach (GameObject root in scene.GetRootGameObjects())
+            {
+                foreach (EventSystem eventSystem in root.GetComponentsInChildren<EventSystem>(true))
+                    eventSystem.enabled = enabled;
+
+                // The same goes for the audio listener on each scene's camera ("2 audio listeners").
+                foreach (AudioListener listener in root.GetComponentsInChildren<AudioListener>(true))
+                    listener.enabled = enabled;
+            }
+        }
+
         /// <summary>Loads <paramref name="targetSceneName"/> additively, makes it active, then unloads <paramref name="sceneToUnload"/>.</summary>
         public static void Replace(string targetSceneName, Scene sceneToUnload)
         {
@@ -22,10 +41,12 @@ namespace MathQuest.Bootstrap
             if (SceneManager.GetSceneByName(targetSceneName).isLoaded)
                 return;
 
+            SetEventSystems(sceneToUnload, false);
             AsyncOperation load = SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Additive);
             if (load == null)
             {
                 Debug.LogError($"Could not load scene '{targetSceneName}'. Is it in Build Settings?");
+                SetEventSystems(sceneToUnload, true);
                 return;
             }
 
@@ -66,10 +87,12 @@ namespace MathQuest.Bootstrap
             if (SceneManager.GetSceneByName(targetSceneName).isLoaded)
                 yield break;
 
+            SetEventSystems(sceneToUnload, false);
             AsyncOperation load = SceneManager.LoadSceneAsync(targetSceneName, LoadSceneMode.Additive);
             if (load == null)
             {
                 Debug.LogError($"Could not load scene '{targetSceneName}'. Is it in Build Settings?");
+                SetEventSystems(sceneToUnload, true);
                 yield break;
             }
 
@@ -113,10 +136,12 @@ namespace MathQuest.Bootstrap
             for (int i = 0; i < SceneManager.sceneCount; i++)
                 before.Add(SceneManager.GetSceneAt(i).handle);
 
+            SetEventSystems(sceneToReload, false);
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             if (load == null)
             {
                 Debug.LogError($"Could not reload scene '{sceneName}'. Is it in Build Settings?");
+                SetEventSystems(sceneToReload, true);
                 yield break;
             }
 
@@ -156,10 +181,12 @@ namespace MathQuest.Bootstrap
             for (int i = 0; i < SceneManager.sceneCount; i++)
                 before.Add(SceneManager.GetSceneAt(i).handle);
 
+            SetEventSystems(sceneToReload, false);
             AsyncOperation load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             if (load == null)
             {
                 Debug.LogError($"Could not reload scene '{sceneName}'. Is it in Build Settings?");
+                SetEventSystems(sceneToReload, true);
                 return;
             }
 
