@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate the phrase: \"The sum of a number $w$ and 5, multiplied by 4.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate the phrase: "The sum of a number $w$ and 5, multiplied by
+    4."'
   answer: {fileID: 11400000, guid: a19af80e029d521c9554c6feaad03716, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "The sum comes first, so it goes in parentheses: $(w+5)$."
-  - "Multiply it by 4: $4(w+5)$."
+  - 'The sum comes first, so it goes in parentheses: $(w+5)$.'
+  - 'Multiply it by 4: $4(w+5)$.'

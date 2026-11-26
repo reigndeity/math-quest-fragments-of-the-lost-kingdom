@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Three-fourths of a number $t$, added to the product of 2 and $t$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Three-fourths of a number $t$, added to the product of 2 and $t$.
   answer: {fileID: 11400000, guid: 8fbe0b2a45c8430dafa02c14edf2a078, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{3}{4}t+2t$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{3}{4}t+2t$.

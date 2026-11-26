@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $14-5x^2+x$, what is the constant term?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $14-5x^2+x$, what is the constant term?
   answer: {fileID: 11400000, guid: 929c064f639a4c098fdad0d69e110ba6, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "A constant term has no variable."
-  - "Here it is $14$."
+  - A constant term has no variable.
+  - Here it is $14$.

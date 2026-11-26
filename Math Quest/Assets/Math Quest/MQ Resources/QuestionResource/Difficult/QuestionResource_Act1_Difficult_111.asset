@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In $3a-4b+5c-6d$, what is the coefficient of $d$?"
+  topic: Components of Algebraic Expressions
+  question: In $3a-4b+5c-6d$, what is the coefficient of $d$?
   answer: {fileID: 11400000, guid: 1481555d2ff2447ca4cfee994c511d95, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-6d$ it is $-6$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-6d$ it is $-6$.

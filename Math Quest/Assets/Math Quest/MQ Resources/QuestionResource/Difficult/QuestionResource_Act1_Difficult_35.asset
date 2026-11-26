@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the algebraic expression $7x^2-5x+12$, identify the coefficient of the term containing $x^2$."
+  topic: Components of Algebraic Expressions
+  question: In the algebraic expression $7x^2-5x+12$, identify the coefficient of
+    the term containing $x^2$.
   answer: {fileID: 11400000, guid: 2285bbe304a7476ea43082436d1d4f70, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Find the term with $x^2$ and read the number in front of it."
-  - "That number is $7$."
+  - Find the term with $x^2$ and read the number in front of it.
+  - That number is $7$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The cube of a number $n$, decreased by twice the same number."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The cube of a number $n$, decreased by twice the same number.
   answer: {fileID: 11400000, guid: e61e8416a88a4edc8b0f2f895c09eb88, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $n^3-2n$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $n^3-2n$.

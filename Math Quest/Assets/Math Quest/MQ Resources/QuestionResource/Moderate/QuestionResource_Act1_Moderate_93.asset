@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $4(p+3q)-2p$ when $p=5$ and $q=2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $4(p+3q)-2p$ when $p=5$ and $q=2$.
   answer: {fileID: 11400000, guid: 48161a199e3f430a866eafb48bf8882c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $4((5)+3(2))-2(5)$."
-  - "Work it out step by step. The result is $34$."
+  - 'Replace each letter with its value: $4((5)+3(2))-2(5)$.'
+  - Work it out step by step. The result is $34$.

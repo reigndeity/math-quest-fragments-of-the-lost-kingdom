@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Six less than the product of 8 and a number $b$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Six less than the product of 8 and a number $b$.
   answer: {fileID: 11400000, guid: 14760262db6e4784917721c7819aebf6, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $8b-6$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $8b-6$.

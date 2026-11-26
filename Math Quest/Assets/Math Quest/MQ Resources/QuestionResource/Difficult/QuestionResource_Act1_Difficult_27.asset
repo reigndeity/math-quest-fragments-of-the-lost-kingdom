@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Three times the cube of the difference of $p$ and $q$, decreased by the quotient of eight less than the product of seven and $p$, and the sum of $q$ and four."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Three times the cube of the difference of $p$ and $q$, decreased by the
+    quotient of eight less than the product of seven and $p$, and the sum of $q$
+    and four.
   answer: {fileID: 11400000, guid: ede44e607c8b44e59edef9f283c1bd66, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $3(p-q)^3-\\frac{7p-8}{q+4}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $3(p-q)^3-\frac{7p-8}{q+4}$.

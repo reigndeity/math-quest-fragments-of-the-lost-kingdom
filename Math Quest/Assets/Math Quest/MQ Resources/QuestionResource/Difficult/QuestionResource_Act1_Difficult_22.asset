@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{x^2}{3}-2(x-5)$ when $x=-3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{x^2}{3}-2(x-5)$ when $x=-3$.
   answer: {fileID: 11400000, guid: 15290ba711a15df885377b50509e3097, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace $x$ with $-3$: $\\frac{(-3)^2}{3}-2(-3-5)$."
-  - "$\\frac{9}{3}-2(-8)$."
-  - "$3+16=19$."
+  - 'Replace $x$ with $-3$: $\frac{(-3)^2}{3}-2(-3-5)$.'
+  - $\frac{9}{3}-2(-8)$.
+  - $3+16=19$.

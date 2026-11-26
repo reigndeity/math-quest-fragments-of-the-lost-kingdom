@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $x-3y+4z-6$, what is the constant term?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $x-3y+4z-6$, what is the constant term?
   answer: {fileID: 11400000, guid: aefd81972f774247b83345486faaa475, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "A constant term has no variable."
-  - "Here it is $-6$."
+  - A constant term has no variable.
+  - Here it is $-6$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms does the expression $-8m^3+4m^2n-6mn^2+n^3-1$ contain?"
+  topic: Components of Algebraic Expressions
+  question: How many terms does the expression $-8m^3+4m^2n-6mn^2+n^3-1$ contain?
   answer: {fileID: 11400000, guid: f63a06fa7f574e98821b5e0ce3c9cd61, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 5 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 5 terms.

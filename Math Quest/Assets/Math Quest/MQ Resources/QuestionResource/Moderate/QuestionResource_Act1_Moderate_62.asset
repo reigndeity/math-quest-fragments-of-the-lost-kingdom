@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $4x^3-2y^2$ when $x=2$ and $y=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $4x^3-2y^2$ when $x=2$ and $y=3$.
   answer: {fileID: 11400000, guid: a2dc334e17c2464094a8d9ed70f8be70, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $4(2)^3-2(3)^2$."
-  - "Work it out step by step. The result is $14$."
+  - 'Replace each letter with its value: $4(2)^3-2(3)^2$.'
+  - Work it out step by step. The result is $14$.

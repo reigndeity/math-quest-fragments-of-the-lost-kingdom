@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "A number $x$ decreased by the sum of three times the number and 11."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: A number $x$ decreased by the sum of three times the number and 11.
   answer: {fileID: 11400000, guid: 6085c7cdbb584ab5869bcf0da9a09ca6, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $x-(3x+11)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $x-(3x+11)$.

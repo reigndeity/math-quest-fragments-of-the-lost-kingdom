@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The quotient of a number $n$ and 8, decreased by 6."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The quotient of a number $n$ and 8, decreased by 6.
   answer: {fileID: 11400000, guid: 81dc3b26500c4fea95c511d11a50277c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{n}{8}-6$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{n}{8}-6$.

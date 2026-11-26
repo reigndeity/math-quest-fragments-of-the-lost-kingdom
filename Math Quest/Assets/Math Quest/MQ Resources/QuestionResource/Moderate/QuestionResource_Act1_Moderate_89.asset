@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The difference between twice a number $p$ and one-third of $p$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The difference between twice a number $p$ and one-third of $p$.
   answer: {fileID: 11400000, guid: 5be8be6807eb4b9d9fec78dbf49b8a1e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $2p-\\frac{p}{3}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $2p-\frac{p}{3}$.

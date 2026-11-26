@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of negative four and the cube of $x$, increased by ten."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of negative four and the cube of $x$, increased by ten.
   answer: {fileID: 11400000, guid: 3092979eee7e443eaeda220cf70e89e5, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $-4x^3+10$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $-4x^3+10$.

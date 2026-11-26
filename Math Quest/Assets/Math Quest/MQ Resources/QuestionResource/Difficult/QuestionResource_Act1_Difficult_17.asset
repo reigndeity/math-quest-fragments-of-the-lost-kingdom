@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of twice $p$ and the cube of $q$, increased by half the difference of $p$ and seven."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of twice $p$ and the cube of $q$, increased by half the difference
+    of $p$ and seven.
   answer: {fileID: 11400000, guid: bdc32b933fbf56e48033354c21f52fc9, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The product of twice $p$ and the cube of $q$ is $2pq^3$."
-  - "Half the difference of $p$ and seven is $\\frac{p-7}{2}$."
-  - "Increased by means add: $2pq^3+\\frac{p-7}{2}$."
+  - The product of twice $p$ and the cube of $q$ is $2pq^3$.
+  - Half the difference of $p$ and seven is $\frac{p-7}{2}$.
+  - 'Increased by means add: $2pq^3+\frac{p-7}{2}$.'

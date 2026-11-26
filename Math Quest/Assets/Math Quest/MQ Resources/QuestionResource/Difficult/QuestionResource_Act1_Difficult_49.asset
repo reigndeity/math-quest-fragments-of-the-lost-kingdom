@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $9-x+4y-2z$, what is the coefficient of $x$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $9-x+4y-2z$, what is the coefficient of $x$?
   answer: {fileID: 11400000, guid: 5a30026ec0b349f88974cad381f6ee75, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-x$ it is $-1$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-x$ it is $-1$.

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficient of the term with the highest degree in the expression $7p^2-3p^5+9p$."
+  topic: Components of Algebraic Expressions
+  question: Identify the coefficient of the term with the highest degree in the expression
+    $7p^2-3p^5+9p$.
   answer: {fileID: 11400000, guid: 70da25350e404392a26897b1aa7efd37, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The highest degree is the largest exponent on the variable."
-  - "That term's coefficient is $-3$ (keep its sign)."
+  - The highest degree is the largest exponent on the variable.
+  - That term's coefficient is $-3$ (keep its sign).

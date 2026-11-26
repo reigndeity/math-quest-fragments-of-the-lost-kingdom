@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{3p^2q-r^2}{2p+q}$ when $p=-1$, $q=4$ and $r=-6$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{3p^2q-r^2}{2p+q}$ when $p=-1$, $q=4$ and $r=-6$.
   answer: {fileID: 11400000, guid: a1d5706a6a4c5e84b86ebcd54f732df5, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Top: $3(-1)^2(4)-(-6)^2=12-36=-24$."
-  - "Bottom: $2(-1)+4=2$."
-  - "$\\frac{-24}{2}=-12$."
+  - 'Top: $3(-1)^2(4)-(-6)^2=12-36=-24$.'
+  - 'Bottom: $2(-1)+4=2$.'
+  - $\frac{-24}{2}=-12$.

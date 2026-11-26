@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $m^2+2mn-n^2$ when $m=6$ and $n=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $m^2+2mn-n^2$ when $m=6$ and $n=3$.
   answer: {fileID: 11400000, guid: f965931f0ddd40789bd43b72f399286d, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $(6)^2+2(6)(3)-(3)^2$."
-  - "Work it out step by step. The result is $63$."
+  - 'Replace each letter with its value: $(6)^2+2(6)(3)-(3)^2$.'
+  - Work it out step by step. The result is $63$.

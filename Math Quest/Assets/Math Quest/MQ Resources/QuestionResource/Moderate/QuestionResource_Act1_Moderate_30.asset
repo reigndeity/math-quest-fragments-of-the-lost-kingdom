@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficient of the term with the highest degree in the expression $3w-9w^4+6v$."
+  topic: Components of Algebraic Expressions
+  question: Identify the coefficient of the term with the highest degree in the expression
+    $3w-9w^4+6v$.
   answer: {fileID: 11400000, guid: 3e1dcce6dd71419a8d117e50e7b4bba5, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The highest degree is the largest exponent on the variable."
-  - "That term's coefficient is $-9$ (keep its sign)."
+  - The highest degree is the largest exponent on the variable.
+  - That term's coefficient is $-9$ (keep its sign).

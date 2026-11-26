@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $7m^3-2m+11$, identify the coefficient of the middle term."
+  topic: Components of Algebraic Expressions
+  question: In the expression $7m^3-2m+11$, identify the coefficient of the middle
+    term.
   answer: {fileID: 11400000, guid: 290eddb9ef944eec9eecd21f1f0f6a33, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The middle term is the second term. Its coefficient is the number in front of the variable part."
-  - "Here that number is $-2$ (keep its sign)."
+  - The middle term is the second term. Its coefficient is the number in front of
+    the variable part.
+  - Here that number is $-2$ (keep its sign).

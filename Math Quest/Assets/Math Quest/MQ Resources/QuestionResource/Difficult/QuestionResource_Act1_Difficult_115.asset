@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In $-m^2+8m-12$, what is the coefficient of $m^2$?"
+  topic: Components of Algebraic Expressions
+  question: In $-m^2+8m-12$, what is the coefficient of $m^2$?
   answer: {fileID: 11400000, guid: 88d126eb49df4d52ae5930599eaa8e5b, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-m^2$ it is $-1$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-m^2$ it is $-1$.

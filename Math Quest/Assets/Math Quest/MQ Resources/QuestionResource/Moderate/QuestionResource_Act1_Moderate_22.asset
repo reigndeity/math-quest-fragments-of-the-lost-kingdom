@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Write an expression for: \"Three times the difference of a number $c$ and 8.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Write an expression for: "Three times the difference of a number $c$
+    and 8."'
   answer: {fileID: 11400000, guid: 153911544e8851429e867a61cd2af0a4, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The difference of $c$ and 8 is $c-8$."
-  - "Three times it: $3(c-8)$. The parentheses matter."
+  - The difference of $c$ and 8 is $c-8$.
+  - 'Three times it: $3(c-8)$. The parentheses matter.'

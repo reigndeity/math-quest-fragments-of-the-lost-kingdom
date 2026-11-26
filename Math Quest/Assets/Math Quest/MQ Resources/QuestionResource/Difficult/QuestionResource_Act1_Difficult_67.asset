@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The perimeter of a rectangle whose length is 3 more than twice its width $w$.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The perimeter of a rectangle whose length is 3 more than
+    twice its width $w$."'
   answer: {fileID: 11400000, guid: f45a224e702d415eb621b6764fdbf46e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $6w+6$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $6w+6$.

@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Three times the quantity four more than a number $a$, decreased by the quotient of $b$ and five."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Three times the quantity four more than a number $a$, decreased by the
+    quotient of $b$ and five.
   answer: {fileID: 11400000, guid: eb8c891b168b563fb70c795a3de75a5a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Four more than $a$ is $a+4$, and three times it is $3(a+4)$."
-  - "The quotient of $b$ and five is $\\frac{b}{5}$."
-  - "Decreased by means subtract: $3(a+4)-\\frac{b}{5}$."
+  - Four more than $a$ is $a+4$, and three times it is $3(a+4)$.
+  - The quotient of $b$ and five is $\frac{b}{5}$.
+  - 'Decreased by means subtract: $3(a+4)-\frac{b}{5}$.'

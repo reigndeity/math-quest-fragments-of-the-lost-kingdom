@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficient of the term with the highest degree in the expression $5w^2-7w^5+4w$."
+  topic: Components of Algebraic Expressions
+  question: Identify the coefficient of the term with the highest degree in the expression
+    $5w^2-7w^5+4w$.
   answer: {fileID: 11400000, guid: ba3dd966ad27452da7ef8867618ce49c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The highest degree is the largest exponent on the variable."
-  - "That term's coefficient is $-7$ (keep its sign)."
+  - The highest degree is the largest exponent on the variable.
+  - That term's coefficient is $-7$ (keep its sign).

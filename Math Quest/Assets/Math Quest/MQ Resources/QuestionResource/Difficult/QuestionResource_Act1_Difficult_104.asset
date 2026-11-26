@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "What is the constant term in the expression $-4x^2+9x-17$?"
+  topic: Components of Algebraic Expressions
+  question: What is the constant term in the expression $-4x^2+9x-17$?
   answer: {fileID: 11400000, guid: 8cc8d5d02e0547ff85a0d9bb2b25e28c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "A constant term has no variable."
-  - "Here it is $-17$."
+  - A constant term has no variable.
+  - Here it is $-17$.

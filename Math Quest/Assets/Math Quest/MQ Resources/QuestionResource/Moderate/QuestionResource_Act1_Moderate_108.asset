@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate to algebra: \"The product of the sum of $x$ and 2 and the difference of $y$ and 5.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate to algebra: "The product of the sum of $x$ and 2 and the difference
+    of $y$ and 5."'
   answer: {fileID: 11400000, guid: b1ef6702940b49f4b1aa3f7f8c7c2d28, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $(x+2)(y-5)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $(x+2)(y-5)$.

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The quotient of the sum of a number $x$ and 5, divided by 2.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The quotient of the sum of a number $x$ and 5, divided by
+    2."'
   answer: {fileID: 11400000, guid: 18b9acb448bd4109a607728f184ac8fa, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{x+5}{2}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{x+5}{2}$.

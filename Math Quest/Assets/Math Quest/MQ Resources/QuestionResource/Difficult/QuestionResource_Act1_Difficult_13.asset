@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are there in the expression below? $-2(x+4)^3-\\frac{y}{5}+6x-1$"
+  topic: Components of Algebraic Expressions
+  question: How many terms are there in the expression below? $-2(x+4)^3-\frac{y}{5}+6x-1$
   answer: {fileID: 11400000, guid: 1751212dd040549badece30cda4b0d96, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Terms are the parts separated by + and - signs."
-  - "$-2(x+4)^3$, $-\\frac{y}{5}$, $6x$ and $-1$ make 4 terms."
+  - Terms are the parts separated by + and - signs.
+  - $-2(x+4)^3$, $-\frac{y}{5}$, $6x$ and $-1$ make 4 terms.

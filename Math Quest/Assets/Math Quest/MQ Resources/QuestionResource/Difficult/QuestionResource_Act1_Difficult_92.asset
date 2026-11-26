@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are there in the expression below? $-3(x+5)^2-y^6+7x-13$"
+  topic: Components of Algebraic Expressions
+  question: How many terms are there in the expression below? $-3(x+5)^2-y^6+7x-13$
   answer: {fileID: 11400000, guid: d63f13f60fb849b1aaa28c45fdc55601, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 4 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 4 terms.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the expression $-3x^4y^5+x^7-y^6+21$?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the expression $-3x^4y^5+x^7-y^6+21$?
   answer: {fileID: 11400000, guid: 68053f5b398c48a7bf353a819a2115a4, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 4 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 4 terms.

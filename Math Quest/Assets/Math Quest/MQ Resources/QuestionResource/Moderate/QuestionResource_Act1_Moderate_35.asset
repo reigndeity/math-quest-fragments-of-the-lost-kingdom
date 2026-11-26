@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "One-third of a number $p$, plus the cube of a different number $w$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: One-third of a number $p$, plus the cube of a different number $w$.
   answer: {fileID: 11400000, guid: 23750681ed354464bd9e16ca0a8f2dfd, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{p}{3}+w^3$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{p}{3}+w^3$.

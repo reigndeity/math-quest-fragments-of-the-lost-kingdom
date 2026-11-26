@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $7-4a+3ab-b$, what is the coefficient of the term $ab$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $7-4a+3ab-b$, what is the coefficient of the term $ab$?
   answer: {fileID: 11400000, guid: 5814e53d3e2f4ec5bc982b46d0c3d5e3, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $3ab$ it is $3$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $3ab$ it is $3$.

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $-6x^3y+8xy-3x+12$, what is the coefficient of the term $x^3y$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $-6x^3y+8xy-3x+12$, what is the coefficient of the
+    term $x^3y$?
   answer: {fileID: 11400000, guid: 29ad48c18abd42aa803eb55ab1d84237, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-6x^3y$ it is $-6$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-6x^3y$ it is $-6$.

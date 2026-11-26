@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $5m^2-2mn+n^2$ when $m=4$ and $n=-3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $5m^2-2mn+n^2$ when $m=4$ and $n=-3$.
   answer: {fileID: 11400000, guid: 614f4b3deb45477fac6edae05b47178c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $5(4)^2-2(4)(-3)+(-3)^2$."
-  - "Work it out step by step. The result is $113$."
+  - 'Replace each letter with its value: $5(4)^2-2(4)(-3)+(-3)^2$.'
+  - Work it out step by step. The result is $113$.

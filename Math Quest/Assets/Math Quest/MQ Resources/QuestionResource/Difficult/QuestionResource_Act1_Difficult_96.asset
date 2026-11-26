@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of three times $p$ and the cube of $q$, increased by half the difference of $p$ and nine."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of three times $p$ and the cube of $q$, increased by half
+    the difference of $p$ and nine.
   answer: {fileID: 11400000, guid: ac9ba9e3d51348a2b7d8a41ec2c5c592, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $3pq^3+\\frac{p-9}{2}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $3pq^3+\frac{p-9}{2}$.

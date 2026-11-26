@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "What is the numerical coefficient of the term $-\\frac{3y}{4}$ in $x^2-\\frac{3y}{4}+10$?"
+  topic: Components of Algebraic Expressions
+  question: What is the numerical coefficient of the term $-\frac{3y}{4}$ in $x^2-\frac{3y}{4}+10$?
   answer: {fileID: 11400000, guid: d4d913db96675afcbb06cc45014ec46c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Remove the variable $y$ and keep the sign."
-  - "The coefficient is $-\\frac{3}{4}$."
+  - Remove the variable $y$ and keep the sign.
+  - The coefficient is $-\frac{3}{4}$.

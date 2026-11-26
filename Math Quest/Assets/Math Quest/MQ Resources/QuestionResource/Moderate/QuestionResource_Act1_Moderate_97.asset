@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the algebraic expression $12x^2-5xy+3y^2-8$?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the algebraic expression $12x^2-5xy+3y^2-8$?
   answer: {fileID: 11400000, guid: c1469a8a4fa148b28f16409631601e1e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 4 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 4 terms.

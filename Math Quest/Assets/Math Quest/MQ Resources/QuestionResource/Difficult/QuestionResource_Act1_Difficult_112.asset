@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $-8xy+15$, what is the coefficient of $xy$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $-8xy+15$, what is the coefficient of $xy$?
   answer: {fileID: 11400000, guid: 9382fa8737fd48daa5ef359f2ebb67af, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-8xy$ it is $-8$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-8xy$ it is $-8$.

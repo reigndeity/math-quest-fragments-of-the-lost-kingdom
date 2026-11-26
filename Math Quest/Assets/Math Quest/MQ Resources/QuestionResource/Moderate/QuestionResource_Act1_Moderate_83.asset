@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the algebraic expression $5m^4-2m^3+6m-9$?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the algebraic expression $5m^4-2m^3+6m-9$?
   answer: {fileID: 11400000, guid: 3fa00eb12ca54d5cb3d0d598907541e1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 4 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 4 terms.

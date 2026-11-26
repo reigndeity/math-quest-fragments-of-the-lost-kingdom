@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficient of the term with the highest degree in the expression $15-6x^4+2x$."
+  topic: Components of Algebraic Expressions
+  question: Identify the coefficient of the term with the highest degree in the expression
+    $15-6x^4+2x$.
   answer: {fileID: 11400000, guid: 5b4cbba296af49f78c853d83666b34c7, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The highest degree is the largest exponent on the variable."
-  - "That term's coefficient is $-6$ (keep its sign)."
+  - The highest degree is the largest exponent on the variable.
+  - That term's coefficient is $-6$ (keep its sign).

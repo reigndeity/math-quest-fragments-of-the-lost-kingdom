@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $(2x-3)^2-4y$ when $x=5$ and $y=-2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $(2x-3)^2-4y$ when $x=5$ and $y=-2$.
   answer: {fileID: 11400000, guid: d579ba50b0145e79b18099431d3905f1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace the letters: $(2(5)-3)^2-4(-2)$."
-  - "$7^2+8$."
-  - "$49+8=57$."
+  - 'Replace the letters: $(2(5)-3)^2-4(-2)$.'
+  - $7^2+8$.
+  - $49+8=57$.

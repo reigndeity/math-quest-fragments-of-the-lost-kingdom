@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $3y^5-8y^2+y-4$, identify the coefficient of $y^2$."
+  topic: Components of Algebraic Expressions
+  question: In the expression $3y^5-8y^2+y-4$, identify the coefficient of $y^2$.
   answer: {fileID: 11400000, guid: 4b9aa4f1b66b4f8db5f3663de65b37a0, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Find the term with $y^2$ and read the number in front of it, sign included."
-  - "The coefficient is $-8$."
+  - Find the term with $y^2$ and read the number in front of it, sign included.
+  - The coefficient is $-8$.

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Three times the square of the difference between $x$ and $y$, increased by twice their product."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Three times the square of the difference between $x$ and $y$, increased
+    by twice their product.
   answer: {fileID: 11400000, guid: 8ee9eef1f18d4ca089d03f2ca931dfc7, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $3(x-y)^2+2xy$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $3(x-y)^2+2xy$.

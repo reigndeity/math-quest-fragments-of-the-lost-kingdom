@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $4x^2-7x+2$, identify the coefficient of the middle term."
+  topic: Components of Algebraic Expressions
+  question: In the expression $4x^2-7x+2$, identify the coefficient of the middle
+    term.
   answer: {fileID: 11400000, guid: 1bf2c0897ec350dfb3f68658ba37eb0b, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The middle term is $-7x$."
-  - "Its coefficient is $-7$. Keep the sign."
+  - The middle term is $-7x$.
+  - Its coefficient is $-7$. Keep the sign.

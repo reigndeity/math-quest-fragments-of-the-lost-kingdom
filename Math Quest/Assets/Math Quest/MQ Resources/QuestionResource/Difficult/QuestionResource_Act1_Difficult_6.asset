@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of three and the cube of $a$, increased by five subtracted from twice the difference of $a$ and $b$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of three and the cube of $a$, increased by five subtracted
+    from twice the difference of $a$ and $b$.
   answer: {fileID: 11400000, guid: 9324eef4e4e45291848c522853e448c7, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The product of three and the cube of $a$ is $3a^3$."
-  - "Twice the difference of $a$ and $b$ is $2(a-b)$."
-  - "Five subtracted from it is $2(a-b)-5$."
-  - "Increased by means add: $3a^3+[2(a-b)-5]$."
+  - The product of three and the cube of $a$ is $3a^3$.
+  - Twice the difference of $a$ and $b$ is $2(a-b)$.
+  - Five subtracted from it is $2(a-b)-5$.
+  - 'Increased by means add: $3a^3+[2(a-b)-5]$.'

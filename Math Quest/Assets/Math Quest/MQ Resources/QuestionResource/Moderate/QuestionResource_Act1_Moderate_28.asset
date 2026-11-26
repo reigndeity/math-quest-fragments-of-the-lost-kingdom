@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the algebraic expression $7m^2-3k+9p-12$?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the algebraic expression $7m^2-3k+9p-12$?
   answer: {fileID: 11400000, guid: 02594365f0684f5fbbe4fd6731905c5c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 4 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 4 terms.

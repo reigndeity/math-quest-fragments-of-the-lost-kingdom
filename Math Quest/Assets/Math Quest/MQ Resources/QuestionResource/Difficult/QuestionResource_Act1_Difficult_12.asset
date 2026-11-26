@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "What is the numerical coefficient of the term $-\\frac{7a^2b}{10}$ in $-\\frac{7a^2b}{10}+3a-5$?"
+  topic: Components of Algebraic Expressions
+  question: What is the numerical coefficient of the term $-\frac{7a^2b}{10}$ in
+    $-\frac{7a^2b}{10}+3a-5$?
   answer: {fileID: 11400000, guid: e04e204180cc50528a91a848cbe7be74, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Remove the variables $a^2b$ and keep the sign."
-  - "The coefficient is $-\\frac{7}{10}$."
+  - Remove the variables $a^2b$ and keep the sign.
+  - The coefficient is $-\frac{7}{10}$.

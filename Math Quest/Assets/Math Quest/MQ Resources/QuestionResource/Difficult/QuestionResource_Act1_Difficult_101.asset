@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{x^2}{4}-3(x-6)$ when $x=-4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{x^2}{4}-3(x-6)$ when $x=-4$.
   answer: {fileID: 11400000, guid: a54940e52497454d806dbdf801ce1d5f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $\\frac{(-4)^2}{4}-3((-4)-6)$."
-  - "Work it out step by step. The result is $34$."
+  - 'Replace each letter with its value: $\frac{(-4)^2}{4}-3((-4)-6)$.'
+  - Work it out step by step. The result is $34$.

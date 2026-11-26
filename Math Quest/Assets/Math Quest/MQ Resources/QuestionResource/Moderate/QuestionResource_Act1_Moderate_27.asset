@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $8y^3-4y+15$, identify the coefficient of the middle term."
+  topic: Components of Algebraic Expressions
+  question: In the expression $8y^3-4y+15$, identify the coefficient of the middle
+    term.
   answer: {fileID: 11400000, guid: 1f2f0da58e7e41629ba4746c9449dff1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The middle term is the second term. Its coefficient is the number in front of the variable part."
-  - "Here that number is $-4$ (keep its sign)."
+  - The middle term is the second term. Its coefficient is the number in front of
+    the variable part.
+  - Here that number is $-4$ (keep its sign).

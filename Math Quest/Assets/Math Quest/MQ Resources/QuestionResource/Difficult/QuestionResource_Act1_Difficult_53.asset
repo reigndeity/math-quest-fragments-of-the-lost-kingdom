@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the term $-15abc$, what is the coefficient?"
+  topic: Components of Algebraic Expressions
+  question: In the term $-15abc$, what is the coefficient?
   answer: {fileID: 11400000, guid: efa3191562874a46af8d2b397b4ccd4a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-15abc$ it is $-15$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-15abc$ it is $-15$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Two-thirds of a number $n$, decreased by 7."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Two-thirds of a number $n$, decreased by 7.
   answer: {fileID: 11400000, guid: c04b950a41834bebb1e2f6c47e62bc2c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{2}{3}n-7$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{2}{3}n-7$.

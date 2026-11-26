@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The quotient of three less than the square of a number $x$, and the sum of four times $y$ and five, increased by the cube of the difference of $x$ and $y$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The quotient of three less than the square of a number $x$, and the sum
+    of four times $y$ and five, increased by the cube of the difference of $x$ and
+    $y$.
   answer: {fileID: 11400000, guid: d53c2c3173624b8fb3f989a708be56d0, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{x^2-3}{4y+5}+(x-y)^3$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{x^2-3}{4y+5}+(x-y)^3$.

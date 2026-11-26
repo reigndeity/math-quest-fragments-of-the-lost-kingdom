@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Five more than the product of negative two and the square of $x$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Five more than the product of negative two and the square of $x$.
   answer: {fileID: 11400000, guid: a55455dda90e5e7ca119bfaf77cbac09, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The product of negative two and the square of $x$ is $-2x^2$."
-  - "Five more than it means add 5: $-2x^2+5$."
+  - The product of negative two and the square of $x$ is $-2x^2$.
+  - 'Five more than it means add 5: $-2x^2+5$.'

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Seven more than the product of negative four and the square of $y$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Seven more than the product of negative four and the square of $y$.
   answer: {fileID: 11400000, guid: 18f15eb361c94207b9922dc4f0ac6101, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $-4y^2+7$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $-4y^2+7$.

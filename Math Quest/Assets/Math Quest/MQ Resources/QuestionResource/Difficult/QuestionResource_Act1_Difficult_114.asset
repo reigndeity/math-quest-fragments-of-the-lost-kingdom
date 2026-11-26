@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the expression $4(x+y)$ before expansion?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the expression $4(x+y)$ before expansion?
   answer: {fileID: 11400000, guid: 6a76f90f6f064e619484a98ca8484db8, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 1 term."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 1 term.

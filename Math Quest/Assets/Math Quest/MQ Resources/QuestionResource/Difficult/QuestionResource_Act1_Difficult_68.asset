@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $3x^2-2x+1$ when $x=-2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $3x^2-2x+1$ when $x=-2$.
   answer: {fileID: 11400000, guid: f0ede9bdf4cd49dd83c00e5d644d4a0e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $3(-2)^2-2(-2)+1$."
-  - "Work it out step by step. The result is $17$."
+  - 'Replace each letter with its value: $3(-2)^2-2(-2)+1$.'
+  - Work it out step by step. The result is $17$.

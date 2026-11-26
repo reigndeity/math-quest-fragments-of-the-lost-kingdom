@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $2a^2-5b$ when $a=3$ and $b=4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $2a^2-5b$ when $a=3$ and $b=4$.
   answer: {fileID: 11400000, guid: 678c53048fc1515fa102db90f045abb1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace $a$ with 3 and $b$ with 4: $2(3)^2-5(4)$."
-  - "$18-20=-2$."
+  - 'Replace $a$ with 3 and $b$ with 4: $2(3)^2-5(4)$.'
+  - $18-20=-2$.

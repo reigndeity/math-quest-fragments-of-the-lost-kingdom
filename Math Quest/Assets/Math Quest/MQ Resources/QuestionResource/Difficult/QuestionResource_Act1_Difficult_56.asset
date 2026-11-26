@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The product of seven and the sum of a number $x$ and four.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The product of seven and the sum of a number $x$ and four."'
   answer: {fileID: 11400000, guid: 35b1f78b25524a94af6216a0ac1cd57c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $7(x+4)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $7(x+4)$.

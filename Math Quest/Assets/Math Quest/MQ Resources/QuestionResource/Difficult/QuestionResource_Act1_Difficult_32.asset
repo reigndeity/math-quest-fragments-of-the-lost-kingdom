@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The quotient of five less than twice a number $n$ and the sum of $n$ and three.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The quotient of five less than twice a number $n$ and the
+    sum of $n$ and three."'
   answer: {fileID: 11400000, guid: 184f0c16bc2f47eeaf2c4f22b80a98fb, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{2n-5}{n+3}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{2n-5}{n+3}$.

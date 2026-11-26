@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "A number $x$ decreased by the sum of twice the number and 9."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: A number $x$ decreased by the sum of twice the number and 9.
   answer: {fileID: 11400000, guid: 3c60427c350b4c61b24d967dacfee315, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $x-(2x+9)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $x-(2x+9)$.

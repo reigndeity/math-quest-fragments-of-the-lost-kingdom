@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $2x^2y-3xy^2+4y^3$ when $x=-2$ and $y=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $2x^2y-3xy^2+4y^3$ when $x=-2$ and $y=3$.
   answer: {fileID: 11400000, guid: 073138298a9a41c089d3ab97fbd7bab9, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $2(-2)^2(3)-3(-2)(3)^2+4(3)^3$."
-  - "Work it out step by step. The result is $186$."
+  - 'Replace each letter with its value: $2(-2)^2(3)-3(-2)(3)^2+4(3)^3$.'
+  - Work it out step by step. The result is $186$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The quotient of the square of $m$ and 3, minus twice $p$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The quotient of the square of $m$ and 3, minus twice $p$.
   answer: {fileID: 11400000, guid: ff0bf8562b9848919eedf0724c5b8f57, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{m^2}{3}-2p$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{m^2}{3}-2p$.

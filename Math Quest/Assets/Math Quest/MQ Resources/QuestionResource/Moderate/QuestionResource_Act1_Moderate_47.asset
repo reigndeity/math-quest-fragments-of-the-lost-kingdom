@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In $2x^2-9xy+y^3-1$ which term has the greatest degree?"
+  topic: Components of Algebraic Expressions
+  question: In $2x^2-9xy+y^3-1$ which term has the greatest degree?
   answer: {fileID: 11400000, guid: adaefc07e0764e6c9a227eb06974c1d3, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The degree of a term is the sum of the exponents on its variables."
-  - "$2x^2$ and $-9xy$ have degree 2, and $y^3$ has degree 3."
+  - The degree of a term is the sum of the exponents on its variables.
+  - $2x^2$ and $-9xy$ have degree 2, and $y^3$ has degree 3.

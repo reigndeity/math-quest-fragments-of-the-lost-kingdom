@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The product of nine and the sum of a number $x$ and six.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The product of nine and the sum of a number $x$ and six."'
   answer: {fileID: 11400000, guid: db7ec151a2054b008b276c4329a83c00, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $9(x+6)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $9(x+6)$.

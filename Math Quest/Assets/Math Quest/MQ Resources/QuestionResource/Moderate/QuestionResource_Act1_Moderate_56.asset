@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $2a^2+3ab-b^2$ when $a=5$ and $b=2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $2a^2+3ab-b^2$ when $a=5$ and $b=2$.
   answer: {fileID: 11400000, guid: 8dafc0dd2f1b485c902a8fb461bd9d35, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $2(5)^2+3(5)(2)-(2)^2$."
-  - "Work it out step by step. The result is $76$."
+  - 'Replace each letter with its value: $2(5)^2+3(5)(2)-(2)^2$.'
+  - Work it out step by step. The result is $76$.

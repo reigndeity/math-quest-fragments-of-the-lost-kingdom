@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $-8a^2b+6ab^2-13a+9$, what is the numerical coefficient of the term $-8a^2b$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $-8a^2b+6ab^2-13a+9$, what is the numerical coefficient
+    of the term $-8a^2b$?
   answer: {fileID: 11400000, guid: 9651634e66ef49c9b55ac5a821fe36a8, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The numerical coefficient is the number part of the term, sign included."
-  - "For $-8a^2b$ it is $-8$."
+  - The numerical coefficient is the number part of the term, sign included.
+  - For $-8a^2b$ it is $-8$.

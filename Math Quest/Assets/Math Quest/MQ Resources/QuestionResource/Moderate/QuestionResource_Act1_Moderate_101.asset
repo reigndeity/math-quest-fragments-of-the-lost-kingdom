@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $12x^4-8x^2+5x-3$, identify the coefficient of $x^2$."
+  topic: Components of Algebraic Expressions
+  question: In the expression $12x^4-8x^2+5x-3$, identify the coefficient of $x^2$.
   answer: {fileID: 11400000, guid: b516c291acdf4663af40ca5e42ee061a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Find the term with $x^2$ and read the number in front of it, sign included."
-  - "The coefficient is $-8$."
+  - Find the term with $x^2$ and read the number in front of it, sign included.
+  - The coefficient is $-8$.

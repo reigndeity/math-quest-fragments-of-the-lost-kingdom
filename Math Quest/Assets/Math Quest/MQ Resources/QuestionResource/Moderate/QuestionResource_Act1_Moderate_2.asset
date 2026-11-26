@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The total cost of $a$ apples at 15 pesos each and $b$ bananas at 8 pesos each, decreased by a 20-peso discount coupon."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The total cost of $a$ apples at 15 pesos each and $b$ bananas at 8 pesos
+    each, decreased by a 20-peso discount coupon.
   answer: {fileID: 11400000, guid: 79def1727f1751a79284f8dc5388d5f6, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "$a$ apples at 15 pesos each cost $15a$."
-  - "$b$ bananas at 8 pesos each cost $8b$."
-  - "Add them: $15a+8b$."
-  - "A 20-peso discount is taken away: $15a+8b-20$."
+  - $a$ apples at 15 pesos each cost $15a$.
+  - $b$ bananas at 8 pesos each cost $8b$.
+  - 'Add them: $15a+8b$.'
+  - 'A 20-peso discount is taken away: $15a+8b-20$.'

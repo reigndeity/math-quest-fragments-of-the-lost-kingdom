@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $2(a-b)^2+3c-a^3$ when $a=-3$, $b=4$ and $c=2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $2(a-b)^2+3c-a^3$ when $a=-3$, $b=4$ and $c=2$.
   answer: {fileID: 11400000, guid: c212b88f31f049c7a5daaeb90aa1c9e9, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $2((-3)-(4))^2+3(2)-(-3)^3$."
-  - "Work it out step by step. The result is $131$."
+  - 'Replace each letter with its value: $2((-3)-(4))^2+3(2)-(-3)^3$.'
+  - Work it out step by step. The result is $131$.

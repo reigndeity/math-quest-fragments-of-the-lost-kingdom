@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Eight subtracted from the product of 3 and a number $b$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Eight subtracted from the product of 3 and a number $b$.
   answer: {fileID: 11400000, guid: 3436ccda9b3c58d19dd8a03050868f9e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "The product of 3 and $b$ is $3b$."
-  - "Eight subtracted from it: $3b-8$."
+  - The product of 3 and $b$ is $3b$.
+  - 'Eight subtracted from it: $3b-8$.'

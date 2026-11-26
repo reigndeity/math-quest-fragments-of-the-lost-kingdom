@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"Three times the difference of a number $x$ and seven, all divided by four.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "Three times the difference of a number $x$ and seven, all
+    divided by four."'
   answer: {fileID: 11400000, guid: 841d8b85b6944d1f9a6c13a237f6d4c6, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{3(x-7)}{4}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{3(x-7)}{4}$.

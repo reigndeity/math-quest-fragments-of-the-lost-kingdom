@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $-4x^2y+7xy-2x+9$, what is the coefficient of the term $x^2y$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $-4x^2y+7xy-2x+9$, what is the coefficient of the term
+    $x^2y$?
   answer: {fileID: 11400000, guid: d32022a6ea6547898ce389c6dbbf6ea3, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-4x^2y$ it is $-4$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-4x^2y$ it is $-4$.

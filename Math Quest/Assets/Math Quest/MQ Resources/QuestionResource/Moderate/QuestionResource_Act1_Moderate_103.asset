@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $18-7y^3+2y$, what is the constant term?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $18-7y^3+2y$, what is the constant term?
   answer: {fileID: 11400000, guid: e5657ed91489479b964723d0e2392538, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "A constant term has no variable."
-  - "Here it is $18$."
+  - A constant term has no variable.
+  - Here it is $18$.

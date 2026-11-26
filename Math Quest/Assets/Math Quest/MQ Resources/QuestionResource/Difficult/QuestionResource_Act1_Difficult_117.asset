@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the term $-18abc$, what is the coefficient?"
+  topic: Components of Algebraic Expressions
+  question: In the term $-18abc$, what is the coefficient?
   answer: {fileID: 11400000, guid: b3a27d3ed67340f494785ccf2d30b734, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-18abc$ it is $-18$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-18abc$ it is $-18$.

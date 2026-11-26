@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of negative five and the square of $y$, decreased by 3."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of negative five and the square of $y$, decreased by 3.
   answer: {fileID: 11400000, guid: 34029f5591b940f48d085a0cd17e6667, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $-5y^2-3$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $-5y^2-3$.

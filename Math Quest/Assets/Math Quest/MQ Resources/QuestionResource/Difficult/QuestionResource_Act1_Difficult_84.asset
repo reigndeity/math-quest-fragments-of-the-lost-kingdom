@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The square of four less than three times a number $x$, decreased by the quotient of six times $y$ and the quantity two more than $x$, all increased by one-third the difference of $x$ and $y$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The square of four less than three times a number $x$, decreased by the
+    quotient of six times $y$ and the quantity two more than $x$, all increased by
+    one-third the difference of $x$ and $y$.
   answer: {fileID: 11400000, guid: d39da33dc4c34074a30ecea46ce43868, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $(3x-4)^2-\\frac{6y}{x+2}+\\frac{x-y}{3}$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $(3x-4)^2-\frac{6y}{x+2}+\frac{x-y}{3}$.

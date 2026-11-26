@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Classifying Algebraic Expressions"
-  question: "Classify the expression $-6x^4+3x^2-9$ as monomial, binomial, or trinomial."
+  topic: Classifying Algebraic Expressions
+  question: Classify the expression $-6x^4+3x^2-9$ as monomial, binomial, or trinomial.
   answer: {fileID: 11400000, guid: b73c7a53a73742d29a08d08802a4ab98, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "A monomial has 1 term, a binomial 2 terms and a trinomial 3 terms."
-  - "$-6x^4+3x^2-9$ has 3 terms, so it is trinomial."
+  - A monomial has 1 term, a binomial 2 terms and a trinomial 3 terms.
+  - $-6x^4+3x^2-9$ has 3 terms, so it is trinomial.

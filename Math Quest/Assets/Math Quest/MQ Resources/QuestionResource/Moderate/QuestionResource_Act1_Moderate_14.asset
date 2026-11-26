@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{24}{c}+d^2$ when $c=6$ and $d=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{24}{c}+d^2$ when $c=6$ and $d=3$.
   answer: {fileID: 11400000, guid: 07516eea6d885ee39daf5283146789a1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace $c$ with 6 and $d$ with 3: $\\frac{24}{6}+3^2$."
-  - "$4+9=13$."
+  - 'Replace $c$ with 6 and $d$ with 3: $\frac{24}{6}+3^2$.'
+  - $4+9=13$.

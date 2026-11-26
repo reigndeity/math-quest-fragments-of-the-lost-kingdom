@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The sum of five times a number $y$ and the square of $y$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The sum of five times a number $y$ and the square of $y$.
   answer: {fileID: 11400000, guid: 1bec4c8c25e45bc79fdbbe6e2f9bc2df, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Five times $y$ is $5y$, and the square of $y$ is $y^2$."
-  - "The sum means add: $5y+y^2$."
+  - Five times $y$ is $5y$, and the square of $y$ is $y^2$.
+  - 'The sum means add: $5y+y^2$.'

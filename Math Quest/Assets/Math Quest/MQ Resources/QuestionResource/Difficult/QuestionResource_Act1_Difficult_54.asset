@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $8-4r+r^2$, what is the coefficient of $r$?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $8-4r+r^2$, what is the coefficient of $r$?
   answer: {fileID: 11400000, guid: cbfc9ef5b4344de2af7a0b7a1648e489, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-4r$ it is $-4$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-4r$ it is $-4$.

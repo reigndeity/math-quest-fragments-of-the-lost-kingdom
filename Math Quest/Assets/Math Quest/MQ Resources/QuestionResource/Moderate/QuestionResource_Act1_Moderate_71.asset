@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $6a^2-5b+2$ when $a=3$ and $b=7$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $6a^2-5b+2$ when $a=3$ and $b=7$.
   answer: {fileID: 11400000, guid: 14a6acc8017b4409a1de2863e958a8ff, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $6(3)^2-5(7)+2$."
-  - "Work it out step by step. The result is $21$."
+  - 'Replace each letter with its value: $6(3)^2-5(7)+2$.'
+  - Work it out step by step. The result is $21$.

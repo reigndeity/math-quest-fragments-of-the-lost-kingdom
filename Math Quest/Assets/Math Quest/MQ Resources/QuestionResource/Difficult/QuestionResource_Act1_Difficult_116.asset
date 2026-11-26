@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "In $6x-3+9y-2x$, how many terms involve the variable $x$?"
+  topic: Components of Algebraic Expressions
+  question: In $6x-3+9y-2x$, how many terms involve the variable $x$?
   answer: {fileID: 11400000, guid: a518c152e4e345f1a6efbff64245290d, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 2 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 2 terms.

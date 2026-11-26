@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $2pq^3+\\frac{p-7}{2}$ when $p=3$ and $q=-2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $2pq^3+\frac{p-7}{2}$ when $p=3$ and $q=-2$.
   answer: {fileID: 11400000, guid: fdedb1fb4f6d504697a9a0285cea9197, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace the letters: $2(3)(-2)^3+\\frac{3-7}{2}$."
-  - "$6(-8)+\\frac{-4}{2}$."
-  - "$-48-2=-50$."
+  - 'Replace the letters: $2(3)(-2)^3+\frac{3-7}{2}$.'
+  - $6(-8)+\frac{-4}{2}$.
+  - $-48-2=-50$.

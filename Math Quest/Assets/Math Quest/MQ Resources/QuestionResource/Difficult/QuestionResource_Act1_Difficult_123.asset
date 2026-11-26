@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Eleven subtracted from the product of a number $x$ and negative three."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Eleven subtracted from the product of a number $x$ and negative three.
   answer: {fileID: 11400000, guid: 2bc7307eeea8430d9e21169ef37b6e7c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $-3x-11$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $-3x-11$.

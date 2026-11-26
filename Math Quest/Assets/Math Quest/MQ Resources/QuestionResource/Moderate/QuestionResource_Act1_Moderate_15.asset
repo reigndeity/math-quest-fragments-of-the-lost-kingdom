@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Half of a number $m$, plus the cube of a different number $k$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Half of a number $m$, plus the cube of a different number $k$.
   answer: {fileID: 11400000, guid: 4763ede95aa35b5c8cb078a87d925981, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Half of $m$ is $\\frac{m}{2}$."
-  - "The cube of $k$ is $k^3$."
-  - "Plus joins them: $\\frac{m}{2}+k^3$."
+  - Half of $m$ is $\frac{m}{2}$.
+  - The cube of $k$ is $k^3$.
+  - 'Plus joins them: $\frac{m}{2}+k^3$.'

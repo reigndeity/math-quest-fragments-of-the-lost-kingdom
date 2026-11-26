@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $11m^4-6m^2+3m-8$, identify the coefficient of $m^2$."
+  topic: Components of Algebraic Expressions
+  question: In the expression $11m^4-6m^2+3m-8$, identify the coefficient of $m^2$.
   answer: {fileID: 11400000, guid: 9b4bba2410f74372ae23176554c7eb9c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Find the term with $m^2$ and read the number in front of it, sign included."
-  - "The coefficient is $-6$."
+  - Find the term with $m^2$ and read the number in front of it, sign included.
+  - The coefficient is $-6$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $9-3y^2+y$, what is the constant term?"
+  topic: Components of Algebraic Expressions
+  question: In the expression $9-3y^2+y$, what is the constant term?
   answer: {fileID: 11400000, guid: d9fbb72285ca51a289944e184d92be7a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The constant term has no variable."
-  - "Only 9 has none."
+  - The constant term has no variable.
+  - Only 9 has none.

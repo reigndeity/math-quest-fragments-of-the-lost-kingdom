@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The quotient of a number $n$ and 4, subtracted from twice the square of $n$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The quotient of a number $n$ and 4, subtracted from twice the square
+    of $n$.
   answer: {fileID: 11400000, guid: 4bd660aacaa358efa3aaa4298a6b089f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The quotient of $n$ and 4 is $\\frac{n}{4}$."
-  - "Twice the square of $n$ is $2n^2$."
-  - "Subtract the quotient from it: $2n^2-\\frac{n}{4}$."
+  - The quotient of $n$ and 4 is $\frac{n}{4}$.
+  - Twice the square of $n$ is $2n^2$.
+  - 'Subtract the quotient from it: $2n^2-\frac{n}{4}$.'

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The quotient of seven times $m$ and the sum of $m$ and three, increased by eight subtracted from $n$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The quotient of seven times $m$ and the sum of $m$ and three, increased
+    by eight subtracted from $n$.
   answer: {fileID: 11400000, guid: 76289a789c914cc8bb1f58d6eba6af82, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $\\frac{7m}{m+3}+(n-8)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $\frac{7m}{m+3}+(n-8)$.

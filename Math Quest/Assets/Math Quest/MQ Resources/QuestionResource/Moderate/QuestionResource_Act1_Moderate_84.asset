@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate to algebra: \"Three times the sum of a number $a$ and 4.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate to algebra: "Three times the sum of a number $a$ and 4."'
   answer: {fileID: 11400000, guid: e0cb1e5383584724990b5f901e09fdb9, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $3(a+4)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $3(a+4)$.

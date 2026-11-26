@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "The product of five and the cube of $a$, increased by seven subtracted from three times the difference of $a$ and $b$."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: The product of five and the cube of $a$, increased by seven subtracted
+    from three times the difference of $a$ and $b$.
   answer: {fileID: 11400000, guid: 11652fc3de1b4b9e8347a6da24ed9eab, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $5a^3+[3(a-b)-7]$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $5a^3+[3(a-b)-7]$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $5m-3n^2$ when $m=6$ and $n=2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $5m-3n^2$ when $m=6$ and $n=2$.
   answer: {fileID: 11400000, guid: 17bdec93ea2552479f3b532b87f52d8a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace $m$ with 6 and $n$ with 2: $5(6)-3(2)^2$."
-  - "$30-12=18$."
+  - 'Replace $m$ with 6 and $n$ with 2: $5(6)-3(2)^2$.'
+  - $30-12=18$.

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Components of Algebraic Expressions"
-  question: "In the expression $8a^3-3a^2+7a-1$, identify the coefficient of $a^2$."
+  topic: Components of Algebraic Expressions
+  question: In the expression $8a^3-3a^2+7a-1$, identify the coefficient of $a^2$.
   answer: {fileID: 11400000, guid: 8e63102d40c34c9b8aea1f71d8bef4e2, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Find the term with $a^2$ and read the number in front of it, sign included."
-  - "The coefficient is $-3$."
+  - Find the term with $a^2$ and read the number in front of it, sign included.
+  - The coefficient is $-3$.

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate to algebra: \"The sum of a number $d$ and 9, multiplied by 2.\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate to algebra: "The sum of a number $d$ and 9, multiplied by
+    2."'
   answer: {fileID: 11400000, guid: 1a63044ac7c74b7fb12793fb72eaa5d4, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $2(d+9)$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $2(d+9)$.

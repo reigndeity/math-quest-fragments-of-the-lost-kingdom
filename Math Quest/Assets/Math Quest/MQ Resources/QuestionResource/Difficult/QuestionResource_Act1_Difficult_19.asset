@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{5m}{m+2}+(n-6)$ when $m=3$ and $n=-4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{5m}{m+2}+(n-6)$ when $m=3$ and $n=-4$.
   answer: {fileID: 11400000, guid: 88c6d46d71445812a33c12f3d2356746, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace the letters: $\\frac{5(3)}{3+2}+(-4-6)$."
-  - "$\\frac{15}{5}-10$."
-  - "$3-10=-7$."
+  - 'Replace the letters: $\frac{5(3)}{3+2}+(-4-6)$.'
+  - $\frac{15}{5}-10$.
+  - $3-10=-7$.

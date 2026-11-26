@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Nine more than the quotient of a number $d$ and 3."
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: Nine more than the quotient of a number $d$ and 3.
   answer: {fileID: 11400000, guid: 31ef01882f7c538281b09d5be345f8f1, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The quotient of $d$ and 3 is $\\frac{d}{3}$."
-  - "Nine more than it means add 9: $\\frac{d}{3}+9$."
+  - The quotient of $d$ and 3 is $\frac{d}{3}$.
+  - 'Nine more than it means add 9: $\frac{d}{3}+9$.'

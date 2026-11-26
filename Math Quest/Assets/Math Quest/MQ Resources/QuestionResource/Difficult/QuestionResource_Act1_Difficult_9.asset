@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 2
-  topic: "Components of Algebraic Expressions"
-  question: "What are the constant terms in the expression below? $-\\frac{4x^2}{3}+7x-15$"
+  topic: Components of Algebraic Expressions
+  question: What are the constant terms in the expression below? $-\frac{4x^2}{3}+7x-15$
   answer: {fileID: 11400000, guid: ddb4111b99bf5ca6a510a980a53a7d98, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "A constant term has no variable."
-  - "Only $-15$ qualifies."
+  - A constant term has no variable.
+  - Only $-15$ qualifies.

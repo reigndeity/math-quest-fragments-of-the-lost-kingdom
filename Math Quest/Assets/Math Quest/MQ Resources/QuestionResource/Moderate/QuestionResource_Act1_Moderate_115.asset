@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $12-2p^2+5q$ when $p=3$ and $q=-1$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $12-2p^2+5q$ when $p=3$ and $q=-1$.
   answer: {fileID: 11400000, guid: 4ceb648331dc472084be664082d0e6b9, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $12-2(3)^2+5(-1)$."
-  - "Work it out step by step. The result is $-11$."
+  - 'Replace each letter with its value: $12-2(3)^2+5(-1)$.'
+  - Work it out step by step. The result is $-11$.

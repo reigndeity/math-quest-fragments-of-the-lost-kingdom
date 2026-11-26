@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $\\frac{x+2y}{3}$ when $x=4$ and $y=1$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $\frac{x+2y}{3}$ when $x=4$ and $y=1$.
   answer: {fileID: 11400000, guid: 602d9d7afb024a08b98ca14f46508cbd, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $\\frac{(4)+2(1)}{3}$."
-  - "Work it out step by step. The result is $2$."
+  - 'Replace each letter with its value: $\frac{(4)+2(1)}{3}$.'
+  - Work it out step by step. The result is $2$.

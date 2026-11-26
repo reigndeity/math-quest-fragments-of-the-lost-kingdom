@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 1
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $3x+2y$ when $x=4$ and $y=-2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $3x+2y$ when $x=4$ and $y=-2$.
   answer: {fileID: 11400000, guid: e53afe97f2f35abeb1eb083db4fc3a01, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace $x$ with 4 and $y$ with $-2$: $3(4)+2(-2)$."
-  - "$12-4=8$."
+  - 'Replace $x$ with 4 and $y$ with $-2$: $3(4)+2(-2)$.'
+  - $12-4=8$.
