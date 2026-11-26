@@ -46,6 +46,8 @@ namespace MathQuest.Battle
         [Tooltip("Spawns the skill effects. Optional: without it the hit still lands, just without an effect.")]
         [SerializeField] private VfxManager vfx;
         [SerializeField] private BattleDialogueController dialogue;
+        [Tooltip("The guide book's part of the screen (GuideBookHolder). It fades in only while the guide speaks.")]
+        [SerializeField] private GuideStage guideStage;
         [SerializeField] private BlurBackdropController blur;
 
         [Header("Answer panel (AnswerPanel itself stays active; only its contents come and go)")]
@@ -57,6 +59,8 @@ namespace MathQuest.Battle
         [SerializeField] private RectTransform answerArea;
         [Tooltip("The AnswerAreaFitter on AnswerAndSubmitHolder. Sizes the answer area to its options and moves the submit area to match. Optional.")]
         [SerializeField] private AnswerAreaFitter answerFitter;
+        [Tooltip("The QuestionIndicator inside QuestionBox. Shows who is asking and slides in once the question box has appeared. Optional.")]
+        [SerializeField] private QuestionIndicator questionIndicator;
 
         [Header("Submit")]
         [Tooltip("The one submit button used by every answer input. Only interactable while the player has an answer to submit.")]
@@ -324,11 +328,15 @@ namespace MathQuest.Battle
 
         private IEnumerator OpenAnswerPanel(QuestionResource question)
         {
-            // The question has finished typing; give the player a moment to read it.
-            yield return new WaitForSeconds(readDelay);
+            // In practice the guide is already on screen over the blur, so there is nothing to wait for or capture.
+            if (!practiceMode)
+            {
+                // The question has finished typing; give the player a moment to read it.
+                yield return new WaitForSeconds(readDelay);
 
-            // The snapshot must be taken while the panel's contents are still hidden.
-            yield return blur.Capture();
+                // The snapshot must be taken while the panel's contents are still hidden.
+                yield return blur.Capture();
+            }
 
             // 1. Prepare everything while it is invisible, so nothing re-lays out later.
             SetGroup(0f, false);
@@ -339,25 +347,49 @@ namespace MathQuest.Battle
             submitButton.gameObject.SetActive(false); // appears after the input, with its own animation
 
             questionBox.Prepare(question.question); // fitted now; its own animation waits for Reveal
+            if (questionIndicator != null)
+                questionIndicator.Prepare(AskerSprite(question));
             SpawnAnswerInput(question);             // options spawned hidden, answer area sized for all of them
             questionBox.Conceal();
 
             // 2. The blur, then the holder, then the question box, then the options.
-            blur.FadeIn();
+            if (!practiceMode)
+                blur.FadeIn();
             yield return new WaitForSeconds(holderFadeDelay);
 
             FadeGroup(1f, holderFadeDuration, true);
-            answerStartedAt = Time.time; // the player can start answering now
+            answerStartedAt = practiceMode ? -1f : Time.time; // the player can start answering now (practice time is not counted)
             yield return new WaitForSeconds(questionBoxDelay);
 
             if (answerFitter != null)
                 answerFitter.SetFollowPaused(true); // the question box slides in; the answers stay put
             questionBox.Reveal();
             StartCoroutine(ResumeFollowAfter(questionBoxAnimationTime));
+            StartCoroutine(PlayIndicatorAfter(questionBoxAnimationTime));
 
             yield return RevealInput();
 
             openRoutine = null;
+        }
+
+        // Who asks: the guide the question names, otherwise the level's enemy.
+        private Sprite AskerSprite(QuestionResource question)
+        {
+            if (practiceMode && practiceGuide != null)
+                return practiceGuide.askerSprite;
+
+            if (question.askedByGuide != null)
+                return question.askedByGuide.askerSprite;
+
+            return level != null && level.enemy != null ? level.enemy.askerSprite : null;
+        }
+
+        // The asker slides in once the question box has finished its own animation.
+        private IEnumerator PlayIndicatorAfter(float seconds)
+        {
+            yield return new WaitForSeconds(seconds);
+            if (questionIndicator != null)
+                questionIndicator.Play();
         }
 
         private IEnumerator ResumeFollowAfter(float seconds)
@@ -658,6 +690,13 @@ namespace MathQuest.Battle
             hintText = null;
             RefreshHintLabel();
             Debug.Log(correct ? "Correct answer." : "Wrong answer.");
+
+            if (practiceMode)
+            {
+                StartCoroutine(ClosePracticePanel(correct));
+                return;
+            }
+
             StartCoroutine(CloseAnswerPanel(BuildReaction(question, answerText, correct), correct, question));
         }
 
@@ -677,7 +716,10 @@ namespace MathQuest.Battle
             else
             {
                 AddEnemyLines(lines, question.tauntDialogue);
-                AddEnemyLines(lines, question.solutionDialogue);
+                if (question.explainedByGuide != null)
+                    AddLines(lines, question.solutionDialogue, DialogueSpeaker.Guide);
+                else
+                    AddEnemyLines(lines, question.solutionDialogue);
             }
 
             return lines;
@@ -685,13 +727,18 @@ namespace MathQuest.Battle
 
         private static void AddEnemyLines(List<DialogueLine> into, List<string> texts)
         {
+            AddLines(into, texts, DialogueSpeaker.Enemy);
+        }
+
+        private static void AddLines(List<DialogueLine> into, List<string> texts, DialogueSpeaker speaker)
+        {
             if (texts == null)
                 return;
 
             foreach (string text in texts)
             {
                 if (!string.IsNullOrWhiteSpace(text))
-                    into.Add(new DialogueLine { speaker = DialogueSpeaker.Enemy, text = text });
+                    into.Add(new DialogueLine { speaker = speaker, text = text });
             }
         }
 
@@ -774,18 +821,235 @@ namespace MathQuest.Battle
                 run?.End();
                 events?.ResetSortingOrder(); // in case the animation moved the character in front of others
 
-                // The last heart: no praise or taunt, the level's ending plays instead.
+                // The last heart: no praise or taunt, the level's ending plays instead. If a guide explains this
+                // question, though, it still steps in first (explanation, practice, a word of encouragement).
                 if (characters.IsDefeated(loser))
                 {
-                    StartCoroutine(PlayEnding(playerWon: loser == CharacterRole.Enemy));
+                    List<DialogueLine> guideLines = reply.FindAll(line => line.speaker == DialogueSpeaker.Guide);
+                    if (loser == CharacterRole.Player && question.explainedByGuide != null && guideLines.Count > 0)
+                        StartCoroutine(GuideThenEnding(guideLines, question));
+                    else
+                        StartCoroutine(PlayEnding(playerWon: loser == CharacterRole.Enemy));
+
                     yield break;
                 }
             }
 
             if (reply.Count > 0)
-                dialogue.PlayLines(reply, AfterReply);
+                StartCoroutine(PlayReply(reply, question));
             else
                 AfterReply();
+        }
+
+        // The enemy's lines first, then, if the guide has lines, it fades in and says them.
+        private IEnumerator PlayReply(List<DialogueLine> reply, QuestionResource failed)
+        {
+            int split = reply.FindIndex(line => line.speaker == DialogueSpeaker.Guide);
+            List<DialogueLine> enemyPart = split < 0 ? reply : reply.GetRange(0, split);
+            List<DialogueLine> guidePart = split < 0 ? new List<DialogueLine>() : reply.GetRange(split, reply.Count - split);
+
+            yield return PlayAndWait(enemyPart);
+
+            if (guidePart.Count > 0)
+                yield return RunGuide(guidePart, failed, finalLoss: false);
+
+            AfterReply();
+        }
+
+        // The wrong answer took the last heart: the guide still explains and practises, then encourages a retry,
+        // and only then does the level's defeat ending play.
+        private IEnumerator GuideThenEnding(List<DialogueLine> guideLines, QuestionResource failed)
+        {
+            yield return RunGuide(guideLines, failed, finalLoss: true);
+            StartCoroutine(PlayEnding(playerWon: false));
+        }
+
+        // The whole guide scene: blur in, the book pops in and explains, practice questions, then the book leaves
+        // the way it came and the blur fades away. With finalLoss the guide ends with a word of encouragement.
+        private IEnumerator RunGuide(List<DialogueLine> explanation, QuestionResource failed, bool finalLoss)
+        {
+            // The blur comes back behind the guide (the guide sits above it, so it stays sharp).
+            blur.FadeIn();
+            yield return new WaitForSeconds(blur.FadeInDuration); // the blur finishes first, then the book appears
+            if (guideStage != null)
+                yield return guideStage.Show();
+
+            yield return PlayAndWait(explanation);
+
+            practiceSolved = false;
+            GuideResource guide = failed.explainedByGuide;
+            if (guide != null && guide.maxPracticeQuestions > 0)
+                yield return PracticeLoop(failed, praiseOnCorrect: !finalLoss);
+
+            if (finalLoss && guide != null)
+                yield return PlayAndWait(GuideLine(practiceSolved ? guide.tryAgainPraiseLines : guide.tryAgainLines));
+
+            // Leaves the way it came: the book pops out first, then the blur fades away.
+            if (guideStage != null)
+                yield return guideStage.Hide();
+
+            blur.FadeOut(blurFadeOutDuration);
+            yield return new WaitForSeconds(blurFadeOutDuration);
+        }
+
+        // ---- Practice: the guide asks similar questions after a wrong answer -------------------
+
+        private bool practiceMode;            // the panel is being used for a guide's practice question
+        private GuideResource practiceGuide;  // who is asking
+        private bool? practiceResult;         // set when a practice answer has been given and the panel has closed
+        private bool practiceSolved;          // the player got one of the practice questions right
+
+        // The guide asks up to Max Practice Questions similar ones, stopping at the first right answer.
+        // A wrong answer costs nothing: the guide explains that question and asks the next one.
+        private IEnumerator PracticeLoop(QuestionResource failed, bool praiseOnCorrect = true)
+        {
+            GuideResource guide = failed.explainedByGuide;
+            var used = new List<QuestionResource> { failed };
+            practiceGuide = guide;
+
+            for (int attempt = 0; attempt < guide.maxPracticeQuestions; attempt++)
+            {
+                // Questions the enemy asks (or already asked) in this battle are left alone when there are others.
+                QuestionResource practice = FindSimilar(failed, used, guide, avoidBattleQuestions: true)
+                                            ?? FindSimilar(failed, used, guide, avoidBattleQuestions: false);
+                if (practice == null)
+                    break;
+
+                used.Add(practice);
+
+                yield return PlayAndWait(GuideLine(attempt == 0 ? guide.practiceIntroLines : guide.retryIntroLines));
+
+                // The question takes the screen: the book steps aside (the asker picture still shows it).
+                if (guideStage != null)
+                    yield return guideStage.ShrinkBook();
+
+                practiceMode = true;
+                practiceResult = null;
+                openRoutine = StartCoroutine(OpenAnswerPanel(practice));
+                while (practiceResult == null)
+                    yield return null;
+
+                practiceMode = false;
+                bool correct = practiceResult.Value;
+                practiceResult = null;
+
+                // Then it pops back in to react.
+                if (guideStage != null)
+                    yield return guideStage.PopBook();
+
+                if (correct)
+                {
+                    practiceSolved = true;
+                    if (praiseOnCorrect)
+                        yield return PlayAndWait(GuideLine(guide.praiseLines));
+                    break;
+                }
+
+                // Wrong: show how it is done, then loop to the next question.
+                var explanation = new List<DialogueLine>();
+                AddLines(explanation, practice.solutionDialogue, DialogueSpeaker.Guide);
+                yield return PlayAndWait(explanation);
+            }
+
+            practiceMode = false;
+            practiceGuide = null;
+        }
+
+        private IEnumerator ClosePracticePanel(bool correct)
+        {
+            FadeGroup(0f, closeFadeDuration, false);
+            yield return new WaitForSeconds(closeFadeDuration + afterAnswerDelay);
+            HidePanelContents();
+            practiceResult = correct;
+        }
+
+        // One random line of the guide as dialogue (empty when the list has none).
+        private static List<DialogueLine> GuideLine(List<string> texts)
+        {
+            var lines = new List<DialogueLine>();
+            if (texts == null)
+                return lines;
+
+            var valid = new List<string>();
+            foreach (string text in texts)
+            {
+                if (!string.IsNullOrWhiteSpace(text))
+                    valid.Add(text);
+            }
+
+            if (valid.Count > 0)
+                lines.Add(new DialogueLine { speaker = DialogueSpeaker.Guide, text = valid[UnityEngine.Random.Range(0, valid.Count)] });
+
+            return lines;
+        }
+
+        // Another question like the failed one, from the level's pools and the guide's own. Closest first:
+        // the same wording with different numbers, then the same topic, kind of answer and difficulty,
+        // then the same topic and kind of answer.
+        private QuestionResource FindSimilar(QuestionResource failed, List<QuestionResource> used, GuideResource guide, bool avoidBattleQuestions)
+        {
+            var all = new List<QuestionResource>();
+            if (level != null)
+            {
+                foreach (LevelQuestionPool entry in level.questionPools)
+                {
+                    if (entry != null && entry.pool != null)
+                        entry.pool.CollectAll(all);
+                }
+            }
+
+            foreach (QuestionPoolResource pool in guide.practicePools)
+            {
+                if (pool != null)
+                    pool.CollectAll(all);
+            }
+
+            string template = Template(failed.question);
+            var sameWording = new List<QuestionResource>();
+            var sameKind = new List<QuestionResource>();
+            var sameTopic = new List<QuestionResource>();
+
+            foreach (QuestionResource candidate in all)
+            {
+                if (candidate == null || candidate.answer == null || used.Contains(candidate) || candidate.question == failed.question)
+                    continue;
+
+                if (avoidBattleQuestions && questions.Exists(asked => asked != null && asked.question == candidate.question))
+                    continue;
+
+                if (candidate.topic != failed.topic || candidate.answer.GetType() != failed.answer.GetType())
+                    continue;
+
+                sameTopic.Add(candidate);
+                if (candidate.difficulty == failed.difficulty)
+                {
+                    sameKind.Add(candidate);
+                    if (Template(candidate.question) == template)
+                        sameWording.Add(candidate);
+                }
+            }
+
+            List<QuestionResource> pick = sameWording.Count > 0 ? sameWording : sameKind.Count > 0 ? sameKind : sameTopic;
+            return pick.Count > 0 ? pick[UnityEngine.Random.Range(0, pick.Count)] : null;
+        }
+
+        // The question with every $...$ replaced by one marker, so only the wording is compared.
+        private static string Template(string question)
+        {
+            return string.IsNullOrEmpty(question)
+                ? string.Empty
+                : System.Text.RegularExpressions.Regex.Replace(question, @"\$[^$]*\$", "$");
+        }
+
+        private IEnumerator PlayAndWait(List<DialogueLine> lines)
+        {
+            if (lines.Count == 0)
+                yield break;
+
+            bool finished = false;
+            dialogue.PlayLines(lines, () => finished = true);
+            while (!finished)
+                yield return null;
         }
 
         private void AfterReply()

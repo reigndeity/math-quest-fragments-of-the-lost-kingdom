@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $5k-6$ when $k=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $5k-6$ when $k=3$.
   answer: {fileID: 11400000, guid: 71d7d2c9ec144c99899263b5ccea4bbe, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $5(3)-6$."
-  - "Work it out step by step. The result is $9$."
+  - 'Replace each letter with its value: $5(3)-6$.'
+  - Work it out step by step. The result is $9$.

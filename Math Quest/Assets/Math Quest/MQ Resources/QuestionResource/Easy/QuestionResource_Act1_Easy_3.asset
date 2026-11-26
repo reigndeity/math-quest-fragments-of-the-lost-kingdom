@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Write as an algebraic expression: \"the sum of a number $n$ and 9\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Write as an algebraic expression: "the sum of a number $n$ and 9"'
   answer: {fileID: 11400000, guid: 64a9f2cccba752f491555e203db8839c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Sum means add."
-  - "So the sum of $n$ and 9 is $n+9$."
+  - Sum means add.
+  - So the sum of $n$ and 9 is $n+9$.

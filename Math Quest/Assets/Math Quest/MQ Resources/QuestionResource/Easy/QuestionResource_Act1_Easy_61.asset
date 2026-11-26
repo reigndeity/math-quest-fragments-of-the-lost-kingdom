@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the coefficient of $x$ in $7x+9$?"
+  topic: Components of Algebraic Expressions
+  question: What is the coefficient of $x$ in $7x+9$?
   answer: {fileID: 11400000, guid: 71f8f8f109174d5c8eaff721e016c2b0, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $7x$ the coefficient is $7$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $7x$ the coefficient is $7$.

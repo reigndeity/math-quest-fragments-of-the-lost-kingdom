@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the coefficient of $y$ in $9-2y$?"
+  topic: Components of Algebraic Expressions
+  question: What is the coefficient of $y$ in $9-2y$?
   answer: {fileID: 11400000, guid: 513f2f547a255940a4cc682038ade67f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The coefficient is the number multiplied with the variable."
-  - "In $9-2y$ it is $-2$. Keep the sign."
+  - The coefficient is the number multiplied with the variable.
+  - In $9-2y$ it is $-2$. Keep the sign.

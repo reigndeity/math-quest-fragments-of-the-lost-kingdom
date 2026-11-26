@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $4r-2s+7$ when $r=5$ and $s=4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $4r-2s+7$ when $r=5$ and $s=4$.
   answer: {fileID: 11400000, guid: e9fe241ccffe46c399264d38d4eeb94b, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $4(5)-2(4)+7$."
-  - "Work it out step by step. The result is $19$."
+  - 'Replace each letter with its value: $4(5)-2(4)+7$.'
+  - Work it out step by step. The result is $19$.

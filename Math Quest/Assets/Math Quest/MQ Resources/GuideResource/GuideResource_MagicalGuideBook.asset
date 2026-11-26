@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1872bc7df24e84479acd7469f5fc92a, type: 3}
+  m_Name: GuideResource_MagicalGuideBook
+  m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.GuideResource
+  displayName: Magical Guide Book
+  askerSprite: {fileID: -3592320088312888185, guid: a1fad9177168e844381bc5d6e4b13e14, type: 3}
+  defaultSprite: {fileID: -3773901386943021437, guid: 5478b9c4a4fcf2d44a29bf53ebf7716f, type: 3}
+  maxPracticeQuestions: 5
+  practicePools: []
+  practiceIntroLines:
+  - Let's try a similar one!
+  retryIntroLines:
+  - Let's try another one!
+  praiseLines:
+  - Well done! You got it!
+  tryAgainPraiseLines:
+  - Great job, you've got it now! Let's give it another try!
+  tryAgainLines:
+  - Don't give up! Look at it again, and let's try once more!

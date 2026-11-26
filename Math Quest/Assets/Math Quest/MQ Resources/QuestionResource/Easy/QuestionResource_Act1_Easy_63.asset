@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the coefficient of $y$ in $12-5y$?"
+  topic: Components of Algebraic Expressions
+  question: What is the coefficient of $y$ in $12-5y$?
   answer: {fileID: 11400000, guid: 446e90bf91df4632bf6734b79c6b8f57, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-5y$ the coefficient is $-5$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-5y$ the coefficient is $-5$.

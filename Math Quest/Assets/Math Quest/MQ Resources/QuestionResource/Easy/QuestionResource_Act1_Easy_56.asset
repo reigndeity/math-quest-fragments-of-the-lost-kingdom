@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the constant term in: $2p+9q-12$."
+  topic: Components of Algebraic Expressions
+  question: 'Identify the constant term in: $2p+9q-12$.'
   answer: {fileID: 11400000, guid: 2df678d15a074514876cfce7b4f84595, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "A constant term has no variable."
-  - "In $2p+9q-12$ it is $-12$ (keep its sign)."
+  - A constant term has no variable.
+  - In $2p+9q-12$ it is $-12$ (keep its sign).

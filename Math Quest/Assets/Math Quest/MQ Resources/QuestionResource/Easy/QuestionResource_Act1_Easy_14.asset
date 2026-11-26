@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate the algebraic expression $4x-5$ when $x=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate the algebraic expression $4x-5$ when $x=3$.
   answer: {fileID: 11400000, guid: 9771439eb4145a8391ec02e57b7907a0, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace $x$ with 3: $4(3)-5$."
-  - "$12-5=7$."
+  - 'Replace $x$ with 3: $4(3)-5$.'
+  - $12-5=7$.

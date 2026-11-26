@@ -7,6 +7,7 @@ namespace MathQuest.Data
     {
         Player = 0,
         Enemy = 1,
+        Guide = 2,
     }
 
     /// <summary>One line of dialogue and who says it.</summary>

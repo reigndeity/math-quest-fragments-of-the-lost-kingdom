@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $8x-5y+4$ when $x=2$ and $y=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $8x-5y+4$ when $x=2$ and $y=3$.
   answer: {fileID: 11400000, guid: 181961774a2541d2b949df566382517c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $8(2)-5(3)+4$."
-  - "Work it out step by step. The result is $5$."
+  - 'Replace each letter with its value: $8(2)-5(3)+4$.'
+  - Work it out step by step. The result is $5$.

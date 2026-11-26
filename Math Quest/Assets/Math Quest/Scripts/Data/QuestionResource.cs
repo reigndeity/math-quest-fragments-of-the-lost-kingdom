@@ -27,6 +27,12 @@ namespace MathQuest.Data
         [Tooltip("How this question is answered. The answer asset's type decides which input is shown.")]
         public AnswerResource answer;
 
+        [Tooltip("Who asks this question. Empty: the level's enemy. A guide asking means a wrong answer is not the enemy's doing.")]
+        public GuideResource askedByGuide;
+
+        [Tooltip("Who explains the solution after a wrong answer. Empty: the enemy does. A guide steps in on screen, with the screen dimmed, and says the solution lines.")]
+        public GuideResource explainedByGuide;
+
         [Header("Dialogue (optional lines are simply skipped when empty)")]
         [Tooltip("Plays after a correct answer. Optional.")]
         [TextArea(1, 3)] public List<string> encourageDialogue = new();

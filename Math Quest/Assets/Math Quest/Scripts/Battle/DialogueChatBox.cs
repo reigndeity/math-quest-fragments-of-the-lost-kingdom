@@ -111,6 +111,16 @@ namespace MathQuest.Battle
         [Tooltip("Pause after each equation block appears.")]
         [SerializeField, Min(0f)] private float mathBlockPause = 0.15f;
 
+        [Header("Guide style")]
+        [Tooltip("The bubble picture used when a guide speaks. The prefab's own picture is used for everyone else.")]
+        [SerializeField] private Sprite guideSprite;
+        [Tooltip("The tail that is shown only in the guide style (it hangs below the bubble). Leave it switched off in the prefab.")]
+        [SerializeField] private GameObject guideTail;
+        [Tooltip("Where the text sits inside the bubble in the guide style. Offset from the middle.")]
+        [SerializeField] private Vector2 guideTextOffset = Vector2.zero;
+        [Tooltip("How much smaller the text area is than the bubble in the guide style (negative = padding on both sides).")]
+        [SerializeField] private Vector2 guideTextSizeDelta = new Vector2(-50f, -50f);
+
         private const string HiddenColor = "\\color{#00000000}";
 
         private Coroutine mathRoutine;
@@ -193,6 +203,33 @@ namespace MathQuest.Battle
                 SetScaleX(label.rectTransform, x);
             if (mathLabel != null)
                 SetScaleX(mathLabel.rectTransform, x);
+        }
+
+        /// <summary>
+        /// Switches between the normal bubble (player and enemy) and the guide's: its own picture, the
+        /// tail, and its own text padding. Call it right after the bubble is created, before Show.
+        /// </summary>
+        public void SetGuideStyle(bool guide)
+        {
+            if (!guide)
+                return; // a new bubble already is the normal style
+
+            if (guideSprite != null && TryGetComponent(out UnityEngine.UI.Image body))
+                body.sprite = guideSprite;
+
+            if (guideTail != null)
+                guideTail.SetActive(true);
+
+            if (label != null)
+                SetTextArea(label.rectTransform);
+            if (mathLabel != null)
+                SetTextArea(mathLabel.rectTransform);
+        }
+
+        private void SetTextArea(RectTransform target)
+        {
+            target.anchoredPosition = guideTextOffset;
+            target.sizeDelta = guideTextSizeDelta;
         }
 
         /// <summary>Shows a line, sized to fit with the given settings (may be null for no fitting).</summary>

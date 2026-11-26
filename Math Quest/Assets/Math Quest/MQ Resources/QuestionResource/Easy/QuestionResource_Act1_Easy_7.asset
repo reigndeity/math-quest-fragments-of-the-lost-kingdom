@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $x+12$ when $x=4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $x+12$ when $x=4$.
   answer: {fileID: 11400000, guid: 02fd370881035845bbf527264fe244fe, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace $x$ with 4: $4+12$."
-  - "$4+12=16$."
+  - 'Replace $x$ with 4: $4+12$.'
+  - $4+12=16$.

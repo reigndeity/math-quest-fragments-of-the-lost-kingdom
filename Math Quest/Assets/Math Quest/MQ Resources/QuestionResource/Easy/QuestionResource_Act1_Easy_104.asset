@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $6w-8$ when $w=6$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $6w-8$ when $w=6$.
   answer: {fileID: 11400000, guid: fc6fa56e23944ea99c31882098903fec, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $6(6)-8$."
-  - "Work it out step by step. The result is $28$."
+  - 'Replace each letter with its value: $6(6)-8$.'
+  - Work it out step by step. The result is $28$.

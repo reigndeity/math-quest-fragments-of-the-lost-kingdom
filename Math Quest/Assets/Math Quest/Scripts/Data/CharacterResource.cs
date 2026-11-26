@@ -40,6 +40,9 @@ namespace MathQuest.Data
         [Tooltip("The dissolve used when this character is defeated: one of the PixelDissolve materials (Fire, Nature, Shadow, Frost...). It decides the colour of the burning edge. Empty: no dissolve.")]
         public Material defeatDissolve;
 
+        [Tooltip("The picture shown on the question when this character is the one asking. Empty: no asker picture is shown.")]
+        public Sprite askerSprite;
+
         [Tooltip("The skills for each question difficulty: the player uses one when answering right, the enemy when the player answers wrong. Give a difficulty several entries and one is picked at random each time. A difficulty with no entry plays no effect.")]
         public List<DifficultySkill> skills = new();
 

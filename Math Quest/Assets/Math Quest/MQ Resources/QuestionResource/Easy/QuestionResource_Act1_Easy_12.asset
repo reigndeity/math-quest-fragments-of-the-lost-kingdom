@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficients of $x$ and $y$ in the algebraic expression: $3x-5y+6$"
+  topic: Components of Algebraic Expressions
+  question: 'Identify the coefficients of $x$ and $y$ in the algebraic expression:
+    $3x-5y+6$'
   answer: {fileID: 11400000, guid: 72779addbc7552a09f3339b1495e595a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "The coefficient is the number in front of the variable."
-  - "For $x$ it is 3, and for $y$ it is $-5$."
+  - The coefficient is the number in front of the variable.
+  - For $x$ it is 3, and for $y$ it is $-5$.

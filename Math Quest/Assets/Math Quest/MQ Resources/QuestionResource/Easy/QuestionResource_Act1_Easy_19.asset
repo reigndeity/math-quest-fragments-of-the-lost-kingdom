@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $3a+2b-5$ when $a=4$ and $b=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $3a+2b-5$ when $a=4$ and $b=3$.
   answer: {fileID: 11400000, guid: 6b22063dd8665c9aa4f9696ce0212510, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace $a$ with 4 and $b$ with 3: $3(4)+2(3)-5$."
-  - "$12+6-5=13$."
+  - 'Replace $a$ with 4 and $b$ with 3: $3(4)+2(3)-5$.'
+  - $12+6-5=13$.

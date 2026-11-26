@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $5r+2s-8$ when $r=4$ and $s=5$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $5r+2s-8$ when $r=4$ and $s=5$.
   answer: {fileID: 11400000, guid: 0b514299621a44f1af6a2b1ef1f82f30, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Replace each letter with its value: $5(4)+2(5)-8$."
-  - "Work it out step by step. The result is $22$."
+  - 'Replace each letter with its value: $5(4)+2(5)-8$.'
+  - Work it out step by step. The result is $22$.

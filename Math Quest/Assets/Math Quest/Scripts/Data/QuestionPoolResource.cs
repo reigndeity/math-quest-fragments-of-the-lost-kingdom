@@ -18,5 +18,8 @@ namespace MathQuest.Data
         /// fresh questions does it fall back to the avoided ones.
         /// </summary>
         public abstract void Pick(List<QuestionResource> into, int countOverride = -1, ICollection<string> avoid = null);
+
+        /// <summary>Appends every question this pool can ever give (not a pick), for example to find similar ones.</summary>
+        public abstract void CollectAll(List<QuestionResource> into);
     }
 }

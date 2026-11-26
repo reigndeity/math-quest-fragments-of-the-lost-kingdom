@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the coefficient of $y$ in $11-4y$?"
+  topic: Components of Algebraic Expressions
+  question: What is the coefficient of $y$ in $11-4y$?
   answer: {fileID: 11400000, guid: b5a249f47bd344feaa6a392e3f863455, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $-4y$ the coefficient is $-4$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $-4y$ the coefficient is $-4$.

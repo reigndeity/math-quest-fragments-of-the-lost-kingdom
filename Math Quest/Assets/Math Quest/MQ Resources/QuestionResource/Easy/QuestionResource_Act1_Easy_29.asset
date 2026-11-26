@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $n+7$ when $n=5$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $n+7$ when $n=5$.
   answer: {fileID: 11400000, guid: 1284b780e03b49ffb660731eae48ff8f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $(5)+7$."
-  - "Work it out step by step. The result is $12$."
+  - 'Replace each letter with its value: $(5)+7$.'
+  - Work it out step by step. The result is $12$.

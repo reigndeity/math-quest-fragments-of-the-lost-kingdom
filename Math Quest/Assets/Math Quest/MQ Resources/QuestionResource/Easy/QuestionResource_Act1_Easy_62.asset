@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficients of $a$ and $b$ in the algebraic expression: $4a-6b+5$"
+  topic: Components of Algebraic Expressions
+  question: 'Identify the coefficients of $a$ and $b$ in the algebraic expression:
+    $4a-6b+5$'
   answer: {fileID: 11400000, guid: 071208b13d254159b899d7a725287f76, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Read the number in front of each variable, sign included."
-  - "The coefficients of $a$ and $b$ are 4, -6."
+  - Read the number in front of each variable, sign included.
+  - The coefficients of $a$ and $b$ are 4, -6.

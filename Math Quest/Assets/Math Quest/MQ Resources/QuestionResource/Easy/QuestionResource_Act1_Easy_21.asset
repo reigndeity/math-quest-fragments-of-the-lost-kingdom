@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "If $x=2$ and $y=5$, what is $4x+2y-6$?"
+  topic: Evaluating Algebraic Expressions
+  question: If $x=2$ and $y=5$, what is $4x+2y-6$?
   answer: {fileID: 11400000, guid: 66a1323c710b530991d068afa2348e93, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace $x$ with 2 and $y$ with 5: $4(2)+2(5)-6$."
-  - "$8+10-6=12$."
+  - 'Replace $x$ with 2 and $y$ with 5: $4(2)+2(5)-6$.'
+  - $8+10-6=12$.

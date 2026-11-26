@@ -29,6 +29,15 @@ namespace MathQuest.Data
         [Tooltip("Shuffle the order of the picked questions each time the level starts. Only matters with Strategy All.")]
         [SerializeField] private bool shuffle;
 
+        public override void CollectAll(List<QuestionResource> into)
+        {
+            foreach (QuestionResource question in questions)
+            {
+                if (question != null)
+                    into.Add(question);
+            }
+        }
+
         // A hand-picked list is asked as written, so the avoid list does not apply here.
         public override void Pick(List<QuestionResource> into, int countOverride = -1, ICollection<string> avoid = null)
         {

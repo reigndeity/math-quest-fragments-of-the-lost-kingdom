@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $5p-3q+8$ when $p=2$ and $q=1$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $5p-3q+8$ when $p=2$ and $q=1$.
   answer: {fileID: 11400000, guid: 9cfac749edc94eeb96df288deb471a73, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $5(2)-3(1)+8$."
-  - "Work it out step by step. The result is $15$."
+  - 'Replace each letter with its value: $5(2)-3(1)+8$.'
+  - Work it out step by step. The result is $15$.

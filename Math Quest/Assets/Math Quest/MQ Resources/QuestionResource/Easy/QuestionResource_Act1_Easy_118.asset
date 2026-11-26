@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $6p+3q-9$ when $p=3$ and $q=4$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $6p+3q-9$ when $p=3$ and $q=4$.
   answer: {fileID: 11400000, guid: 2f7a4a1bd4064f229b2d83ea01adc01a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $6(3)+3(4)-9$."
-  - "Work it out step by step. The result is $21$."
+  - 'Replace each letter with its value: $6(3)+3(4)-9$.'
+  - Work it out step by step. The result is $21$.

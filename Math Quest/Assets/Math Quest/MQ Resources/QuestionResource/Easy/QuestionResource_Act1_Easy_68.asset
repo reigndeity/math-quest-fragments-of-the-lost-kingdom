@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficients of $c$ and $d$ in the algebraic expression: $-3c-4d+8$"
+  topic: Components of Algebraic Expressions
+  question: 'Identify the coefficients of $c$ and $d$ in the algebraic expression:
+    $-3c-4d+8$'
   answer: {fileID: 11400000, guid: 0a20b6a2f5ee4366ba950c066662621f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Read the number in front of each variable, sign included."
-  - "The coefficients of $c$ and $d$ are -3, -4."
+  - Read the number in front of each variable, sign included.
+  - The coefficients of $c$ and $d$ are -3, -4.

@@ -27,6 +27,8 @@ namespace MathQuest.Battle
         [Min(0.1f)] public float playerPitch = 1.2f;
         [Tooltip("Multiplies the pitch for the enemy's bubbles. Below 1 is deeper.")]
         [Min(0.1f)] public float enemyPitch = 0.85f;
+        [Tooltip("Multiplies the pitch for the guide's bubbles.")]
+        [Min(0.1f)] public float guidePitch = 1f;
 
         [Tooltip("On: spaces beep too. Off: only letters do.")]
         public bool beepOnSpaces;
@@ -47,6 +49,8 @@ namespace MathQuest.Battle
         [SerializeField] private RectTransform playerDialogueHolder;
         [Tooltip("Where the enemy's bubble spawns (EnemyDialogueHolder).")]
         [SerializeField] private RectTransform enemyDialogueHolder;
+        [Tooltip("Where the guide's bubble spawns (GuideBookDialogueHolder).")]
+        [SerializeField] private RectTransform guideDialogueHolder;
 
         [Header("Chat box (tune live in Play mode)")]
         [FormerlySerializedAs("chatBoxFit")]
@@ -149,7 +153,8 @@ namespace MathQuest.Battle
             DestroyChatBox();
 
             bool isPlayer = speaker == DialogueSpeaker.Player;
-            RectTransform holder = isPlayer ? playerDialogueHolder : enemyDialogueHolder;
+            RectTransform holder = speaker == DialogueSpeaker.Guide ? guideDialogueHolder
+                                 : isPlayer ? playerDialogueHolder : enemyDialogueHolder;
 
             if (holder == null)
             {
@@ -160,11 +165,13 @@ namespace MathQuest.Battle
             current = Instantiate(chatBoxPrefab, holder, false);
             // The prefab is laid out for the enemy; the player's faces the other way.
             current.SetMirrored(isPlayer);
+            current.SetGuideStyle(speaker == DialogueSpeaker.Guide);
             fitHash = chatBox.Hash;
 
             // The voice: set up before the first letter appears.
             letterCount = 0;
-            voicePitch = isPlayer ? sound.playerPitch : sound.enemyPitch;
+            voicePitch = speaker == DialogueSpeaker.Guide ? sound.guidePitch
+                       : isPlayer ? sound.playerPitch : sound.enemyPitch;
             current.LetterTyped += OnLetterTyped;
 
             current.Show(text, chatBox);

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $8p-12$ when $p=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $8p-12$ when $p=3$.
   answer: {fileID: 11400000, guid: 601ac79454004bd09b700400c817429c, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $8(3)-12$."
-  - "Work it out step by step. The result is $12$."
+  - 'Replace each letter with its value: $8(3)-12$.'
+  - Work it out step by step. The result is $12$.

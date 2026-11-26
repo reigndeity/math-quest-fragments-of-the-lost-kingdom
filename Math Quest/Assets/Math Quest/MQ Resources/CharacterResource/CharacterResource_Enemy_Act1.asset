@@ -16,7 +16,9 @@ MonoBehaviour:
   displayName: Null
   maxHearts: 3
   characterPrefab: {fileID: 3509842088010357834, guid: ca95ad02b555d614b9ccf6d05c9c0d60, type: 3}
+  girlPrefab: {fileID: 0}
   defeatDissolve: {fileID: 2100000, guid: e368bd1d252157bc934ad9e7437c25b6, type: 2}
+  askerSprite: {fileID: 6645427384175290001, guid: 4dffe6eab57ca4e4ba2f967307bd1c29, type: 3}
   skills:
   - difficulty: 0
     skill: {fileID: 11400000, guid: e9a12f6b30fd57c1b2ba7d005bd2c7cd, type: 2}

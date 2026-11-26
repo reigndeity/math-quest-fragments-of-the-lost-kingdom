@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $3x+8$ when $x=2$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $3x+8$ when $x=2$.
   answer: {fileID: 11400000, guid: afc77ec5d3914cd28c075dd8070eac1b, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Replace each letter with its value: $3(2)+8$."
-  - "Work it out step by step. The result is $14$."
+  - 'Replace each letter with its value: $3(2)+8$.'
+  - Work it out step by step. The result is $14$.

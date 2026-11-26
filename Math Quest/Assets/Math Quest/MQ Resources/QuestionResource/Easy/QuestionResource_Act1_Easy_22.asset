@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the numerical coefficient of $a$ in $12-4a$?"
+  topic: Components of Algebraic Expressions
+  question: What is the numerical coefficient of $a$ in $12-4a$?
   answer: {fileID: 11400000, guid: d7203e39243b5b6780040a7c5cab703a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "The numerical coefficient is the number multiplied with $a$."
-  - "In $12-4a$ it is $-4$."
+  - The numerical coefficient is the number multiplied with $a$.
+  - In $12-4a$ it is $-4$.

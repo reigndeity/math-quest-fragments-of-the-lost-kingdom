@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the coefficient of $z$ in $9z+13$?"
+  topic: Components of Algebraic Expressions
+  question: What is the coefficient of $z$ in $9z+13$?
   answer: {fileID: 11400000, guid: a2fadf269dab4362b140c1e9cbd6ec5d, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "The coefficient is the number multiplied by the variable part, sign included."
-  - "For $9z$ the coefficient is $9$."
+  - The coefficient is the number multiplied by the variable part, sign included.
+  - For $9z$ the coefficient is $9$.

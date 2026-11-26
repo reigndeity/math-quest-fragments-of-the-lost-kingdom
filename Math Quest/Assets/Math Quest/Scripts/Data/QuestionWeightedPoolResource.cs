@@ -31,6 +31,15 @@ namespace MathQuest.Data
         [Tooltip("Off: a question can only appear once. On: the same question can be drawn again.")]
         [SerializeField] private bool allowRepeats;
 
+        public override void CollectAll(List<QuestionResource> into)
+        {
+            foreach (WeightedQuestion entry in entries)
+            {
+                if (entry != null && entry.question != null)
+                    into.Add(entry.question);
+            }
+        }
+
         public override void Pick(List<QuestionResource> into, int countOverride = -1, ICollection<string> avoid = null)
         {
             // Fresh questions first; the ones to avoid are only used if the pool runs out of fresh ones.

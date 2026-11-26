@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "How many terms are in the expression $5a+3b-2$?"
+  topic: Components of Algebraic Expressions
+  question: How many terms are in the expression $5a+3b-2$?
   answer: {fileID: 11400000, guid: 80831fe6d8734c4e9b85fff5d3d0015a, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Terms are the parts separated by $+$ and $-$ signs."
-  - "Counting them gives 3 terms."
+  - Terms are the parts separated by $+$ and $-$ signs.
+  - Counting them gives 3 terms.

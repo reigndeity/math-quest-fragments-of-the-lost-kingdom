@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $6c+9$ when $c=0$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $6c+9$ when $c=0$.
   answer: {fileID: 11400000, guid: fcf807c6f66947fbb544c106ea4fc3c0, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $6(0)+9$."
-  - "Work it out step by step. The result is $9$."
+  - 'Replace each letter with its value: $6(0)+9$.'
+  - Work it out step by step. The result is $9$.

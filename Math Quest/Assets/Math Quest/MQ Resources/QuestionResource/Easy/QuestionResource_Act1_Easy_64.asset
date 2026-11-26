@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficients of $m$ and $n$ in the algebraic expression: $-2m+8n-3$"
+  topic: Components of Algebraic Expressions
+  question: 'Identify the coefficients of $m$ and $n$ in the algebraic expression:
+    $-2m+8n-3$'
   answer: {fileID: 11400000, guid: 3c6a88e499164221b62f88b3e7433638, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Read the number in front of each variable, sign included."
-  - "The coefficients of $m$ and $n$ are -2, 8."
+  - Read the number in front of each variable, sign included.
+  - The coefficients of $m$ and $n$ are -2, 8.

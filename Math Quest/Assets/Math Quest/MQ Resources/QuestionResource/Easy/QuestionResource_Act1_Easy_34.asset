@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $a+6$ when $a=5$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $a+6$ when $a=5$.
   answer: {fileID: 11400000, guid: efc80c9634504c728da692749f613d0f, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Replace each letter with its value: $(5)+6$."
-  - "Work it out step by step. The result is $11$."
+  - 'Replace each letter with its value: $(5)+6$.'
+  - Work it out step by step. The result is $11$.

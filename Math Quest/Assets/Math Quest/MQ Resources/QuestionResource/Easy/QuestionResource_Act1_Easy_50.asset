@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "What is the variable in the expression: $9t-2$?"
+  topic: Components of Algebraic Expressions
+  question: 'What is the variable in the expression: $9t-2$?'
   answer: {fileID: 11400000, guid: a7b3cb42b6ae4221a517cf731c5793ec, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "A variable is a letter that stands for an unknown number."
-  - "In $9t-2$ that letter is $t$."
+  - A variable is a letter that stands for an unknown number.
+  - In $9t-2$ that letter is $t$.

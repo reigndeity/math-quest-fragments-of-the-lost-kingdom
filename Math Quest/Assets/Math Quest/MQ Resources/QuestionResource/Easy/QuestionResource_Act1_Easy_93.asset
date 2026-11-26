@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Evaluating Algebraic Expressions"
-  question: "Evaluate $9-2y$ when $y=3$."
+  topic: Evaluating Algebraic Expressions
+  question: Evaluate $9-2y$ when $y=3$.
   answer: {fileID: 11400000, guid: 96e2aa60717146a48a790b5b95c3bbeb, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Impressive! That is correct."
+  - Impressive! That is correct.
   tauntDialogue:
-  - "Hehehe... that is not right!"
+  - Hehehe... that is not right!
   solutionDialogue:
-  - "Replace each letter with its value: $9-2(3)$."
-  - "Work it out step by step. The result is $3$."
+  - 'Replace each letter with its value: $9-2(3)$.'
+  - Work it out step by step. The result is $3$.

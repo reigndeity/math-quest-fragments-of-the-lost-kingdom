@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"Nine subtracted from a number $k$\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "Nine subtracted from a number $k$"'
   answer: {fileID: 11400000, guid: 294013f5ec2e48b4999850d456983a27, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $k-9$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $k-9$.

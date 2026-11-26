@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Components of Algebraic Expressions"
-  question: "Identify the coefficients of $u$ and $v$ in the algebraic expression: $5u-v+11$"
+  topic: Components of Algebraic Expressions
+  question: 'Identify the coefficients of $u$ and $v$ in the algebraic expression:
+    $5u-v+11$'
   answer: {fileID: 11400000, guid: 411c3780ceb54d46a3556c67af309b67, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Hmph... correct. Lucky guess?"
+  - Hmph... correct. Lucky guess?
   tauntDialogue:
-  - "Wrong! Better luck next time."
+  - Wrong! Better luck next time.
   solutionDialogue:
-  - "Read the number in front of each variable, sign included."
-  - "The coefficients of $u$ and $v$ are 5, -1."
+  - Read the number in front of each variable, sign included.
+  - The coefficients of $u$ and $v$ are 5, -1.

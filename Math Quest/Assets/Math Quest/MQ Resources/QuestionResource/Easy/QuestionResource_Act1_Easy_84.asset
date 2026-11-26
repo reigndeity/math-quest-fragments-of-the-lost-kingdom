@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"Ten more than three times a number $q$\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "Ten more than three times a number $q$"'
   answer: {fileID: 11400000, guid: 993d7040405143a492466f333a801aea, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Correct! You are stronger than you look."
+  - Correct! You are stronger than you look.
   tauntDialogue:
-  - "Ha! Is that your best?"
+  - Ha! Is that your best?
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $3q+10$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $3q+10$.

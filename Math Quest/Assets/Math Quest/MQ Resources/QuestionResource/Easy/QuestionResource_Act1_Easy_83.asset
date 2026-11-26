@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: MathQuest.Runtime::MathQuest.Data.QuestionResource
   act: 1
   difficulty: 0
-  topic: "Translating Verbal Phrases into Algebraic Expressions"
-  question: "Translate: \"The product of six and a number $m$\""
+  topic: Translating Verbal Phrases into Algebraic Expressions
+  question: 'Translate: "The product of six and a number $m$"'
   answer: {fileID: 11400000, guid: 3043f9d3894a4bb0a5464309bf0cdb1e, type: 2}
+  askedByGuide: {fileID: 0}
+  explainedByGuide: {fileID: 11400000, guid: 83ff694a7788da24498d14928bc1a0d3, type: 2}
   encourageDialogue:
-  - "Well done! You got it right."
+  - Well done! You got it right.
   tauntDialogue:
-  - "Nope! Not even close."
+  - Nope! Not even close.
   solutionDialogue:
-  - "Turn each part of the phrase into math, then join the pieces."
-  - "The expression is $6m$."
+  - Turn each part of the phrase into math, then join the pieces.
+  - The expression is $6m$.
